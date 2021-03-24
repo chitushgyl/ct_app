@@ -1,0 +1,79 @@
+/**
+ * ===========================================
+ * 省市区选择
+ * @auther： 李渊
+ * @date: 2018.8.23
+ * ===========================================
+ */
+.selectCity{
+	display: none;
+    position: fixed;
+    top: 50%;
+    /* left: 2%; */
+    z-index: 10000;
+    padding: 10px;
+    width: 96%;
+    margin: 0 auto;
+    height: 450px;
+    transform: translate(0,-50%);
+    -webkit-transform: translate(0,-50%);
+    /* border-radius: 10px; */
+    background-color: #FFFFFF;
+}
+
+.selectCity-header{
+	display: flex;
+	display: -webkit-flex;
+	flex-direction: row;
+	-webkit-flex-direction: row;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	padding: 5px 7px;
+}
+.selectCity-header .selectCity-title{
+	color: #1A8AFF;
+}
+
+.selectCity .selectCity-list{
+	-webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 00;
+    -webkit-margin-end: 0;
+    -webkit-padding-start: 0;
+    overflow: hidden;
+}
+.selectCity .selectCity-list .selectCity-item{
+	float: left;
+	width: 25%;
+	list-style: none;
+    padding: 7px;
+}
+.selectCity .selectCity-list .selectCity-item>span{
+	display: inline-block;
+	width: 100%;
+	margin: auto;
+	border: 1px solid #E2E2E2;
+    border-radius: 3px;
+    font-size: 14px;
+    line-height: 25px;
+    text-align: center;
+    color: #78787A;
+}
+
+.selectCity-backdrop{
+	display: none;
+	/* position: fixed; */
+    z-index: 998;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    -webkit-transition-duration: 400ms;
+    transition-duration: 400ms;
+    opacity: 0;
+    background: rgba(0,0,0,.4);
+}
+.selectCity-backdrop.active{
+	display: block;
+	opacity: 1;
+}

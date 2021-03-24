@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
+		<!-- 字体 -->
+		<link rel="stylesheet" type="text/css" href="../fonts/iconfont.css" />
+		<!-- 通用样式 -->
+		<link rel="stylesheet" type="text/css" href="../css/common/common.css" />
+		<style type="text/css">
+			.mui-bar {
+				background-color: #FFFFFF;
+			}
+			.mui-title {
+				color: #000000 !important;
+			}
+			.mui-content {
+				margin-top: 10px;
+			}
+			.mui-input-group {
+				margin-bottom: 60px;
+			}
+			.mui-input-row {
+				margin-top: -5px;
+				height: 55px !important;
+				padding-top: 6px;
+			}
+			.mui-input-clear {
+				font-size: 13px !important;
+			}
+			.mui-bar-nav {
+				top: 0;
+				-webkit-box-shadow: none;
+				box-shadow: none;
+			}
+			.mui-bar {
+				background-color: #FFFFFF;
+			}
+			.mui-title {
+				color: #000000 !important;
+			}
+			.mui-pull-left {
+				color: #000000 !important;
+			}
+
+			input::-webkit-input-placeholder {
+				color: #999999;
+			}
+			.mui-input-group:after {
+				height:2px;
+				background-color: #FFFFFF;
+			}
+
+			.mui-input-group:before{
+				height:0;
+			}
+			.mui-input-group div input {
+				height:100%;
+				text-align: right;
+				font-size:14px;
+			}
+			.mui-input-group .mui-row {
+				border-radius:2px;
+			}
+			.mui-input-group div {
+				height:100%;
+				line-height: 49px;
+
+			}
+			.mui-col-xs-3{
+				padding-left:15px;
+				color:#333;
+				font-size:14px;
+			}
+			.mui-content .mui-input-group .mui-row{
+				border-top:1px solid #efefef;
+			}
+			.mui-poppicker-btn-cancel{
+				color:#0088f4 !important;
+			}
+
+			.mui-input-group .mui-input-row:after{
+				height:0;
+			}
+			.mui-radio.mui-left input[type=radio]{
+				left:unset;
+				right:15px;
+			}
+			.mui-radio input[type=radio]:before{
+				font-size:22px;
+			}
+			#share_url{
+				-webkit-touch-callout: all;
+				-webkit-user-select: all;
+				-moz-user-select: all;
+				-ms-user-select: all;
+				user-select: all;
+			}
+			[v-cloak]{
+				display: none !important;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 标题栏 -->
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-pull-left">
+				<img src="../images/user/topbackarr.png" style="width: 20px;padding-top:10px;">
+			</a>
+			<h1 class="mui-title" id="title">添加承运商</h1>
+		</header>
+		<!-- 主体 -->
+		<div class="mui-content" v-cloak id="template_carrier" style="padding-top:70px;border:0;border-radius:2px;margin-left:10px;margin-right:10px;padding-bottom:80px;">
+			<form class="mui-input-group" style="margin-bottom:20px;">
+				<div class="mui-row" id="" style="height: 49px !important;border:0;">
+					<div class="mui-col-xs-3" id="showUserPicker">公司</div>
+					<a class="">
+						<span id="all_name" style="margin-left:265px;font-size: 14px;" v-if="!create_user_name">请选择</span>
+						<span style="color: #1D2026;font-size: 18px;">
+							<span id="" style="margin-left:270px;font-size: 14px;">{{create_user_name}}</span>
+						</span>
+					</a>
+				</div>
+				<div class="mui-row" style="height: 49px !important;">
+					<div class="mui-col-xs-3">客户名称</div>
+					<div class="mui-col-xs-9">
+						<input id="all_name" type="text" style="" placeholder="请输入" style="color: #1D2026;float: left;" v-model="company_name" >
+					</div>
+				</div> 				
+
+				<div class="mui-row" style="height: 49px !important;" id="showCostPicker" @tap="selectCostType()">
+					<div class="mui-col-xs-3">结算方式</div>
+					<a class="">
+						<span id="" type="text" style="margin-left:265px;font-size: 14px;" v-if="!cost_type_show">请选择</span>
+						<span style="color: #1D2026;font-size: 18px;">
+							<span id="" style="margin-left:280px;font-size: 14px;">{{cost_type_show}}</span>
+						</span>
+					</a>
+					<!-- <div class="mui-col-xs-9 mui-row">
+						<div class="mui-input-row mui-radio mui-left mui-col-xs-6" style="clear:unset;font-size:16px;">
+							<label>现付</label>
+							<input name="paystate" type="radio" style="top:18px;" value="1" v-model="paystate">
+						</div>
+
+						<div class="mui-input-row mui-radio mui-left mui-col-xs-6" style="clear:unset;font-size:16px;">
+							<label>月结</label>
+							<input name="paystate" type="radio" style="top:18px;" value="2" v-model="paystate">
+						</div> -->
+					<!-- </div> -->
+				</div> 
+
+				<div class="mui-row" style="height: 49px !important;">
+					<div class="mui-col-xs-3">联系人</div>
+					<div class="mui-col-xs-9">
+						<input id="contact_name" type="text" style="" placeholder="请输入" style="color: #1D2026;float: left;" v-model="contacts">
+					</div>
+				</div> 				
+
+				<div class="mui-row" style="height: 49px !important;">
+					<div class="mui-col-xs-3">联系电话</div>
+					<div class="mui-col-xs-9">
+						<input id="contact_tel" type="text" style="" placeholder="请输入" style="color: #1D2026;float: left;" v-model="tel">
+					</div>
+				</div> 				
+
+				<div class="mui-row" style="height: 49px !important;">
+					<div class="mui-col-xs-3">客户地址</div>
+					<div class="mui-col-xs-9">
+						<input id="" type="text" style="" placeholder="请输入" style="color: #1D2026;float: left;" v-model="address">
+					</div>
+				</div> 				
+
+				<!-- <div class="mui-row" style="height: 49px !important;">
+					<div class="mui-col-xs-3">链接端口</div>
+					<div class="mui-col-xs-9" id="share_url" style="color:#0088f4;text-align: right;padding-right:10px;font-size:13px;" @tap="share_()">
+						
+					</div>
+				</div> 
+
+				<div class="mui-row" style="height: 49px !important;">
+					<div class="mui-col-xs-3">登录账号</div>
+					<div class="mui-col-xs-9">
+						<input id="username" type="text" style="" placeholder="请填写邮箱/手机号" style="color: #1D2026;float: left;" v-model="info.username">
+					</div>
+				</div> 
+
+				<div class="mui-row" style="height: 49px !important;">
+					<div class="mui-col-xs-3">登录密码</div>
+					<div class="mui-col-xs-9">
+						<input id="password1" type="password" style="" placeholder="密码(不填写不修改)" style="color: #1D2026;float: left;" >
+					</div>
+				</div> 
+
+				<div class="mui-row" style="height: 49px !important;">
+					<div class="mui-col-xs-3">确认密码</div>
+					<div class="mui-col-xs-9">
+						<input id="password2" type="password" style="" placeholder="确认密码(不填写不修改)" style="color: #1D2026;float: left;" >
+					</div>
+				</div> -->
+			</form>
+
+			<!-- <div style="padding:0px 20px;color:#fc5854;font-size:13px;line-height: 23px;">
+				<div>注：客户添加完成后</div>
+				<div>1、将上方“链接端口”通过微信、短信等方式分享给客户，或者返回上一个页面点击右上角“分享”按钮分享给客户。</div>
+				<div>2、客户通过上方的“登录账号”和“登录密码”登录后，就可以进行下单了。</div>
+			</div> -->
+
+		</div>
+		<button type="button" id="button" class="mui-btn mui-btn-main mui-btn-block mt20 set_bottom_btn" @tap="submitFun()" style="position:fixed;bottom:10px;width:92%;margin-left:4%;">保存</button>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/base64.min.js" type="text/javascript"></script>
+		<!-- mui 框架 -->
+		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<!-- vue -->
+		<script src="../js/vue-2.4.1.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 通用js -->
+		<script src="../js/common/common.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 接口 -->
+		<script src="../js/config/request.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../plug/js/share.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 页面切换传值 -->
+		<script src="js/form.js" type="text/javascript" charset="utf-8"></script>
+		<!-- <script src="js/tms_cost_type.js" type="text/javascript" charset="utf-8"></script> -->
+		<script type="text/javascript">
+			setAutoHeight(function(h){},1)
+		</script>
+	</body>
+</html>

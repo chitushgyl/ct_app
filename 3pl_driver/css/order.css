@@ -1,0 +1,256 @@
+/**
+ * =======================================
+ * 赤途承运端订单列表样式表
+ * =======================================
+ */
+p{
+	line-height: 35px;
+	margin-bottom: 0;
+}
+/* nav */
+.nav{
+	position: fixed;
+	z-index: 9990;
+	top: 64px;
+	left: 0;
+	width: 100%;
+	display: flex;
+	display: -webkit-flex;
+	flex-direction: row;
+	-webkit-flex-direction: row;
+	justify-content: space-around;
+	-webkit-justify-content: space-around;
+	line-height: 16px;
+	padding-top: 12px;
+	text-align: center;
+	background-color: white;
+	border-bottom: 1px solid #E1E1DF;
+}
+.nav .nav-list{
+	display: inline-block;
+	width: 70px;
+	padding: 5px 0;
+}
+.nav .active{
+	border-bottom: 1px solid #FC9A18;
+	color: #FC9A18;
+}
+
+/* footer */
+.mui-table-view-cell .mui-row-ft{
+	margin-top: 10px;
+	padding: 8px 0;
+	height: 50px;
+	line-height: 50px;
+	border-top:1px solid #f3f4f6;
+}
+.mui-table-view-cell .mui-row-ft p{
+	line-height: 25px;
+}
+.mui-table-view-cell .mui-row-ft button{
+	padding: 0 0px;
+	border-color:#FC9A18 ;
+	width:50px;
+	border-radius: 3px;
+	font-size: 15px;
+	text-align: center;
+	line-height:30px;
+	color:#FFFFFF;
+	background-color: #FF7A1A;
+	font-weight: 100;
+	border: none;
+}
+
+/* 筛选列表  */
+.fliter-box .filter-list{
+	position: fixed;
+	top: 64px;
+	left: 0;
+	z-index: 100;
+	width: 100%;
+	background-color: #FFFFFF;
+	line-height: 40px;
+}
+.fliter-box .filter-list>div{
+	border-right: 1px solid #E3E3E3;
+	color: #78787a;
+}
+.fliter-box .filter-list .mui-icon-arrowdown{
+	font-size: 15px;
+}
+/* 仓库列表  */
+.fliter-box .mescroll{
+	top: 100px;
+}
+/* 筛选遮罩  */
+.fliter-box .mask{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 100000;
+	width: 100%;
+	background-color: rgba(0,0,0,.5);
+}
+.fliter-box .mask .filter{
+	position: absolute;
+	top: 120px;
+	left: 3%;
+	bottom: 10%;
+	padding: 15px;
+	width: 94%;
+	overflow: hidden;
+	border-radius: 10px;
+	background-color: #FFFFFF;
+}
+.fliter-box .mask .filter .tit{
+	font-size: 16px;
+	line-height: 35px;
+}
+.fliter-box .mask .filter .val{
+	position: absolute;
+	top: 50px;
+	left: 3%;
+	right: 3%;
+	bottom: 0;
+	width: 96%;
+	margin: 0 auto 10px;
+	overflow-y: scroll;
+}
+.fliter-box .ul{
+	-webkit-padding-start: 0;
+	-webkit-column-count: 4; /* Chrome, Safari, Opera */
+    -moz-column-count: 4; /* Firefox */
+    column-count: 4;
+    -webkit-column-width: 100px; /* Chrome, Safari, Opera */
+    column-width: 100px;
+}
+.fliter-box .mask .filter .ul .item{
+	width: 90%;
+	text-align: center;
+	margin-bottom: 10px;
+	/*border: 1px solid #E2E2E2;*/
+	border-radius: 3px;
+	line-height: 25px;
+}
+.fliter-box .close{
+	width: 20px;
+}
+
+/* icon */
+.icon-img{
+	margin-right: 5px;
+	width: 19px;
+	position: relative;
+	top: 5px;
+}
+.tocityImg{
+	position: relative;
+	top: -4px;
+	width: 30px;
+	margin: 0 10px;
+}
+/* 包车框  */
+.borderspan{
+	border:1px solid #fc9a18;
+	padding:2px 5px;
+	border-radius: 5px;
+	font-size: 10px;
+	color:#fc9a18;
+	margin-left: 10px;
+}
+/* 钱的图标 */
+.price{
+	font-size: 19px;
+	font-weight:bold;
+	vertical-align: -webkit-baseline-middle;
+}
+
+.iconPriceImg{
+	width: 7px !important;
+}
+
+/*订单水印样式*/
+.watermark-img{
+	width: 15%;
+	position: absolute;
+	right: -10px;
+	top: -13px;
+}
+
+/* 整车订单取消弹窗 */
+#ordercancel{
+	top:35% !important;
+}
+#warning2{
+	text-align: center;color:#333333;
+	border-radius:6px 6px 0px 0px;padding-bottom:20px;
+	margin-top:20px;
+}
+.information{
+	width:100%;text-align: center;padding:0px 15px;
+}
+#tips3{
+	font-size:18px;color:#333333;font-weight:bold;
+	
+}
+#show2{
+	font-size:18px;
+	line-height:30px;
+	text-align: left;color:#333333;
+}
+#gorecharge2{
+	border-radius:3px;width:49%;margin-top:25px;background-color:#E3E7EB;border:none;padding:0px 13px;height:44px;
+}
+#gopay2{
+	border-radius: 3px;width:49%;margin-bottom:25px;margin-top:25px;border:none;background-color: #2972E9;height:44px;color:#FFFFFF;
+}
+
+#mescroll{
+				margin-top:30px;
+			}
+
+			.nav{
+	position: fixed;
+	z-index: 3;
+	top: 74px;
+	left: 0;
+	width: 100%;
+	display: flex;
+	display: -webkit-flex;
+	flex-direction: row;
+	-webkit-flex-direction: row;
+	justify-content: space-around;
+	-webkit-justify-content: space-around;
+	line-height: 16px;
+	padding-top: 12px;
+	text-align: center;
+	background-color: white;
+	/* border-bottom: 1px solid #E1E1DF; */
+}
+.nav .nav-list{
+	display: inline-block;
+	width: 25%;
+	padding: 5px 0;
+}
+.nav .active{
+	border-bottom: 3px solid #2972E9;
+	color: #1A8AFF;
+}
+.mescroll{
+	position: fixed;
+	top: 104px;
+	left: 0;
+	bottom: 0;
+	padding-bottom: 60px;
+	height: auto;
+}
+.otherinfo{
+	background: #F7F9F8;
+}
+
+.pricelist{
+	font-size: 20px;
+	font-weight: 800;
+	color: #333333;
+}

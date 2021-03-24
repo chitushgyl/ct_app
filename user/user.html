@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="#fff">
+		<meta name="theme-color" content="#fff">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!-- 通用样式 -->
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<style type="text/css">
+			.mui-bar {
+				padding-top: 20px;
+				height: 64px;
+			}
+			.mui-content {
+				background-color: #eeeeee !important;
+			}
+			.mui-bar {
+				background-color: #fff !important;
+			}
+			.mui-table-view-cell {
+				background-color: transparent;
+			}
+			.mui-title {
+				color: #333333;
+			}
+
+			.mui-table-view-cell:after {
+				background-color: transparent;
+			}
+
+			.mui-table-view-cell {
+				color: #333333;
+				font-size: 16px;
+				text-align: left;
+				font-weight: bold;
+				padding-left: 26px;
+			}
+
+			.mui-col-xs-3 {
+				width: 25%;
+			}
+
+			.mui-table-view .icon {
+				width: 44px;
+				height:44px;
+				left: 5px;
+			}
+
+			.mui-content {
+				height: 100%;
+			}
+
+			.setmeal p {
+				color: #FFFFFF;
+			}
+
+			.mui-table-view-cell {
+				padding-left: 15px;
+			}
+
+			a {
+				color: #333333;
+			}
+
+			body {
+				height: 100%;
+				background-color: #eeeeee !important;
+			}
+
+			.user-ImgBox {
+				padding-top: 2px;
+				width: 54px;
+			}
+
+			.user-ImgBox img {
+				width: 54px;
+				border-radius: 50%;
+			}
+
+			.user-phoneBox {
+				position: absolute;
+				left: 92px;
+				margin-top: -50px;
+			}
+			.user-phoneBoxTwo {
+/* 				position: absolute;
+				left: 92px;
+				margin-top: -65px; */
+			}
+			.login {
+				font-size: 22px;
+				color: #333;
+				font-weight: 400;
+				overflow: hidden;
+			}
+
+			.mui-table-view:after {
+				height: 0px;
+			}
+
+			.setmeal button:first-child {
+				width: 45%;
+			}
+
+			.setmeal button:last-child {
+				width: 45%;
+				float: right;
+			}
+
+			.mui-table-view {
+				background-color: #FFFFFF;
+			}
+
+			.user-Info {
+				padding:5vw;
+				background-color: #fff;
+				background:#0088F4;
+				color:#fff;
+				height:45vw;
+				border-radius:0 0 10% 10%;
+				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-box-align: center;
+				-ms-flex-align: center;
+				align-items: center;			
+			}
+
+			ul {vw
+				padding: 0px 15px;
+			}
+
+			header a img {
+				width: 25px;
+			}
+			header a{
+				width: 25px;
+				/* margin-top: 8px; */
+				position: relative;
+				z-index: 20;
+			}
+			
+			/* 新增弹窗样式 */
+			#warning2 {
+				background: linear-gradient(135deg, rgba(83, 171, 246, 1) 0%, rgba(41, 114, 233, 1) 100%);
+				margin-top: 0px;
+				height: 65px;
+				line-height: 65px;
+				text-align: center;
+			}
+
+			#tips3 {
+				color: #FFFFFF;
+				font-size: 18px;
+			}
+
+			.information {
+				width: 200px;
+				text-align: center;
+				padding: 0px;
+				margin: auto;
+				margin-top: 20px;
+			}
+
+			#renz2 {
+				margin: 0px;
+				border-top: 1px solid #E3E7EB;
+				padding-top: 20px;
+			}
+
+			#vehicle2 {
+				width: 250px;
+				z-index: 99999;
+				left: 50%;
+				margin-left: -125px;
+				top: 50%;
+				margin-top: -94px;
+			}
+			
+			.mui-popover .mui-popover-arrow:after {
+				width: 0px;
+			}
+
+			.mui-popup-inner{
+				background:#fff;
+			}
+
+			.select-company .mui-table-view-cell{
+				border-bottom:1px solid #eee;
+			}
+			
+			body,.footer{
+			    padding-bottom: constant(safe-area-inset-bottom);
+			    padding-bottom: env(safe-area-inset-bottom);
+			}
+
+			#picture .mui-table-view-cell>a {
+			    position: relative;
+			    display: block;
+			    overflow: hidden;
+			    margin: -11px -15px;
+			    padding: inherit;
+			    white-space: nowrap;
+			    text-overflow: ellipsis;
+			    color: #007aff;
+			    text-align: center;
+			}
+			.mui-media-body{
+				font-size:14px !important;
+			}
+			.mui-table-view-cell{
+				padding-bottom:5px;
+			}
+			.mui-table-view{
+				margin-top:0 !important;
+			}
+
+			[v-cloak] {
+				display: none !important;
+			}
+			.mui-media .target{
+				position:relative;
+				width:100%;
+				height:10px;
+			}
+			.mui-media{
+				position:relative;
+			}
+			.target_left{
+				position:absolute;
+				left:-20px;
+				bottom:20px;
+				width:16px;
+			}
+			.clear{
+				clear:both;
+			}
+			.set_msg_btn{
+				position:absolute;
+				height:15px;
+				min-width:15px;
+				line-height: 15px;
+				right:13%;
+				top:2px;
+				background-color: #FC5854;
+				border-radius: 10px;
+				color:#fff;
+				border:0;
+				padding:0 3px;
+				font-size:13px;
+				z-index:9999;
+			}
+			.money_color{
+				color: #0088F4 !important; 
+			}
+			.money{
+				height:55px;line-height:35px;
+			}
+				
+			.menu_title{
+				height:25px;line-height:25px;
+				padding:5px 0px;
+			}	
+			
+			.mui-table-view-cell, .mui-table-view-cell:active {  
+			    background-color: #FFFFFF !important;  
+			}
+			.mui-bar .mui-title {
+			    right:80px;
+			    left:80px;
+			    display: inline-block;
+			    overflow: hidden;
+			    width: auto;
+			    margin: 0;
+			    text-overflow: ellipsis;
+			}
+/* 			@supports (top: env(safe-area-inset-top)){
+			body,
+				.header{
+				padding-top: constant(safe-area-inset-top);
+				padding-top: env(safe-area-inset-top);
+				}
+			} */
+/* 			@supports(bottom:constant(safe-area-inset-bottom))or(bottom:env(safe-area-inset-bottom)){
+				.footer{
+					margin-bottom:constant(safe-area-inset-bottom);
+					margin-bottom:env(safe-area-inset-bottom);
+				}
+			} */
+		</style>
+	</head>
+
+	<body>
+		<header id="header_id" class="mui-bar mui-bar-nav" style="background: #0088F4 !important;">
+			<h1 class="mui-title" style="z-index: 10;color:#fff;">我的</h1>
+			<a style="float: right;margin-top:5px;" id="target">
+				<img src="../images/user/set.png" style="width: 25px;">
+			</a>
+<!-- 			<a style="margin-right:10px;float: right;margin-top:5px;">
+				<img src="../images/user/kefu.png" style="width: 25px;" />
+			</a> -->
+<!-- 				<div  style="widows:2vw;">
+					<img src="https://bloodcity.oss-cn-beijing.aliyuncs.com/2020-07/service.png" style="width:6vw;margin-right:15px;" />
+					<a class="mui-pull-right target" ><img  src="https://bloodcity.oss-cn-beijing.aliyuncs.com/2020-07/set.png" style="width:6vw;" /></a>				
+				</div>	 -->		
+		</header>
+		<div class="mui-content" id="template" style="padding-top: 74px;">
+			<div class="user-Info">
+
+				<div class="mui-col-xs-2">
+					<div class="user-ImgBox">
+						<img @tap="selectImg()" v-bind:src="userImg" style="width:12vw;height:12vw;" />
+					</div>
+				</div>
+
+				<div class="mui-col-xs-6" >
+					<div v-if="isLogin==1" class="user-phoneBoxTwo">
+						<div @tap="login()" class="login" style="overflow:hidden;font-size:18px;height:20px;line-height:20px;color:#fff;" v-cloak>{{tel}}</div>
+						<div style="font-size:14px;overflow:hidden;height:16px;line-height: 16px;" v-cloak>
+							{{type_name}}  :{{type}}
+						</div>
+					</div>
+				</div>
+
+				<div class="mui-col-xs-4">
+						<img @tap="to_change_role_index" src="https://bloodcity.oss-cn-beijing.aliyuncs.com/2020-07/switch.png" style="width:6vw;float:right;" />
+				</div>
+				
+			</div>
+			
+			<div style="margin:-30px 3% 10px 3%;padding-top: 0 !important;">
+			    <div class="mui-row"  v-for="(item,index) in owm_list" style="background:#ffffff;margin-bottom:15px;border-radius:10px;padding: 0px 10px 10px 10px;">
+						<div class="mui-table-view-cell" @click="toWallet(item)" :class="item.type=='money'?'money' : 'money_tilte' " >						
+							<img class="icon" :src="item.inactive_img"  v-if="item.type=='money'"  style="width:35px;float:left;"/> 
+							<span class="tit" style="float:left;padding:5px 0;" :class="item.type=='money'?'money_color' : '' ">{{item.name}}</span>							
+						</div>
+						
+						<li v-for="(val,key) in item.sys_foot" class="mui-col-xs-3" style="float: left;text-align:center;position:relative;padding:6px 0;">
+							<a class="toNextPage" @click="uesr_path(val)">
+								<img class="icon" :src="val.inactive_img" style="width:31px;"/>
+								<div>{{val.name}}</div>
+								<button style="" class="set_msg_btn" v-if="val.number > 0">{{val.number}}</button>								
+							</a>
+						</li>							
+			    </div>
+			</div>		
+
+		</div>
+
+		<!-- mui 框架 -->
+		<script src="../js/mui.min.js"></script>
+		<!-- vue -->
+		<script src="../js/vue-2.4.1.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 通用js -->
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/base64.min.js" type="text/javascript"></script>
+		<script src="../js/common/common.js" type="text/javascript" charset="utf-8"></script>
+		<!---->
+		<script src="../js/config/request.js" type="text/javascript" charset="utf-8"></script>
+		<!---->
+		<script src="../js/controller/controller-account.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/controller/controller-driver.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 分享 -->
+		<script src="../plug/js/share.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 主页菜单 -->
+		<script src="js/user.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>
+		<script type="text/javascript">
+			
+			document.getElementById('target').addEventListener('tap', function() {
+						    indexDtat.toSetting();
+						})
+						
+						$('#template ul').hide();
+						console.log('--------init--------');
+						// mui('#template').on('tap', '.target', function() {
+						// 	alert(11111);
+							
+						// })
+						mui('#carheader').on('tap', '.share', function() {
+							indexDtat.share();
+						})
+			
+						$(document).on('click','#order_share',function(){
+							var app_role = localStorage.getItem('app_role') ? localStorage.getItem('app_role') : 1;
+							if (app_role == 1) {
+								indexDtat.to_change_role();
+								return false;
+							}
+							if(mui.os.plus) {
+			                    var a = [{
+			                        title: "司机接单端口"
+			                    }, {
+			                        title: "承运方接单端口"
+			                    }, {
+			                        title: "客户下单端口"
+			                    }];
+			                    plus.nativeUI.actionSheet({
+			                        title: "链接端口",
+			                        cancel: "取消",
+			                        buttons: a
+			                    }, function(b) {
+			                        switch(b.index) {
+			                            case 0:
+			                                break;
+			                            case 1:
+			                                indexDtat.share_driver();
+			                                break;
+			                            case 2:
+			                                indexDtat.share_carriage();
+			                                break;
+			                            case 3:
+			                                indexDtat.share_customer();
+			                                break;
+			                            default:
+			                                break
+			                        }
+			                    })
+			                }
+						});
+			
+					// location.reload();
+						set_index_menu();
+	
+						function set_index_menu(){
+							// location.reload();
+							// console.log("owm_list:  "+ JSON.stringify(indexDtat.owm_list));
+							request.PostInfo_new(request.user_owm,{project_type:request.project_type},function(res){
+								console.log("登陆后身份是："+JSON.stringify(res.data.type));
+								var info = res.info;
+								 indexDtat.type = res.data.type;
+								var group_name = res.data.group_name;
+								var company_name = res.data.company_name;
+								
+								localStorage.project_type=res.data.type;
+								localStorage.group_code=res.data.group_code;
+								localStorage.company_id=res.data.company_id;
+								indexDtat.type_name=res.data.tel;
+								indexDtat.tel = res.data.tel;
+							 	for(var i in info) {
+							 		var leng = info[i].sys_foot.length;
+							 		var int =  Math.ceil(leng/4);
+							 		var height = 110;
+							 		var set_height = int * height;
+							 		info[i].style_height = set_height+'px'
+							 	}
+								// console.log("info:  "+ JSON.stringify(info));
+							 	indexDtat.owm_list = info;
+								
+								// typesname:function(type,group_name,company_name){
+								  switch(indexDtat.type){
+									case 'TMS3PL':
+										indexDtat.type_name=group_name;
+									  break;
+									case 'carriers':
+										indexDtat.type_name=company_name+' | '+group_name;
+									  break;
+									case 'customer':
+									  console.log("客户")
+										indexDtat.type_name= company_name+' | '+group_name;
+										 break;
+									case 'driver':
+										indexDtat.type_name=group_name+' | '+'司机';    
+									  break;
+									 case 'user':
+										 indexDtat.type_name='用户';    
+									 break;  
+								  }
+								// },
+								
+								
+							},function(){});
+						}
+			
+						function refreshData_index_menu() {
+							set_index_menu()
+							// var token = user.getState('token');
+							console.log("个人中心监听底部tab传递事件执行中");
+							indexDtat.getpersoninfo();
+							creatMaskView();
+							$('.mui-content').show();
+						}
+						
+						function creatMaskView(){
+							console.log("登录成功，是否创建首页引导页");
+						};
+			
+						mui('body').on('tap', '.mui-popover-action li>a', function() {
+							var a = this,
+								parent;
+							//根据点击按钮，反推当前是哪个actionsheet
+							for (parent = a.parentNode; parent != document.body; parent = parent.parentNode) {
+								if (parent.classList.contains('mui-popover-action')) {
+									break;
+								}
+							}
+							var data = $(this).attr('data');
+							//关闭actionsheet
+							mui('#' + parent.id).popover('toggle');
+							if (data == 1) {
+								indexDtat.share_driver();
+							} else if (data == 2) {
+								indexDtat.share_carriage();
+							}
+						})
+			
+						var mask = mui.createMask(function(){
+							$('#vehicles').css('display','none');
+							return true;
+						});
+						
+						mui.plusReady(function() {
+						        plus.navigator.setStatusBarBackground("#0088f4");
+						});
+						
+						
+						// 点击 X 关闭遮罩
+						mui('body').on('tap', '#close', function() {
+							mui("#vehicle2").popover('hide');
+						})							
+						setAutoHeight(function(h){
+							$('.mui-content').css({"padding-top":(h+0)+"px"});
+						},2)
+
+		</script>

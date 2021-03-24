@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>我要用车</title>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+	<style type="text/css">
+		
+		.mui-bar-tab .mui-tab-item.mui-active {
+			color: #2972E9;
+			/* padding-top: 30px; */
+		}
+		.mui-bar-tab .mui-tab-item{
+			/* padding-top: 30px; */
+		}
+		
+		.tabimg{
+			width: 22px;
+			height:22px;
+			margin:5px auto 0;
+			/* position: absolute; */
+			/* top: 8px; */
+			/* margin-left: 3px; */
+		}
+		
+		
+		#foottitle{
+			height:15px;
+			line-height:15px;
+			display:block;
+			font-size: 14px;
+			margin-bottom:10px;
+		}
+		
+		#set_footer{
+			height:50px !important;
+		}
+
+		@supports(bottom:constant(safe-area-inset-bottom))or(bottom:env(safe-area-inset-bottom)){
+			 #footer,#indexfoot{ 
+               /* top: constant(safe-area-inset-top); */
+			   /* bottom: calc(50px + constant(safe-area-inset-bottom)); */
+			   /* bottom: calc(50px + env(safe-area-inset-bottom)); */
+			   /* padding-bottom: constant(safe-area-inset-bottom); */
+			   /* padding-bottom: env(safe-area-inset-bottom); */
+			   height:50px !important;
+			 } 		
+		}
+
+    /*兼容ihponeX样式 end*/
+		
+	</style>
+</head>
+<body>
+	<div class="mui-content footer" id="set_footer" >
+	    <nav class="mui-bar mui-bar-tab pagetab " id="indexfoot" style="height:50px;border:0; background: #FFFFFF;box-shadow:none;-webkit-box-shadow:none;z-index: 9999;display:flex;flex:1;">
+			<a  v-for="(item,index) in list" :href="item.app_path" :class="['mui-tab-item',item.type,item.active]"  @click="tap_bar(index)" style="flex:1;">
+	            <span class="tab3" id="" style="z-index:9999;">
+	            	<img id="" v-if="item.active" :src="item.active_img" class="tabimg" >
+	            	<img id="" v-else :src="item.inactive_img" class="tabimg">
+	            </span>
+	            <span class="mui-tab-label" id="foottitle">{{item.name}}</span>
+	        </a>			
+	    </nav>
+	</div>	
+	
+	<script src="js/mui.min.js" type="text/javascript"></script>
+	<script src="js/vue-2.4.1.js" type="text/javascript"></script>
+	<script src="js/jquery.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/base64.min.js"></script>
+	<!-- 需要请求到的接口 -->
+	<script src="js/config/request.js" type="text/javascript"></script>
+	<!-- 页面的启动图逻辑 -->
+	<script src="js/common/index.js" type="text/javascript"></script>
+	<!-- 页面的封装事件 -->
+	<script src="js/common/common.js" type="text/javascript"></script>
+	<!-- 检查升级 -->
+	<!-- <script type="text/javascript" src="js/config/update.js"></script> -->
+<script type="text/javascript">
+	
+	var d_index = new Vue({
+				el:'#set_footer',
+				data:{
+					list:[],
+					activeTab:'',
+					subpages:[],
+					aniShow:{},
+					app_role:localStorage.getItem('app_role') ? localStorage.getItem('app_role') : 1,
+					subpage_style:{
+						top:'0px',
+					    bottom:'50px', 
+						scrollIndicator:'none',
+					}
+				},
+				methods:{
+					// refreshData();
+
+					tap_bar(index){
+						var subpages_length=parseInt(d_index.subpages.length)-1;
+						console.log("菜单长度"+ (parseInt(d_index.subpages.length)-1));
+						console.log("点击的是第"+index+"个");
+						
+						var targetTab = this.list[index].app_path
+						
+						var activeTab = this.activeTab
+						if (activeTab != targetTab) {
+							var list = this.list;
+							for (var i in list) {
+								list[i].active = ''
+								if (i == index) {
+									list[i].active = 'mui-active'
+								}
+							}
+							this.list = JSON.parse(JSON.stringify(list));
+							this.aniShow = {};
+							if(mui.os.ios||this.aniShow[targetTab]){
+								plus.webview.show(targetTab);
+							}else{
+								   //否则，使用fade-in动画，且保存变量
+								var temp = {};
+								temp[targetTab] = "true";
+								mui.extend(this.aniShow,temp);
+								plus.webview.show(targetTab,"fade-in",200);
+							}
+							plus.webview.hide(this.activeTab);
+					        this.activeTab = activeTab = targetTab;
+						}
+					    // activeTab = targetTab;
+						// console.log(targetTab);
+						//当点击的是个人中心时，调用 菜单接口
+						// if(subpages_length==index){
+							plus.webview.getWebviewById('user/user.html').evalJS('refreshData_index_menu()');
+						// }
+					},
+
+				}
+			});
+			// to_set_color_light()
+			// mui('body').on('tap','.shua',function(){
+			//      var c_out = click_one();
+			// 	if (!c_out) {
+			// 		console.log('time_in');
+			// 		return false;
+			// 	}
+			//     plus.webview.getWebviewById('/user/user.html').evalJS('refreshData_index_menu()');
+			// });
+	// mui.plusReady(function() {
+	//        plus.webview.getWebviewById('user/user.html').evalJS('refreshData_index_menu()');
+	// });
+	//创建子页面，首个选项卡页面显示，其它均隐藏；
+	function InitTabbar(index) {
+		var self = plus.webview.currentWebview();
+		//console.log('d_index.subpages的类型是：'+Array.isArray(d_index.subpages));
+		//console.log('d_index.subpages的值是：'+d_index.subpages);
+		for (var i = 0; i <d_index.subpages.length; i++) {
+			var temp = {};
+
+			if (/iphone/gi.test(navigator.userAgent) && (screen.height == 896 && screen.width == 414)) {
+				d_index.subpage_style = {
+							 top: '0px', // 去除顶部的高度
+							 bottom:'50px', // 去除tab的高度,注意iPhoneX的底部高度有问题,比50px高
+							 scrollIndicator:'none'
+				}
+			}else if (/iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375)) {
+				   d_index.subpage_style = {
+					 top: '0px', // 去除顶部的高度
+					 bottom:'50px', // 去除tab的高度,注意iPhoneX的底部高度有问题,比50px高
+					 scrollIndicator:'none'
+				   }		
+			}	
+			
+			var sub = plus.webview.create(d_index.subpages[i], d_index.subpages[i], d_index.subpage_style);
+			if (i !=index) {
+				sub.hide();
+			}
+			self.append(sub);
+		};
+		//检查login情况，第一次加载就要登录
+		fistToLogin();
+	};
+	
+	
+	refreshData();
+	function refreshData(){
+		var url = request.user_foot;
+		var data = {
+			project_type:request.project_type
+		}
+		d_index.subpages = [];
+		request.PostInfo_new(url,data,function(res){
+			console.log("foot:"+JSON.stringify(res));
+			d_index.list = res.data;
+			var sub = []
+			for (var i in d_index.list) {
+				if (i == 0) {
+					d_index.list[i].active = 'mui-active'
+				} else {
+					d_index.list[i].active = ''
+				}
+				sub.push(d_index.list[i].app_path);
+			}
+			d_index.subpages = sub;
+			set_init_bar(0)
+		},function(){});	
+	}
+	
+	function set_init_bar(index){
+		InitTabbar(index)
+		 //当前激活选项
+		var activeTab = d_index.subpages[index];
+		d_index.activeTab = d_index.subpages[index]
+		var change_role_flag = localStorage.change_role_flag;
+		if (change_role_flag) {
+			var len = d_index.subpages.length - 1;
+			d_index.tap_bar(len);
+		} else {
+			d_index.tap_bar(index);
+		}
+		localStorage.change_role_flag = '';
+	}
+	
+	function fistToLogin(){
+		var ftoken = localStorage.ftoken;
+		if(!ftoken){
+			clicked('login/login.html');
+		} 
+	}
+	
+	//从其他页面返回tab页(2021.3.12新增) 
+	function changSub(index){
+		console.log('传递过来的index是：'+index);
+		//改变选中的tab样式
+		d_index.tap_bar(index);
+		set_init_bar(index);	
+	}
+	
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--mui.css-->
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../fonts/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/mescroll.css" />
+		<link rel="stylesheet" type="text/css" href="../css/common/common.css"/>
+		<!-- 日期选择器 -->
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css"/>
+		<style type="text/css">
+			.mui-bar-nav{
+				background-color: #fff;
+			}
+			body,.mui-content{
+				background-color: #F3F4F6;
+			}
+			.mui-bar {
+				background-color: #FFFFFF;
+			}
+			
+			.mescroll{
+				position: fixed;
+				top:65px;
+				padding-bottom:60px;
+			}
+			
+			.mui-bar .mui-title {
+				color: #333333;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 61px;
+			}
+			.val_mobile{
+				padding:5px 0;
+				color:#666;
+			}
+			.mescroll .mui-table-view-cell {
+			    margin-bottom: 10px;
+			}
+			[v-cloak]{
+				display: none !important;
+			}
+		</style>
+	</head>
+	<body>
+		<!--头部start-->
+		<header class="mui-bar mui-bar-nav" style="height:64px;">
+			<a class="mui-action-back mui-pull-left">
+				<img src="../images/user/topbackarr.png" style="width: 20px;">
+			</a>
+			<h1 class="mui-title">常用地址</h1>
+		</header>
+		<div id="mescroll" class="mescroll">
+		<div class="mui-content" id="template" v-cloak>
+			<!-- <div class="noaddress" v-if="addressList == 0">
+				<div><img src="../images/empty/noAddress.png"/ style="width: 50%;margin-left:25%;margin-top:10%;margin-bottom: -40px;"></div>
+				<div style="color:#999;text-align:center;font-size:13px;">暂无可用地址</div>
+			</div> -->
+			<div class="hadaddress" >
+				<ul class="mui-table-view" style="background-color: #F3F4F6;margin-top:20px; ">	
+					<li class="mui-table-view-cell mui-row set_tool_" v-for="(item,index) in showlist" @tap="returan(index)" style="padding-top:0;padding-bottom:0;">
+						<div class="mui-col-xs-7 set_tool_left"  >
+							<div class="set_tool_left_top" style="display:block;width:100%;float:unset;">{{item.contacts}}&nbsp;{{item.tel}}</div>
+							<div class="set_tool_left_bottom" style="width:100%;">
+								<span>{{item.sheng_name}}&nbsp;{{item.shi_name}}&nbsp;{{item.qu_name}}&nbsp;{{item.address}}</span>
+							</div>
+						</div>
+						<div class="mui-col-xs-5 set_tool_right" style="height:100%;">
+							<img src="../images/tool/delete.png">
+							<span class="tool_btn tool_btn_red"  @tap.stop="delAddress(index)">删除</span>
+							<img src="../images/tool/edit.png"><span class="tool_btn tool_btn_888" @tap.stop="editorAddress(index)">编辑</span>
+						</div>
+					</li>
+				</ul>
+				<!-- <div style="text-align: center;padding: 25px 0px;">
+				</div> -->
+			</div>
+		</div>
+		</div>
+		<button  type="button" class="mui-btn mui-btn-block" id="addForm" style="position:fixed;bottom:0px;width:92%;margin-left:4%;border:0px;background-color: #0088f4;height:44px;border-radius: 22px;color:#fff;font-size:16px;z-index: 9999;line-height: 44px;padding:0;"  onclick='clicked("add_address.html")'>添加地址</button>
+	</body>
+	<!-- mui 框架 -->
+	<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<!-- vue -->
+	<script src="../js/vue-2.4.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/base64.min.js" type="text/javascript"></script>
+	<!-- 通用js -->
+	<script src="../js/common/common.js" type="text/javascript" charset="utf-8"></script>
+	<!-- 接口 -->
+	<script src="../js/config/request.js" type="text/javascript" charset="utf-8"></script>
+	<!--常用地址接口-->
+	<!-- <script src="../js/controller/controller-account.js" type="text/javascript" charset="utf-8"></script> -->
+	<script src="../js/mescroll.js" type="text/javascript" charset="utf-8"></script>
+	<!-- 页面切换传值 --> 
+	<script src="js/list.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+			// setAutoHeight(function(h){
+			// 	$('.mui-content').css({"padding-top":(h+40)+"px"});
+			// },2)
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
+			setAutoHeight(function(h){
+				$('#mescroll').css({"top":(40+h)+'px'});
+			},2)
+	</script>
+</html>

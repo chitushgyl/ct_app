@@ -1,0 +1,88 @@
+/* 列表展开样式 */
+.mui-table-view-cell.mui-active{
+	background-color: #FFFFFF;
+}
+/* 列表带图片  图片样式  */
+.mui-table-view .mui-media-object{
+	line-height: 56px;
+    max-width: 56px;
+    height: 56px;
+}
+/* 图片包裹层 */
+.img-wrap{
+	padding: 5px;
+}
+.img-box{
+	display: flex;
+	display: -webkit-flex;
+	flex-direction: row;
+	-webkit-flex-direction: row;
+	justify-content: center;
+	-webkit-justify-content: center;
+	align-items: center;
+	-webkit-align-items: center;
+}
+.img-box img{
+	/*width: 100%;*/
+	width:120px;
+	height: 105px;
+}
+.img-box-example{
+	display: flex;
+	display: -webkit-flex;
+	flex-direction: row;
+	-webkit-flex-direction: row;
+	justify-content: center;
+	-webkit-justify-content: center;
+	align-items: flex-start;
+	-webkit-align-items: flex-start;
+}
+.img-box-example img{
+	width: 120px;
+}
+
+
+.i-yuan{
+	display: inline-block;
+	width:5px;
+	height:5px;
+	border-radius: 50%;
+	background: #FC9A18;
+	margin-right: 10px;
+}
+.cardimg{
+	width: 35px;
+	vertical-align: middle;
+}
+.mui-bar{
+	background-color: #FFFFFF;
+}
+.mui-bar .mui-title{
+	color: #333333;
+}
+.mui-content>.mui-table-view:first-child{
+	margin-top: 9px;
+}
+p{
+	font-size: 15px;
+	color: #333333;
+}
+.mb10{
+	border-bottom:1px solid #E3E7EB;
+	padding-bottom: 20px;
+	margin-bottom: 30px !important;
+}
+.mui-btn-main {
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid #A88734;
+    background: -webkit-linear-gradient(bottom, #2972E9, #2972E9);
+    background: -moz-linear-gradient(bottom, #2972E9, #2972E9);
+    background: -o-linear-gradient(bottom, #2972E9, #2972E9);
+    background: linear-gradient(bottom, #2972E9, #2972E9);
+    font-size: 17px;
+    font-weight: normal;
+    color: #323232;
+	border: none;
+}
+	

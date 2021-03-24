@@ -1,0 +1,245 @@
+header{
+	color: white;
+}
+header .mui-pull-left span{
+	color: white;
+}
+header .mui-pull-right a{
+	padding: 15px 0px;
+	color: white;
+}
+.mui-table-view-cell.mui-active{
+	background-color: white;
+}
+/*页面主元素大小占全屏 ，整体绝对定位*/
+.noaddress{
+	position: absolute;
+	width: 100%;
+}
+/*
+ * 没有常用地址时的样式
+ * */
+.mui-content .noaddress{
+	height: 80%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	-webkit-align-items: center;
+	-webkit-flex-direction: column;
+	-webkit-justify-content: center;
+}
+/*中部字体样式*/
+.mui-content .noaddress>div:nth-child(2){
+	color: #969698;
+	font-size: 14px;
+	line-height: 40px;
+	padding-bottom: 20px;
+}
+/*底部按钮样式*/
+.mui-content .noaddress>div:nth-child(3) a{
+	padding: 10px 20px !important;
+}
+/*
+ * 存在常用地址时的样式
+ */
+/*圆角、内边距*/
+.mui-content .hadaddress{
+	margin: 0px 5px;
+}
+.mui-content .hadaddress .mui-table-view{
+	border-radius: 5px;
+	overflow: hidden;
+	background: transparent;
+}
+/*输入框样式*/
+.select_address{
+	position: relative;
+}
+.select_address>div:first-child{
+	position: absolute;
+	top: 10px;
+	left: 7px;
+	width: 20px;
+}
+.select_address>div:first-child img{
+	width: 100%;
+}
+.hadaddress input{
+	padding-left: 33px;
+	margin-bottom: 5px;
+	font-size: 13px;
+	color: #8f8f94;
+	border: none;
+	border-radius: 5px;
+}
+/*地址列表元素样式*/
+.mui-content .hadaddress .mui-table-view .mui-table-view-cell{
+	padding: 0px 7px;
+	border-radius: 5px;
+	overflow: hidden;
+}
+/*地址块前部图标*/
+
+.hadaddress .mui-table-view-cell>div:first-child{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	-webkit-align-items: center;
+	-webkit-justify-content: space-between;
+}
+.hadaddress .mui-table-view-cell>div:first-child div:first-child{
+	width: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-direction: column;
+	-webkit-align-items: center;
+	-webkit-justify-content: space-between;
+	-webkit-flex-direction: column;
+}
+.hadaddress .mui-table-view-cell>div:first-child div:first-child img{
+	width: 100%;
+	min-width: 20px;
+}
+.hadaddress .mui-table-view-cell>div:first-child .address_message{
+	width: 100%;
+	padding-top: 7px;
+	padding-left: 7px;
+	/*height: 66px;*/
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    -webkit-justify-content: center;
+    -webkit-flex-direction: column;
+}
+/*地址块样式*/
+.mui-table-view-cell .address_message{
+	padding:11px 0px;
+}
+/*地址*/
+.mui-table-view-cell .address_message p:first-child{
+	line-height: 23px;
+}
+/*联系人*/
+.mui-table-view-cell .address_message p.contact{
+	font-size: 12px;
+}
+.mui-table-view-cell .address_message p.contact span{
+	display: inline-block;
+	text-indent: 1em;
+}
+
+/*
+ * 操作按钮样式
+ * */
+.mui-content .hadaddress .mui-table-view .mui-table-view-cell .manage{
+	line-height: 20px;
+	text-align: right;
+	padding: 7px 0px;
+	border-top: 1px dashed #dedede;
+}
+.mui-content .hadaddress .mui-table-view .mui-table-view-cell .manage span{
+	font-size: 12px;
+	/* margin: 0px 15px; */
+}
+
+.mui-content .hadaddress .mui-table-view .mui-table-view-cell .manage span:first-child{
+	color: #1a8aff;
+}
+/*
+ * 默认地址按钮样式
+ * */
+.hadaddress .mui-input-group{
+ 	display: inline-block;
+ 	float: left;
+}
+.hadaddress .mui-input-group .mui-checkbox{
+ 	min-width: 5em;
+    line-height: 0px;
+    height: auto;
+}
+.hadaddress .mui-input-group .mui-input-row:after{
+	display: none;
+}
+.mui-table-view-cell .mui-input-row label{
+	padding: 3px 2em 7px 2em;
+}
+.mui-table-view-cell .mui-input-row input{
+	left: -9px !important;
+	top: 1px;
+	padding: 0;
+}
+.mui-table-view-cell .mui-input-row input:before{
+	font-size: 20px;
+}
+
+
+/**
+ * 提醒弹出款样式
+ * */
+.mui-popup.mui-popup-in{
+	width: 70%;
+}
+.mui-popup.mui-popup-out{
+	width: 70%;
+}
+.mui-popup.mui-popup-out li,.mui-popup.mui-popup-out div{
+	font-size: 12px;
+	color: #78787a;
+}
+/*底部按钮意外设置内边距为0*/
+.mui-popup.mui-popup-in .mui-popup-inner{
+	padding: 0px;
+}
+.mui-popup.mui-popup-in .mui-popup-inner:after{
+	background-color: #f3f4f6;
+}
+/*标题背景*/
+.mui-popup.mui-popup-in .mui-popup-title{
+	color: white;
+	padding: 15px;
+	background-image: url(../../images/official-bg.png);
+	background-attachment: scroll;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+/*去除ul上边距*/
+.mui-popup.mui-popup-in .mui-popup-text{
+	margin-top: 0px;
+}
+/*ul上下内边距*/
+.mui-popup.mui-popup-in ul.mui-table-view{
+	padding: 15px 0px ;
+	background-color: white;
+}
+/*列表元素li样式（字体颜色）*/
+.mui-popup.mui-popup-in li.mui-table-view-cell{
+	font-size: 12px;
+	line-height: 22px;
+	color: #78787a;
+	padding:5px 10px;
+}
+.mui-popup.mui-popup-in div.mui-table-view-cell{
+	font-size: 12px;
+	color: #78787a;
+	text-align: left;
+	padding: 20px 15px;
+	border-top: 1px solid #f3f4f6;
+}
+/*列表元素li:after样式（下边界）*/
+.mui-popup.mui-popup-in .mui-table-view-cell:after{
+	background-color: #F3F4F6;
+	height: 0px;
+}
+/*弹出框底部按钮样式*/
+.mui-popup.mui-popup-in .mui-popup-button{
+	color: #1a8aff;
+	font-size: 15px;
+	font-weight: normal;
+	background-color: rgba(255,255,255,1);
+}
+.mui-popup-title+.mui-popup-text{
+	padding-top: 30px;
+	padding-bottom: 30px;
+}

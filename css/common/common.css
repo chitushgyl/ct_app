@@ -1,0 +1,294 @@
+*{
+	margin: 0;padding: 0;
+}
+header{                          /* 预留顶部状态栏 */
+
+}
+.mui-bar {
+    z-index: 100;
+    padding-top: 20px;
+    height: 64px;
+    font-size: 14px;
+    line-height: 44px;
+	background-color: #0088f4;
+}
+.mui-bar-nav {                   /* 去掉底部下划线 */
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.mui-picker {
+    background-color: #fff;
+}
+.mui-dtpicker-title h5 {
+    font-size: 18px;
+    display: inline-block;
+    width: 20%;
+    margin: 0;
+    padding: 8px;
+    text-align: center;
+    border-top: solid 1px #ddd;
+    background-color: #FFFFFF;
+}
+.btnorder{
+	background: #2972E9;
+	font-size: 18px;
+	font-weight: 800;
+	color: #FFFFFF;
+}
+.mui-action-back{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    height:100%;
+}
+.customer_tel{
+    color:#0088f4;
+}
+
+.set_style_li .order_style_top{
+                height:37px;
+                line-height:37px;
+                border-bottom:1px solid #e8e9ea;
+            }
+            .set_style_li .order_style_top_btn{
+                height:20px;
+                width:35px;
+                font-size:12px;
+                padding:0;
+                margin:auto;
+                margin-top:8.5px;
+                border:0;
+                color:#fff;
+            }
+            .set_style_li .order_number{
+                color:#333;
+                margin-left:10px;
+                font-size:13px;
+            }
+            .set_style_li .mui-float-left{
+                float:left;
+            }
+            .set_style_li .mui-float-right{
+                float:right;
+            }
+            .set_style_li .order_status{
+                font-size:11px;
+                line-height:37px;
+                color:#35B85F;
+                font-weight:bold;
+                display:flex;
+                align-items: center;
+            }
+            .set_style_li .line_right_order_top{
+                width:6px;
+                height:10px;
+                margin-left:3px;
+            }
+            .set_style_li .order_style_center{
+                height:52px;
+                padding-top:9px;
+            }
+            .set_style_li .order_style_bottom{
+                position:relative;
+            }
+            
+            .set_style_li .start_order_center{
+                width:40%;
+            }
+            .set_style_li .line_order_center{
+                width:20%;
+            }
+            .set_style_li .end_order_center{
+                width:40%;
+                text-align:right;
+            }
+            .set_style_li .start_order_center_city{
+                height:15px;
+                overflow: hidden;
+                font-size:12px;
+                line-height:15px;
+                color:#a2a3a4;
+            }
+            .set_style_li .start_order_center_area{
+                height:24px;
+                font-size:17px;
+                line-height:24px;
+                color:#333;
+                font-weight:bold;
+            }
+            .set_style_li .line_line{
+                width:100%;
+                height:6px;
+            }
+            .set_style_li .line_order_center{
+                margin-top:5px;
+            }
+            .set_style_li .order_time_txt{
+                color:#a2a3a4;
+                font-size:14px;
+                overflow: hidden;
+            }
+            .set_style_li .order_time_val{
+                color:#333;
+                font-size:14px;
+            }
+            .set_style_li .order_price{
+                position:absolute;
+                bottom:0;
+                right:0;
+                height:35px;
+                line-height:35px;
+                text-align:right;
+                color:#FC5854;
+                font-size:15px;
+                font-weight:bold;
+            }
+            .set_style_li .copy_order{
+                height:21px;
+                font-size:13px;
+                border:1px solid #e7e7e7;
+                border-radius: 10px;
+                width:37px;
+                text-align: center;
+                padding:0;
+                margin:0;
+                margin-top:8px;
+                margin-left:0px;
+            }
+            .set_style_li.mui-table-view-cell {
+                background-color: transparent;
+                margin: 0px 10px;
+            }
+            .set_style_li .set_null_div{
+                width:100%;
+                height:30px;
+            }
+            .set_style_li .order_style_bottom_btn{
+                width:100%;
+                height:44px;
+                line-height:44px;
+                border-top:1px solid #E8E9EA;
+            }
+            .set_style_li .order_style_bottom_btn_s{
+                width:100%;
+                height:100%;
+                display:flex;
+                justify-content: flex-end; 
+                align-items: center;
+
+            }
+            .order_style_bottom_btn_s button{
+                width:90px;
+            }
+            .set_style_li .btn_color_ccc{
+                background-color:   #fff;
+                color:#ccc;
+                border:1px solid #ccc;
+                border-radius:  5px;
+            }            
+
+            .set_style_li .btn_color_0088{
+                background-color:   #0088f4;
+                color:#fff;
+                border:1px solid #0088f4;
+                border-radius:  5px;
+            }
+            .mui-table-view:before{
+                height:0;
+            }            
+            .mui-table-view:after{
+                height:0;
+            }
+            .mui-table-view-cell:after{
+                background-color: #fff;
+            }
+/*我的功能 列表*/
+.set_tool_{
+    height:72px;
+    margin:0 10px;
+    margin-top:10px;
+    background-color: #fff;
+    border-radius: 2px;
+}
+.set_tool_ .set_tool_left,.set_tool_ .set_tool_right{
+    height:100%;
+}
+.set_tool_ .set_tool_left_bottom{
+    height:25px;
+    line-height: 25px;
+    font-size:13px;
+    color:#999;
+    width:100%;
+    overflow:hidden;
+}
+.set_tool_ .set_tool_right img{
+    width:15px;
+    /*height:15px;*/
+    margin-left:10px;
+}
+.set_tool_ .set_tool_right .tool_btn{
+    margin-left:3px;
+    font-size:13px;
+}
+.set_tool_ .set_tool_right{
+    height:100%;
+    display:flex;
+    justify-content: flex-end;
+    align-items:center;
+}
+.set_tool_ .set_tool_left_top{
+   height:35px;
+   line-height: 45px;
+   font-size:15px;
+   /*font-weight:bold;*/
+   color:#333;
+   width:100%;
+   overflow:hidden; 
+}
+.set_tool_ .set_tool_right .tool_btn_888{
+    color:#0088f4;
+}
+
+.set_tool_ .set_tool_right .tool_btn_red{
+    color:red;
+}
+/*我的功能 列表*/
+
+.set_bottom_btn{
+    padding:0;
+    height:44px;
+    line-height: 44px;
+    border-radius:22px;
+    background-color: #0088f4;
+    color:#fff;
+}
+
+/*表单*/
+::-webkit-input-placeholder {font-size:14px;}
+/* Firefox 4-18 */
+:-moz-placeholder {font-size:14px;}
+/* Firefox 19-50 */
+::-moz-placeholder {font-size:14px;}
+/*表单*/
+
+.mui-poppicker-header,.mui-dtpicker-header{
+    background-color: #fff !important;
+    height: 40px !important;
+}
+.mui-poppicker-body{
+    margin-top:0 !important;
+}
+.mui-poppicker-header .mui-btn,.mui-dtpicker-header .mui-btn{
+    color:#0088f4 !important;
+    height:100%;
+    border:0;
+    font-size:14px !important;
+}
+.mui-dtpicker.mui-active{
+    background-color: #fff !important;
+}
+/*弹窗样式*/
+.mui-popup-button-bold{
+    font-weight: unset !important;
+    color:#999;
+}

@@ -1,0 +1,76 @@
+/**
+ * =============================================
+ * 赤途冷链 客服中心 样式表
+ * =============================================
+ * @auther: 李渊
+ * @date: 2018.05.25
+ */
+.mui-bar-nav~.mui-content{
+	padding: 64px 15px 35px 15px;
+	min-height: 100%;
+	background-color: #FFFFFF;
+}
+
+/* 标题 */
+.title-h4{
+	margin: 18px 0 10px;
+	font-size: 16px;
+	line-height: 25px;
+}
+/* 段落 */
+.anwer-p{
+	text-indent: 35px;
+	line-height: 25px;
+}
+ol{
+	padding-left: 50px;
+}
+ol li{
+	list-style-type: decimal;
+	list-style-position: outside;
+}
+/* 意见反馈   */
+.icon--kefu{
+	top: 8px;
+	font-size: 22px !important;
+}
+.feedback{
+	padding-top: 75px !important;
+	background-color: #F3F4F6 !important;
+}
+.feedback ul li{
+	height: 220px;
+	border-radius: 5px;
+}
+.feedback textarea{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	border: none;
+	font-size: 14px;
+}
+.feedback button{
+	width: 100%;
+	height: 44px;
+	border: #1A8AFF;
+	background-color: #1a8aff;
+}
+/* 联系客服  */
+.contact-us{
+	display: flex;
+	display: -webkit-flex;
+}
+.per_service{
+	position: relative;
+	top: -45px;
+	margin: auto;
+	text-align: center;
+}
+.per_service img{
+	width: 59px;
+	height: 60px;
+}
+.per_service p{
+	font-size: 15px;
+	line-height: 30px;
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>我的车辆</title>
+		<!-- mui -->
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<!-- font -->
+		<link rel="stylesheet" type="text/css" href="../fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mescroll.css" />
+		<link rel="stylesheet" type="text/css" href="../css/common/common.css" />
+		<style type="text/css">
+			.mui-bar {
+				background-color: #FFFFFF;
+			}
+
+			.mescroll{
+				position: fixed;
+				top:65px;
+				padding-bottom:60px;
+			}
+
+			.mui-bar .mui-title {
+				color: #333333;
+			}
+
+			.mui-bar-nav~.mui-content {
+				padding-top: 61px;
+			}
+			.val_mobile{
+				padding:5px 0;
+				color:#666;
+			}
+			.mescroll .mui-table-view-cell {
+			    margin-bottom: 10px;
+			}
+			body,.mui-content{
+				background-color: #F3F4F6;
+			}
+			[v-cloak]{
+				display: none !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" id="header">
+			<a class="mui-action-back mui-pull-left">
+				<img src="../images/user/topbackarr.png" style="width: 20px;">
+			</a>
+			<h1 class="mui-title">我的车辆</h1>
+		</header>
+		<div id="mescroll" class="mescroll">
+			<div class="mui-content" id="template_carList" v-cloak>
+				<ul class="mui-table-view" id="dataList" style="margin-top:20px;background-color: #F3F4F6;">
+					<div id="historylist" style="display: block;">
+					<li class="mui-table-view-cell mui-row set_tool_" v-for="(item,index) in carList" style="padding-top:0;padding-bottom:0;" @tap.stop="returan(index)">
+							<div class="mui-col-xs-7 set_tool_left">
+								<div class="set_tool_left_top">{{item.car_number}}&nbsp;{{item.tel}}</div>
+								<div class="set_tool_left_bottom">
+									<span>{{item.car_type_name}}</span>&nbsp;{{item.tms_control_type_show}}&nbsp;{{item.car_possess_show}}&nbsp;{{item.contacts}}
+								</div>
+							</div>
+							<div class="mui-col-xs-5 set_tool_right" style="">
+								<img src="../images/tool/delete.png"><span class="tool_btn tool_btn_red" @tap.stop="delCar(index)">删除</span>
+								<img src="../images/tool/edit.png"><span class="tool_btn tool_btn_888" @tap.stop="editCar(index)">编辑</span>
+							</div>
+						</li>
+						</div>
+				</ul>
+				<div id="png" style="margin: auto; text-align: center;display: none;">
+					<img style="width:180px;margin-top: 70px;" src="../images/empty/car.png">
+					<p style="font-size: 16px;color: #999999;">您还未添加车辆哦～</p>
+				</div>
+			</div>
+		</div>
+
+		<button  type="button" class="mui-btn mui-btn-block" id="addForm" style="position:fixed;bottom:0px;width:92%;margin-left:4%;border:0px;background-color: #0088f4;height:44px;border-radius: 22px;color:#fff;font-size:16px;z-index: 9999;line-height: 44px;padding:0;">添加车辆</button>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/base64.min.js" type="text/javascript"></script>
+		<!-- mui -->
+		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-2.4.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mescroll.js" type="text/javascript" charset="utf-8"></script>
+		<!-- request-->
+		<script src="../js/common/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/config/request.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../plug/js/share.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="../js/controller/controller-driver.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/list.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
+			setAutoHeight(function(h){
+				$('#mescroll').css({"top":(40+h)+'px'});
+			},2)
+		</script>
+	</body>
+</html>

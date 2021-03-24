@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>调度</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!-- 字体 -->
+		<link rel="stylesheet" type="text/css" href="../fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mescroll.css" />
+		<!-- 列表 -->
+		<link rel="stylesheet" type="text/css" href="css/order.css" />
+		<style>
+			.mui-col-xs-3{
+				padding-left:15px;
+				color:#333;
+				font-size:14px;
+			}
+			.mui-popover .mui-popover-arrow:after {
+				width: 0px;
+			}
+			.mui-popover {
+				width: 5.8rem;
+				background-size: 100% 100%;
+			}
+			#ordercancel {
+				top: 3.4rem !important;
+				left: 0.86rem;
+				right: 0.86rem;
+			}
+			.watermark-img{
+				position: absolute;
+				right: -7px;
+				top: -10px;
+			}
+			.mui-bar{
+				background-color: #FFFFFF;
+			}
+			.mui-bar .mui-title{
+				color: #333333;
+			}
+			p{
+				font-size: 16px;
+			}
+			body,.mui-content{
+				background-color: #F3F4F6;
+			}
+			.mui-col-sm-8 {
+				width: 100%;
+			}
+			.mui-table-view-cell .mui-row-ft {
+			    margin-top:0px;
+			}
+			.mui-col-xs-8 button{
+				font-weight: bold !important;
+			}
+			.mui-table-view-cell:after {
+			    background-color: #FFFFFF;
+			}
+			[v-cloak]{
+	            display: none
+	        }
+	        .set_null_div{
+	        	height:10px !important;
+	        }
+	        .mescroll{
+				top:83px;
+			}
+			.mui-radio input[type='radio']:checked:before {
+			content: '\e442';
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- 标题栏 -->
+		<header class="mui-bar mui-bar-nav">
+			<button class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"> <img src="../images/user/return.png"
+				 style="width: 30px;margin-top:8px;" /> </button>
+			<h1 class="mui-title" id="manual">订单列表</h1>
+		</header>
+		<!-- 主体 -->
+		<div id="carOrderList" class="mui-content">
+			<div class="nav" style="height: 44px;">
+				<div class="nav-list active" i="0" style="font-size: 14px;color: #333333;">自营车辆</div>
+				<div class="nav-list" i="1" style="font-size: 14px;color: #333333;">承运商</div>
+			</div>
+			<div id="mescroll" class="mescroll" style="margin-top:20px;margin-bottom:40px;">
+				<ul id="dataList" class="mui-table-view data-list mui-table-view-radio" style="background-color:#F3F4F6;">
+					<li class="mui-table-view-cell mt5 set_style_li " v-for="(item,index) in list" style="box-shadow:0px 0px 16px #ECE9E9;border-radius: 4px;border: 1px solid #cecfcf;background-color: #FFFFFF;margin-bottom: 10px;padding-left:15px;padding-top:0px;padding-bottom:0;" v-cloak>
+						<div @click="to_car(index)"  v-if="status==1">	
+							<div style="" class="order_style_center" >
+								<div class="mui-float-left">
+									<div class="mui-radio mui-right" style="height: 70px;font-size: 16px;width: 370px;display: flex;padding-top: 10px;" >
+										<div>
+											<img src="../images/car.png"  style="width: 30px;"/>
+										</div>
+										<div style="padding-left: 30px;">
+											<span>{{item.car_number}}</span>
+											<span>{{item.tms_control_type_show}}</span>
+											</br>
+											<span>{{item.contacts}}</span>
+											<span>{{item.tel}}</span>
+										</div>
+											<input type="radio" style="padding-top: 10px;right: 40px;" :checked="index == checkedIndex">
+									</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							</div>
+							<div @click="to_car_c(index)" v-if="status==2">
+								<div style="" class="order_style_center">
+									<div class="mui-float-left">
+										<div class="mui-radio mui-right" style="height: 70px;font-size: 16px;padding-top: 20px;width: 370px;display: flex;" >
+											<div>
+												<img src="../images/carriage.png" style="width: 30px;" >
+											</div>
+											<div style="padding-left: 30px;width: 270px;">
+												<span>{{item.company_name}}</span>
+											</div>
+											<!-- <a class="mui-navigate-right"></a> -->
+											<input name="radio1" type="radio" style="padding-top: 10px;right: 40px;" :checked="index == checkedIndex_c">
+										</div>
+									</div>
+									<div class="clear"></div>
+								</div>
+								</div>
+					</li>
+				</ul> 
+			</div>
+			<div style="background-color: #FFFFFF;position:fixed;bottom:10px;width: 100%;box-shadow:0px 0px 16px #ECE9E9;">
+				<div class="mui-row" style="height: 45px !important;display: flex;">
+					<div class="mui-col-xs-3" style="padding-top: 11px;">应付金额：<span style="color: red;">￥</span></div>
+					<div class="mui-col-xs-9">
+						<input id="" type="text" placeholder="请输入" style="color: red;float: left;border:0px;" v-model="total_price"/>
+					</div>
+				</div>
+				<div class="mui-row" style="height: 45px !important;" v-if="status==1">
+					<div class="mui-col-xs-3" style="padding-top: 11px;">联系人：</div>
+					<div class="mui-col-xs-9">
+						<input id="" type="text" placeholder="请输入" style="color: #1D2026;float: left; border: 0px;font-size: 14px;" v-model="contacts" />
+					</div>
+				</div>
+				<div class="mui-row" style="height: 45px !important;"v-if="status==1">
+					<div class="mui-col-xs-3" style="padding-top: 11px;">联系电话：</div>
+					<div class="mui-col-xs-9">
+						<input id="" type="text" placeholder="请输入" style="color: #1D2026;float: left; border: 0px;font-size: 14px;" v-model="tel"/>
+					</div>
+				</div>
+				<button style="width:92%;margin-left:4%;" type="button" class="mui-btn mui-btn-block create_order set_bottom_btn" >确认调度</button>
+			</div>
+		</div>
+		
+			<script>
+				window.FastClick = true;
+			</script>
+
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/base64.min.js" type="text/javascript"></script>
+		<!-- mui 框架 -->
+		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<!-- vue -->
+		<script src="../js/vue-2.4.1.js" type="text/javascript" charset="utf-8"></script>
+		<!--mescroll-->
+		<script src="../js/mescroll.js" type="text/javascript" charset="utf-8"></script>
+		<!-- common -->
+		<script src="../js/common/common.js" type="text/javascript"></script>
+		<!-- <script src="../oldcommon/oldCommon.js" type="text/javascript" charset="utf-8"></script> -->
+		<!-- 接口 -->
+		<script src="../js/config/request.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/controller/controller-driver.js" type="text/javascript" charset="utf-8"></script>
+
+		<script src="../plug/js/share.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/dispatch.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			setAutoHeight(function(h){
+				$('.nav').css({"margin-top":(h-40)+'px'});
+				$('#mescroll').css({"margin-top":(h)+'px'});
+			},2)
+		</script>
+	</body>
+</html>

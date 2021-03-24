@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="#0088f4">
+		<meta name="theme-color" content="#0088f4">
+		<title></title>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/mui.pick.min.css" rel="stylesheet" />
+		<link href="../css/common/common.css" rel="stylesheet" />
+		<link href="css/form.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../keyBoard/css/keyBoard.css" charset="utf-8" />
+		<style type="text/css">
+			.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
+				border-top: 0px solid #E1E1DF;
+				border-bottom: none;
+				background: #fff;
+			}
+			.mui-bar {
+				padding-top: 20px;
+				height: 64px;
+				background-color: #0088f4;
+			}
+			.mui-badge.mui-badge-inverted {
+				color: #333333;
+			}
+			.mui-off-canvas-wrap .mui-bar {
+				-webkit-transform: none;
+				transform: none;
+			}
+			.mui-bar .mui-title {
+				z-index: 10;
+				font-size: 18px;
+				right: 70px;
+				padding-left: 30px;
+			}
+			.mui-scroll-wrapper {
+				top: 0px;
+			}
+			.mui-bar-nav~.mui-content {
+				padding-top: 0px;
+			}
+			.mui-row:after {
+				clear: both;
+			}
+			.mui-radio input[type=radio]:before {
+				font-size: 15px;
+			}
+			.mui-radio input[type=radio] {
+				top: 0px;
+			}
+			.mui-bar {
+				padding-top: 20px;
+				height: 64px;
+			}
+			.mui-badge.mui-badge-inverted {
+				color: #333333;
+			}
+			.mui-off-canvas-wrap .mui-bar {
+				-webkit-transform: none;
+				transform: none;
+			}
+			.mui-bar .mui-title {
+				z-index: 10;
+				font-size: 18px;
+				right: 70px;
+				padding-left: 30px;
+				color:#fff;
+			}
+			.mui-active {
+				background: #FFFFFF !important;
+			}
+			.mui-scroll-wrapper {
+				top: 0px;
+			}
+			.mui-bar-nav~.mui-content {
+				padding-top: 64px;
+			}
+			.mui-row:after {
+				clear: both;
+			}
+			.mui-radio input[type=radio]:before {
+				font-size: 15px;
+			}
+			.mui-radio input[type=radio] {
+				top: 0px;
+			}
+			.radiobox {
+				width: auto;
+				float: left;
+			}
+			.cartype {
+				font-size: 18px;
+				color: #666666;
+				padding-left: 20px;
+				font-weight: 400;
+			}
+			.type1 {
+				color: #2972E9;
+				font-weight: 800;
+			}
+			.mui-table-view:after {
+				height: 1px;
+				color: #E3E7EB;
+				left: 15px;
+				right: 15px;
+			}
+			.mui-table-view:before {
+				height: 0px;
+			}
+			.mui-radio.mui-left input[type=radio] {
+				left: 0px;
+			}
+			.mui-active {
+				background: #FFFFFF !important;
+			}
+			.check-box {
+				padding: 11px 15px;
+				display: flex;
+				display: -webkit-flex;
+				flex-direction: row;
+				-webkit-flex-direction: row;
+				justify-content: flex-end;
+				-webkit-justify-content: flex-end;
+				align-items: center;
+				-webkit-align-items: center;
+				background-color: #FFFFFF;
+				font-size: 13px;
+			}
+			.active {
+				border: 1px solid #2972E9 !important;
+				color: #2972E9 !important;
+			}
+			.mui-table-view-cell:before {
+				position: absolute;
+				right: 15px;
+				top: 0;
+				left: 15px;
+				height: 1px;
+				content: '';
+				background-color: #E3E7EB;
+			}
+			.mui-table-view-cell{
+				position: relative;
+				overflow: hidden;
+				padding-bottom: 0px;
+				padding-top: 6px;
+				-webkit-touch-callout: none;
+			}
+			.mui-table-view-cell:last-child:before {
+				height: 1px;
+			}
+			#cityorno .mui-table-view-cell:last-child:before {
+				height: 0px;
+			}
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				width: 80px;
+				height: 30px;
+			}
+			[v-cloak] {
+				display: none !important;
+			}
+			.mui-table-view-cell.servers{
+				padding:11px 15px;
+			}
+			.mui-switch-blue.mui-active{
+				background-color: #007aff !important;
+			}
+			.mui-switch.mui-active:before{content: '是';}  
+			.mui-switch:before{content: '否';} 			
+
+			.select_carriage .mui-switch.mui-active:before{content: '是';}  
+			.select_carriage .mui-switch:before{content: '否';} 
+			.textright{
+				width: 75%;
+			    text-align: right;
+				padding-right: 16px;
+			}
+			.inbutton{
+				margin-top:25px;
+			}
+			.mui-input-row {
+				clear:none;
+			}
+			.mui-checkbox{}
+			.mui-checkbox.mui-left input[type=checkbox]{
+				left:0;
+			}
+			.mui-checkbox.mui-left label{
+				padding-left:28px;
+				padding-right:5px;
+			}
+			.set_height.mui-table-view-cell:before{
+				height:0;
+			}
+			input[type=checkbox]:before{
+				font-size:20px !important;
+				margin-top:3px;
+			}
+			input[type=checkbox]{
+				width:28px;
+			}
+			.mui-checkbox label{
+				font-size:14px;
+				padding-top:8px;
+			}
+			.mui-checkbox input[type=checkbox]{
+				width:auto;
+			}
+			.mui-dtpicker-header .mui-btn-blue{
+				color:#0088f4 !important;
+				background-color: #fff !important;
+			}
+			.set_check_active{
+				border:1px solid #0088f4 !important;
+				color:#0088f4 !important;
+			}
+			.set_btn{
+				padding-top: 5px;
+				padding-bottom:5px;
+				width:90%;
+				color:#888;
+				border:1px solid #e8e9ea;
+				margin-bottom:5px;
+			}
+			.set_checkbox .mui-input-row{
+				display:flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.mui-table-view-cell:after{
+				height:1px !important;
+			}
+			.mui-table-view-cell:after{
+				background-color:#E3E7EB;
+			}
+			.mui-table-view-cell:before{
+				height:0px !important;
+			}
+			.mui-poppicker-header .mui-btn, .mui-dtpicker-header .mui-btn{
+				color:#0088f4 !important;
+				background-color: #fff;
+			}
+			.right_line{
+				height:15px;
+			}
+
+			.input-wrap .mui-input-row {
+			    position: relative;
+			    margin: 8px;
+			    height: 32px;
+			    border-radius: 2px;
+			    background-color: #F3F4F6;
+			}
+
+			.input-wrap .mui-input-row input {
+			    margin-top: 2px;
+			    margin-bottom: 2px;
+			    margin-left: 3px;
+			    padding: 0 5px;
+			    height: 28px;
+			    border: 0;
+			    border-right: 36px solid #F3F4F6;
+			    background-color: #FFFFFF;
+			    font-size: 13px;
+			    text-align: center;
+			}
+
+			.input-wrap .mui-input-row label {
+			    position: absolute;
+			    top: 0;
+			    right: 0;
+			    width: 35px;
+			    text-align: center;
+			    line-height: 32px;
+			    padding: 0;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item {
+			 height: 40px;
+			 line-height: 40px;
+			}
+			
+			.mui-segmented-control.mui-scroll-wrapper .mui-scroll {
+			 height: 50px;
+			}
+
+			.mui-slider .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				border-bottom: 5px solid #58A6FF !important;
+				color:#58A6FF !important;
+				
+			}
+			.addImg{
+				width:25px;
+			}
+			
+			li{list-style: none;}
+			.mui-table-view-cell {
+			    position: relative;
+			    overflow: hidden;
+			    padding: 2px 10px;
+			    -webkit-touch-callout: none;
+			}
+			.active_clod{
+			    background: #0088f4 !important;
+			    color:#fff !important;
+			  }
+			
+			.add{
+				width:50px;
+				height:50px;
+				border-radius:50px;
+				margin-top:25px;
+				text-align:center;
+			}
+			.del{
+				width:50px;
+				height:50px;
+				border-radius:50px;
+				margin-top:25px;
+				text-align:center;
+				background-color: #ff976a;
+				border: 1px solid #ff976a;
+			} 
+			 .coldDiv{
+				 display: flex;
+				 justify-content: space-around;
+				 width:100%;
+				 padding:10px 0;
+			 }
+			 .coldBtn{
+				display:inline-block;
+				border-radius: 5px;
+				height: 28px;
+				padding: 0px 12px;
+				line-height: 28px; 
+			 }
+			  .nomal_clod{
+				background-color: transparent; 
+				color: #333
+			  }
+			  
+			  .mui-numbox [class*=btn-numbox], .mui-numbox [class*=numbox-btn] {
+			      font-size: 18px;
+			      font-weight: 400;
+			      line-height: 100%;
+			      position: absolute;
+			      top: 0;
+			      overflow: hidden;
+			      width: 30px;
+			      height: 100%;
+			      padding: 0;
+			      color: #555;
+			      border: none;
+			      border-radius: 0;
+			      background-color: #fff;
+			  }
+			  .mui-numbox {
+			      position: relative;
+			      display: inline-block;
+			      overflow: hidden;
+			      width: 100px;
+			      height: 30px;
+			      padding: 0 30px;
+			      vertical-align: top;
+			      vertical-align: middle;
+			      border: solid 1px #bbb;
+			      border-radius: 3px;
+			      background-color: #efeff4;
+			  				  
+			  }
+			  
+			.good_input{
+							  flex:1;
+							  text-align:right !important;
+							  padding-right:0;
+							  /* border:1px solid #efeff4 !important; */
+							  box-sizing: border-box !important;
+							  padding: 0px 15px !important;
+							  height: 35px !important;
+							  margin:2.5px 0 !important;
+			}  
+		</style>
+	</head>
+	<body>
+
+		<header id="carheader" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-pull-left">
+				<img src="../images/user/topbackarr1.png" style="width: 20px;padding-top:10px;">
+			</a>
+			<h1 class="mui-title">下单</h1>
+		</header>
+		
+		<div id="carcont" class="mui-content mui-scroll-wrapper" style="padding-bottom:80px;">
+			<div id="vmovetitle" style="margin-top:0px;display:none;">
+				<!-- 顶部滚动条区域 -->
+				<div>
+					<img src="../images/user/warmingcall.png" style="width: 22px;position: absolute;top:12px;left: 16px;">
+				</div>
+				<div class="vtutorial">
+					<marquee behavior="scroll" direction="left" height="45" scrollamount="7">
+						<p class="move_item" v-cloak>{{fristcontent}}{{twocontent}}{{threecontent}}</p>
+					</marquee>
+
+					<div id="close_vtutorial">
+					</div>
+				</div>
+
+			</div>
+			
+			<div class="mui-scroll" style="padding-top: 0px;">
+				<!-- 下单选择 -->
+				<div class="mui-content"   v-for="(item,index) in address_list"    style="background:#fff;margin:10px 2%;padding:10px 1.5%;border-radius:7px;">
+					<div class="mui-row" style="background:#fff;">
+							<div  class="mui-col-sm-9 mui-col-xs-9">
+								<div class="addcom tadd" style="padding:5px 0;">
+									<div class="mui-row"  @tap="send_info(index)" >
+										<div class=" mui-ellipsis addline">
+											<img  class="addImg" src="../images/f.png">
+											<div class="mui-badge mui-badge-inverted "  v-cloak style="margin-left: 10px;">
+												<p  style="font-size:16px;color:#444;font-weight:600;margin:0;">{{item.send_info_tel}}</p>
+												<p  style="font-size:14px;color:#999;margin:0;">{{item.send_info}}</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- 发货地址 end -->
+								<!-- 到货地址 start -->
+								<div class="addcom padd"  style="padding:5px 0;">
+									<div class="mui-row"  @tap="gather_info(index)">
+										<div class=" mui-ellipsis addline" >
+											<img  class="addImg" src="../images/s.png">
+											<span class="mui-badge mui-badge-inverted" style="" v-cloak>
+												<div class="mui-badge mui-badge-inverted "  v-cloak  style="margin-left: 10px;">
+													<p  style="font-size:16px;color:#444;font-weight:600;margin:0;">{{item.gather_info_tel}}</p>
+													<p  style="font-size:14px;color:#999;margin:0;">{{item.gather_info}}</p>
+												</div>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="mui-col-sm-3 mui-col-xs-3" style="height:100px;text-align: center;">
+								<button type="button" class="mui-btn mui-btn-primary add" v-if="index == 0" @click="add_address_list">添加</button>
+								<button type="button" class="mui-btn mui-btn-primary del" v-if="index > 0" @click="del_address_list(index)">删除</button>
+							</div>						 
+
+					 </div>
+					 
+
+					 <div class="mui-table-view-cell mui-collapse"  :class="index == 0?'mui-active' : '' " style="width:100%;min-height:30px;">
+						<a class="mui-navigate-right" href="#" style="padding-left:10px;height:30px;line-height:30px;margin: 0px -15px;" v-cloak>货物信息 <span class="goods_info">{{item.clod_name}} {{item.good_number}} 件 {{item.good_weight}} 吨 {{item.good_volume}} 方  {{item.good_name}}</span></a>
+					 <div class="mui-collapse-content" style="padding:0;font-size:13px;">
+						 <!-- <ul class="mui-table-view"> -->
+						 
+							<li class="mui-table-view-cell">
+								<div class="mui-input-row">
+									<label class="carInfotitle" style="padding-left:0;">货物名称</label>
+									<input type="text" class="" style="text-align: right;padding-right:0px;"  v-model="item.good_name" placeholder="请输入"  v-cloak  maxLength=10  οnkeyup="checkLength(index);">
+								</div>
+							</li>
+							
+									<li class="mui-table-view-cell">
+										<div class="mui-input-row" style="display:flex;flex: 1;">
+											<label  class="carInfotitle" style="padding-left:0;">数量</label>
+											<input class="mui-numbox-input mui-col-sm-2  mui-col-xs-2 good_input"  :min="1" :max="999999999"    v-model="item.good_number"  readonly="readonly"  type="number" @tap="set_good_number(index)"/>
+											<span class="mui-col-sm-7  mui-col-xs-7"  style="text-align:right;width:30px;height:40px;line-height:40px;float:right;">件</span>											
+										</div>
+									</li>
+									
+									<li class="mui-table-view-cell">
+										<div class="mui-input-row" style="display:flex;flex: 1;">
+											<label  class="carInfotitle" style="padding-left:0;">总重量</label>
+											<input class="mui-numbox-input mui-col-sm-2  mui-col-xs-2 good_input" v-model="item.good_weight"  type="number" @tap="set_good_weight(index)" readonly="readonly"/>
+											<span class="mui-col-sm-7  mui-col-xs-7"  style="text-align:right;width:30px;height:40px;line-height:40px;float:right;">吨</span>											
+										</div>
+									</li>
+
+									<li class="mui-table-view-cell">
+										<div class="mui-input-row" style="display:flex;flex: 1;">
+											<label  class="carInfotitle" style="padding-left:0;">总体积</label>
+											<input class="mui-numbox-input mui-col-sm-2  mui-col-xs-2 good_input" v-model="item.good_volume"  type="number" @tap="set_good_volume(index)" readonly="readonly" />
+											<span class="mui-col-sm-7  mui-col-xs-7"  style="text-align:right;width:30px;height:40px;line-height:40px;float:right;">立方</span>											
+										</div>
+									</li>
+							
+							<li class="mui-table-view-cell">
+								<div class="mui-row">
+									<div class="mui-col-sm-12  mui-col-xs-12 carInfotitle">温度</div>
+									<div class="mui-row control_div  coldDiv">
+										<button type="button control_button" class="mui-btn coldBtn" v-for="(items,indexs) in item.control_type" :class="String(items.key) == String(item.clod)?'mui-btn-primary' : '' " @click="click_control(items.key,index,items.name)" v-cloak>
+										{{items.name}}
+										</button>
+										
+									</div>									
+								</div>
+							</li>
+					 </div>
+					 </div>
+	 
+				</div>
+
+				<ul class="mui-table-view" style="background:#fff;margin:10px 2%;padding:10px 0;border-radius:7px;">
+
+					<li class="mui-table-view-cell" @tap="timeSelt()" style="padding:11px 10px;padding-right:0;">
+						<div class="mui-row">
+							<div class="mui-col-sm-3  mui-col-xs-3 carInfotitle">装车时间</div>
+							<div class="mui-col-sm-9  mui-col-xs-9 textright" v-cloak>{{start_time}}</div>
+						</div>
+					</li>					
+
+					<li class="mui-table-view-cell" @tap="timeSelt_send()" style="padding:11px 10px;padding-right:0;">
+						<div class="mui-row">
+							<div class="mui-col-sm-3  mui-col-xs-3 carInfotitle">收货时间</div>
+							<div class="mui-col-sm-9  mui-col-xs-9 textright" v-cloak >{{end_time}}</div>
+						</div>
+					</li>	
+
+					<li class="set_height mui-table-view-cell" style="padding:11px 10px;padding-right:0;">
+						<span>是否装货</span>
+						<div class="mui-switch mui-switch-blue picktype" id="picktype">
+							<div class="mui-switch-handle"></div>
+						</div>
+					</li>
+					
+					<li class="mui-table-view-cell"  v-if="pick_flag=='2'">
+						<div class="mui-input-row">
+							<label class="carInfotitle" style="padding-left:0px;">装货费(元)</label>
+							<input type="number" class="" style="text-align: right;padding-right:15px;"  placeholder="装货费(元)" readonly="readonly"   v-model="pick_price" v-cloak  @tap="set_pick_price()" />
+							<!-- @tap="set_pick_price()" -->
+						</div>
+					</li>	
+
+					<li class="set_height mui-table-view-cell" style="padding:11px 10px;padding-right:0;">
+						<span>是否卸货</span>
+						<div class="mui-switch mui-switch-blue sendtype" id="sendtype">
+							<div class="mui-switch-handle"></div>
+						</div>
+					</li>
+	
+					<li class="mui-table-view-cell"  v-if="send_flag=='2'" >
+						<div class="mui-input-row">
+							<label class="carInfotitle" style="padding-left:0px;">卸货费(元)</label>
+							<input type="number" class="" style="text-align: right;padding-right:15px;"  placeholder="卸货费(元)"  readonly="readonly"   v-model="send_price" v-cloak  @tap="set_send_price()"   />
+							 <!-- @tap="set_send_price()" -->
+						</div>
+					</li>
+	
+	
+			
+					<li class="mui-table-view-cell"   @tap="customer_info()">
+						<div class="mui-input-row">
+							<label class="carInfotitle" style="padding-left:0px;">客户</label>
+							<input type="text" class="" style="text-align: right;padding-right:15px;" readonly placeholder="选择客户" v-model="customer" v-cloak>
+							<!-- <div class="mui-col-sm-9  mui-col-xs-9 textright" v-cloak>{{yugu}}</div> -->
+						</div>
+					</li>
+					
+					<li class="mui-table-view-cell">
+						<div class="mui-input-row">
+							<label class="carInfotitle" style="padding-left:0;width:40%">运费(元)</label>
+							<input type="number" class="" style="text-align: right;padding-right:15px;width:60%;" placeholder="请输入运费"  readonly="readonly"    v-model="line_price"   @tap="set_line_price()"  />
+						<!-- @tap="set_line_price()" -->
+						</div>
+					</li>
+					
+<!-- 					<li class="mui-table-view-cell" >
+						<div class="mui-input-row">
+							<label class="carInfotitle" style="padding-left:0px;">总运费(元)</label>
+							<input type="number" class="" style="text-align: right;padding-right:15px;" readonly placeholder="预估运费" v-model="total_money" v-cloak>							
+						</div>
+					</li> -->	
+					<li class="mui-table-view-cell" >
+					 <div class="mui-input-row">
+					   <label class="carInfotitle" style="padding-left:0px;">总运费(元)</label>
+					  <input type="number" class="" style="text-align: right;padding-right:15px;" readonly placeholder="预估运费"       v-model="returnMoney" v-cloak>
+					  </div>
+					</li>
+					
+					<li class="mui-table-view-cell">
+						<div class="mui-input-row">
+							<label class="carInfotitle" style="padding-left:0;width:40%">备注</label>
+							<!-- <span style="text-align: right;width:20px;height:40px;line-height:40px;color:#FC5854;position:absolute;right:140px;top:0;">￥</span> -->
+							<input type="text" class="" style="width:60%;text-align:right;padding-right:10px;" placeholder="请输入备注信息"    v-model="remark" maxLength=10  οnkeyup="checkLength2();">
+							<!-- @tap="set_line_price()" -->
+						</div>
+					</li>
+					
+
+				</ul>
+
+			</div>
+				<div class="inbutton" style="position:fixed;bottom:10px;padding:0;margin:0;z-index:9999;">
+					<button style="background: #0088f4;color: #FFFFFF;border-radius:22px;width:92%;margin-left:4%;" type="button" class="mui-btn mui-btn-block btnorder1" @tap="orderUse()">确定</button>
+				</div>
+		</div>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/base64.min.js" type="text/javascript"></script>
+		<script src="../js/mui.min.js" type="text/javascript"></script>
+		<script src="../js/vue-2.4.1.js" type="text/javascript"></script>
+		<!-- 需要请求到的接口 -->
+		<script src="../js/config/request.js" type="text/javascript"></script>
+		<!-- 页面的封装事件 -->
+		<script src="../js/common/common.js" type="text/javascript"></script>
+		<script src="../js/common/car.js" type="text/javascript"></script>
+		<!-- 页面的数据vue逻辑 -->
+		<script src="../js/mui.pick.min.js" type="text/javascript"></script>
+		<script src="js/form.js" type="text/javascript"></script>
+		<script src="../keyBoard/js/keyBoard.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
+			//主界面和侧滑菜单界面均支持区域滚动；
+			mui('#carcont').scroll({
+				bounce: false, //是否启用回弹  
+			});
+			
+			(function($) {
+				$(".mui-scroll-wrapper").scroll({});
+			})(mui);
+			
+			//实现ios平台原生侧滑关闭页面；
+			if (mui.os.plus && mui.os.ios) {
+				mui.plusReady(function() { //5+ iOS暂时无法屏蔽popGesture时传递touch事件，故该demo直接屏蔽popGesture功能
+					plus.webview.currentWebview().setStyle({
+						'popGesture': 'none'
+					});
+				});
+			}
+			
+		$(document).on('click','.control_div button',function(e){
+			var c = $(this).hasClass('active_clod');
+			if (c) {
+				$(this).removeClass('active_clod');
+			} else {
+				$(this).addClass('active_clod');
+			}
+			e.stopPropagation();
+		});	
+			
+			
+		$(document).on('click','.set_checkbox button',function(e){
+			var c = $(this).hasClass('set_check_active');
+			if (c) {
+				$(this).removeClass('set_check_active');
+			} else {
+				$(this).addClass('set_check_active');
+			}
+			e.stopPropagation();
+		});
+	
+			function refreshData() {
+				location.reload();
+			}
+
+			setAutoHeight(function(h){
+				$('.mui-scroll').css({"padding-top":(h-20)+"px"});
+			},2)
+		</script>
+	</body>
+</html>

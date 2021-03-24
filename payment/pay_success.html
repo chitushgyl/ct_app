@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!-- 字体 -->
+		<link rel="stylesheet" type="text/css" href="../fonts/iconfont.css" />
+		<!-- 通用样式 -->
+		<link rel="stylesheet" type="text/css" href="../person/css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<!-- 支付 -->
+		<link rel="stylesheet" type="text/css" href="../css/paymentVehical.css" />
+		<!-- -->
+		<style type="text/css">
+			.mui-bar-nav {
+				top: 0;
+				-webkit-box-shadow: none;
+				box-shadow: none;
+			}
+			.bitmap img {
+				width: 100%;
+			}
+
+			h5 {
+				padding-left: 15px;
+				height: 30px;
+				font-size: 13px;
+				line-height: 30px;
+			}
+
+			.ordermoney {
+				font-size: 18px;
+				color: #ffffff;
+				background:#0088F4;
+				padding:50px 0;
+				    text-align: center;
+				    display:flex;
+				    justify-content: center;
+				    align-items: center;
+			}
+
+			/* 支付类型 */
+			.payment-type .mui-radio.mui-left label {
+				display: flex;
+				display: -webkit-flex;
+				align-items: center;
+				-webkit-align-items: center;
+				padding: 2px 15px 2px 2px;
+				font-size: 17px;
+				box-sizing: border-box;
+				/* border-bottom:1px solid #ccc; */
+			}
+
+			.payment-type .mui-radio.mui-left label .iconImg {
+				width: 24px;
+				height: 24px;
+				margin-right: 10px;
+			}
+
+			.payment-type .mui-radio input[type=radio] {
+				top: 1px;
+				left: inherit;
+				right: 0px;
+			}
+
+			.payment-type .mui-radio input[type=radio]:before {
+				font-size: 24px;
+			}
+
+			.mui-bar {
+				background-color:#0088F4;
+				color:#ffffff;
+			}
+
+			.mui-title {
+				color: #ffffff !important;
+			}
+
+			.font23 {
+				font-size: 35px !important;
+			}
+			.font14 {
+				font-size: 14px !important;
+				text-decoration: line-through;
+			}
+
+			.mui-table-view-cell:after {
+				position: relative;
+			}
+
+			.mui-checkbox input[type=checkbox]:checked:before,
+			.mui-radio input[type=radio]:checked:before {
+				color: #FF5656;
+			}
+
+			.ordertext {
+				color: #4D5668;
+				height: 25px !important;
+				margin-bottom: 8px !important;
+			}
+
+			.fontcolor {
+				color: #333333;
+				font-size: 17px;
+			}
+			#stylenone{
+				background-color: #FFFFFF;border: none;width: 100%;height:55px;
+			}
+			.mui-table-view:after {
+				height: 0;
+			}
+			.mui-table-view:before {
+				left: 15px;
+				right: 15px;
+				color: #E3E7EB;
+			}
+			.mui-content {
+				background-color: #F3F5F7;
+				-webkit-overflow-scrolling: touch;
+			}
+			.mui-btn-blue{
+				color: #fff;
+				font-size: 18px;
+				font-weight: 800;
+				border: 1px solid #2972E9;
+				background-color: #2972E9;
+				padding: 9px 0px 8px;
+				margin-bottom: 20px;
+			}
+			.butline:before {
+				position: absolute;
+				right: 15px;
+				top: 180px;
+				left: 15px;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #E3E7EB;
+			}
+			.mui-radio input[type=radio]:checked:before {
+			    content: '\e472';
+				background-color: #007AFF;
+				color: #FFFFFF;
+				border-radius: 25px;
+				font-size:24px;
+			}
+			
+			.paytext {
+				top: 3px !important;
+			}
+			.paydesp {
+				position: absolute;
+				top: 1px;
+				left: 120px;
+			}
+			.paytext {
+				font-size: 12px;
+				/* color: #FFFFFF; */
+				top: -2px;
+				text-indent: 6px;
+				border:1px solid #0088F4;
+				box-sizing: border-box;
+				height:18px;
+				line-height:18px;
+				color: #0088F4;
+				margin:0 10px;
+				border-radius:2px;
+				text-align:center;
+			}
+			.paytext_tj{
+				background:#0088F4;
+				color:#fff;
+				font-size:12px;
+				width:40px;
+				height:22px;
+				line-height:25px;
+				border-radius:21px 15px 15px 0;
+				text-align:center;
+			}
+			.paydesp {
+			    width: 110px;
+			}
+			.mui-table-view-cell {
+				position: relative;
+				overflow: hidden;
+				padding:5px 0px;
+				margin:0 10px;
+				-webkit-touch-callout: none;
+				/* border-bottom:1px solid #ccc; */
+			}
+			
+			.mui-table-view-cell.mui-collapse .mui-collapse-content {
+			    position: relative;
+			    display: none;
+			    overflow: hidden;
+			    margin: 11px 0 -11px !important;
+			    padding: 8px 0px !important;
+			    -webkit-transition: height .35s ease;
+			    -o-transition: height .35s ease;
+			    transition: height .35s ease;
+			    background: #fff;
+			}
+
+			.pay_info{
+				height:22px;
+				line-height:22px;
+				display:inline-block;
+				width:100%;
+				
+			}
+			.pay_info_l{
+				float:left;width:50%;display:inline-block;color:#929292;
+			}
+			.pay_info_r{
+				float:left;width:50%;display:inline-block;text-align:right;
+			}
+		   .true_pay{
+				font-size:28px;
+				color:#333;
+				line-height:60px;
+				display:flex;
+				justify-content: center;
+				align-items: center;
+				text-align:center;		
+		    }
+			.suc_img{
+			  width:60px;
+			}
+		    .txt{
+			margin-left:15px;
+			color:#fff;
+			font-weight:200px;
+			font-size:20px;
+		    }  
+		    .pay_money{
+		      text-align: center;
+		    }
+		    .pay_center_left{
+			padding-left:15px;
+		    }
+			.pay_money_v{
+			  font-weight: bold;
+			  color:#333;
+			  font-size:30px;
+			  margin-left:3px;
+			}
+			.pay_center_left,.pay_center_right{
+			  color:#666;
+			  font-size:14px;
+			  /* width:50%; */
+			  display:inline-block;
+			}  
+			.btns{
+			  display:flex;
+			  justify-content: center;
+			  align-items: center;
+			}
+			.btn_one{
+				width:65%;
+				height:40px;
+				line-height: 40px;
+				border-radius:22px;
+			}
+		    .pay_center{
+			height:30px;
+			line-height: 30px;
+			color:#666;
+			text-align:left;
+		    }	
+					
+			.pay_sussess_btn{
+				width:32%;
+				height:40px;
+				line-height:40px;
+				color:#fff;
+				text-align:center;
+				background:#0088F4;
+				padding:0;
+				border-radius:20px;
+				margin:0 10px;
+			}		
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+<!-- 			<a class="mui-action-back mui-pull-left">
+				<img src="../images/user/topbackarr.png" style="width: 20px;">
+			</a> -->
+			<h1 class="mui-title">支付</h1>
+		</header>
+		<div class="mui-content" id="dataList">
+			<div class="mui-row ordermoney">
+				<div class="mui-text-center true_pay">
+					<img class="suc_img" src="../images/bulk/su.png">
+					<span class="txt">
+						{{txt}}
+					</span>
+				</div>
+			</div>
+			<!-- 支付类型 -->
+			<div style="width:92%;margin-left:4%;background-color: #fff;margin-top:-20px;padding-bottom:25px;">
+				<div style="height:10px;width:100%;background-image: linear-gradient(#0088f4, #fff);"></div>
+				<div style="height:60px;line-height: 60px;">
+					<div class="pay_money">
+					   ￥<span class="pay_money_v">{{price}}</span>
+					</div>
+				</div>
+				
+				<span style="width:92%;height:1px;background:#efeff4;margin:0 auto 10px;display:block;" ></span>
+								
+				<div class="pay_center">
+						<p class="pay_center_left">订单编号：</p>
+						<p class="pay_center_right">{{order_id}}</p>
+				</div>
+				<div class="pay_center">
+						<p class="pay_center_left">下单时间：</p>
+						<p class="pay_center_right" id="time_text"></p>
+				</div>			
+				<div class="pay_center">
+						<p class="pay_center_left">支付方式：</p>
+						<p class="pay_center_right">{{pay_type}}</p>
+				</div>
+				
+			</div>
+			
+			<div style="height:50px;width:100%;margin-top:20px;">
+
+					<div class="btns">
+						<button class="pay_sussess_btn" type="primary" @tap="onClickLeft()">返回</button>
+						<button class="pay_sussess_btn" type="primary" @tap="detail()">订单详情</button>
+					</div>
+			</div>
+			
+			
+		</div>
+		<script src="../js/jquery.min.js" type="text/javascript"></script>
+		<script src="../js/base64.min.js" type="text/javascript"></script>
+		<!-- mui 框架 -->
+		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-2.4.1.js" type="text/javascript" charset="utf-8"></script>
+
+		<!-- 通用js -->
+		<script src="../js/common/common.js" type="text/javascript" charset="utf-8"></script>
+		<!---->
+		<script src="../js/config/request.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/controller/controller-vehicle.js" type="text/javascript" charset="utf-8"></script>
+
+		<!-- 支付 -->
+		<script src="js/pay_success.js" type="text/javascript" charset="utf-8"></script>
+
+		<script type="text/javascript">
+			// plus对象加载完毕执行
+			mui.plusReady(function() {
+				// 获取页面传输数据
+				// getdata();
+
+				//定金支付不允许使用信用额度支付
+				// if (isearnest) {
+				// 	document.querySelector('.ordertext').innerHTML = '订金';
+				// 	document.getElementById('credit').setAttribute('disabled', 'disabled');
+				// }
+
+			});
+			getTime();
+			function getTime(){
+				var currDate = new Date();
+				var d = new Date();
+				document.getElementById("time_text").innerHTML=d.getFullYear() + "-" +(d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+			 }
+			
+
+			setAutoHeight(function(h){
+				
+			},1)
+		</script>
+	</body>
+
+</html>

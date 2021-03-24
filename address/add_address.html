@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover,viewport-fit=cover" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--mui.css-->
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<!--公用样式-->
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<!--日期选择器-->
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css"/>
+		<!--页面css-->
+		<link rel="stylesheet" type="text/css" href="css/setNewlocal.css" />
+		<title></title>
+		<style type="text/css">
+			.mui-bar-nav~.mui-content {
+				padding-top: 68px;
+				background-color: #F3F4F6;
+			}
+			input::-webkit-input-placeholder {
+				/* WebKit browsers */
+				color: #999999 !important;
+				font-size: 18px;
+			}
+			.set_bottom_btn{
+			    padding:0;
+			    height:44px;
+			    line-height: 44px;
+			    border-radius:22px;
+			    background-color: #0088f4;
+			    color:#fff;
+			}
+		</style>
+	</head>
+	<body>
+		<!--头部start-->
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-pull-left">
+				<img src="../images/user/topbackarr.png" style="width: 20px;">
+			</a>
+			<h1 class="mui-title" id="title">添加地址</h1>
+		</header>
+		<div class="mui-content" id="template">
+			<div class="mui-table-view">
+				<!-- <div class="mui-table-view-cell person mui-margin">
+					<input id="name" type="text" class="color" @tap = "visibilityPicker(1)" placeholder="联系人"  v-model="name"  style="font-size: 18px;color: #999999;"/>
+				</div>
+				<div class="mui-table-view-cell number mui-margin">
+					<input id="phone" class="color" type="text" @tap = "visibilityPicker(2)" placeholder="电话号码" v-model="phone"  style="font-size: 18px;"/>
+				</div> -->
+				<!-- @tap="selectAddress()" -->
+				<div id="showCityPicker" class="mui-table-view-cell address mui-margin"  @tap="selectAddress()" style="font-size: 18px;">
+					<a class="">
+						<span class="color" v-if="!qu_name">请选择省市区</span><img src="../images/user/rightthree.png" style="float: right;margin-top:16px;width: 8px;height: 14px;">
+						<span style="padding-left: 10px;color: #1D2026;font-size: 18px;">
+							<span id="pro_id" style="color: #1D2026;">{{sheng_name}}</span>
+							<span id="city_id"style="color: #1D2026;">{{shi_name}}</span>
+							<span id="area_id"style="color: #1D2026;">{{qu_name}}</span>
+						</span>
+					</a>
+				</div>
+				<div class="mui-table-view-cell detailaddress mui-margin">
+					<input id="address" placeholder="详细信息" type="text" class="color" style="font-size: 18px;" v-model="address">
+				</div>
+
+				<div class="mui-table-view-cell person mui-margin">
+					<input id="contacts" placeholder="联系人" type="text" class="color" style="font-size: 18px;" v-model="contacts">
+				</div>
+				
+				<div class="mui-table-view-cell number mui-margin">
+					<input id="tel" placeholder="联系电话" type="text" class="color" style="font-size: 18px;" v-model="tel">
+				</div>				
+
+			</div>
+			
+			<div class="btn" style="position:unset;margin-top:60px;">
+				<button @tap='submitFun()' id="subbtn" type="button" class="mui-btn mui-btn-primary set_bottom_btn">保存</button>
+			</div>
+		</div>
+	</body>
+	<!-- mui 框架 -->
+	<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/base64.min.js" type="text/javascript"></script>
+	<!-- vue -->
+	<script src="../js/vue-2.4.1.js" type="text/javascript" charset="utf-8"></script>
+	<!-- picker -->
+	<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/city.data-3.1.js" type="text/javascript" charset="utf-8"></script>
+	<!-- <script src="js/city.data-3.js" type="text/javascript" charset="utf-8"></script> -->
+	<!-- <script src="js/cityPicker.js" type="text/javascript" charset="utf-8"></script> -->
+	<!-- <script src="../js/city.data-3.js" type="text/javascript" charset="utf-8"></script> -->
+	<!-- 省市区地址库  -->
+	
+	<!-- 通用js -->
+	<script src="../js/common/common.js" type="text/javascript" charset="utf-8"></script>
+	<!-- 接口 -->
+	<script src="../js/config/request.js" type="text/javascript" charset="utf-8"></script>
+	
+	<!-- 页面切换传值 -->
+	<script src="js/add.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script type="text/javascript">
+			setAutoHeight(function(h){
+
+			},1)
+		</script>
+</html>

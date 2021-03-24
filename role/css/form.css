@@ -1,0 +1,21 @@
+
+/* 编辑联系人  */
+.mui-input-row label{
+	width: 15%;
+}
+.mui-input-row label i{
+	position: relative;
+	top: 2px;
+}
+.mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea{
+	width: 85%;
+	font-size: 12px;
+}
+.mui-btn-main{
+	margin: 0 auto;
+	width: 96%;
+}
+.img-icon{
+	width:19px;
+	vertical-align: middle;
+}

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>专车承接订单</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!-- 字体 -->
+		<link rel="stylesheet" type="text/css" href="../fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mescroll.css" />
+		<!-- 列表 -->
+		<link rel="stylesheet" type="text/css" href="css/order.css" />
+		<style>
+			.mui-popover .mui-popover-arrow:after {
+				width: 0px;
+			}
+			.mui-popover {
+				width: 5.8rem;
+				background-size: 100% 100%;
+			}
+			#ordercancel {
+				top: 3.4rem !important;
+				left: 0.86rem;
+				right: 0.86rem;
+			}
+			.watermark-img{
+				position: absolute;
+				right: -7px;
+				top: -10px;
+			}
+			.mui-bar{
+				background-color: #FFFFFF;
+			}
+			.mui-bar .mui-title{
+				color: #333333;
+			}
+			p{
+				font-size: 16px;
+			}
+			body,.mui-content{
+				background-color: #F3F4F6;
+			}
+			.mui-col-sm-8 {
+				width: 100%;
+			}
+			.mui-table-view-cell .mui-row-ft {
+			    margin-top:0px;
+			}
+			.mui-col-xs-8 button{
+				font-weight: bold !important;
+			}
+			.mui-table-view-cell:after {
+			    background-color: #FFFFFF;
+			}
+			[v-cloak]{
+	            display: none
+	        }
+	        .set_null_div{
+	        	height:10px !important;
+	        }
+	        .mescroll{
+				top:83px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- 标题栏 -->
+		<header class="mui-bar mui-bar-nav">
+			<button class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"> <img src="../images/user/return.png"
+				 style="width: 30px;margin-top:8px;" /> </button>
+			<h1 class="mui-title" id="manual">接单列表</h1>
+		</header>
+		<!-- 主体 -->
+		<div id="carOrderList" class="mui-content">
+
+			
+			<div class="nav" style="height: 44px;" v-cloak>
+				<div class="nav-list" 
+				 style="font-size: 14px;color: #333333;"
+				  v-for="(item,index) in nav_list" 
+				  :key="index" 
+				  :class="parseInt(index) == current?'active':''" 
+				  :i="index"
+				  >{{item.name}}</div>
+			</div>
+			
+
+			<div id="mescroll" class="mescroll" style="margin-top:20px;margin-bottom:40px;">
+				<ul id="dataList" class="mui-table-view data-list" style="background-color:#F3F4F6;">
+
+					<li class="mui-table-view-cell mt5 set_style_li"  v-cloak v-for="(item,index) in list"  style="box-shadow:0px 0px 16px #ECE9E9;border-radius: 4px;border: 1px solid #cecfcf;background-color: #FFFFFF;margin-bottom: 10px;padding-left:15px;padding-top:0px;padding-bottom:0;">
+						<div @tap.stop="to_detail(index)"  >	
+							<div style="" class="order_style_top" >
+								<!-- </div> -->
+								<div class="order_number mui-float-left copy_div" >
+										<span style="padding: 2px 4px; height: 24px;line-height: 20px;background-color:#0088F4;color: #FFFFFF;margin-left: -10px;border-radius: 4px;font-size: 12px;">{{item.order_type_show}}</span>
+										<button class="btn" style="border:0;padding:0;height:100%;margin:0;background-color: #fff;display:inline;font-size:12px;height:36px;">
+											{{item.create_time}}
+										</button> 
+									
+								</div>
+								<div class="mui-float-right order_status" :data="item.self_id">
+									<!-- 2已接单 3已调度 4运输中 5已送达 6已完成 7已结束 8已取消 -->
+									<span v-if="item.order_status == 1  && item.order_status == 2" style="color:#0088f4;">待接单</span>
+									<span v-if="item.order_status == 1  && item.line_status == 1" style="color:#0088f4;">待处理</span>
+									
+									<span v-if="item.order_status == 2 && item.line_status == 2" style="color:#333;">已接单</span>
+									<span v-if="item.order_status == 2 && item.line_status == 1" style="color:#333;">进行中</span>
+									<span v-if="item.order_status == 3" style="color:#0088f4;">待调度</span>
+									<span v-if="item.order_status == 4" style="color:#35B85F;">运输中</span>
+									<span v-if="item.order_status == 5" style="color:#FF9400;">已送达</span>
+									<span v-if="item.order_status == 6" style="color:#FF9400;">已完成</span>
+									<span v-if="item.order_status == 7" style="color:#FF807D;">已超时</span>
+									<span v-if="item.order_status == 8" style="color:#FF807D;">已取消</span>
+									<img src="../images/driver/line_right.png" class="line_right_order_top" style="margin-top: -2px;">
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div style="" class="order_style_center">
+								<div class="mui-float-left start_order_center">
+									<div class="start_order_center_area" v-if="item.send_qu_name">{{item.send_qu_name}}</div>
+									<div class="start_order_center_city">
+										<span v-if="item.send_sheng_name || item.send_shi_name">{{item.send_sheng_name}}&nbsp;{{item.send_shi_name}}</span>
+									</div>
+								</div>
+								<div class="mui-float-left line_order_center">
+									<img src="../images/driver/line_line.png" class="line_line">
+								</div>
+								<div class="mui-float-left end_order_center">
+									<div class="start_order_center_area" v-if="item.gather_qu_name">{{item.gather_qu_name}}</div>
+									
+									<div class="start_order_center_city"> 
+										<span v-if="item.gather_sheng_name || item.gather_shi_name">{{item.gather_sheng_name}}&nbsp;{{item.gather_shi_name}}</span>
+									</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div style="" class="order_style_bottom" >
+								<div style="height:22px;line-height: 22px;">
+									<div class="mui-float-left" style="width:50%;overflow: hidden;height:22px;"><span class="order_time_txt">货物</span>&nbsp;
+									<span class="order_time_val">{{item.good_number}}件{{item.good_weight}}kg{{item.good_volume}}方</span></div>
+									<div class="mui-float-right" style="width:50%;overflow: hidden;height:22px;text-align: right;">
+										<span class="order_time_txt">温度</span>&nbsp;
+										<span class="order_time_val" v-for="(clod,i) in item.clod" :key="i">{{clod}}<span v-if="i < item.clod.length-1">,</span></span>
+										</div>
+									<div class="clear"></div>
+								</div>
+								<div style="height:22px;line-height: 22px;">
+									<!-- <div class="mui-float-left" style="" v-if="item.order_type != 'vehicle'"><span class="order_time_txt"></span>&nbsp;<span class="order_time_val"></span></div> -->
+									<div class="clear"></div>
+								</div>
+								<div class="set_null_div">	</div>
+								<div class="order_price" v-cloak>
+									<span >
+										￥<span style="font-size:20px;" v-if="item.group_code != item.receiver_id">{{item.on_line_money}}</span>
+										<span style="font-size:20px;" v-else>{{item.on_line_money}}</span>
+									</span>
+	
+								</div>
+							</div>
+						</div>
+
+						<div class="order_style_bottom_btn">	
+							<div class="order_style_bottom_btn_s">
+								<button type="button" style="width:70px;margin-left:10px;font-size:x-small;" class="mui-btn mui-pull-right mui-btn-outlined btn_color_0088" v-for="(btn,i) in item.button"  @tap.stop="vehical_done(index,btn.id)">{{btn.name}}</button>	
+							</div>	
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/base64.min.js" type="text/javascript"></script>
+		<!-- mui 框架 -->
+		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<!-- vue -->
+		<script src="../js/vue-2.4.1.js" type="text/javascript" charset="utf-8"></script>
+		<!--mescroll-->
+		<script src="../js/mescroll.js" type="text/javascript" charset="utf-8"></script>
+		<!-- common -->
+		<script src="../js/common/common.js" type="text/javascript"></script>
+		<!-- <script src="../oldcommon/oldCommon.js" type="text/javascript" charset="utf-8"></script> -->
+		<!-- 接口 -->
+		<script src="../js/config/request.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/controller/controller-driver.js" type="text/javascript" charset="utf-8"></script>
+
+		<script src="../plug/js/share.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 专车订单列表 -->
+		<script src="js/take_list.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			setAutoHeight(function(h){
+				$('.nav').css({"margin-top":(h-40)+'px'});
+				$('#mescroll').css({"margin-top":(h)+'px'});
+			},2)
+		</script>
+	</body>
+</html>

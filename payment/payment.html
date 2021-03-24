@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!-- 字体 -->
+		<link rel="stylesheet" type="text/css" href="../fonts/iconfont.css" />
+		<!-- 通用样式 -->
+		<link rel="stylesheet" type="text/css" href="../person/css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../css/common.css" />
+		<!-- 支付 -->
+		<link rel="stylesheet" type="text/css" href="../css/paymentVehical.css" />
+		<!-- -->
+		<style type="text/css">
+			.mui-bar-nav {
+				top: 0;
+				-webkit-box-shadow: none;
+				box-shadow: none;
+			}
+			.bitmap img {
+				width: 100%;
+			}
+
+			h5 {
+				padding-left: 15px;
+				height: 30px;
+				font-size: 13px;
+				line-height: 30px;
+			}
+
+			.ordermoney {
+				font-size: 18px;
+				/* line-height: 50px; */
+				color: #333333;
+				/* background-color: #FFFFFF; */
+				margin: 5px 0 15px;
+				padding-top: 30px;
+			}
+
+			/* 支付类型 */
+			.payment-type .mui-radio.mui-left label {
+				display: flex;
+				display: -webkit-flex;
+				align-items: center;
+				-webkit-align-items: center;
+				padding: 2px 15px 2px 2px;
+				font-size: 17px;
+				box-sizing: border-box;
+				/* border-bottom:1px solid #ccc; */
+			}
+
+			.payment-type .mui-radio.mui-left label .iconImg {
+				width: 24px;
+				height: 24px;
+				margin-right: 10px;
+			}
+
+			.payment-type .mui-radio input[type=radio] {
+				top: 1px;
+				left: inherit;
+				right: 0px;
+			}
+
+			.payment-type .mui-radio input[type=radio]:before {
+				font-size: 24px;
+			}
+
+			.mui-bar {
+				background-color: #FFFFFF;
+			}
+
+			.mui-title {
+				color: #000000 !important;
+			}
+
+			.font23 {
+				font-size: 35px !important;
+			}
+			.font14 {
+				font-size: 14px !important;
+				text-decoration: line-through;
+			}
+
+			.mui-table-view-cell:after {
+				position: relative;
+			}
+
+			.mui-checkbox input[type=checkbox]:checked:before,
+			.mui-radio input[type=radio]:checked:before {
+				color: #FF5656;
+			}
+
+			.ordertext {
+				color: #4D5668;
+				height: 25px !important;
+				margin-bottom: 8px !important;
+			}
+
+			.fontcolor {
+				color: #333333;
+				font-size: 17px;
+			}
+			#stylenone{
+				background-color: #FFFFFF;border: none;width: 100%;height:55px;
+			}
+			.mui-table-view:after {
+				height: 0;
+			}
+			.mui-table-view:before {
+				left: 15px;
+				right: 15px;
+				color: #E3E7EB;
+			}
+			.mui-content {
+				background-color: #F3F5F7;
+				-webkit-overflow-scrolling: touch;
+			}
+			.mui-btn-blue{
+				color: #fff;
+				font-size: 18px;
+				font-weight: 800;
+				border: 1px solid #2972E9;
+				background-color: #2972E9;
+				padding: 9px 0px 8px;
+				margin-bottom: 20px;
+			}
+			.butline:before {
+				position: absolute;
+				right: 15px;
+				top: 180px;
+				left: 15px;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #E3E7EB;
+			}
+			.mui-radio input[type=radio]:checked:before {
+			    content: '\e472';
+				background-color: #007AFF;
+				color: #FFFFFF;
+				border-radius: 25px;
+				font-size:24px;
+			}
+			
+			.paytext {
+				top: 3px !important;
+			}
+			.paydesp {
+				position: absolute;
+				top: 1px;
+				left: 120px;
+			}
+			.paytext {
+				font-size: 12px;
+				/* color: #FFFFFF; */
+				top: -2px;
+				padding:0 5px;
+				border:1px solid #0088F4;
+				box-sizing: border-box;
+				height:18px;
+				line-height:18px;
+				color: #0088F4;
+				margin:0 10px;
+				border-radius:2px;
+				text-align:center;
+			}
+			.paytext_tj{
+				background:#0088F4;
+				color:#fff;
+				font-size:12px;
+				width:40px;
+				height:20px;
+				line-height:20px;
+				border-radius:21px 15px 15px 0;
+				text-align:center;
+			}
+			.paydesp {
+			    width: 110px;
+			}
+			.mui-table-view-cell {
+				position: relative;
+				overflow: hidden;
+				padding:5px 0px;
+				margin:0 10px;
+				-webkit-touch-callout: none;
+				/* border-bottom:1px solid #ccc; */
+			}
+			
+			.mui-table-view-cell.mui-collapse .mui-collapse-content {
+			    position: relative;
+			    display: none;
+			    overflow: hidden;
+			    margin: 11px 0 -11px !important;
+			    padding: 8px 0px !important;
+			    -webkit-transition: height .35s ease;
+			    -o-transition: height .35s ease;
+			    transition: height .35s ease;
+			    background: #fff;
+			}
+
+			.pay_info{
+				height:22px;
+				line-height:22px;
+				display:inline-block;
+				width:100%;
+				
+			}
+			.pay_info_l{
+				float:left;width:50%;display:inline-block;color:#929292;
+			}
+			.pay_info_r{
+				float:left;width:50%;display:inline-block;text-align:right;
+			}
+			.mui-ios .mui-table-view-cell{
+				border:0 !important;
+			}
+			.mui-table-view{
+				position:static;
+			}
+			#add_pay{
+				width:92%;margin-left:4%;padding:0;height:44px;line-height: 44px;border-radius:22px;background-color: #0088f4;color:#fff;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-pull-left">
+				<img src="../images/user/topbackarr.png" style="width: 20px;">
+			</a>
+			<h1 class="mui-title">支付</h1>
+		</header>
+		<div class="mui-content" id="dataList" style="padding-top:40px;">
+			<div class="mui-row ordermoney">
+				<!-- <p style="text-align:center;padding:10px 0;">支付剩余时间：15:00</p> -->
+				<div class="mui-text-center">
+					<span>￥</span><span id="ordermoney" class="font23">{{true_pay}}</span>
+					<span class="font14" v-if="pay_type !== 3">￥</span><span id="pricecros" class="font14">{{total_money}}</span>
+				</div>
+			</div>
+			<!-- 支付类型 -->
+			<ul class="mui-table-view payment-type" style="background:#fff;margin: 10px;border-radius: 10px;">
+				<li class="mui-table-view-cell" >
+					<div class="mui-input-row mui-radio mui-left">
+						<label class="fontcolor" style="height: 42px;"> <img class="iconImg" src="../images/order/allpay.png" />
+							立即支付
+							<span class="paytext" v-cloak>立减 {{del_money}} 元 </span>
+							<span class="paytext_tj" v-cloak>推荐</span>
+							</label>
+					</div>
+				</li>
+
+				<li class="mui-table-view-cell" @tap="click_pay(1)" style="border-top:1px solid #efeff4 !important;">
+					<div class="mui-input-row mui-radio mui-left">
+						<label class="fontcolor" style="height: 42px;"> <img class="iconImg" src="../images/user/alipay.png" />
+							支付宝支付</label>
+						<input name="radio" type="radio" value="2" style="line-height: 42px;" checked=""/>
+					</div>
+				</li>
+				<li class="mui-table-view-cell" @tap="click_pay(2)"  style="border-top:1px solid #efeff4 !important;">
+					<div class="mui-input-row mui-radio mui-left">
+						<label class="fontcolor" style="height: 42px;"> <img class="iconImg" src="../images/user/wechat.png" />
+							微信支付</label>
+						<input name="radio" type="radio" value="3" style="line-height: 42px;" />
+					</div>
+				</li>
+			</ul>
+			<ul class="mui-table-view payment-type" style="background:#fff;margin: 10px;border-radius: 10px;border:none;"  @tap="click_pay(3)" v-if="forms == '1'">
+				<li class="mui-table-view-cell">
+					<div class="mui-input-row mui-radio mui-left" style="height: 42px;">
+						<label class="fontcolor" style="height: 42px;"> <img class="iconImg" src="../images/user/delivery.png" />货到付款</label>
+						<input name="radio" type="radio" value="4" style="line-height: 42px;" />
+					</div>
+				</li>
+			</ul>
+
+			<ul class="mui-table-view" style="background:#fff;margin: 10px;border-radius: 10px;border:none;"> 
+				<li class="mui-table-view-cell mui-collapse" style="min-height:48px;">
+					<a class="mui-navigate-right" href="#" style="background:#fff;height:48px;line-height:48px;margin-left:0;">费用明细</a>
+					<div class="mui-collapse-content" style="font-size:14px;">
+						<div class="mui-row pay_info" >
+							<div class="pay_info_l">
+								<span>里程运费</span> 
+							</div>
+							<div class="pay_info_r">
+								<span>￥{{licheng_Price}}</span> 
+							</div>
+						</div>
+						<div class="mui-row pay_info" v-if="order_type=='vehicle'">
+							<div class="pay_info_l">
+								<span>多点提配</span> 
+							</div>
+							<div class="pay_info_r">
+								<span>￥{{multistorePrice}}</span> 
+							</div>
+						</div>
+						<div class="mui-row pay_info" v-if="order_type=='vehicle'">
+							<div class="pay_info_l">
+								<span>装货费</span> 
+							</div>
+							<div class="pay_info_r">
+								<span>￥{{pick_price}}</span> 
+							</div>
+						</div>
+						<div class="mui-row pay_info" v-if="order_type=='vehicle'">
+							<div class="pay_info_l">
+								<span>卸货费</span> 
+							</div>
+							<div class="pay_info_r">
+								<span>￥{{send_price}}</span> 
+							</div>
+						</div>
+						<div class="mui-row pay_info" v-if="order_type=='line'">
+							<div class="pay_info_l">
+								<span>提货费</span> 
+							</div>
+							<div class="pay_info_r">
+								<span>￥{{pick_price}}</span> 
+							</div>
+						</div>
+						<div class="mui-row pay_info" v-if="order_type=='line'">
+							<div class="pay_info_l">
+								<span>配送费</span> 
+							</div>
+							<div class="pay_info_r">
+								<span>￥{{send_price}}</span> 
+							</div>
+						</div>
+
+						<div class="mui-row pay_info" >
+							<div class="pay_info_l">
+								<span>下单立减</span> 
+							</div>
+							<div class="pay_info_r">
+								<span style="color:#FF4940;"> -￥ {{del_money}} 元</span> 
+							</div>
+						</div>
+<!-- 						<div class="mui-row pay_info" >
+							<div class="pay_info_l">
+								<span>总费用</span> 
+							</div>
+							<div class="pay_info_r">
+								<span style="color:#FF4940;"> ￥ {{line_price}} 元</span> 
+							</div>
+						</div> -->
+						<div class="mui-row pay_info" >
+							<div class="pay_info_l">
+								<span>合计</span> 
+							</div>
+							<div class="pay_info_r">
+								<span style="font-size:20px;color:#FF4940;">{{true_pay}} 元</span> 
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+
+			<div class="" id="payment" style="position: fixed;bottom: 0px;width: 100%;">
+				<button type="button" class="mui-btn mui-btn-blue mui-btn-block" id="add_pay"  data-loading-text = "支付中"  @tap="onPay()">{{btn_title}}</button>
+			</div>
+
+		</div>
+		<script src="../js/jquery.min.js" type="text/javascript"></script>
+		<script src="../js/base64.min.js" type="text/javascript"></script>
+		<!-- mui 框架 -->
+		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-2.4.1.js" type="text/javascript" charset="utf-8"></script>
+
+		<!-- 通用js -->
+		<script src="../js/common/common.js" type="text/javascript" charset="utf-8"></script>
+		<!---->
+		<script src="../js/config/request.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/controller/controller-vehicle.js" type="text/javascript" charset="utf-8"></script>
+
+		<!-- 支付 -->
+		<script src="js/payment.js" type="text/javascript" charset="utf-8"></script>
+		<script src=”https://unpkg.com/axios/dist/axios.min.js”></script>
+
+		<script type="text/javascript">
+			// 获取支付通道
+			var wxChannel = null; // 微信支付  
+			var aliChannel = null; // 支付宝支付  
+			var channel = null; 
+			mui.init();  
+ 
+			// 实际支付金额
+		// 	var ordermoney = null;
+		// 	// 支付类型
+		// 	var paytype = null;
+		// 	// 订单金额
+		// 	var price = null;
+		// 	// 订单id
+		// 	var id = null;
+		// 	// alldata  下单所有的data数据
+		// 	var data = null;
+
+		// 	var from_ = '';
+		// 	var type_from = '';
+			
+			
+		// 	var wxChannel = null; // 微信支付  			 
+		// 	var aliChannel = null; // 支付宝支付  
+		// 	var channel = null;   //支付通道 
+		// 	mui.init({  
+		// 		swipeBack:true //启用右滑关闭功能  
+		// 	});  
+			
+		// mui.plusReady(function() {    	 
+		//             // 获取支付通道  	 
+		// 	plus.payment.getChannels(function(channels){  	 
+		// 	for (var i in channels) { 		 
+		// 			if (channels[i].id == "wxpay") { 		 
+		// 				 wxChannel=channels[i];  	 
+		// 			}else{ 	 
+		// 				aliChannel=channels[i];  	 
+		// 			} 	 
+		// 		}     
+
+		// 	},function(e){  
+		// 	 alert("获取支付通道失败："+e.message);  
+		// 	});  		 
+		// })  	
+			
+
+		// document.getElementById('add_pay').addEventListener('tap',function() {  
+		// 	pay(vm.pay_type);   	 
+		// })
+
+
+			
+			/**
+			 * @description: 获取优惠券id与金额
+			 * @Auther: liyuan
+			 * @Time: 2018.5.9
+			 * @param {Number} cou_id 优惠券id
+			 * @param {Number} coupon_money 优惠卷金额
+			 */
+			
+			// function click_pay(data){
+			// 	var self = this;
+			// 	this.paytype=data;
+			// 	if(data==3){
+					
+			// 		document.getElementsByClassName('font14').style.display = "none";
+			// 	}else{
+			// 		document.getElementsByClassName('font14').style.display = "block";
+			// 	}
+
+			// }
+			
+			// function setCoupon(data) {
+			// 	couponid = data.cou_id;
+			// 	coupon_money = data.coupon_money;
+			// 	paymoney = parseFloat(ordermoney) - parseFloat(coupon_money);
+			// 	document.getElementById('coupon').innerText = '-' + coupon_money;
+			// 	document.getElementById('paymoney').innerText = paymoney;
+			// }
+			/**
+			 * 获取需要支付的数据 支付方式通用
+			 * @Auther: liyuan
+			 * @Time: 2018.5.9
+			 */
+			// function getdata() {
+			// 	// 自身页面
+				// var ws = plus.webview.currentWebview();
+				// ordermoney = vm.true_pay;   // 实际支付价格
+			// 	console.log(ordermoney);
+
+			// 	price = ws.deleteprice;   // 计算价格
+			// 	console.log(price);      
+				
+			// 	id = ws.data;           // 支付类型
+			// 	console.log(id);  
+
+				// from_ = ws.from_;
+				// type_from = ws.type_from;
+
+			// 	data = ws.alldata;
+			// 	console.log("支付页拿到的所有data数据=="+JSON.stringify(data));
+
+
+			// 	// 显示订单金额
+			// 	document.getElementById('ordermoney').innerText = ordermoney;
+			// 	// 显示支付金额
+			// 	document.getElementById('pricecros').innerText = price;
+				
+			// 	if(paytype ==3){
+			// 		document.getElementById('pricecros').style.display = "none";
+			// 	}
+			// }
+			/**
+			 * 获取支付方式进行支付
+			 * @Auther: liyuan
+			 * @Time: 2018.5.9
+			 */
+			// function topayment(uoid) {
+			// 	// radio
+			// 	var radio = document.getElementsByName("radio");
+			// 	// 默认余额支付
+			// 	var value = 1;
+			// 	// 获取选中的支付方式
+			// 	for (i = 0; i < radio.length; i++) {
+			// 		if (radio[i].checked) {
+			// 			value = parseInt(radio[i].value);
+			// 		}
+			// 	}
+			// 	// 支付参数
+			// 	var data = {
+			// 		token: user.getState('ftoken'), // token
+			// 		// id: uoid, // 订单id
+			// 		// type: 3, // 产品支付类型 1 零担 2 室内配送 3 整车4.定制
+			// 		price: ordermoney, // 支付金额
+			// 		line_price:ordermoney,
+			// 		// price: 0.01, // 支付金额
+			// 		// line_price:0.01,
+			// 		// couponid: couponid, // 优惠券id
+			// 		// pay_type: '1' // 针对城配支付
+			// 		from_:from_,
+			// 		type_from:type_from,
+			// 	}
+
+			// 	var index = 1;
+			// 	var ordertype = 2;    //整车确认订单支付;
+
+			// 	switch (value) {
+			// 		case 1: // 支付宝支付
+			// 			index = 1;
+			// 			break;
+			// 		case 2: // 微信支付
+			// 			index = 2;
+			// 			break;
+			// 		case 3: // 货到付款
+			// 			index = 3;
+			// 			break;
+			// 		default:
+			// 			break;
+			// 	}
+			// 	payment.pay(index,ordertype,data, function(){});
+			// 	//特价整车成功支付返回
+			// 	// if (plus.webview.currentWebview().opener().id == 'pay.html') {
+			// 	// 	payment.pay(index, data, function() {
+			// 	// 		plus.webview.currentWebview().opener().opener().close();
+			// 	// 		plus.webview.currentWebview().opener().close();
+			// 	// 		mui.back();
+			// 	// 	});
+			// 	// 	return;
+			// 	// }
+
+			// 	// 城配或者整车是在个人中心支付所以不用跳转地图找车提示页面
+			// 	// if (type == 2 || type == 3) {
+			// 	// 	payment.pay(index, data, function() {
+			// 	// 		mui.back();
+			// 	// 		plus.webview.currentWebview().opener().reload();
+			// 	// 	});
+			// 	// } else {
+			// 	// 	payment.pay(index, data, function() {
+			// 	// 		clicked('../common/paymented.html');
+			// 	// 	});
+			// 	// }
+			// }
+			// plus对象加载完毕执行
+			// mui.plusReady(function() {
+				// 获取页面传输数据
+				// getdata();
+
+				//定金支付不允许使用信用额度支付
+				// if (isearnest) {
+				// 	document.querySelector('.ordertext').innerHTML = '订金';
+				// 	document.getElementById('credit').setAttribute('disabled', 'disabled');
+				// }
+
+			// });
+			
+			// 上线 整车 支付
+			// mui('body').on('tap', '#payment', function() {
+			// 	console.log("点击支付按钮拿到的所有data数据=="+JSON.stringify(data));
+			// 		// topayment(data.id);
+			// 		topayment();
+
+			// });
+			mui(document.body).on('tap', '.mui-btn', function(e) {
+			      mui(this).button('loading');
+			      setTimeout(function() {
+			          mui(this).button('reset');
+			      }.bind(this), 3000);
+			});
+
+			setAutoHeight(function(h){
+				
+			},1)
+		</script>
+	</body>
+
+</html>

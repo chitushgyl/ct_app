@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover"/>
+		<meta name="misapplication-tap-highlight" content="no"/>
+		<meta name="HandheldFriendly" content="true"/>
+		<meta name="MobileOptimized" content="320"/>
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
+		<!-- <link rel="stylesheet" type="text/css" href="../css/common.css"/> -->
+		<title></title>
+		<style type="text/css">
+			#guideImg{
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0px;
+				left: 0px;
+				bottom: 0px;
+				z-index: 5;
+			}
+			.disappear{
+				background: transparent;
+				animation: dis .3s linear;
+				-webkit-animation: dis .3s linear;
+				animation-fill-mode: forwards;
+				-webkit-animation-fill-mode: forwards;
+			}
+			@keyframes dis{
+				0%{
+					opacity: 1;
+					filter: alpha(opacity=100);
+				}
+				98%{
+					opacity: 0;
+					filter: alpha(opacity=0);
+				}
+				100%{
+					opacity: 0;
+					filter: alpha(opacity=0);
+				}
+			}
+			@-webkit-keyframes dis{
+				0%{
+					opacity: 1;
+					filter: alpha(opacity=100);
+				}
+				98%{
+					opacity: 0;
+					filter: alpha(opacity=0);
+				}
+				100%{
+					opacity: 0;
+					filter: alpha(opacity=0);
+				}
+			}
+			#closepage{
+				position: absolute;
+				background: #737373;
+				right: 9%;
+				top: 6%;
+				border-radius: 30px;
+				/* border: 1px solid rgb(255,122,26); */
+				padding: 2px 10px;
+				z-index: 9;
+			}
+			#closepage p{
+				display: inline-block;
+				font-size: 11px;
+				color: #C6C6C6;
+				margin: 0px;
+				line-height: 1.5em;
+			}
+		</style>
+	</head>
+	<body style="background: transparent;">
+		<div id="closepage" class="mui-text-center">
+			<p>跳过</p>
+			<p><span id="second">3</span>s</p>
+		</div>
+		
+		<img id="guideImg" src="../images/guideImg/index.png" />
+		
+		<!-- mui.js -->
+		<script src="../js/mui.min.js" type="text/javascript"></script>
+		<script src="../js/vue-2.4.1.js" type="text/javascript"></script>
+		<script src="../js/common/common.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			
+			//开启全屏显示
+			mui.plusReady(function () {
+			    
+			    if(mui.os.ios){
+			    	plus.navigator.setFullscreen(true);
+			    }
+			    plus.navigator.closeSplashscreen();
+			    
+			})
+			
+			var second = 2;
+			var time = setInterval(function(){
+				if(second >= 0){
+					
+					document.getElementById('second').innerHTML = second -- ;
+					
+				}else{
+					clearInterval(time);
+					plus.webview.currentWebview().setStyle({"background":"transparent"});
+					
+					document.getElementById('closepage').style.display = 'none';
+					document.getElementById('guideImg').classList.add('disappear');
+					
+					document.getElementById('guideImg').addEventListener('webkitAnimationEnd',function(){
+						plus.navigator.setFullscreen(false);
+						plus.webview.currentWebview().close();
+						// createMew();
+					});
+					
+				}
+			},1000);
+			
+			mui('body').on('tap','#closepage',function(){
+				
+				clearInterval(time);
+				plus.navigator.setFullscreen(false);
+				plus.webview.currentWebview().close();
+					// createMew();
+			});
+			
+			function createMew(){
+				// console.log("引导页执行完毕，创建引导视图");
+	
+				var openPage = plus.webview.currentWebview().opener();
+				// console.log(JSON.stringify(openPage));
+				
+				var token = user.getState('token');
+				if(token){
+					// console.log("token 存在是登录状态");
+					mui.fire(openPage,'PageEvent');
+				}else{
+					// console.log('token不存在，未登录状态');
+				}
+				
+				
+			}
+			
+		</script>
+	</body>
+</html>

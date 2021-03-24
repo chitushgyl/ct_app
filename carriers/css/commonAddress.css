@@ -1,0 +1,49 @@
+/*没有数据背景图*/
+.bgimg{
+	background-color: #F3F4F6;
+	background-image: url(../../images/contacts.png);  
+	background-position: 9rem 18rem;
+	background-size: 50%;
+	background-repeat: no-repeat;
+}
+.bgaddress{
+	background-color: #F3F4F6; 
+	background-position: 9rem 18rem;
+	background-size: 50%;
+	background-repeat: no-repeat;
+}
+
+/*
+ * 个人信息 栏目下 常用联系人、常用地址页面css
+ * */
+
+/* 列表  */
+.mui-table-view-cell{
+	padding: 0;
+}
+.mui-table-view-cell-row{
+	padding: 5px;
+	padding-left: 15px;
+	line-height: 30px;
+}
+.mui-table-view-cell-row>i{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.mui-table-view-cell-row2{
+	border-bottom: 1px solid #EBEBEB;
+}
+.mui-radio.mui-left input[type=radio]{
+	left: 0px;
+}
+.mui-radio input[type=radio]:before{
+	font-size: 20px;
+}
+.mui-checkbox.mui-left label, .mui-radio.mui-left label{
+	padding-left: 28px;
+}
+.img-icon{
+	width:19px;
+	vertical-align: middle;
+}

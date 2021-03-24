@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<!-- mui -->
+		<link href="../css/mui.pick.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<!-- <link rel="stylesheet" type="text/css" href="css/transportList.css" /> -->
+		<link rel="stylesheet" type="text/css" href="../user/css/common.css" />
+		<!-- <link rel="stylesheet" type="text/css" href="../plug/calendar/time.css" /> -->
+		<!-- 选择器 -->
+		<!-- <link rel="stylesheet" type="text/css" href="../css/mui.picker.all.css" /> -->
+		<!-- base -->
+		<!-- <link rel="stylesheet" type="text/css" href="../oldcommon/common.css" /> -->
+		<!-- 车牌号 -->
+		<link rel="stylesheet" type="text/css" href="css/carNum.css" />
+		<!-- addCar -->
+		<link rel="stylesheet" type="text/css" href="css/car_card.css"/>
+		<style type="text/css">
+			body {
+				font-size: 17px;
+				background-color: #F3F5F7;
+				color: #333333;
+			}
+
+			.mui-bar {
+				background-color: #FFFFFF;
+			}
+
+			.mui-bar .mui-title {
+				color: #333333;
+			}
+
+			.mui-btn-main {
+				background-color: #2972E9;
+				color: #FFFFFF;
+				border: none;
+				font-weight: bold;
+				background: -webkit-linear-gradient(bottom, #2972E9, #2972E9);
+			}
+
+			ul li a {
+				height: 49px;
+				line-height: 29px;
+			}
+
+			.mui-navigate-right:after,
+			.mui-push-right:after {
+				right: 15px;
+				content: '';
+			}
+/* 			.mui-table-view-cell.mui-collapse>.mui-navigate-right:after, .mui-table-view-cell.mui-collapse>.mui-push-right:after{
+				content: '';
+			}
+			.mui-table-view-cell.mui-collapse.mui-active>.mui-navigate-right:after, .mui-table-view-cell.mui-collapse.mui-active>.mui-push-right:after{
+				content: '';
+			} */
+/* 			.mui-badge{
+				font-size: 17px;
+				color: #333333 !important;
+			} */
+			.mui-text-center{
+				font-size: 15px;
+				color: #333333;
+			}
+			p{
+				font-size: 15px !important;
+				color: #666666;
+				line-height:26px;
+			}
+			h5{
+				font-size: 15px;
+			}
+/* 			.picker .picker-panel .wheel-wrapper .wheel .wheel-scroll .wheel-item{
+				font-weight: bold;
+				color: #333333 !important;
+				font-size: 18px;
+			} */
+			.mui-poppicker-body {
+			   margin-top: 20px;
+			}
+			.mui-input-range .mui-tooltip{
+				z-index: 9999;
+				display:none;
+			}
+			.mui-switch.mui-active:before{content: '是';}  
+			.mui-switch:before{content: '否';} 
+			.mui-input-row.mui-input-range{
+				padding-right:0;
+			}
+			.mui-bar-nav~.mui-content {
+				padding-top: 61px;
+			}
+			body,.mui-content{
+				background-color: #F3F4F6;
+			}
+			.deleteImg{
+				position: absolute;
+				top:0;
+				right:30px;
+				width:15px;
+				height:15px;
+				z-index:2;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav" id="header_id">
+			<!-- <button class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"> <img src="../images/user/return.png"/
+				 style="width: 0px;margin-top:8px;"></button> -->
+				 <a class="mui-action-back mui-pull-left">
+				 	<img src="../images/user/topbackarr.png" style="width: 20px;">
+				 </a>
+			<h1 class="mui-title">添加车辆</h1>
+		</header>
+		<div class="mui-content" style="padding-bottom:80px;" id="template_car">
+			<ul class="mui-table-view" style="margin-top:20px;background-color: #F3F4F6;">
+				<li class="mui-table-view-cell car">
+					<a class="mui-navigate-right">
+						<div class="mui-row">
+							<div class="mui-col-sm-4 mui-col-xs-4">
+								<span>车牌号码</span>
+							</div>
+							<div class="mui-col-sm-8 mui-col-xs-8">
+								<input type="text" name="" style="border:0;text-align:right;padding-right:24px;font-size: 16px;" placeholder="请输入" v-model="car_number"/>
+							</div>
+						</div>
+					</a>
+				</li>
+				
+				<li class="mui-table-view-cell" id="carTypePicker"  @tap="selectCarType()">
+					<a class="mui-navigate-right" >
+						<span>车辆类型</span>
+						<span class="mui-badge mui-badge-inverted" v-if="!car_type_name" style="font-size: 16px;">请选择</span>
+						<span class="mui-badge mui-badge-inverted">
+							<span id="" style="font-size: 16px;">{{car_type_name}}</span>
+						</span>
+					</a>
+				</li>
+
+				<li class="mui-table-view-cell" id="control_id" @tap="selectControlType()">
+					<a class="mui-navigate-right">
+						<span>温控类型</span>
+						<span class="mui-badge mui-badge-inverted" id="control" v-if="!tms_control_type_show" style="font-size: 16px;">请选择</span>
+						<span class="mui-badge mui-badge-inverted">
+							<span id="" style="font-size: 16px;">{{tms_control_type_show}}</span>
+						</span>
+						<!-- <img style="width:8px;margin-top:10px;" class="mui-pull-right" src="../images/other/screen.png" /> -->
+					</a>
+				</li>
+				<li class="mui-table-view-cell" id="control_id" @tap="select_carPossessType()">
+					<a class="mui-navigate-right">
+						<span>车辆属性</span>
+						<span class="mui-badge mui-badge-inverted" id="control" v-if="!car_possess_show" style="font-size: 16px;">请选择</span>
+						<span class="mui-badge mui-badge-inverted">
+							<span id="" style="font-size: 16px;">{{car_possess_show}}</span>
+						</span>
+						<!-- <img style="width:8px;margin-top:10px;" class="mui-pull-right" src="../images/other/screen.png" /> -->
+					</a>
+				</li>
+				
+				<li class="mui-table-view-cell" id="carage">
+					<a class="mui-navigate-right">
+						<span>车辆注册日期</span>
+						<span class="mui-badge mui-badge-inverted" id="carageVal" v-if="!board_time" style="font-size: 16px;">请选择</span>
+						<span class="mui-badge mui-badge-inverted">
+							<span id="result" style="font-size: 16px;">{{board_time}}</span>
+						</span>
+						<!-- <img style="width:8px;margin-top:10px;" class="mui-pull-right" src="../images/other/screen.png" /> -->
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						<div class="mui-row">
+							<div class="mui-col-sm-4 mui-col-xs-4">
+								<span>司机姓名</span>
+							</div>
+							<div class="mui-col-sm-8 mui-col-xs-8">
+								<input type="text"  style="border:0;text-align:right;padding-right:24px;font-size: 16px;" placeholder="请输入" v-model="contacts"/>
+							</div>
+						</div>
+					</a>
+				</li>				
+
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						<div class="mui-row">
+							<div class="mui-col-sm-4 mui-col-xs-4">
+								<span>司机电话</span>
+							</div>
+							<div class="mui-col-sm-8 mui-col-xs-8">
+								<input type="text" style="border:0;text-align:right;padding-right:24px;font-size: 16px;" placeholder="请输入" v-model="tel"/>
+							</div>
+						</div>
+					</a>
+				</li>				
+			</ul>
+			
+			<button type="button"  @tap="submitFun()" id="submit" class="mui-btn mui-btn-block mt20 mui-btn-main  " style="margin-top: 30px;position:fixed;width:92%;margin-left:4%;height:44px;line-height: 44px;border-radius:22px;background-color: #0088f4;bottom:10px;padding:0;">提交</button>
+		</div>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/base64.min.js" type="text/javascript"></script>
+		<!-- mui -->
+		<script src="../js/vue-2.4.1.js"></script>
+		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 通用 -->
+		<script src="../js/common/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../oldcommon/oldCommon.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 弹出层 -->
+		<script src="../js/layer.js" type="text/javascript" charset="utf-8"></script>
+
+		<script src="../js/config/request.js" type="text/javascript" charset="utf-8"></script>
+
+		<!-- 本页 -->
+		<script src="js/addCar.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>
+
+<script type="text/javascript">
+	// document.getElementById('block-range').addEventListener('input',function(){
+	//     $('.kilo_price').text(this.value/2);
+	//     layer.close(window.cartype);
+	// });	
+
+	// document.getElementById('low_temperture-range').addEventListener('input',function(){
+	//     $('.low_temperture').text(this.value);
+	//     layer.close(window.cartype);
+	// });
+	// setAutoHeight(function(){},1)
+</script>

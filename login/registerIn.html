@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<!-- windows phone 点击无高光 -->
+		<meta name="misapplication-tap-highlight" content="no" />
+		<!-- 删除默认的苹果工具栏和菜单栏 -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!-- fonticon -->
+		<link rel="stylesheet" type="text/css" href="../fonts/iconfont.css" />
+		<!-- 通用样式 -->
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<!-- login -->
+		<link rel="stylesheet" type="text/css" href="css/login.css" />
+
+		<style type="text/css">
+			{
+					{
+						{
+						input {
+							-webkit-user-select: auto !important;
+						}
+					}
+				}
+			}
+			.btnactive{
+				font-size:16px !important;
+				padding: 9px 50px;
+				border: 1px solid #58A6FF;
+				background: #58A6FF;
+				color: #FFFFFF;
+				border-radius: 5px;
+				display: block;
+			}
+			.mui-popup-button:after {
+				width: 0 !important;
+			}
+			.login_register{
+				width:100%;
+				display: flex;
+				height:auto;
+				justify-content: space-around;
+			}
+			.login_register button{
+				padding:10px 25px;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-pull-left" id="return">
+				<img src="../images/user/topbackarr.png" style="width: 20px;position: absolute;top: 30px;">
+			</a>
+		</header>
+		<div class="mui-content" id="bottomx">
+
+			<div class="login_register">
+				<button type="button" class="mui-btn login_register_btn mui-btn-primary" @click="login_f" data="1">登录</button>
+				<button type="button" class="mui-btn login_register_btn" @click="login_f" data="2">注册</button>
+			</div>
+			<!-- 赤途冷链 -->
+			<div class="loginTitle">
+				<p class="font23 color_1d" id="titletip">{{titleTip}}</p>
+				<p id="tipText" class="font12 color_85">验证码已发送至<span id="tiPhone"></span></p>
+			</div>
+			<!-- 表单 -->
+
+			<div class="mui-input-group" v-if="login_x">
+				<!-- 手机号 -->
+				<div class="mui-input-row phone_input">
+					<label><img src="../images/login/new_login_phone.png" /></label>
+					<input type="tel" class="font14" id="phone" maxlength="11" placeholder="请输入手机号" style="color: #1D2026;" />
+					<img src="../images/login/white.png" class="clear" onclick="clearall()" width="20px" height="20px" id="clear" />
+				</div>
+				<!-- 验证码登录区 -->
+				<div class="mui-input-row code-login">
+					<input type="tel" maxlength="4" class="font14" id="code" style="width: 280px; height: 60px;margin-left: 15%;" />
+					<div class="codenum">
+						<input class="font20 inputactive" type="tel" id="tel1" maxlength="1" autofocus="autofocus" readonly="readonly" />
+						<input class="font20" type="tel" id="tel2" readonly="readonly" maxlength="1" />
+						<input class="font20" type="tel" id="tel3" readonly="readonly" maxlength="1" />
+						<input class="font20" type="tel" id="tel4" readonly="readonly" maxlength="1" />
+					</div>
+				</div>
+				<!-- 密码登录区 -->
+				<div class="mui-input-row pass-login">
+					<label><img style="width: 16px; height: 20px;" src="../images/login/new_login_password.png" /></label>
+					<input type="password" class="font14" id="passwrod" placeholder="请输入密码" style="color: #1D2026;" />
+					<span class="Eyes"><img style="display: none;" src="../images/login/white.png" width="20px" height="12px"
+						 id="ico" onclick="xs()" title="显示密码" /></span>
+				</div> 
+					<p class="mui-text-center color_85 font13 timeinterval" style="padding-left: 20px;padding-right: 20px;">
+						<span id="sendCode" class="sendCode color_85 font13"></span>
+					</p>
+
+				<!-- 登录注册 -->
+				<button type="button" id="submit" class="mui-btn-block font-write-color mui-btn-login shadowbutton">获取验证码</button>
+					<!-- <p class="mui-text-center color_85 font13">
+						<span id="sendCode" class="sendCode color_85 font13 btnactive">重新获取</span>
+					</p> -->
+				<!-- 登录方式切换 -->
+				<div class="switch-login color_1d login_type">
+					<div class="switch-item switch-pass">使用账号密码登录</div>
+					<div class="switch-item switch-code active">使用验证码登录</div>
+				</div>
+
+			</div>
+			
+			<div class="mui-input-group" v-if="!login_x">
+				<!-- 手机号 -->
+				<div class="mui-input-row phone_input">
+					<label><img src="../images/login/new_login_phone.png" /></label>
+					<input type="tel" class="font14" id="phone" maxlength="11" placeholder="请输入手机号" style="color: #1D2026;" />
+					<img src="../images/login/white.png" class="clear" onclick="clearall()" width="20px" height="20px" id="clear" />
+				</div>
+				<!-- 验证码登录区 -->
+				<div class="mui-input-row code-login">
+					<input type="tel" maxlength="4" class="font14" id="code" style="width: 280px; height: 60px;margin-left: 15%;" />
+					<div class="codenum">
+						<input class="font20 inputactive" type="tel" id="tel1" maxlength="1" autofocus="autofocus" readonly="readonly" />
+						<input class="font20" type="tel" id="tel2" readonly="readonly" maxlength="1" />
+						<input class="font20" type="tel" id="tel3" readonly="readonly" maxlength="1" />
+						<input class="font20" type="tel" id="tel4" readonly="readonly" maxlength="1" />
+					</div>
+				</div>
+				<!-- 密码登录区 -->
+				<div class="mui-input-row pass-login">
+					<label><img style="width: 16px; height: 20px;" src="../images/login/new_login_password.png" /></label>
+					<input type="password" class="font14" id="passwrod" placeholder="请输入密码" style="color: #1D2026;" />
+					<span class="Eyes"><img style="display: none;" src="../images/login/white.png" width="20px" height="12px"
+						 id="ico" onclick="xs()" title="显示密码" /></span>
+				</div> 
+					<p class="mui-text-center color_85 font13 timeinterval" style="padding-left: 20px;padding-right: 20px;">
+						<span id="sendCode" class="sendCode color_85 font13"></span>
+					</p>
+			
+				<!-- 登录注册 -->
+				<button type="button" id="submit" class="mui-btn-block font-write-color mui-btn-login shadowbutton">获取验证码</button>
+			
+			</div>
+			<!-- 条款 -->
+			<!-- <div ><button onclick="getregetcode()">按钮</button></div> -->
+			<div class="pagebottom mui-text-center android-fixed" data-default='30'>
+				<!-- <label><img src="../images/login/checked.png" class="radioimg"></label> -->
+				<!-- <span class="font12 color_4d">登录即代表阅读并同意<span style="color: #58a6ff;">《服务条款》</span></span> -->
+				<span class="font12 color_4d">登录即代表阅读并同意<span id="yhxy" style="color: #2972E9;">《用户协议》</span>和<span style="color: #2972E9;" id="yscz">《隐私政策》</span></span>
+			</div>
+		</div>
+	</body>
+	<!-- mui 框架 -->
+	<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/vue-2.4.1.js" type="text/javascript"></script>
+	<script src="../js/base64.min.js" type="text/javascript"></script>
+
+	<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<!-- 通用js -->
+	<script src="../js/common/common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/common/fixed.js" type="text/javascript" charset="utf-8"></script>
+	<!-- -->
+	<script src="../js/config/request.js" type="text/javascript" charset="utf-8"></script>
+	<!-- -->
+	<script src="../js/controller/controller-account.js" type="text/javascript" charset="utf-8"></script>
+	<!-- 登录  -->
+
+	<script type="text/javascript">
+		
+		new Vue({
+			el:"#bottomx",
+			data:{
+				login_x: true,
+				titleTip:'欢迎登录赤途',
+
+			},
+			mounted:function(){
+
+			},
+			methods:{
+				login_f:function(that){
+					var target = that.target;
+					var data = $(target).attr('data');
+
+					$('.login_register_btn').removeClass('mui-btn-primary');
+					$(target).addClass('mui-btn-primary');
+					if (data == 1) {
+						this.login_x = true;
+						this.titleTip = '欢迎登录赤途';
+					} else {
+						this.login_x = false;
+						this.titleTip = '欢迎注册赤途';
+					}
+					console.log($(that));
+				}
+			},
+		});
+		// wed端的隐私政策
+		mui('body').on('tap', '#yscz', function() {
+			mui.openWindow({
+				url: 'secret.html',
+			});
+		});
+		mui('body').on('tap', '#yhxy', function() {
+			mui.openWindow({
+				url: 'agreement.html',
+			});
+		});
+
+		// 登录方式状态 1 验证码登录 2 密码登录
+		var switchStatus = 1;
+		var hadsendCode = false;
+
+		/**
+		 * @description: 验证码登录
+		 * @param {type} param_name
+		 * @return {type}
+		 */
+		function codeLogin() {
+			// 获取手机号,验证手机号是否符合
+			var phone = document.getElementById("phone").value;
+			 if (!(/^1[345789]\d{9}$/.test(phone))) {
+			     mui.toast("请填写正确的手机号码");
+			     return false;
+			 }
+			// 获取验证码
+			var codeVal = document.getElementById('code').value;
+
+//			console.log(phone + ':' + code);
+
+			// 提交参数
+			var data = {
+				phone: phone,
+				code: codeVal
+			};
+			// 判断是否为空
+			if (phone == '' || codeVal == '') {
+				mui.toast('请填写手机号或验证码');
+				return false;
+			}
+			// 提交数据
+			account.loginname(data, function(response) {
+				// 状态值
+				var code = parseInt(response.code);
+				// 状态值说明
+				var message = response.message;
+				// 信息
+				var data = response.data;
+
+				switch (code) {
+					case 1000: // 参数错误
+						mui.toast(message);
+						break;
+					case 1001: // 登录成功
+						mui.toast(message);
+						var data = response.data;
+						console.log(JSON.stringify(data));
+						user.setAllState(data, function() { // 储存本地用户信息
+							// 更新app的登陆信息
+							refreshData();
+							plus.webview.currentWebview().opener().evalJS('refreshData()');
+							// 返回上一页
+							plus.webview.currentWebview().close();
+						});
+						break;
+					case 1002: // 参数错误
+						mui.toast(message);
+						break;
+					case 1003: // 参数错误
+						mui.toast(message);
+						break;
+					default:
+						// codeELe
+						var codeEle = document.getElementById("sendCode");
+						// 终止验证码发送状态恢复初始状态
+						account.closeCode(codeEle);
+						// 提示信息
+						mui.toast(message);
+						break;
+				}
+
+			});
+		}
+		/**
+		 * @description: 密码登录
+		 * @param {type} param_name
+		 * @return {type}
+		 */
+		function passLogin() {
+			// 获取手机号,正则验证手机号格式
+			var phone = document.getElementById("phone").value;
+			 if (!(/^1[345789]\d{9}$/.test(phone))) {
+			     mui.toast("请填写正确的手机号码");
+			     return false;
+			 }
+			// 获取登陆密码
+			var passwrod = document.getElementById("passwrod").value;
+			// 提交参数
+			var data = {
+				username: phone,
+				password: passwrod
+			};
+			// 判断是否为空
+			if (phone == '' || passwrod == '') {
+				mui.toast('请填写手机号或密码');
+				return false;
+			}
+			// 提交数据
+			account.login(data, function(data) {
+				console.log(JSON.stringify(data));
+				console.log(JSON.stringify(data.data));
+				user.setAllState(data.data, function() { // 储存本地用户信息
+					// 更新app的登陆信息
+					refreshData();
+					// 返回上一页
+					mui.back();
+				});
+			});
+		}
+
+		// 点击切换密码登录
+		mui('body').on('tap', '.switch-pass', function() {
+			document.getElementById('titletip').innerHTML = "请输入账号及密码";
+			document.getElementsByClassName('pass-login')[0].style.display = 'block';
+
+			Array.prototype.forEach.call(this.parentNode.childNodes, function(value) {
+				if (value.nodeType == 1) {
+					value.classList.remove('active');
+				}
+			});
+			this.classList.add('active');
+
+			// 改变状态
+			switchStatus = 2;
+
+			// 终止验证码发送状态恢复初始状态
+			var codeEle = document.getElementById("sendCode");
+			account.closeCode(codeEle);
+			hadsendCode = false;
+
+			document.getElementById('submit').innerHTML = "登录";
+		});
+
+		// 点击切换验证码登录
+		mui('body').on('tap', '.switch-code', function() {
+			document.getElementById('titletip').innerHTML = "欢迎登录赤途";
+			document.getElementsByClassName('pass-login')[0].style.display = 'none';
+			Array.prototype.forEach.call(this.parentNode.childNodes, function(value) {
+				if (value.nodeType == 1) {
+					value.classList.remove('active');
+				}
+			});
+			this.classList.add('active');
+
+			switchStatus = 1;
+
+			document.getElementById('submit').innerHTML = "获取验证码";
+		});
+
+
+		// 提交数据
+		document.getElementById("submit").addEventListener("tap", function() {
+			// 判断登录方式
+			if (switchStatus == 1 && !hadsendCode) { // 验证码登陆且还未发送验证码
+
+				// 获取手机号,验证手机号格式
+				var phone = document.getElementById("phone").value;
+				// if (!(/^1[345789]\d{9}$/.test(phone))) {
+				//     mui.toast("请填写正确的手机号码");
+				//     return false;
+				// }
+				// codeELe
+				var codeEle = document.getElementById("sendCode");
+				// 判断验证码是否发送
+				account.sendCode(phone, codeEle, {
+					phone: phone
+				}, function() {
+					document.getElementById('titletip').innerHTML = "输入验证码";
+					document.getElementById('tipText').style.display = "block";
+					document.getElementById('tiPhone').innerHTML = phone;
+					hadsendCode = true;
+					document.querySelector('.code-login').style.display = "block";
+					document.querySelector('.timeinterval').style.display = "block";
+					document.querySelector('.phone_input').style.display = "none";
+					document.getElementById('submit').style.display = "none";
+					document.querySelector('.login_type').style.display = "none";
+					document.getElementById('code').focus();
+
+				});
+
+			} else { // 密码登录
+
+				passLogin();
+
+			}
+		});
+
+		var _back = mui.back;
+		mui.back = function() {
+			if (hadsendCode) {
+				document.getElementById('titletip').innerHTML = "欢迎登录赤途";
+				document.getElementById('tipText').style.display = "none";
+
+				// 终止验证码发送状态恢复初始状态
+				var codeEle = document.getElementById("sendCode");
+				
+				codeEle.classList.remove("btnactive");
+				account.closeCode(codeEle);
+				hadsendCode = false;
+
+				document.querySelector('.code-login').style.display = "none";
+				document.querySelector('.timeinterval').style.display = "none";
+				document.querySelector('.phone_input').style.display = "block";
+				document.getElementById('submit').style.display = "block";
+				document.querySelector('.login_type').style.display = "block";
+				
+				codeEle.classList.remove("btnactive");  // 移除存在的属性
+				return false;
+
+			}
+			_back();
+		}
+
+		//phone有值时更换按钮样式
+		document.getElementById('phone').addEventListener('input', function() {
+			if (this.value) {
+				document.getElementById('submit').classList.add('hasphone');
+				document.getElementById("clear").src = "../images/login/clear.png";
+			} else {
+				document.getElementById('submit').classList.remove('hasphone');
+				document.getElementById("clear").src = "../images/login/white.png";
+			}
+		});
+		document.getElementById('passwrod').addEventListener('input', function() {
+			if (this.value) {
+				document.getElementById("ico").style.display = "block";
+				document.getElementById("ico").src = "../images/login/noeye.png";
+			} else {
+				document.getElementById("clear").src = "../images/login/white.png";
+				document.getElementById("ico").style.display = "none";
+			}
+		});
+		// 验证码输入后自动进行登录操作
+		document.getElementById('code').addEventListener('input', function() {
+			console.log(this.value);
+			var value = this.value;
+			var c = value.length;
+			if (c >= 4) {
+				this.value = value.substr(0, 4);
+				c = 4;
+			}
+			if (value) {
+				document.querySelector('.codenum input:nth-child(' + c + ')').value = value.substr(c - 1, 1);
+
+				if (c == 4) {
+					document.querySelector('.codenum input:nth-child(' + c + ')').classList.remove('inputactive');
+				} else {
+					document.querySelector('.codenum input:nth-child(' + c + ')').classList.remove('inputactive');
+					document.querySelector('.codenum input:nth-child(' + (c + 1) + ')').classList.add('inputactive');
+				}
+
+				for (var i = c + 1, j = 0; i <= 4; i++, j++) {
+					if (j == 1) {
+						document.querySelector('.codenum input:nth-child(' + i + ')').classList.remove('inputactive');
+					}
+					document.querySelector('.codenum input:nth-child(' + i + ')').value = '';
+				}
+			} else {
+				document.querySelector('.codenum input:nth-child(1)').value = '';
+				document.querySelector('.codenum input:nth-child(1)').classList.add('inputactive');
+				document.querySelector('.codenum input:nth-child(2)').classList.remove('inputactive');
+			}
+
+			if (c == 4) {
+				codeLogin();
+			}
+
+		});
+
+		document.querySelector('.code-login').addEventListener('tap', function(e) {
+
+			if (e && e.preventDefault) {
+				e.preventDefault();
+			} else {
+				window.event.returnValue = false;
+			}
+
+			document.getElementById('code').focus();
+
+		});
+		//防止底部图片被键盘顶起
+		var h = document.body.offsetHeight;
+		window.onresize = function() {
+
+			if (document.body.offsetHeight < h) {
+				document.getElementsByClassName('pagebottom')[0].style.display = 'none';
+			} else {
+				document.getElementsByClassName('pagebottom')[0].style.display = 'block';
+			}
+		}
+
+		function xs() {
+			//var a = document.getElementById("inp").value;
+			var title = document.getElementById("ico").title;
+			//alert();
+			if (title == "隐藏密码") {
+				document.getElementById("passwrod").type = "password";
+				document.getElementById("ico").title = "显示密码";
+				document.getElementById("ico").src = "../images/login/noeye.png";
+			} else {
+				document.getElementById("ico").title = "隐藏密码";
+				document.getElementById("passwrod").type = "text";
+				document.getElementById("ico").src = "../images/login/eyes.png";
+			}
+		}
+
+		function clearall() {
+			document.getElementById('phone').value = "";
+			var value = document.getElementById('phone').value
+			if (value == null || value == "" || value == "undefined" || value == undefined || value == "null") {
+				document.getElementById('submit').classList.remove('hasphone');
+				document.getElementById("clear").src = "../images/login/white.png";
+			}
+		}
+
+		document.getElementById('return').addEventListener('tap', function() {
+			var value = document.getElementById('code').value;
+			if (value.length > 0) {
+				document.getElementById('code').value = "";
+				document.getElementById('tel1').value = "";
+				document.getElementById('tel2').value = "";
+				document.getElementById('tel3').value = "";
+				document.getElementById('tel4').value = "";
+			}
+		});
+		
+		// function getregetcode() {
+		// 	console.log(123);
+		// 	var regetcodeval = document.getElementById("sendCode").innerText;
+		// 	console.log(regetcodeval)
+		// }
+		
+		mui.plusReady(function() {
+			if(!plus.storage.getItem("logintoast")){
+				mui.confirm('请你务必谨慎阅读，充分理解“用户协议”和“隐私政策”各条款。您可阅读《隐私政策》和《用户协议》了解更多详细信息','提示', ['','我知道了',''], function(e) {
+					if (e.index == 1) {
+						// console.log("取消");
+						plus.storage.setItem("logintoast", "true");
+					} else {
+						// console.log("不取消");
+						plus.storage.setItem("logintoast", "true");
+					}
+				},'div');
+			}
+		})
+		
+		document.getElementById("sendCode").addEventListener('tap', function() {
+			var regetcodeval = document.getElementById("sendCode").innerText;
+			if(regetcodeval == "重新获取"){
+				var phone = document.getElementById("phone").value;
+				// if (!(/^1[345789]\d{9}$/.test(phone))) {
+				//     mui.toast("请填写正确的手机号码");
+				//     return false;
+				// }
+				// codeELe
+				var codeEle = document.getElementById("sendCode");
+				account.sendCode(phone, codeEle, {
+					phone: phone
+				}, function() {
+					hadsendCode = true;
+					document.getElementById('code').focus();
+				});
+				codeEle.classList.remove("btnactive");
+			};
+		});
+			
+		
+			
+			
+	</script>
+</html>

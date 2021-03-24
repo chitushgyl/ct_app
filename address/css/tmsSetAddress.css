@@ -1,0 +1,76 @@
+.mui-bar-nav~.mui-content{
+	padding-top: 64px;
+	padding-left: 0;
+	padding-right: 0;
+}
+h5{
+	margin: 0;
+	padding-left: 12px;
+	line-height: 44px;
+}
+.mui-bar-nav{
+	background-color:#58A6FF ;
+}
+.mui-input-group{
+	border-top: 1px solid #efefef;
+	/*border-bottom: 1px solid #efefef;*/
+	height:100px;
+	background-color: #FFFFFF;
+}
+.mui-input-group .mui-input-row{
+	position: relative;
+	height: 50px;
+}
+.mui-input-group .mui-input-row:after{
+	left: 0;
+}
+.mui-input-group .mui-input-row label{
+    padding: 17px 10px;
+	width: 35%;
+}
+.mui-input-group .mui-input-row input{
+    width: 65%;
+    height: 49px;
+    margin-bottom: 0;
+    padding: 17px 10px;
+    border: 0;
+    background-color: transparent;
+    font-size: 18px;
+}
+.mui-input-group .mui-input-row input:first-child{
+	padding-right: 50px;
+}
+.mui-input-group .mui-input-row .other{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100px;
+	height: 49px;
+	border-left: 1px solid #E1E1DF;
+	text-align: center;
+	line-height: 49px;
+	color: #1A8AFF;
+}
+.mui-input-group .mui-input-row .other img{
+	position: relative;
+	top: 2px;
+	height: 15px;
+}
+.mui-btn-main{
+	margin: 33px auto;
+	width: 95%;
+	background-color: #2972E9;
+}
+/*通讯录*/
+/*联系电话*/
+.mail-list{
+	border-left: 1px solid #E2E2E2; 
+	text-align: center;
+}
+.mail-list>img{
+	margin: 28px auto 5px;
+	width: 20px;
+}
+.mb13{
+	margin-bottom: 13px;
+}

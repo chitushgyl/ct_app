@@ -1,0 +1,232 @@
+/**
+ * =======================================
+ * 赤途用户端订单列表样式表
+ * =======================================
+ */
+.mescroll{
+	padding-top: 5px;
+	padding-bottom: 50px;
+}
+.mescroll .mui-table-view-cell{
+	margin-bottom: 5px;
+	padding:0 15px;
+	font-size: 13px;
+}
+.mescroll .mui-table-view-cell .mui-row p{
+	margin-bottom: 0;
+	font-size: 13px;
+	line-height: 40px;
+}
+.mescroll .mui-table-view-cell .mui-row-first{
+	border-bottom: 1px solid #f3f4f6;
+	color: #484848;
+}
+.mescroll .mui-table-view-cell .mui-row-first .mui-text-right{
+	font-size: 13px;
+	color: #1A8AFF;
+}
+.mescroll .mui-table-view-cell .mui-row-center{
+	padding-top: 7px;
+	padding-bottom: 7px;
+}
+.mescroll .mui-table-view-cell .mui-row-center p{
+	line-height: 35px;
+}
+.mescroll .mui-table-view-cell .mui-row-last{
+	position: relative; 
+	height:45px; 
+	border-top:1px solid #f3f4f7;
+	line-height: 45px;
+}
+/* icon */
+.mescroll .mui-table-view-cell .icon-img{
+	margin-right: 5px;
+	width: 24px;
+	position: relative;
+	top: 5px;
+}
+/* money */
+.mescroll .mui-table-view-cell .iconprice{
+	width: 7px !important;
+	vertical-align: inherit;
+}
+/* line */
+.mescroll .mui-table-view-cell .tocityImg{
+	position: relative;
+	width: 55px;
+	margin: 0 10px;
+}
+/* btn */
+.mui-btn-outlined{
+	border:1px solid #2972E9;
+	width:80px;
+	border-radius: 3px;
+	font-size: 14px;
+	text-align: center;
+	line-height: 1.32;
+	color:#2972E9;
+	margin-top: 6px;
+}
+.mui-btn-outlined2{
+	border:1px solid #CCCCCC;
+	width:80px;
+	border-radius: 3px;
+	font-size: 14px;
+	text-align: center;
+	line-height: 1.32;
+	color:#999999;
+	margin-top: 6px;
+}
+
+/**
+ * ----------------------------------
+ * Notes: 所有仓库列表样式(houselist.html)
+ * ----------------------------------
+ * @Auther 李渊
+ */
+.mui-bar-nav~.all-warehouse{
+	padding-top: 105px;
+}
+.mui-bar-nav~.mui-content .mui-pull-top-pocket{
+	top: 110px;	
+}
+/* 筛选列表  */
+.all-warehouse .filter-list{
+	position: fixed;
+	top: 64px;
+	left: 0;
+	z-index: 100;
+	width: 100%;
+	background-color: #FFFFFF;
+	line-height: 40px;
+}
+.all-warehouse .filter-list>div{
+	border-right: 1px solid #E3E3E3;
+	color: #323232;
+}
+.all-warehouse .filter-list .mui-icon-arrowdown{
+	font-size: 15px;
+}
+/* 仓库列表  */
+.all-warehouse .mescroll{
+	position: fixed;
+	top: 105px;
+	left: 0;
+	bottom: 0;
+	padding-bottom: 60px;
+	height: auto;
+}
+.all-warehouse .mui-table-view-cell{
+	position: relative;
+	padding: 10px;
+	/*height: 125px;*/
+	border-radius: 5px;
+}
+.all-warehouse .mui-table-view-cell .list-l{
+	position: absolute;
+	display: flex;
+	display: -webkit-flex;
+	flex-direction: row;
+	-webkit-flex-direction: row;
+	justify-content: center;
+	-webkit-justify-content: center;
+	align-items: center;
+	-webkit-align-items: center;
+	width: 90px;
+	height: 90px;
+	border-radius: 5px;
+	overflow: hidden;
+}
+.all-warehouse .mui-table-view-cell .list-l .img-thumbnail{
+	width: 100%;
+}
+
+.all-warehouse .mui-table-view-cell .list-r{
+	padding-top: 10px;
+	padding-left: 100px;
+}
+.all-warehouse .mui-table-view-cell .list-r .authentication{
+	font-size: 13px;
+	color: #42cc69;
+}
+.all-warehouse .mui-table-view-cell .list-r .authentication .isfalse{
+	color: #323232;
+}
+.all-warehouse .mui-table-view-cell .list-r .authentication .price{
+	font-size: 18px;
+	color: #1A8AFF;
+}
+.all-warehouse .mui-table-view-cell .list-r .authentication .img-Authentication{
+	width: 12px;
+    vertical-align: text-top;
+}
+.all-warehouse .mui-table-view-cell .list-r .address{
+	font-size: 15px;
+	line-height: 30px;
+	color: #323232;
+}
+.all-warehouse .mui-table-view-cell .list-r .area{
+	font-size: 14px;
+	color: #323232;
+}
+.all-warehouse .mui-table-view-cell .list-r .area-val{
+	font-size: 11px;
+}
+.all-warehouse .mui-table-view-cell .list-r .city{
+	font-size: 12px;
+	color: #323232;
+}
+
+.btn-color{
+	color:#969698!important;
+	border:1px solid #969698;
+}
+.col-img{
+	width:35%;	
+}
+.lineheight{
+	height:40px;
+	line-height: 40px;
+}
+.mui-badge-green.mui-badge-inverted, .mui-badge-ti.mui-badge-inverted {
+	color:#0194dc;
+}
+.mui-badge-green.mui-badge-inverted, .mui-badge-pei.mui-badge-inverted {
+	color:#0194dc;
+}
+
+/* footer */
+.footer{
+	position: fixed;
+	left: 50%;
+	bottom: 20px;
+	margin-left: -65px;
+	z-index: 100;
+	width: 130px;
+	border-radius: 10px;
+	background-color: rgba(26,138,255,.7);
+	font-size: 16px;
+
+	text-align: center;
+	line-height: 40px;
+}
+.footer::before{
+	position: absolute;
+	top: 40px;
+	left: 50%;
+	margin-left: -10px;
+	display: block;
+	content: '';
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 10px;
+	border-color: rgba(26,138,255,.7) transparent transparent;
+}
+.footer a{
+	color: #FFFFFF;	
+} 
+.footer img{
+	width: 22px;
+	vertical-align: sub;
+}

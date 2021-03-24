@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no,viewport-fit=cover">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!-- fonticon -->
+		<link rel="stylesheet" type="text/css" href="../fonts/iconfont.css"/>
+		<!-- 通用样式 -->
+		<link rel="stylesheet" type="text/css" href="../person/css/common.css"/>
+						<link rel="stylesheet" type="text/css" href="../user/css/common.css" />
+		<!--页面样式-->
+		<link rel="stylesheet"  type="text/css" href="css/aboutus.css">
+		<title>关于我们</title>
+		<style type="text/css">
+			.mui-bar {
+				background-color: #ffffff;
+			}
+			.mui-bar .mui-title {
+				font-size: 18px;
+				color: #333333;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-pull-left">
+				<img src="../images/user/topbackarr.png" style="width: 20px;">
+			</a>
+			<h1 class="mui-title">关于我们</h1>
+		</header>
+			<div class="mui-content" id="template">
+				<div class="appimg">
+					<div class="logo"></div>
+					<img src="../images/user/about_001.png" />
+					<div class="mui-text-center">
+						<p style="font-size:15px;color: #1D2026;">赤途冷链</p>
+						<p id="version" style="font-size:15px;color: #1D2026;"></p>
+					</div>
+				</div>
+				<ul class="mui-table-view"> 
+					<li class="mui-table-view-cell" style="margin-top: 10px;color: #1D2026;font-size: 17px;" id="update">
+						<a class="mui-navigate-right" href="#">
+							<span>检查更新</span>
+							<span class="mui-badge mui-badge-blue mui-badge-inverted"></span>
+						</a>
+					</li>
+					<li class="mui-table-view-cell" id="contact" style="color: #1D2026;font-size: 17px;">
+						<a class="mui-navigate-right" href="#">
+							<span>联系我们</span>
+							<span class="mui-badge mui-badge-blue mui-badge-inverted" style="color: #1D2026;font-size: 17px;">400-9206101</span>
+						</a>
+					</li>
+				</ul>	
+			</div>
+		</div>
+		<!-- mui 框架 -->
+		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/base64.min.js" type="text/javascript"></script>
+		<script src="../js/vue-2.4.1.js" type="text/javascript"></script>
+		<script src="../js/config/request.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/common/common.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.plusReady(function(){
+				var checkUrl = request.ServerUrl+"/app/personal/get_pt"; // 检测更新
+				var downloadWgtUrl = request.ServerUrl+"/public/update/driver.wgt"; // 升级包目录
+				var downloadApkUrl = request.ServerUrl+"/public/update/driver.apk"; // 升级包目录
+				var iosURL = "https://itunes.apple.com/cn/app/%E8%B5%A4%E9%80%94%E6%89%BF%E8%BF%90%E7%AB%AF/id1249214373?mt=8"; // 苹果地址
+				var ios_state = null; // ios升级状态 1 需要升级从appstore中下载 2 差量升级 3 不升级
+			    var android_state = null; // android是否需要升级 1 需要升级从服务器下载新的apk 2 差量升级 3 不升级
+			    var app_version = null; // 当前应用版本号
+				var ios_version = null; // 服务器上苹果的版本号
+				var android_version = null; // 服务器上安卓的版本号
+			    // 检测更新
+				function checkUpdate(){
+				    var xhr = new XMLHttpRequest();
+				    xhr.onreadystatechange=function(){
+				        switch(xhr.readyState){
+				            case 4:
+					            if(xhr.status==200){
+					                var res = JSON.parse(BASE64.decode(xhr.responseText));
+					                res = res.data;
+							        ios_version = res.ios_version; // 苹果版本号
+							        android_version = res.android_version; // 安卓版本号
+							        ios_state = res.ios; // 苹果升级状态 1 整包升级 2 差量升级 3 不升级
+							        android_state = res.android; // 安卓需要升级状态 1 整包升级 2 差量升级 3不升级
+					                checkOs();
+					            }else{
+					                console.log("检测更新失败！");
+					            }
+				            	break;
+				            default:
+				            	break;
+				        }
+				    }
+				    xhr.open('GET',checkUrl);
+				    xhr.send();
+				}
+				/**
+				 * 判断手机系统检测升级
+				 */
+				function checkOs(){ 
+					
+			        if(plus.os.name == 'Android'){	// 	Android 用户
+			        	// 判断版本号
+			        	var isupdate = compareVersion(app_version,android_version); // 是否需要升级
+			        	// 
+			        	if(!isupdate) {
+			        		mui.toast('已经是最新版本了');
+			        		return false;
+			        	}
+			        	//
+			        	switch (android_state){
+			        		case '1':
+			        			plus.nativeUI.alert( "温馨提示:请升级、新版本APP为您带来更好的服务体验！", function(){
+									createDownload();
+								}, "请升级", "确定" );
+			        			break;
+			        		case '2':
+			        			downWgt();
+			        			break;
+			        		case '3':
+			        			break;
+			        		default:
+			        			break;
+			        	}
+					}else{ // 苹果用户
+						// 判断版本号
+			        	var isupdate = compareVersion(app_version,ios_version); // 是否需要升级
+			        	// 
+			        	if(!isupdate) {
+			        		mui.toast('已经是最新版本了');
+			        		return false;
+			        	}
+			        	
+						switch (ios_state){
+			        		case '1':
+			        			plus.nativeUI.alert( "温馨提示:请升级、新版本APP为您带来更好的服务体验！", function(){
+									plus.runtime.openURL( iosURL );
+								}, "请升级", "确定" );
+			        			break;
+			        		case '2':
+			        			downWgt();
+			        			break;
+			        		case '3':
+			        			break;
+			        		default:
+			        			break;
+			        	}
+					}
+				}
+				/**
+				 * 比较版本大小，如果新版本nv大于旧版本ov则返回true，否则返回false
+				 * @param {String} ov
+				 * @param {String} nv
+				 * @return {Boolean} 
+				 */
+				function compareVersion( ov, nv ){
+					if ( !ov || !nv || ov=="" || nv=="" ){
+						return false;
+					}
+					var b=false,
+					ova = ov.split(".",4),
+					nva = nv.split(".",4);
+					for ( var i=0; i<ova.length&&i<nva.length; i++ ) {
+						var so=ova[i],no=parseInt(so),sn=nva[i],nn=parseInt(sn);
+						if ( nn>no || sn.length>so.length  ) {
+							return true;
+						} else if ( nn<no ) {
+							return false;
+						}
+					}
+					if ( nva.length>ova.length && 0==nv.indexOf(ov) ) {
+						return true;
+					}
+				}
+				
+				// 下载wgt文件
+				function downWgt(){
+				    plus.nativeUI.showWaiting("更新文件...");
+				    plus.downloader.createDownload( downloadWgtUrl, {filename:"_doc/update/"}, function(d,status){
+				        if ( status == 200 ) { 
+				            console.log("下载wgt成功："+d.filename);
+				            installWgt(d.filename); // 安装wgt包
+				        } else {
+				            console.log("下载wgt失败！");
+				        }
+				        plus.nativeUI.closeWaiting();
+				    }).start();
+				}
+				// 更新应用资源升级包
+				function installWgt(path){
+				    plus.nativeUI.showWaiting("安装文件...");
+				    plus.runtime.install(path,{},function(){
+				        plus.nativeUI.closeWaiting();
+				        plus.nativeUI.alert("应用资源更新完成！",function(){
+				            plus.runtime.restart();
+				        });
+				    },function(e){
+				        plus.nativeUI.closeWaiting();
+				        plus.nativeUI.alert(JSON.stringify(e));
+				    });
+				}
+				/**
+				 * 创建下载任务 安卓
+				 */
+				function createDownload() {
+					var dtask = plus.downloader.createDownload( downloadApkUrl, { filename:'_doc/download/'}, function ( d, status ) {
+						// 下载完成
+						if ( status == 200 ) { 
+							plus.runtime.install(d.filename, {}, function(){
+								console.log('安装成功');
+							}, function(DOMException ){
+								alert(JSON.stringify(DOMException));
+							});
+						} else {
+							alert( "Download failed: " + status ); 
+						}  
+					});
+					dtask.start(); 
+				}
+				// 获取本地应用资源版本号
+			    plus.runtime.getProperty(plus.runtime.appid,function(inf){
+			        app_version = inf.version; 
+			        document.getElementById('version').innerText = app_version;
+			    });
+			    
+			    mui('ul').on('tap','#contact',function(){
+			      	plus.device.dial('4009-206-101',false)
+			    });
+			    
+			    mui('ul').on('tap','#update',function(){
+			      	checkUpdate();
+			    }) 
+			})
+			setAutoHeight(function(h){
+
+			},1)
+		</script>
+
+	</body>
+</html>

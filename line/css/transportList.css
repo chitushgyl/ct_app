@@ -1,0 +1,279 @@
+/*头部样式*/
+.mui-bar-transparent span.mui-icon{
+	font-size: 22px ;
+	color: #000000;
+}
+.mui-bar-transparent h1.mui-title{
+	font-size: 18px ;
+}
+.mui-bar .mui-title{
+	color: #000000;
+}
+.mui-bar{
+	background-color: white;
+}
+.font-bold{
+	font-weight: bold;
+}
+.font-blue{
+	color: #58A6FF;
+}
+.font12{
+	font-size: 12px !important;
+}
+.font-admin-color{
+	color: #1D2026;
+}
+.redfont{
+	color: #FF5656;
+	font-weight: bold;
+}
+.ws_nowrap{
+	white-space: nowrap;
+}
+.normalfont{
+	color: #58A6FF;
+}
+.triangleMarker{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 11%;
+	max-width: 50px;
+}
+
+/*
+ * 总列表样式
+ * */
+.mescroll{
+	position: fixed;
+	top: 64px;
+	bottom: 0px;
+	padding-top: 15px;
+    height: auto;
+}
+.mescroll .mui-table-view{
+	padding: 0px 10px;
+}
+.mescroll .mui-table-view .mui-table-view-cell{
+	padding-left: 8%;
+	margin-bottom: 15px;
+	border-radius: 5px;
+	overflow: hidden;
+}
+/*零担列表部分样式*/
+.bulkitem .discomt{
+	position: absolute;
+	top: 0;
+	left: 10%;
+}
+.bulkitem .discomt>img{
+	width: 30px;
+    transform: scale(1,1.2);
+    -webkit-transform: scale(1,1.2);
+}
+.bulkitem .discomt>p{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 30px;
+	text-align: center;
+	letter-spacing: normal;
+	line-height: 15px;
+    padding-top: 20px;
+	color: #fff;
+}
+.bulkitem .discomt .num{
+	font-size: 20px;
+	display: block;
+}
+.bulkitem .discomt .text{
+	font-size: 12px;
+}
+.bulkitem .mui-row-1{
+	margin-top: 5px;
+}
+.bulkitem .mui-row-1>div{
+	height: 30px;
+	line-height: 30px;
+}
+.bulkitem .mui-row-1 .mui-text-center>p{
+	margin-top: 5px;
+	margin-bottom: 0;
+	line-height: initial;
+	font-size: 10px;
+}
+.bulkitem .mui-row-1 .mui-text-center{
+	top: -15px;
+}
+.bulkitem .mui-row-1 .toShiftImg{
+	position: relative;
+	top: -1px;
+	bottom: 3px;
+	height: 5px;
+	vertical-align: text-top;
+}
+.bulkitem .mui-row-1 .toShiftImg>img{
+	max-width: 50px;
+}	
+.bulkitem .defaultImg{
+	position: relative;
+	top: 2px;
+	height: 14px;
+}
+.bulkitem .mui-row:nth-of-type(2){
+	height: 33px;
+}
+.bulkitem .shift-attr{
+	display: inline-block;
+	font-size: 12px;
+}
+.bulkitem .rowimg{
+	width:19px;
+	position: relative;
+	top: 5px;
+}
+.bulkitem .pick_send{
+	display: flex;
+	justify-content: space-between;
+	display: -webkit-flex;
+	-webkit-justify-content: space-between;
+}
+@media only screen and (max-width: 400px) {
+	.bulkitem .pick_send{
+		justify-content: flex-end;
+		-webkit-justify-content: flex-end;
+	}
+}
+/*.bulkitem .mr3{
+	margin-right: 3px;
+}*/
+
+/*城配数据样式*/
+.city_vehical_item{
+	padding-left: ;
+	padding-right: 15px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	display: -webkit-flex;
+	-webkit-justify-content: space-between;
+	-webkit-align-items: center;
+}
+/*起终点城市样式*/
+.city_vehical_item .carMessage{
+	width: 100%;
+}
+.city_vehical_item .carMessage .carAddress{
+	/* line-height: 0px; */
+}
+.city_vehical_item .carMessage .carAddress>div[class*="mui-col-sm-5"] div{
+	line-height: 1em;
+	margin-top: 5px;
+}
+.city_vehical_item .carMessage .carAddress>div[class*="mui-col-sm-5"] div img{
+	width: 14px;
+	vertical-align: text-top;
+	margin-right: 2px;
+	padding: 0px;
+}
+.city_vehical_item .carMessage .carAddress>div[class*="mui-col-sm-5"] p:first-child{
+	width: 100%;
+	font-size: 17px;
+	line-height: 30px;
+	margin-top: 0px;
+}
+.city_vehical_item .carMessage .carAddress>div[class*="mui-col-sm-5"]:nth-of-type(2){
+	float: right;
+}
+.city_vehical_item .carMessage .carAddress img{
+	padding: 0px .4em;
+    padding-top: .8em;
+    max-width: 48px;
+}
+
+/*转去发货按钮*/
+.sendgoods{
+	text-align: center;
+	padding: 30px 0px;
+}
+.sendgoods>*{
+	display: inline-block;
+	text-align: center;
+	width: 50%;
+	white-space: nowrap;
+}
+.sendgoods .tips{
+	color: #8590A6;
+	font-size: 18px;
+}
+.sendgoods .sendgoods_btn{
+	margin: 15px;
+	width: 70%;
+	background-image: url(../../images/other/sendgoods_bg.png);
+	background-size: 100% 100%;
+	background-position: center center;
+	line-height: 53px;
+	color: #fff;
+	font-size: 18px;
+}
+/*动态标题*/
+/*.tutorial{
+	margin-top:64px ;
+    background-color: #FFFFFF;
+    position: relative;
+    width: 100%;
+    /*margin-right: 48px;*/
+    /*width: calc(100% - 38px);*/
+    /*left: -5px;*/ 
+    /*top: -5px;*/
+    
+   
+/*}*/
+/*.tutorial>div:first-child{
+	width: -webkit-max-content;
+	overflow: hidden;
+}
+.tutorial>div:first-child p{
+	 display: inline-block;
+	 margin: 0px;
+	 line-height: 50px;
+	 color: blue;
+}*/
+/*.tutorial>div:last-child {
+	background-color: #FFFFFF;
+	padding: 13px 13px 12px;
+	position: absolute;
+	right: -48px;
+	top: 0px;
+}
+
+header:before{
+	display: block;
+	position: absolute;
+	right: 0;
+	bottom: 0px;
+	left: 0;
+	right:0;
+	height: 1px;
+	width: 100%;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: #E3E7EB;
+}*/
+
+/*.tutorial:after{
+	display: block;
+	position: absolute;
+	right: 0;
+	bottom: 0px;
+	left: 0;
+	right:0;
+	height: 1px;
+	content: '';
+	-webkit-transform: scaleY(.5);
+	transform: scaleY(.5);
+	background-color: red;
+}*/
+

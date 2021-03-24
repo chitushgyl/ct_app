@@ -1,0 +1,215 @@
+@charset "utf-8";
+/**
+ * ----------------------------
+ * 赤途冷链 支付 样式
+ * ----------------------------
+ */
+.mui-bar-nav~.mui-content{
+	margin-bottom: 60px;
+	overflow: hidden;
+}
+.mui-content{
+	margin-top: -13px !important;
+	
+}
+small{
+	color: #1D2026;
+	font-size: 12px !important;
+}
+.tit .mui-text-center .font12 .culation{
+	border: none !important;
+}
+.mui-bar{
+	background-color: #FFFFFF;
+}
+.mui-title{
+	color: #000000 !important;
+}
+.font-blue-color{
+	font-size:30px !important;
+	color: #1D2026 !important;
+}
+.mui-table-view-cell{
+	/* border-radius: 3px; */
+	padding:12px 15px;
+}
+h5.mui-text-center{
+	font-size: 13px;
+	line-height: 30px;
+}
+p.mui-text-center{
+	font-size: 24px;
+	line-height: 30px;
+}
+ul{
+	padding: 0px 38px 0px 38px;
+}
+li p{
+	margin: 3px ;
+}
+.mui-row div p{
+	color: #4D5668 !important;
+	font-size: 13px;
+}
+.padd{
+	padding: 15px 38px 0px 38px;
+	color: #8590A6;
+	font-size: 12px;
+	/* text-align:center; */
+}
+.border{
+	border-top:1px solid #E3E7EB;
+	margin: 0px 38px 0px 38px;
+}
+.mui-color{
+	background-color: #FFFFFF;
+}
+.map{
+	height: 200px;
+	border: 1px solid #FFFFFF;
+	background-color: #FFFFFF;
+}
+/* 提示  */
+.prompt{
+	padding-left: 15px !important;
+	font-size: 12px;
+	line-height: 40px;
+}
+/* 支付类型 */
+.payment-type{}
+.payment-type .iconImg{
+	margin-right: 10px;
+	width: 25px;
+	vertical-align: sub;
+}
+.payment-type .mui-radio input[type=radio]:before{
+	font-size: 22px;
+}
+.i-payicon{
+	width:24px; 
+	vertical-align: middle;
+}
+h5{
+	padding-left: 38px;
+	height: 40px;
+	font-size: 13px;
+	line-height: 40px;
+	margin: 0px;
+}
+.mui-input-span{
+	width:80px;
+	border:1px solid #78787a;
+	border-radius:6px;
+	display: inline-block;
+	text-align: center; 
+	margin-top: 10px;
+}
+[v-cloak] {
+    display: none;
+}
+.mr65{
+	margin-right: -65px;
+}
+.culation{
+	/* border-bottom: 1px solid #f3f4f6; */
+	/* padding-bottom: 15px; */
+	margin-bottom: 0px;
+}
+.mui-row .price{
+	/* margin:15px 0px; */
+	/* border-right:1px solid #F3F4F6; */
+}
+.mui-row .mui-col-xs-4:last-child{
+	border-right: 0px;
+}
+small {
+    font-size: 60%;
+}
+/* 提交  */
+
+.footer .estimated-time{
+	font-size: 14px;
+	line-height: 49px;
+	text-align: center;
+	color: #FFFFFF;
+}
+.footer .submit{
+	background-color: #1a8aff;
+	height: 49px;
+	line-height: 49px;
+	text-align: center;
+	color: #FFFFFF;
+	font-size:16px;
+	font-weight: 300;
+}
+.mb0{
+	margin-bottom: 0px;
+}
+
+
+/* 付款的介绍图标 */
+.priceshow{
+	padding-top: 30px;
+	margin-top: 10px;
+}
+.paydesp{
+	width: 110px;
+	/* height: 20px; */
+	position: absolute;
+	top: -12px;
+	left: 120px;
+}
+.paytext{
+	font-size: 14px;
+	color: #FFFFFF;
+	top: -2px;
+	text-indent: 6px;
+}
+.payment-type .mui-input-row {
+	overflow:visible;
+}
+.mui-table-view:before {
+    height: 1px;
+	left: 15px;
+	right: 15px;
+	color: #E3E7EB;
+}
+.mui-table-view-cell:after {
+	height: 0px;
+}
+
+.paydote1{
+	font-size: 17px;
+	color: #333333;
+	font-weight: 800;
+
+}
+.paynum1{
+	font-size: 25px;
+	color: #333333;
+	font-weight: 800;
+}
+.paydote2{
+	font-size: 16px;
+	color: #333333;
+	text-decoration: line-through;
+}
+.footer{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 49px;
+	/* margin-top: 10px; */
+	/* background-color: #272933; */
+	/* border-top: 1px solid #E3E7EB; */
+	/* padding-top: 8px; */
+	/* padding-right: 15px; */
+}
+.mui-btn-blue{
+    color: #fff;
+	font-size: 18px;
+	font-weight: 800;
+    border: 1px solid #2972E9;
+    background-color: #2972E9;
+}

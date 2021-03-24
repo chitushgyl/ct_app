@@ -1,0 +1,29 @@
+/*字体大小*/
+p{
+	font-size: 12px;
+}
+.mui-bar-nav~.mui-content{
+	padding-top: 64px;
+}
+/*图片居中、尺寸、外边距*/
+.appimg{
+	text-align: center;
+	background-color: white;
+}
+.appimg img{
+	margin: 85px 0 0 0;
+	width: 100px;
+}
+/* APP名称设置为 行内块*/
+.mui-text-center p{
+	display: inline-block;
+	margin: 0px;
+}
+/*版本号左边距*/
+.mui-text-center p:nth-child(2){
+	margin-left: 5px;
+}
+/*app图像下边距*/
+.mui-text-center{
+	padding-bottom: 73px;
+}

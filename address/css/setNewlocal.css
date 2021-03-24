@@ -1,0 +1,197 @@
+/*返回按钮样式*/
+header {
+	color: white;
+}
+
+header .mui-pull-left span {
+	color: white;
+}
+
+header .mui-pull-right a {
+	padding: 15px 0px;
+	color: white;
+}
+
+/*
+ * 日期选择器样式
+ */
+.mui-poppicker-header {
+	background-color: #1a8aff;
+}
+
+/*输入部分圆角*/
+.mui-content {
+	margin: 0px 5px;
+}
+
+.mui-content .mui-table-view {
+	margin-top: 5px !important;
+	padding: 0px 7px;
+	background: white;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.mui-table-view {
+	position: relative;
+}
+
+/*输入框样式*/
+.mui-content .mui-table-view .mui-table-view-cell {
+	padding: 2px 0px;
+	height: 44px;
+}
+
+.mui-content .mui-table-view .mui-table-view-cell input {
+	font-size: 14px;
+	margin: 0px;
+	border: none;
+	padding: 10px 0px 10px 25px;
+}
+
+/*前部图标*/
+.mui-content .mui-table-view .mui-table-view-cell:before {
+	content: '';
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 13px;
+	background-size: cover;
+}
+/*地址*/
+.address:before {
+	background-image: url(../../images/user/address.png);
+}
+/*详细地址*/
+.detailaddress:before {	
+	background-image: url(../../images/user/information.png);
+}
+/*联系人、联系方式*/
+.person:before {
+	background-image: url(../../images/user/name.png);
+}
+/*联系人、联系方式*/
+.number:before {
+	background-image: url(../../images/user/phone.png);
+}
+
+/*联系人图标*/
+.mui-pull-right {
+	position: absolute;
+	line-height: 9px;
+	padding: 21px 10px 25px 24px;
+	top: -1px;
+	right: 0px;
+	border: 1px solid #f3f4f6;
+	background-color: #FFFFFF;
+}
+
+.mui-table-view-cell.person .mui-pull-right img {
+	width: 30px;
+}
+
+/*联系人分栏显示*/
+.person {
+	display: flex;
+}
+
+/* .person>input:first-child {
+	width: 10em;
+} */
+
+.mui-content .mui-table-view .mui-table-view-cell.person>input:nth-child(2) {
+	padding: 10px 40px 10px 1em;
+	border-left: 1px solid #f3f4f6;
+	border-radius: 0px;
+}
+
+/*确定按钮样式*/
+.btn {
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	padding: 5px;
+}
+
+.btn button {
+	line-height: 30px;
+	width: 100%;
+}
+
+
+/*地址选择器的a标签样式*/
+.mui-content .mui-table-view .mui-table-view-cell.address>a {
+	width: 100%;
+	top: 0px;
+	left: 0px;
+	margin: 0px;
+	padding: 0px 0px 0px 25px;
+	line-height: 40px;
+}
+
+.mui-content .mui-table-view .mui-table-view-cell.address>a span {
+	color: #78787a;
+}
+
+#name {
+	width: 510px;
+}
+
+/* .mui-btn{
+	margin-bottom:200px;
+} */
+.mui-title {
+	color: #000000 !important;
+}
+
+.mui-bar {
+	background-color: #FFFFFF;
+}
+
+.color {
+	color: #1D2026 !important;
+	padding-left: 10px;
+	margin-top: 3px !important;
+}
+
+.mui-table-view {
+	margin: 0px -5px 0px -5px;
+	border-radius: 0px !important;
+}
+
+.mui-margin {
+	margin: 0px 10px 0px 10px;
+	height: 49px !important;
+}
+
+input::-webkit-input-placeholder {
+	color: #8590A6 !important;
+	font-size: 13px;
+}
+
+input {
+	padding-left: 37px !important;
+}
+
+.mui-navigate-right {
+	margin-top: 3px !important;
+}
+
+.mui-navigate-right:after,
+.mui-push-right {
+	content: none;
+}
+
+input::-webkit-input-placeholder {
+	color: #1D2026 !important;
+}
+.mui-btn-blue, .mui-btn-primary, input[type=submit] {
+	height: 44px;
+	font-size: 18px;
+    color: #fff;
+    border:none;
+    background-color: #2972E9;
+	border-radius: 6px;
+}

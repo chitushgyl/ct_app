@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html class="feedback">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<title></title>
+		<!-- mui -->
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<!-- iconfont -->
+		<link rel="stylesheet" type="text/css" href="../fonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../oldcommon/common.css" />
+		<link rel="stylesheet" type="text/css" href="../oldcommon/orderDetail.css" />
+		<link href="../../css/mui-imageviewer.css" rel="stylesheet" />
+		<style type="text/css">
+			p {
+				margin-top: 4px !important;
+				font-size: 16px;
+			}
+
+			.pl10 {
+				font-size: 16px;
+			}
+
+			.mui-bar-nav~.mui-content {
+				padding: 0px;
+			}
+
+			.driver-info {
+				padding-left: 16px;
+				padding-right: 16px;
+			}
+
+			.info-box {
+				padding-left: 16px;
+				padding-right: 16px;
+			}
+			p.absolute {
+			    padding-right:0px;
+			}
+			body{
+				height: 0px;
+			}
+			.mui-content{
+	            display: none
+	        }
+
+	        .others{
+				padding:5px 15px;
+				background-color:#E4F3FF;
+				color:#0088f4;
+				border-radius:5px;
+				height:30px; 
+				margin-top:10px;
+			}
+			.title_{
+				font-size:15px;
+				color:#666;
+			}
+			.value_{
+				font-size:15px;
+				color:#333;
+				text-align: right;
+			}
+			.value_t{
+				font-size:15px;
+				font-weight: bold;
+				color:#333;
+				padding-left: 10px;
+				/* text-align: right; */
+			}
+			.title_value{
+				height:40px;
+				line-height: 40px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" id="header">
+			<button class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left"> <img src="../images/user/return.png"
+				 style="width: 30px;margin-top:8px;" />
+			</button>
+			<h1 class="mui-title">订单详情</h1>
+		</header>
+
+		<div class="mui-content" id="template" style="padding-top:84px;">
+			<div style="background-color:#fff;border-radius:5px;width:94%;margin-left:3%;padding:0 10px;height:100%;margin-top:10px;padding-bottom:10px;">
+				<div style="height:40px;line-height: 40px;width:100%;color:#333;font-size:13px;">
+					<span style="padding:5px 15px;background-color: #0088f4;color:#fff;border-radius:5px;">{{detailData.order_type_show}}</span>
+					<span class="" style="color: #FF7A1A;font-size: 16px;font-weight: bold; float: right;" v-if="detailData.total_money">￥{{detailData.on_line_money}}</span>  
+				</div>
+				<div style="height:0;width:94%;margin-left:3%;border-bottom:1px solid #e8e9ea;margin-bottom:10px;"></div>
+				<div class="mui-row" v-cloak v-for="(item,index) in addressList">
+							<div class="mui-row" style="display:flex;justify-context:centet;align-items:center;">
+								<img src="../images/f.png" style="width: 20px;" >
+							<div class="mui-col-sm-8 mui-col-xs-8 value_t" style="word-wrap: break-word;overflow: hidden;width: 500px;">
+								{{item.send_info}}
+							</div>
+							</div>
+							<div style="color:#0088F4 ;">
+								<span style="font-size:12px;padding-left: 30px;">联系人:</span>
+								<span style="font-size:12px;" v-cloak>{{item.send_info_tel}}</span>
+							</div>
+							<div class="mui-row" style="display:flex;justify-context:centet;align-items:center;">
+								<img src="../images/s.png" style="width: 20px;" >
+							<div class="mui-col-sm-8 mui-col-xs-8 value_t"style="word-wrap: break-word;overflow: hidden;width: 500px;">
+								{{item.gather_info}}
+							</div>
+							</div>
+							<div style="color:#0088F4 ;">
+								<span style="font-size:12px;padding-left: 30px;">联系人:</span>
+								<span style="font-size:12px;" v-cloak>{{item.gather_info_tel}}</span>
+							</div>
+					<div style="height:40px;line-height: 40px;width:100%;color:#333;font-size:13px;" class="mui-col-sm-4 mui-col-xs-4 title_">
+						<span style="padding:5px 15px;background-color: #E4F3FF;color:#0088f4;border-radius:5px;">{{item.good_weight}}kg/{{item.good_volume}}立方</span>
+						<span style="padding:5px 15px;background-color: #E4F3FF;color:#0088f4;border-radius:5px;">{{item.clod_name}}</span>
+						<span style="padding:5px 15px;background-color: #E4F3FF;color:#0088f4;border-radius:5px;">{{item.good_name}}</span>
+						<span style="padding:5px 15px;background-color: #E4F3FF;color:#0088f4;border-radius:5px;">{{item.good_number}}件</span>
+						<!-- <span style="padding:5px 15px;background-color: #E4F3FF;color:#0088f4;border-radius:5px;"></span> -->
+						 </div>
+				</div>
+
+			</div>
+
+			<div style="width:94%;margin-left:3%;margin-top:10px;border-radius: 5px;background-color: #fff;padding:0 10px;">		
+				<div class="mui-row title_value" v-cloak v-if="detailData.send_time">
+					<div class="mui-col-sm-4 mui-col-xs-4 title_">装货时间</div>
+					<div v-cloak class="mui-col-sm-8 mui-col-xs-8 value_">
+						{{detailData.send_time}}
+					</div>
+				</div>
+				<div class="mui-row title_value" v-cloak v-if="detailData.gather_time">
+					<div class="mui-col-sm-4 mui-col-xs-4 title_">收货时间</div>
+					<div v-cloak class="mui-col-sm-8 mui-col-xs-8 value_">
+						{{detailData.gather_time}}
+					</div>
+				</div>
+				<div class="mui-row title_value" v-if="detailData.order_type == 'vehicle'" v-cloak>
+					<div class="mui-col-sm-4 mui-col-xs-4 title_">是否装卸</div>
+					<div class="mui-col-sm-8 mui-col-xs-8 value_" >
+						<span v-if="detailData.pick_flag == 'Y'">需要装货</span>
+						<span v-else>不需装货</span>
+						<span v-if="detailData.send_flag == 'Y'">需要卸货</span>
+						<span v-else>不需卸货</span>
+					</div>
+				</div>
+				<div class="mui-row title_value" v-if="detailData.order_type == 'line'" v-cloak>
+					<div class="mui-col-sm-4 mui-col-xs-4 title_">是否提配</div>
+					<div class="mui-col-sm-8 mui-col-xs-8 value_" >
+						<span v-if="detailData.pick_flag == 'Y'">需要提货</span>
+						<span v-else>不需提货</span>
+						<span v-if="detailData.send_flag == 'Y'">需要配送</span>
+						<span v-else>不需配送</span>
+					</div>
+				</div>
+				<div class="mui-row title_value">
+					<div class="mui-col-sm-4 mui-col-xs-4 title_">订单备注</div>
+					<div class="mui-col-sm-8 mui-col-xs-8 value_" >
+						<span v-if="!detailData.remark">无特殊要求</span>
+						<span v-else>{{detailData.remark}}</span>
+					</div>
+				</div>
+			</div>
+			<!-- 显示图片 -->
+			<div style="width:94%;margin-left:3%;margin-top:10px;border-radius: 5px;background-color:#fff;padding:0 10px;">
+					<div class="mui-row title_value" v-cloak v-for="(item,index) in detailData.car_info">
+						<div class="mui-col-sm-4 mui-col-xs-4 title_" v-if="index==0">运输信息</div>
+							<div class="mui-col-sm-8 mui-col-xs-8 value_" v-cloak style="float: right;">
+								{{item.car_number}}&nbsp;&nbsp;{{item.contacts}}&nbsp;&nbsp;{{item.tel}}
+							</div>
+					</div>
+				<div style="" v-for="(item,index) in img" >
+					<div class="mui-col-sm-4 mui-col-xs-4 title_" v-if="item.url">回单信息</div>
+					<div class="mui-row" v-cloak style="display: flex;flex-direction: row-reverse;flex-wrap:wrap">
+						<img :src="item.url" style="width: 150px;height: 100px;">
+					</div>
+					</div>
+			</div>
+				<!-- <div style="width:94%;margin-left:3%;margin-top:10px;border-radius: 5px;background-color: #fff;padding:0 10px;" v-for="(item,index) in img" >
+					<div class="mui-col-sm-4 mui-col-xs-4 title_" v-if="item.url">回单</div>
+					<div class="mui-row" v-cloak >
+						<img :src="item.url" style="width: 150px;">
+					</div>
+					</div> -->
+		</div>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/base64.min.js" type="text/javascript"></script>
+		<!-- mui -->
+		<script src="../js/mui.min.js"></script>
+		
+		<!-- 详情 -->
+		<script src="../js/vue-2.4.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/common/common.js" type="text/javascript"></script>
+		<!-- <script src="../oldcommon/oldCommon.js" type="text/javascript" charset="utf-8"></script> -->
+		<script src="../js/config/request.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/myOrderDetail.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.zoom.js"></script>
+		<script src="../js/mui.previewimage.js"></script>
+		<script type="text/javascript">
+			mui.previewImage();
+			mui('body').on('tap','.customer_tel',function(e){
+			  	var phone = e.target.innerText;
+			  	plus.device.dial(phone,false)
+			});
+			setAutoHeight(function(h){
+				// $('.mui-content').css({"padding-top":"0px"});
+				// $('.mui-content').css({"padding-top":(h-30)+'px'});
+			},2)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,248 @@
+/* 登录样式 */
+@charset "utf-8";
+html,body{
+    height: 100%;
+    width:100%;
+	background: #fff;
+}
+.mui-content {
+    background-color: #transparent; 
+    -webkit-overflow-scrolling: touch;
+}
+.color_1d{
+	color: #1D2026;
+}
+.color_85{
+	color: #8590A6;
+}
+.color_4d{
+	color: #4D5668;
+}
+
+/* 头部  */
+.mui-bar-nav{
+	box-shadow: none;
+	background-color: transparent;
+}
+.mui-bar-nav .mui-icon{
+	color: #33363B;
+}
+.mui-bar-nav~.mui-content {
+    background-color: transparent;
+    width: 80%;
+	margin: auto;
+}
+
+/* 标题  */
+.loginTitle{
+	margin: 50px auto 75px;
+}
+#tipText{
+	margin-bottom: 0px;
+}
+
+/* 表单  */
+.mui-input-group .mui-input-row{
+	position: relative;
+	padding: 3px 0;
+	/* margin-top: 23px; */
+	border-bottom: 1px solid #A3ACBF;
+	height: auto;
+	
+}
+.mui-input-group .mui-input-row:after {
+    height: 0px; 
+}
+.mui-input-group .mui-input-row label{
+	position: absolute;
+	top: 8.5px;
+	left: 0;
+	width: 21px;
+	height: 40px;
+	display: flex;
+	display: -webkit-flex;
+	padding: 9px 0px;
+}
+.mui-input-group {
+    position: relative;
+    padding: 0;
+    border: 0;
+    background-color: transparent; 
+}
+
+.mui-input-group .mui-input-row label img{
+	width: 13px;
+	margin: auto;
+} 
+:-moz-placeholder { 
+    color: #8590A6;
+}
+::-moz-placeholder { 
+    color: #8590A6;
+}
+
+input:-ms-input-placeholder{
+    color: #8590A6;
+}
+
+input::-webkit-input-placeholder{
+    color: #8590A6;
+}
+
+.mui-input-group .mui-input-row label~input{
+	width:100%;
+	padding-left: 27px;
+	float:left;
+	margin:5px 0;
+}
+.mui-input-group .mui-input-row .sendCode {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    right: 0px;
+	padding: 3px 1em;
+    width: auto;
+}
+
+.inputactive{
+	border-color: #58A6FF !important;
+}
+
+/* 按钮样式  */
+.mui-btn-login {
+	background: #1a8aff;
+	border:1px solid #1a8aff;
+}
+/* 新用户注册勾选框小 图标 */
+.radioimg{
+	width:15px;
+	height:15px;
+	margin-right: 7px;
+	vertical-align: sub;
+}
+
+/* 登录按钮 */
+.shadowbutton{
+	border: none;
+	border-radius: 3px;
+	/* background: #E3E7EB; */
+	color:#A3ACBF !important;
+	border:1px solid #A3ACBF;
+	padding:10px 5px !important;
+	box-sizing: border-box;
+	border-radius:6px;
+	display:inline-block;
+	width:100px !important;
+	height:35px;
+	line-height:35px;
+	font-size:10px;
+	float:right;
+	position: absolute;
+	right: 0px;
+	top:5px;
+	margin-bottom:0;
+}
+.shadowbutton.hasphone{
+	border:1px solid #0088F4 !important;
+	/* border-radius:6px !important; */
+	color:#0088F4 !important;
+	/* background: linear-gradient(to right,#58A6FF,#5C78F7); */
+	/* background: -webkit-linear-gradient(to right,#58A6FF,#5C78F7); */
+}
+
+.onbutton{
+    border: none;
+    margin-top: 32px;
+    border-radius: 3px;
+	background-color: #0088f4;
+    border-radius: 22px;
+}
+
+/* 默认验证码登陆  */
+.pass-login{
+	display: none;
+}
+/* 登陆方式切换  */
+.switch-login{
+	margin-top: 20px;
+	font-size: 13px;
+}
+
+/* 底部图片 */
+.pagebottom{
+	width: 100%;
+	position: absolute;
+	bottom: 44px;
+	left: 0px;
+	line-height: 0px;
+}
+
+.active{
+	display: none;
+}
+.timeinterval{
+	margin-top: 12px;
+	display: none;
+}
+#tipText{
+	display: none;
+}
+/* ,#code */
+.mui-input-group .mui-input-row.code-login{
+	display: none;
+	border: none;
+}
+.mui-input-group .mui-input-row.code-login .codenum{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	display: -webkit-flex;
+	-webkit-justify-content: center;
+	-webkit-align-items: center;
+}
+.mui-input-group .mui-input-row.code-login .codenum input{
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	text-align: center;
+	border-radius: 3px;
+	border: 1px solid #8590A6;
+	margin-right: 15px;
+}
+.mui-input-group .mui-input-row.code-login .codenum input:last-child{
+	margin-right: 0px;
+}
+
+#code{
+	/* position: absolute; */
+    width:60% !important;
+    z-index: 99999;
+    color: transparent;
+	margin:5px 0;
+}
+.ico{
+	width: 20px;
+	height: 12px;
+	
+}
+.Eyes{
+	float: right;
+	position: absolute;
+	bottom:10px;
+	right: 0px;
+}
+.clear{
+	position: absolute;
+	right:0px;
+	top: 15px;
+}
+
+.font20 {
+    width: 42px;
+    height:42px;
+    text-align: center; border:1px solid #dad6da; border-radius: 3px; float: left; margin-left: 1%; font-size: 15px; box-sizing: border-box;
+}
+.codenum input:focus{
+    outline:none;
+    border:1px solid #5ec2d2;
+} 

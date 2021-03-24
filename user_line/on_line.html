@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mescroll.css" />
+		<link rel="stylesheet" type="text/css" href="css/transportList.css" />
+		<link rel="stylesheet" type="text/css" href="../user/css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../plug/calendar/time.css" />
+		
+		<style type="text/css">
+			html,body{
+				background: #F3F4F6;
+			}
+			.mui-bar {
+				background-color: #FFFFFF;
+			}
+			.mui-title {
+				color: #000000 !important;
+			}
+			.share {
+				font-size: 12px;
+			}
+			.zero-load {
+				color: #FF5656;
+			}
+			.mui-table-view-cell {
+				padding: 8px 0px 8px 8px !important;
+			}
+
+			.mui-table-view {
+				padding: 8px !important;
+				margin: 0 auto;
+				width: 100%;
+				height: 100%;
+			}
+			.mescroll {
+				padding: 0px;
+			}
+
+			.discomt {
+				margin: 5px 0px 0px 90px;
+			}
+
+			.sharetwo {
+				border-bottom: 1px solid #E3E7EB;
+				margin-left: -10px;
+				margin-right: -10px;
+				;
+			}
+
+			.sharethree {
+				border-bottom: 1px solid #E3E7EB;
+				height: 108px;
+			}
+
+			.sharethree:last-child {
+				border-bottom: none;
+			}
+
+			.mui-col-sm-2 {
+				margin-top: 16px;
+				padding: 0px !important;
+				width: 36px;
+			}
+
+			.sharefour {
+				color: #4D5668 !important;
+				font-size: 15px !important;
+			}
+
+			.order {
+				margin-left: 10px;
+				color: #8590A6;
+				font-size: 12px;
+			}
+
+			.font {
+				font-size: 12px;
+				color: #8590A6;
+			}
+
+			.special-offer {
+				color: #FF7A1A;
+			}
+
+			.vehicle {
+				color: #58A6FF;
+			}
+			.mui-active{
+				background:#FFFFFF !important;
+			}
+			.set_li{
+				position:relative;
+				border-radius: 6px;
+				border: 1px solid rgb(211, 211, 211);
+				margin-bottom:0 auto 10px;
+				background-color: white;
+				padding:10px !important;
+			}
+			
+			.space_title{
+				width:100%;
+				display:block;
+/* 				display: -webkit-box;
+				display: -ms-flexbox;
+				display: flex;
+				-webkit-box-pack: justify;
+				-ms-flex-pack: justify;
+				justify-content: space-between;
+				-webkit-box-align: center;
+				-ms-flex-align: center; */
+				align-items: center;
+				padding-bottom: 10px;
+				padding-top: 10px;
+				border-bottom: 1px solid #eee;
+			}
+			
+			.shift_number{
+				color: #333;
+				font-size: 12px;
+				display:inline-block;
+				text-align:center;
+			}
+			
+			.set_type{
+				width:auto;
+				height:18px;
+				line-height:18px;
+				text-align: center;
+				/* float:right; */
+				color:#fff;
+				font-size:12px;
+				display: -webkit-inline-box;
+				display: -webkit-inline-flex;
+				display: inline-flex;
+				-webkit-box-align: center;
+				-webkit-align-items: center;
+				align-items: center;
+				padding: 0 4px;
+				line-height: 16px;
+				border-radius: 2px;
+				display:inline-block;
+				background: #0088F4;
+				
+			}
+			.set_content{
+				height:100%;
+			}
+			.set_start{
+				text-align: left;
+				padding-top:10px;
+				/* width:20%; */
+				float:left;
+				
+			}
+			.set_center{
+				text-align: center;
+				display:flex;
+				flex-direction:column;
+				justify-content: flex-start;
+				align-items: center;
+				/* width:32%; */
+				padding-top:10px;
+				float:left;
+			}
+			.set_end{
+				padding-top:10px;
+				text-align: right;
+				/* width:20%; */
+				float:left;
+			}
+			.set_price{
+				display:flex;
+				flex-direction:column;
+				justify-content: center;
+				align-items:flex-end;
+				color:#FC5854;
+				/* width:28%; */
+				/* padding-right:10px; */
+
+			}
+			.set_price_p{
+				font-size:20px;
+				font-weight:500;
+			}
+			.set_price_c{
+				font-size:12px;
+			}
+			.set_city{
+				font-size:17px;
+				color:#333;
+				font-weight:bold;
+				height:30px;
+				line-height: 30px;
+				overflow: hidden;
+			}
+			.set_area{
+				font-size:12px;
+				color:#a2a3a4;
+				height:30px;
+				line-height:30px;
+				overflow: hidden;
+				padding-top:0px;
+			}
+			.set_center_img{
+				height:6px;
+				width:70%;
+			}
+			.set_center_day{
+				height:15px;
+				line-height:15px;
+				font-size:11px;
+			}
+			.set_center_tem{
+				height:27px;
+				line-height: 27px;
+				font-size:11px;
+			}
+			.set_center_price{
+				font-size:12px;
+				color:#A2A3A4;
+				height:35px;
+				line-height: 35px;
+				overflow: hidden;
+				padding-top:5px;
+			}
+
+			/*筛选*/
+			#search_data,#search_data_bulk{
+				height:38px;
+				background-color:#fff; 
+				width:100%;
+				/*top:0px;*/
+				display:flex;
+				flex-direction: row;
+				justify-content:space-around;
+				position:relative;
+				z-index: 9999;
+			}
+			#search_data .mui-content,#search_data .mui-slider,#search_data .mui-slider-group{
+				height:100%;
+			}
+			#search_data .mui-scroll-new{
+				display:flex;
+				flex-wrap:wrap;
+			}
+			.mui-s-data{
+				text-align: center;
+				height:100%;
+				line-height: 38px;
+				color:#666;
+				font-size:16px;
+			}
+			.mui-header,.header-city{
+				float:left;
+			}
+			.header-city{
+				width:25%;
+				color:#fff;
+				font-size:16px;
+				line-height: 30px;
+				height:30px;
+				margin-top:10px;
+				overflow: hidden;
+				display:none;
+			}
+			.search_marker{
+				z-index:9999;
+				position:absolute;
+				top:46px;
+				width:100%;
+				height:100%;
+				left:0;
+				display:none;
+				background-color: #fff;
+				padding:0;
+			    margin:0;
+
+			}
+
+			.mui-backdrop {
+			    position: fixed;
+			    top: 160px;
+			    right: 0;
+			    bottom: 0;
+			    left: 0;
+			    z-index: 998;
+			    background-color: rgba(0,0,0,.1);
+			    padding:0;
+			    margin:0;
+			}
+
+			.title_mask{
+				width:100%;
+				background-color: #FFF;
+				display:flex;
+				flex-direction:column;
+
+			}
+			.title_mask_content{
+				height:100%;
+				width:100%;
+				overflow-y: scroll;
+				padding-bottom:60px;
+				font-size:16px;
+
+			}
+			.title_mask_btn button:last-child{
+				border-left:1px solid #ddd;
+			}
+			.title_mask_btn button{
+				width:50%;
+				border:0;
+				border-radius: 0;
+			}
+			.title_mask_btn{
+				width:100%;
+				height:60px;
+				background-color: #fff;
+				z-index: 10000;
+				display:flex;
+				flex-direction: row;
+				justify-content: space-around;
+				border-top:0;
+			}
+			.title_mask_btn3,.title_mask_btn2{
+				height:50px;
+			}
+			.confirm_btn{
+				color:#0088F4;
+			}
+			ul li{
+				list-style: none;
+			}
+
+			.title_mask1 ul li {
+				height:50px;
+			}
+			.mui-s-data-active{
+				font-size:16px;
+				color:#0088F4;
+			}
+			.temperture_one{
+				width:25%;
+				margin-top:10px;
+				color:#333;
+				height:33px;
+			}
+
+			.temperture_one button{
+				width:80px;
+			}
+
+			.temperture_btn{
+				border:1px solid #E3E4E5;
+				border-radius: 2px;
+				width:70px;
+			}
+			.cartype_btn{
+				width:70px;
+				border:1px solid #E3E4E5;
+				border-radius: 2px;
+			}
+
+			.select_active {
+				border:1px solid #0088F4;
+				background-color: #CCE7FD;
+				color:#0088F4;
+			}
+
+			.mui-segmented-control .mui-control-item{
+				display:inline-block;
+				padding:0 20px;
+				width:auto;
+			}
+
+			.title_mask1 .mui-selected{
+				color:#0088F4;
+				font-weight:bold;
+			}
+			.mui-badge{
+				margin-left:2px;
+				background-color:#CCE7FD;
+				color:#0088F4;
+				font-size:12px;
+			}
+			.start_group_btn{
+				width:auto;
+				border:0;
+				background-color: #CCE7FD;
+				border-radius: 2px;
+				color:#0088F4;
+			}
+			/*筛选*/
+
+			/*日期选择*/
+			.page-header{
+				background-color: #0088f4;
+			}
+			.m-calendar .calendar-content .calender-month .calendar-week .select-single-day{
+				background-color: #0088f4;
+				color:#fff;
+			}
+			.m-calendar .calendar-date-bar .dates-item{
+				font-size:14px;
+			}
+			.mui-slider,.mui-segmented-control{
+				overflow: unset !important;
+			}
+			.temperture_one .mui-control-item{
+				padding:0 !important;
+				text-decoration: none !important;
+				margin:0 !important;
+				border:0 !important;
+			}
+			.title_mask_btn .mui-control-item{
+				display:inline-block !important;
+				width:50% !important;
+				margin:0 !important;
+				border:0 !important;
+				padding:0 !important;
+				text-decoration: none !important;
+			}
+			/*日期选择*/
+			
+		</style>
+	</head>
+	<body>
+		<header id="header_id" class="mui-bar mui-bar-nav">
+			<!-- <a class="mui-action-back mui-icon mui-icon-arrowleft font21 mui-pull-left" style="color: #000000;"></a> -->
+<!-- 			<a class="mui-action-back mui-pull-left">
+				<img src="../images/user/topbackarr.png" style="width: 20px;">
+			</a> -->
+			<h1 class="mui-title">接单列表</h1>
+		</header>
+		<div class="mui-content" id="set_content" style="padding-top:0;" >
+					<div class="nav" style="display:none;height:0;">
+						<div class="activecolor" id="type0"></div>
+					</div>
+					<!-- 筛选 -->
+					<div id="search_data" style="border-top:1px solid #eee;">
+		
+						<div class="mui-s-data" data="2">
+							<span class="mui-s-data-v2">始发地</span>
+							<img src="../images/driver/line_down.png" style="height:6px;">
+						</div>
+						<div class="mui-s-data" data="3">
+							<span class="mui-s-data-v3">目的地</span>
+							<img src="../images/driver/line_down.png" style="height:6px;">
+						</div>
+		
+						<div style="" data="1" class="search_marker">
+							<div class="title_mask1" style="height:100%;">
+								<ul class="mui-table-view mui-table-view-radio" style="height:auto;background-color: #fff;padding:0 !important;margin:0;">
+									<li class="mui-table-view-cell mui-selected" data="" data_v="默认排序">
+										<a class="mui-navigate-right" style="margin-top:0;margin-left:0;">
+											默认排序（按照发车时间最近）
+										</a>
+									</li>
+		
+									<li class="mui-table-view-cell" data="2" data_v="干线费最低">
+										<a class="mui-navigate-right" style="margin-top:0;margin-left:0;">
+											干线费最低（按照最低干线收费）
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div style="" data="2" class="search_marker">
+							<div class="title_mask title_mask2">
+								<div class="title_mask_content title_mask_content2" style="overflow-y: unset;padding-bottom:0;">
+									<div style="display: flex;flex-direction: row;justify-content: flex-start;flex-wrap:wrap;margin-top:0px;padding-left:15px;height:8%;" class="start_group">
+										<div class="temperture_one" style="">
+											<button class="start_group_btn select_pro" style="" data="全国" data_id="0">全国</button>
+										</div>								
+										<div class="temperture_one" style="margin-left:10px;">
+											<button class="start_group_btn select_city" style="" data="" data_id="">城市</button>
+										</div>								
+								
+									</div>
+									<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" style="height:92%;">
+										<div style="width:100%;border:0;height:100%;margin-top:10px;" id="address_iframe">
+											<div class="mui-content">
+												<div id="slider" class="mui-slider" style="">
+													<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" style="background-color: #fff;height:10%;text-align: left;">
+														<a class="mui-control-item mui-active" href="#item1mobile" >
+													请选择省
+												</a>
+														<a class="mui-control-item" href="#item2mobile">
+													请选择市
+												</a>
+		
+													</div>
+													<div id="" class="mui-slider-progress-bar mui-col-xs-4" style="display:none;height:90%;"></div>
+													<div class="mui-slider-group" >
+														<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+															<div id="scroll1" class="mui-scroll-wrapper">
+																<div class="mui-scroll-new" style="padding-bottom: 60px;" >
+																	<div class="temperture_one">
+																		<button class="pros_btn select_active" style="" data="0">全国</button>
+																	</div>	
+		
+																	<div class="temperture_one" v-for="item in pros" :key="item.id">
+																		<a class="mui-control-item" href="#item2mobile" >
+																			<button class="pros_btn" style="" :data="item.id">{{item.pro}}</button>
+																		</a>
+																	</div>	
+																</div>
+															</div>
+														</div>
+														<div id="item2mobile" class="mui-slider-item mui-control-content">
+															<div id="scroll2" class="mui-scroll-wrapper">
+																<div class="mui-scroll-new" style="padding-bottom: 60px;">
+																	<div class="mui-loading">
+																		<div class="mui-spinner">
+																		</div>
+																	</div>
+																</div>
+															</div>
+		
+														</div>
+													</div>
+		
+													<div class="title_mask_btn title_mask_btn2" data="2">
+														<a class="mui-control-item" href="#item1mobile" style="" >
+															<button type="button" class="mui-btn mui-btn-outlined reset_btn reset_btn2" style="width:100%;height:50px;background-color: #fff;">重置</button>
+														</a>
+														<button type="button" class="mui-btn mui-btn-outlined confirm_btn confirm_btn2" style="height:50px;background-color: #fff;">确认</button>
+													</div>
+		
+												</div>
+
+											</div>
+										</div>
+									</div>
+		
+								</div>
+								
+							</div>
+						</div>
+						<div style="" data="3" class="search_marker">
+							<div class="title_mask title_mask3">
+								<div class="title_mask_content title_mask_content3"  style="overflow-y: unset;padding-bottom:0;">
+									<div style="display: flex;flex-direction: row;justify-content: flex-start;flex-wrap:wrap;margin-top:0px;padding-left:15px;height:8%;" class="start_group">
+										<div class="temperture_one" style="">
+											<button class="start_group_btn select_pro" style="" data="全国" data_id="0">全国</button>
+										</div>								
+										<div class="temperture_one" style="margin-left:10px;">
+											<button class="start_group_btn select_city" style="" data="" data_id="">城市</button>
+										</div>								
+									
+									</div>
+		
+									<div class="" style="height:92%;">
+										<div style="width:100%;border:0;height:100%;margin-top:10px;" id="address_iframe_end">
+											<div class="mui-content">
+												<div id="slider_end" class="mui-slider" style="">
+													<div id="sliderSegmentedControl_end" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" style="background-color: #fff;height:10%;text-align: left;">
+														<a class="mui-control-item mui-active click_pro" href="#item1mobile_end" >
+													请选择省
+												</a>
+														<a class="mui-control-item click_city" href="#item2mobile_end">
+													请选择市
+												</a>
+		
+													</div>
+													<div id="sliderProgressBar_end" class="mui-slider-progress-bar mui-col-xs-4" style="display:none;height:90%;"></div>
+													<div class="mui-slider-group" style="" >
+														<div id="item1mobile_end" class="mui-slider-item mui-control-content mui-active">
+															<div id="scroll1_end" class="mui-scroll-wrapper">
+																<div class="mui-scroll-new" style="padding-bottom: 60px;padding-left:15px;" >
+																	<div class="temperture_one">
+																		<button class="pros_btn select_active" style="" data="0">全国</button>
+																	</div>	
+		
+																	<div class="temperture_one" v-for="item in pros" :key="item.id">
+																		<a href="#item2mobile_end" class="mui-control-item">
+																			<button class="pros_btn" style="" :data="item.id">{{item.pro}}</button>
+																		</a>
+																	</div>	
+																</div>
+															</div>
+														</div>
+														<div id="item2mobile_end" class="mui-slider-item mui-control-content">
+															<div id="scroll2_end" class="mui-scroll-wrapper">
+																<div class="mui-scroll-new" style="padding-bottom: 60px;padding-left:15px;">
+																	<div class="mui-loading">
+																		<div class="mui-spinner">
+																		</div>
+																	</div>
+																</div>
+															</div>
+		
+														</div>
+		
+													</div>
+													<div class="title_mask_btn title_mask_btn3" data="3">
+														<a href="#item1mobile_end" class="mui-control-item" style="">
+														<button type="button" class="mui-btn mui-btn-outlined reset_btn reset_btn3"  style="width:100%;height:50px;background-color: #fff;">重置</button></a>
+														<button type="button" class="mui-btn mui-btn-outlined confirm_btn confirm_btn3" style="height:50px;background-color: #fff;">确认</button>
+													</div>
+												
+												</div>
+		
+											</div>
+										</div>
+									</div>
+									
+								</div>
+		
+							</div>
+						</div>
+		<!-- 				<div style="" data="4" class="search_marker">
+							<div class="title_mask title_mask4">
+								<div class="title_mask_content title_mask_content4" style="padding-left:15px;">
+									<div style="font-size:13px;color:#999;margin-top:10px;">请选择温度</div>
+									<div style="display: flex;flex-direction: row;justify-content: space-between;flex-wrap:wrap;" class="temperture_group">
+										<div class="temperture_one">
+											<button class="temperture_btn" style="">冷冻</button>
+										</div>								
+										<div class="temperture_one">
+											<button class="temperture_btn" style="">冷藏</button>
+										</div>								
+										<div class="temperture_one">
+											<button class="temperture_btn" style="">恒温</button>
+										</div>								
+										<div class="temperture_one">
+											<button class="temperture_btn" style="">常温</button>
+										</div>								
+										<div class="temperture_one" style="">
+											<button class="temperture_btn" style="padding:5.5px 0;">冷冻/冷藏</button>
+										</div>
+									</div>
+		
+									<div style="font-size:13px;color:#999;margin-top:10px;display:none;" class="select_cartype">请选择车型</div>
+		
+									<div style="display: flex;flex-direction: row;justify-content: space-between;flex-wrap:wrap;display:none;" class="select_cartype temperture_cartype">
+										<div class="temperture_one">
+											<button class="cartype_btn" style="" data="1">不限</button>
+										</div>								
+										<div class="temperture_one">
+											<button class="cartype_btn" style="" data="2">4.2米</button>
+										</div>								
+										<div class="temperture_one">
+											<button class="cartype_btn" style="" data="3">5.2米</button>
+										</div>								
+										<div class="temperture_one">
+											<button class="cartype_btn" style="" data="4">6.8米</button>
+										</div>									
+										<div class="temperture_one">
+											<button class="cartype_btn" style="" data="5">7.6米</button>
+										</div>
+		
+										<div class="temperture_one">
+											<button class="cartype_btn" style="" data="6">9.6米</button>
+										</div>
+		
+										<div class="temperture_one">
+											<button class="cartype_btn" style="" data="7">12.5米</button>
+										</div>
+										<div class="temperture_one">
+											<button class="cartype_btn" style="" data="8">15米</button>
+										</div>								
+									</div>
+								</div>
+								<div class="title_mask_btn title_mask_btn4" data="4">
+									<button type="button" class="mui-btn mui-btn-outlined reset_btn4">重置</button>
+									<button type="button" class="mui-btn mui-btn-outlined confirm_btn confirm_btn4">确认</button>
+								</div>
+							</div>
+						</div>
+					 -->
+					</div>
+			<!-- 筛选 -->
+
+			<div id="mescroll" class="mescroll" style="">
+				<!--这里放置真实显示的DOM内容-->
+				<div>	
+					<ul class="mui-table-view" id="dataList" style="margin-top:40px;">						
+						<li class="mui-table-view-cell set_li mui-row" v-for="(item,index) in lineList" @tap="toBulkOrderDetail(index,lineList)">
+							<div class="mui-col-xs-12 set_content" style="padding-bottom:8px;border-bottom:1px solid rgb(211, 211, 211);">
+								<span class="set_type" style="float:left;" v-cloak>{{item.order_type_show}}</span>
+								<div class="" style="float:left;width:70%;display:inline-block;margin-left:5px;overflow:hidden;">
+									<span>订单编码</span> 
+									<span style="color:#333;" v-cloak>{{item.order_id_show}}</span>
+								</div>
+								<div class="" style="display:inline-block;float:right;width:15%;text-align:right;">
+									详情
+									<img src="../images/user/line_right.png" style="height:10px;">
+								</div>
+							</div>
+							<div class="mui-col-xs-4 set_content set_start">
+								<div class="set_city" v-cloak>{{item.line_send_shi_name}}</div>
+								<div class="set_area" v-cloak>
+									<div v-cloak>{{item.line_send_qu_name}}</div>
+								</div>
+							</div>
+							<div class="mui-col-xs-4 set_content set_center" >
+								<div class="set_center_day"></div>
+								<img src="../images/driver/line_line.png" class="set_center_img">
+								<div class="set_center_tem"></div>					
+			
+							</div>
+							<div class="mui-col-xs-4 set_content set_end" style="position:relative;">
+								<div class="set_city" v-cloak>{{item.line_gather_shi_name}}</div>
+								<div class="set_area">
+									<div v-cloak>{{item.line_gather_qu_name}}</div>
+								</div>					
+							</div>
+
+							<div class="mui-col-xs-12 set_content" style="display:flex;flex:1;height:25px;line-height:25px;">
+								<div class="" style="flex:1">
+									<span style="color:#a2a3a4;">装车时间</span> 
+									<span style="color:#333;" v-cloak>{{item.send_time}}</span>
+								</div>
+								<div class="" style="flex:1;text-align:right;">
+									<span style="color:#a2a3a4;">送达时间</span> 
+									<span style="color:#333;" v-cloak>{{item.gather_time}}</span>
+								</div>								
+							</div>
+							<div class="mui-col-xs-12 set_content" style="display:flex;flex:1;height:25px;line-height:25px;">
+								<div class="" style="flex:1">
+									<span style="color:#a2a3a4;">车型</span> 
+									<span style="color:#333;" v-cloak>{{item.car_type_show}}</span>
+								</div>
+								<div class="" style="flex:1;text-align:right;">
+									<span style="color:#a2a3a4;">温度</span> 
+									<span style="color:#333;" v-cloak>{{item.clod}}</span>
+								</div>
+							</div>
+							<div class="mui-col-xs-12" style="text-align: right;height:30px;line-height:30px;">
+									<span class="set_price_p set_price_family" style="color:#FF4940;font-size:14px;">￥<strong style="font-size:20px;" v-cloak>{{item.on_line_money}}</strong></span>
+							</div>
+						</li>
+
+
+						<li id="nulltips" class="sendgoods" style="display:none;">
+							<img src="../images/empty/noMoreMessage.png" />
+							<p class="tips">暂无线路信息</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div style="position:fixed;bottom:15px;width:38%;margin-left:31%;height:40px;border-radius:5px;background-color: #0088f4;line-height: 40px;color:#fff;font-size:14px;display:none;" id="startDate" class="Trip_type" datatype="1">
+			<div style="display:flex;justify-content: center;align-items: center;height:100%;padding:0;margin:0;color:#fff;">
+				<span class="select_date" style="color:#fff;" v-cloak>{{starttime}}</span>&nbsp;
+				<span class="select_week" style="color:#fff;" v-cloak>{{week}} &nbsp;
+				|&nbsp;</span>
+				<img src="../images/bulk/cand.png" style="height:15px;">
+			</div>
+		</div>
+
+		<input type="hidden" id="type0_add" name="">
+		<input type="hidden" id="type2_add" name="">
+
+		<!--mui-->
+		<script src="../js/mui.min.js" type="text/javascript"></script>
+		<script src="../js/vue-2.4.1.js" type="text/javascript"></script>
+		<script src="../js/base64.min.js" type="text/javascript"></script>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<!--common-->
+		<script src="../js/common/common.js" type="text/javascript"></script>
+		<!--mescroll-->
+		<script src="../js/mescroll.js" type="text/javascript"></script>
+		<!--filter-->
+		 <script src="../js/common/fliter.js" type="text/javascript" charset="utf-8"></script> 
+		<!--request-->
+		<script src="../js/config/request.js" type="text/javascript"></script>
+		<!--transportList-->
+		<script src="js/address.js" type="text/javascript"></script>
+		<script src="js/on_line.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			mui('.mui-scroll-wrapper').scroll({
+				deceleration: 0.0005, //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+			});
+			mui.init({
+				beforeback: function() {
+					var list = plus.webview.currentWebview().opener();
+					//refresh是A页面自定义事件
+					mui.fire(list, 'refresh');
+					//返回true,继续页面关闭逻辑
+					return true;
+				}
+			});
+			
+		// mui.plusReady(function() {
+		// //设置状态栏的背景颜色
+		// 	plus.navigator.setStatusBarBackground('#0088F4');		
+		// //设置系统状态栏样式 (可选值:dark,light,UIStatusBarStyleDefault,UIStatusBarStyleBlackOpaque)
+		// 	plus.navigator.setStatusBarStyle('dark');
+		// });
+			// mui.plusReady(function(){
+			// 	plus.navigator.setStatusBarStyle('dark');   
+			// 	// plus.navigator.setStatusBarBackground('#FF0000');              
+			// });
+			setAutoHeight(function(h){
+				$('#mescroll').css({"top":(35+h)+'px'});
+				$('#set_content').css({"padding-top":(h+38)+'px'});
+
+				$('.page-header').css({"padding-top":(h)+"px"});
+				$('.m-calendar').css({"padding-top":(h)+"px"});
+				$('.left-action').css({"top":(h)+"px"});
+				$('#calendar-content').css({"padding-top":(h+20)+"px"});
+				$('.left-action .left-btn').css({"padding-top":(10)+"px"});
+			},2)
+			
+			// window.addEventListener('refresh', function(event) { //从B页面返回时触发
+			// 				var set = event.detail.isSet;  //获取B页面传过来的值
+			// 				//或刷新页面
+			// 				location.reload();
+			// });
+		</script>
+	</body>
+</html>
+<script type="text/javascript" src="../plug/calendar/time.js"></script>

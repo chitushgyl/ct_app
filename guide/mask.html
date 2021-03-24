@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<style>
+			.item-logo {
+				width: 100%;
+				height: 100%;
+				position: relative;
+			}
+			.item-logo img{
+				display: block;
+				width: 100%;
+				max-width: 750px;
+				height: 100%;
+				margin: auto;
+			}
+			.animate {
+				position: absolute;
+				left: 0;
+				bottom: 54px;
+				width: 100%;
+				color: #FFFFFF;
+				padding-right: 64px;
+				display: -moz-box;
+			}
+			@media(max-width : 320px) {
+				.animate {
+					padding-right: 40px;
+				}
+			}
+			.animate p{
+				margin: 0px;
+				line-height: 19px;
+				font-size: 12px;
+				color: inherit;
+				display: inline-block;
+			}
+			.animate p>span{
+				color: inherit;
+				font-size: 19px;
+				margin-left: 3px;
+				position: relative;
+				top: 1px;
+			}
+			.animate.close{
+				bottom: 100px;
+				padding: 0px;
+				width: 100%;
+				text-align: center;
+			}
+			.animate.close #close{
+				display: inline-block;
+				color: #59A7FF;
+				line-height: 44px;
+				padding: 0px;
+				width: 200px;
+				font-size: 18px;
+				border-radius: 22px;
+				background: #FFFFFF;
+			}
+			
+			.mui-slider-indicator{
+				bottom: 54px;
+			}
+			.mui-slider-indicator .mui-indicator{
+				width: 9px;
+				height: 9px;
+				background: #5b7ef8;
+				box-shadow: 0px 0px 1px 1px rgb(227,231,235);
+				-webkit-box-shadow: 0px 0px 1px 1px rgb(227,231,235);
+			}
+			.mui-slider-indicator .mui-indicator.mui-active{
+				background:#FFFFFF;
+				box-shadow: 0px 0px 1px 1px rgb(88,166,255);
+				-webkit-box-shadow: 0px 0px 1px 1px rgb(88,166,255);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="slider" class="mui-slider mui-fullscreen" style="background-color: white;">
+			<div class="mui-slider-group">
+				<div class="mui-slider-item">
+					<div class="item-logo">
+						<img src="../images/guideImg/guidmask.png" />
+					</div>
+				</div>
+			</div>
+			<!-- <div class="animate">
+				<p id="skip" class="mui-pull-right">跳过<span class="mui-icon mui-icon-arrowright"></span></p>
+			</div>
+			
+			<div class="animate close mui-hidden">
+				<div id='close'>立即体验</div>
+			</div> -->
+			
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script>
+			mui.init();
+			mui.back = function() {};
+			
+			mui.plusReady(function() {
+				if(mui.os.ios){
+					// plus.navigator.setFullscreen(true);
+				}
+				// plus.navigator.closeSplashscreen();
+			});
+			
+			//跳过按钮点击事件
+			document.getElementById("slider").addEventListener('tap', function(event) {
+				plus.storage.setItem("guidemask", "true");
+				// plus.navigator.setFullscreen(false);
+				plus.webview.currentWebview().close();
+			}, false);
+
+		</script>
+	</body>
+
+</html>

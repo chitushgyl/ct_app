@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!-- iconfont -->
+		<link rel="stylesheet" type="text/css" href="../fonts/iconfont.css"/>
+		<!-- 通用样式 -->
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<!-- 选择器 -->
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css"/>
+		<style>
+			/**
+			 * 头像部分样式
+			 */
+			.mui-bar,.mui-bar-nav{
+				box-shadow: none;
+				-webkit-box-shadow: none; 
+			}
+			.mui-bar-nav~.mui-content{
+				padding-top: 64px;
+			}
+			.mui-table-view-chevron li{
+				background: #0088f4;
+				padding: 15px 15px 18px 15px;
+			}
+			.mui-table-view-chevron li>img{
+				border-radius: 50%;
+				overflow: hidden;
+			}
+			.mui-table-view-chevron li>div p{
+				display: inline-block;
+				background: #fff;
+				width: 110px;
+				line-height: 29px;
+				border-radius: 20px;
+				color: #2972E9;
+				margin-top: 8px;
+			}
+			.mui-table-view-cell.pr15.mui-active{
+				background-color: #2972E9;
+			}
+			
+			
+			.mui-input-group:after {
+			     height: 1px!important; 
+			}
+			.mui-input-group .mui-input-row:after{
+				background-color: #f3f4f6;
+			}
+			.mui-poppicker-header {
+			    padding: 6px;
+			    font-size: 14px;
+			     color: #1a8aff; 
+			}
+			.mui-poppicker-header .mui-btn {
+			    background-color: transparent;
+			    border: none;
+			    color: #1a8aff;
+			}
+			.mui-picker{
+				background-color: #fff;
+			}
+			.color1{
+				color: #1D2026;
+			}
+			.color2{
+				color: #8590A6;
+			}
+			
+			#divsltsex {
+				width: 0px;
+				height: 0px;
+				background: red;
+				position: fixed;
+				top: 70%;
+				left: 50%;
+			}
+			/*移除底部或顶部三角,需要在删除此代码*/
+			.mui-popover .mui-popover-arrow:after {
+				width: 0px;
+			}
+			#popsltsex{
+				border-radius: 6px;
+				height: 171px;
+				width: 250px;
+			}
+			#popsltsex .slthead{
+				text-align:center;
+				color: #333333;
+				margin-top: 24px;
+				margin-bottom: 15px;
+			}
+			#popsltsex .sltone{
+				/* background: pink; */
+				color: #333333;
+				font-size: 15px;
+				padding-left: 5px;
+				margin-top: 8px;
+				margin-bottom: 8px;
+			}
+			
+			#popsltsex .mui-radio input[type=radio]:before {
+				font-size: 16px;
+			}
+			#popsltsex .mui-radio input[type=radio]{
+				top:8px;
+				right: 5px;
+			}
+			#selw.mui-radio input[type=radio]{
+				top:6px;
+				right: 5px;
+			}
+			#selm:after {
+				position: absolute;
+				right: 20px;
+				bottom: 0;
+				left: 20px;
+				height: 1px;
+				content: '';
+				/* -webkit-transform: scaleY(.5);
+				transform: scaleY(.5); */
+				background-color: #E3E7EB;
+			}
+			.mui-card{
+				margin: 0;
+			}
+			
+			#safeul li{
+				padding: 13px 15px;
+			}
+			#safeli{
+				padding: 13px 15px;
+			}
+		</style>
+		
+	</head>
+
+	<body>
+		<!-- 标题栏 -->
+		<header class="mui-bar mui-bar-nav" style="background-color:#0088f4;">
+			<a class="mui-action-back mui-pull-left">
+				<img src="../images/user/topbackarr1.png" style="width: 20px;">
+			</a>
+			<h1 class="mui-title" style="color: #FFFFFF;">账户与安全</h1>
+		</header>
+		<!-- 主体 -->
+		<div class="mui-content">
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell pr15 mui-text-center" >
+					<img class="head-img" id="head-img" src="../images/user/personimg.png" style="width:65px;height:65px;">
+					<div class="mui-text-center" >
+						<p class="font13" id="head" style="font-size: 16px !important;height: 32px;line-height: 32px;color: #2972E9;">更换头像</p>
+						<!-- <p class="font13" id="head" style="font-size: 16px !important;height: 32px;line-height: 32px;color: #2972E9;" disabled>头像</p> -->
+					</div>
+				</li>
+			</ul>
+			
+			<ul id="safeul" class="mui-table-view">
+				<li class="mui-table-view-cell" >
+		            <a class="">
+		            	<span class="color1" style="font-size: 17px;">账号</span>
+		            	<span class="mui-badge mui-badge-inverted color2" id="login" style="color: #333333;font-size: 16px;margin-right: 15px;">
+		            	</span>
+						<img style="width: 8px;height: 14px; float: right;margin-right: 4px;margin-top: 4px;" src="../images/user/rightthree.png"/>
+
+		            </a>
+		        </li>
+
+		        <li class="mui-table-view-cell" onclick='clicked("../template/updateName.html")'>
+		            <a class="">
+		            	<span class="color1" style="font-size: 17px;">用户名</span>
+		            	<span class="mui-badge mui-badge-inverted color2" id="username1" style="color: #333333;font-size: 16px;margin-right: 15px;">
+		            	</span>
+						<img style="width: 8px;height: 14px; float: right;margin-right: 4px;margin-top: 4px;" src="../images/user/rightthree.png"/>
+
+		            </a>
+		        </li>	
+				<li class="mui-table-view-cell" onclick='clicked("../template/updateRealname.html")'>
+		            <a class="">
+		            	<span class="color1" style="font-size: 17px;">姓名</span>
+		            	<span class="mui-badge mui-badge-inverted color2" id="realname1" style="color: #333333;font-size: 16px;margin-right: 15px;">
+		            	</span>
+						<img style="width: 8px;height: 14px; float: right;margin-right: 4px;margin-top: 4px;" src="../images/user/rightthree.png"/>
+		            </a>
+		        </li>
+		        <li class="mui-table-view-cell" onclick="changeSex()">
+					
+						  <a class="">
+							<span class="color1" style="font-size: 17px;">性别</span>
+							<span class="mui-badge mui-badge-inverted color2" id="sex" style="color: #333333;font-size: 16px;margin-right: 15px;">男
+							</span>
+							<img style="width: 8px;height: 14px; float: right;margin-right: 4px;margin-top: 4px;" src="../images/user/rightthree.png"/>
+						</a>
+					
+		        </li>
+			    <!-- <li class="mui-table-view-cell mb5" onclick='clicked("../template/editorPhone.html")'>
+		            <a class="">
+		            	<span class="color1" style="font-size: 17px;">手机号</span>
+		            	<span class="mui-badge mui-badge-inverted color2" id="phone" style="color: #333333;font-size: 16px;margin-right: 15px;">
+		            	</span>
+						<img style="width: 8px;height: 14px; float: right;margin-right: 4px;margin-top: 4px;" src="../images/user/rightthree.png"/>
+
+		            </a>
+		        </li>		 -->
+		    </ul>
+			
+			<ul class="mui-table-view mt10">
+		        <li id="safeli" class="mui-table-view-cell mb5" onclick='clicked("../template/sendCode.html")'>
+		            <a class="">
+		                <span class="color1" style="font-size: 17px;">密码设置</span>  
+		            	<img style="width: 8px;height: 14px; float: right;margin-right: 4px;margin-top: 4px;" src="../images/user/rightthree.png"/>
+		            </a>
+		        </li>
+		   	</ul>
+			<!-- popover弹窗，选择器，选择性别（废除picker） -->
+			<div id="divsltsex"></div>
+			<div id="popsltsex" class="mui-popover mui-card">
+				<div class="mui-popover-arrow"></div>
+					<div class="slthead"><h4>性别</h4></div>
+					<div id="selm" class="mui-input-row mui-radio sltone">
+						<label style="padding-bottom: 16px;">男</label>
+						<input name="sex" type="radio" value="B"/>
+					</div>
+					<div id="selw" class="mui-input-row mui-radio sltone">
+						<label style="padding-top: 7px;">女</label>
+						<input name="sex" type="radio" value="G" />
+					</div>
+			</div>
+
+		   
+		</div>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/base64.min.js" type="text/javascript"></script>
+		<!-- mui 框架 -->
+		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-2.4.1.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 通用js -->
+		<script src="../js/common/common.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 日期插件 -->
+		<script src="../js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="../js/config/request.js" type="text/javascript" charset="utf-8"></script>
+		
+		<!---->
+		<script src="../js/controller/controller-account.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			var picker;
+			
+			/**
+			 * @description: 修改性别到后台
+			 * @param {type} sex
+			 * @return {type}
+			 */
+			 
+			function addsexvalue(sexvalue){
+				console.log(sexvalue);
+				 mui('#popsltsex').popover('hide'); 
+				var data = {token: user.getState('token'),sex:sexvalue};
+								// 	// 
+				account.updateSex(data,function(res){
+					mui.toast(res.msg);
+				// 更新缓存数据
+					user.setState('sex',sexvalue,function(){
+						refreshData();
+					});
+				})
+			}
+			
+			
+			/**
+			 * @description: 页面刷新
+			 * @param {type} param_name
+			 * @return {type}
+			 */
+			function refreshData(){
+				plusReady();
+			}
+			function upload_img(file){
+				var url = request.ServerUrl + request.personal_update_image;
+				var token = user.getState('token');
+
+				var task = plus.uploader.createUpload(url, {  
+			    	method: "post"  
+			   }, function(t, status) {  
+				    console.log(JSON.stringify(t));
+				    console.log(status);
+			        if(status == 200) { 
+			           	mui.toast("上传成功！");
+			            // wt.close(); //关闭等待提示按钮
+			            // uploaderImg(userimg);
+			            // plus.webview.currentWebview().opener().evalJS('reload()');
+			            mui.back();
+			        }else{
+			            mui.toast("上传失败："+t);
+			            // wt.close();//关闭等待提示按钮
+			        }
+			    });
+				// 添加文件
+			    task.addFile(file, {key:"file"});
+			    // 添加其他参数  接口令牌
+			    task.addData("token",token);
+			    console.log('task:'+JSON.stringify(task));
+				
+				console.log("=========添加车辆信息=========="+JSON.stringify(task));
+				
+			    task.addEventListener( "statechanged", function(upload,status){
+			    	if ( upload.state == 4 && status == 200 ) {
+			    		var res_json = JSON.parse(BASE64.decode(upload.responseText));
+			    		// uploaderImg(res_json.data);
+			    		console.log('json:'+JSON.stringify(res_json));
+			    		// return false;
+			    		user.setState("userimage",res_json.data.image);
+			        	// 显示图像
+			        	console.log('img:'+request.ServerUrl + res_json.data.image);
+			        	var src = request.ServerUrl + res_json.data.image;
+		        		document.getElementById("head-img").src = src;
+		        		localStorage.is_now_action = 1;
+		        		plus.webview.getWebviewById('person/index-menu.html').reload();
+		        		// 更新页面用户图像信息
+		        		refreshData();
+						// 上传完成
+						console.log( "Upload success: " + upload.responseText );
+					}
+			    } , false );
+			    // 开始上传 
+			    task.start();
+			}
+			/**
+			 * @description: 拍照
+			 * @param {type} param_name
+			 * @return {type}
+			 */
+            function getImage() {
+                var c = plus.camera.getCamera();
+                c.captureImage(function(e) {
+                    //存储到本地
+                    plus.io.resolveLocalFileSystemURL(e, function(entry) {
+                        // cutImage(entry.toLocalURL());//裁剪图片，传入绝对地址
+                        // 转化路径
+			            var localUrl = entry.toLocalURL();
+			            // 压缩上传
+			            plus.zip.compressImage({  
+			                src: localUrl,  
+			                dst: "_doc/chat/camera/" + localUrl,  
+			                quality: 20,  
+			                overwrite: true  
+			            }, function(e) {  
+			            	console.log("压缩成功" + e.target);
+			            	// 显示图片
+			            	upload_img(e.target);
+			            	// self.setAttribute('src',e.target);
+			            }, function(err) {  
+			                console.log("压缩失败：  " + err.message);  
+			            }); 
+                    }, function(e) {
+                        console.log("读取拍照文件错误：" + e.message);
+                    });
+                }, function(s) {
+                    console.log("error" + s);
+                }, {
+                    filename: "_doc/head.jpg"
+                })
+            }
+
+            /**
+			 * @description: 相册
+			 * @param {type} param_name
+			 * @return {type}
+			 */
+            function galleryImg() {
+				
+				console.log("在相册选取图片");
+                plus.gallery.pick(function(a) {
+                    plus.io.resolveLocalFileSystemURL(a, function(entry) { 　　　　　　//entry为图片原目录（相册）流
+                        // cutImage(entry.toLocalURL());
+                        var localUrl = entry.toLocalURL();
+                        // 压缩上传
+			            plus.zip.compressImage({  
+			                src: localUrl,  
+			                dst: "_doc/chat/camera/" + localUrl,  
+			                quality: 20,  
+			                overwrite: true  
+			            }, function(e) {  
+			            	console.log("压缩成功" + e.target);
+			            	// 显示图片
+			            	upload_img(e.target);
+			            	// self.setAttribute('src',e.target);
+			            }, function(err) {  
+			                console.log("压缩失败：  " + err.message);  
+			            }); 
+                    
+                    }, function(e) {
+                        console.log("读取图片错误：" + e.message);
+                    });
+                }, function(a) {}, {
+                    filter: "image"
+                })
+            };
+			
+			/**
+			 * @description: 裁剪图片
+			 * @param {type} param_name
+			 * @return {type}
+			 */
+            function cutImage(path) {
+                mui.openWindow({
+                    url: '../template/cropper.html',
+                    id: 'cropper',
+                    extras: {
+                        path: path,
+                    },
+                    show: {
+                        aniShow: 'zoom-fade-in',
+                        duration: 800
+                    },
+                    waiting: {
+                        autoShow: true
+                    }
+                });
+            }
+            
+            /**
+			 * @description: 上传图片
+			 * @param {type} token 用户令牌
+			 * @return {type}  // path就是user_path，前面传递过来的参数
+			 */
+            function uploaderImg(path){
+            	// 本地存储图片
+				console.log("图片上传的接口");
+				console.log("图片上传的本地地址=============="+path);
+				
+	        	account.updateAvatar({
+	        		token: user.getState('token'),
+	        		file: path
+	        	},function(data){
+	        		// 本地存储图片
+					console.log("得到返回值");
+					console.log('data:'+JSON.stringify(data));
+					// return false;
+		        	user.setState("userimage",data.image);
+		        	// 显示图像
+	        		document.getElementById("head-img").src = request.ServerUrl + data.image;
+	        		// 更新页面用户图像信息
+	        		refreshData();
+	        		// 
+	        		plus.webview.getWebviewById('person/index-menu.html').evalJS('refreshData()');
+	        	});
+            }
+			
+			/**
+			 * @description: plusReady加载完毕执行
+			 * @param {type} param_name
+			 * @return {type}
+			 */
+			function plusReady(){
+				// 图像
+				var user_img = user.getState('userimage');
+				if(user_img){ // 如果有图像
+					document.getElementById("head-img").src = request.ServerUrl + user_img;
+				}else{
+					console.log("没有头像");
+					document.getElementById("head-img").src = '../images/user/defaultUserImg.png';
+				}
+				// 用户名
+				var login = 	user.getState('login');
+				document.getElementById('login').innerText = login;				
+
+				var username = 	user.getState('name');
+				document.getElementById('username1').innerText = username;
+				// 真实姓名
+				var realname = user.getState('true_name');
+				document.getElementById('realname1').innerText = realname;
+				// 性别
+				var sex = user.getState('sex');
+				document.getElementById('sex').innerText = sex =='B' ? "男" : "女";
+				// 手机号
+				// var phone = user.getState('tel');
+				// document.getElementById('phone').innerText = tel.plusxing(phone,3,7);
+				
+			}
+			// mui.back=function(){
+			// 	var ws=plus.webview.currentWebview().parent();  
+			// 		// ws.evalJS("refreshData()");
+			// 	mui.fire(ws,'refres');
+			// }
+			/**
+			 * @description: 初始化选择器
+			 * @param {type} param_name
+			 * @return {type}
+			 */
+			// function Initpicker() {
+			// 	// 初始化
+			// 	picker = new mui.PopPicker();
+			// 	// 插入数据
+			// 	picker.setData([{value:'1',text:"男"},{value:'2',text:"女"}]);
+			// }
+			
+			/**
+			 * @description: 改变性别
+			 * @param {type} param_name
+			 * @return {type}
+			 */
+			function changeSex() {
+				// var sexvalue = 1;
+				mui("#popsltsex").popover('toggle', document.getElementById("divsltsex"));
+				var sexvalue = user.getState('sex');  
+				console.log(sexvalue);    //  先获取到第一个值
+				if(sexvalue == "B"){
+                    document.getElementsByName('sex')[0].checked='checked';
+                }else{
+                    document.getElementsByName('sex')[1].checked='checked';
+                }
+
+				// document.getElementById("selm").addEventListener("click",function(){
+				mui('.mui-popover').on('tap', '#selm', function() {
+					 mui(".mui-popover").off("tap");
+					var sexvalue = 'B';
+					addsexvalue(sexvalue)
+				});
+				// document.getElementById("selw").addEventListener("click",function(){
+				mui('.mui-popover').on('tap', '#selw', function() {
+					 mui(".mui-popover").off("tap");
+					var sexvalue = 'G';
+					addsexvalue(sexvalue)
+				});
+				
+				
+				
+				// picker.show(function(items){
+				// 	var value = items[0].value;
+				// 	// 请求数据
+				// 	var data = {token: user.getState('token'),sex:sexvalue};
+				// 	// 
+				// 	account.updateSex(data,function(){
+				// 		// 更新缓存数据
+		  //       		user.setState('sex',value,function(){
+		  //       			refreshData();
+		  //       		});
+				// 	})
+				// })
+			}
+			
+			
+			
+			// 初始化
+			// Initpicker();
+			
+			/**
+			 * @description：plus对象加载完毕执行 plusReady函数
+			 */
+			if(window.plus){
+				plusReady();
+			}else{
+				document.addEventListener('plusready',plusReady,false);
+			}
+			
+			// 添加updateHeadImg自定义事件监听 更新用户头像，主要是裁剪页面裁剪完后触发的
+            window.addEventListener('updateHeadImg',function(event){
+              	// 获得事件参数
+              	var userimg = event.detail.img_path;
+console.log("存储在本地的需要添加到后台的头像图片地址"+userimg);
+              	// 根据id向服务器请求新闻详情
+              	if(userimg != "") {
+                    uploaderImg(userimg);
+                }
+            });
+            
+			//
+			mui.init({
+				beforeback:function(){
+					var ws = plus.webview.currentWebview().opener();
+					mui.fire(ws,'refres');
+					// mui.fire(ws,'refres);
+					return true;
+				}
+			});
+			// 弹出菜单
+            mui(".mui-table-view").on("tap", "#head", function(e) {
+				console.log("dianjiannn")
+                if(mui.os.plus) {
+                    var a = [{
+                        title: "拍照"
+                    }, {
+                        title: "从手机相册选择"
+                    }];
+                    plus.nativeUI.actionSheet({
+                        title: "修改头像",
+                        cancel: "取消",
+                        buttons: a
+                    }, function(b) {
+                        switch(b.index) {
+                            case 0:
+                                break;
+                            case 1:
+                                getImage();
+                                break;
+                            case 2:
+                                galleryImg();
+                                break;
+                            default:
+                                break
+                        }
+                    })
+                }
+            });
+            setAutoHeight(function(h){
+
+			},1)
+
+   //          var fl = judgeBigScreen();
+			// if (fl) {
+			// 	$('header').css({"padding-top":"35px"});
+			// 	$('.mui-action-back img').css({"top":"45px"});
+			// }
+		</script>
+	</body>
+</html>

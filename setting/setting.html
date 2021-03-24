@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>设置</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!-- iconfont-->
+		<link rel="stylesheet" type="text/css" href="../fonts/iconfont.css" />
+		<!-- 通用样式 -->
+		<link rel="stylesheet" type="text/css" href="../person/css/common.css" />
+		<!-- 列表 -->
+				<link rel="stylesheet" type="text/css" href="../user/css/common.css" />
+		<style type="text/css">
+			#exit {
+				padding: 10px 0;
+				background: #fff;
+				width: 100%;
+			}
+			.font14 {
+				color: #1D2026;
+				font-weight: 400;
+			}
+			.mui-bar-nav {
+				box-shadow: none;
+			}
+			/* 开关样式调整 */
+			.mui-switch {
+				height: 25px;
+			}
+			.mui-switch.mui-active {
+				border-color: #357CF1;
+				background-color: #357CF1;
+			}
+
+			.mui-switch .mui-switch-handle {
+				width: 23px;
+				height: 23px;
+			}
+
+			.mui-switch-mini.mui-active .mui-switch-handle {
+				transform: translate(24px, 0);
+				-webkit-transform: translate(24px, 0);
+			}
+
+			.mui-switch.mui-dragging.mui-active .mui-switch-handle {
+				left: -15px;
+				width: 38px;
+			}
+
+			.mui-switch-mini {
+				width: 50px;
+			}
+
+			.mui-bar {
+				background-color: #FFFFFF;
+			}
+
+			.mui-bar-nav .mui-title {
+				color: #000000;
+			}
+			.mui-content {
+				margin-top: 6px;
+			}
+
+			.mui-bar-nav~.mui-content {
+				padding-top: 67px;
+			}
+
+			/*modal*/
+			.login_content{
+				background-color: #fff;
+				width:94%;
+				margin-left:3%;
+				height:110px;
+				display:flex;
+				flex-direction: row;
+				margin-top:20px;
+			}
+			.login_content_one{
+				width:10%;
+				display:flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction:column;
+			}
+			.login_content_one img{
+				width:18px;
+				height:18px;
+			}
+			.login_content_two{
+				width:70%;
+			}
+			.login_content_two1{
+				font-size:18px;
+				color:#666;
+				height:50px;
+				line-height: 50px;
+			}
+			.login_content_two2{
+				font-size:12px;
+				color:#666;
+				height:20px;
+				line-height: 20px;
+				color:#0088f4;
+			}
+			.login_content_two3{
+				font-size:10px;
+				color:#666;
+				height:25px;
+				line-height: 25px;
+				color:#d2d2d2;
+			}
+			.login_content_three{
+				width:25%;
+				display:flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+			}			
+			.login_content_three img{
+				width:100%;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<!-- 标题栏 -->
+		<header id="header_id"  class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-pull-left">
+				<img src="../images/user/topbackarr.png" style="width: 20px;">
+			</a>
+			<h1 class="mui-title">设置</h1>
+		</header>
+		<!-- 主体 -->
+		<div class="mui-content" id="content">
+			<!-- <ul class="mui-table-view"> -->
+<!-- 				<li class="mui-table-view-cell" id="safe">
+					<a class="" onclick="clicked('../person/safe.html')">
+						<span style="font-size: 17px;color: #1D2026;" class="font17">账号与安全</span>
+						<img style="width: 8px;height: 14px;float: right;margin-top: 3px;" src="../images/user/rightthree.png" />
+
+					</a>
+				</li> -->
+
+				<!-- <li class="mui-table-view-cell" id="modal_click">
+					<a class=""href="#modal">
+						<span style="font-size: 17px;color: #1D2026;" class="font17">切换身份</span>
+						<img style="width: 8px;height: 14px;float: right;margin-top: 3px;" src="../images/user/rightthree.png" />
+						<span style="float:right;margin-right:20px;font-size:16px;font-weight:bold;" id="person_role">{{role_name}}</span>
+
+					</a>
+				</li> -->
+			<!-- </ul> -->
+
+			<!-- <ul class="mui-table-view mt10">
+				<li class="mui-table-view-cell">
+					<span style="font-size: 17px;color: #1D2026;" class="font17">实时路况</span>
+					<div class="mui-switch mui-switch-mini mui-active">
+						<div class="mui-switch-handle"></div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<span style="font-size: 17px;color: #1D2026;" class="font17">音效提示</span>
+					<div class="mui-switch mui-switch-mini mui-active">
+						<div class="mui-switch-handle"></div>
+					</div>
+				</li>
+			</ul> -->
+
+			<ul class="mui-table-view mt10">
+<!-- 				<li class="mui-table-view-cell" onclick="clicked('userGuide.html')">
+					<a class="">
+						<span style="font-size: 17px;color: #1D2026;" class="font17">绑定手机</span>
+						<img style="width: 8px;height: 14px;float: right;margin-top: 3px;" src="../images/user/rightthree.png" />
+					</a>
+				</li> -->
+				<li class="mui-table-view-cell" onclick="clicked('userGuide.html')">
+					<a class="">
+						<span style="font-size: 17px;color: #1D2026;" class="font17">用户指南</span>
+						<img style="width: 8px;height: 14px;float: right;margin-top: 3px;" src="../images/user/rightthree.png" />
+					</a>
+				</li>
+				<li class="mui-table-view-cell" onclick='clicked("legalProvisions.html")'>
+					<a class="">
+						<span style="font-size: 17px;color: #1D2026;" class="font17">法律条款</span>
+						<img style="width: 8px;height: 14px;float: right;margin-top: 3px;" src="../images/user/rightthree.png" />
+					</a>
+				</li>
+				<li class="mui-table-view-cell" onclick='clicked("../login/agreement.html")'>
+					<a class="">
+						<span style="font-size: 17px;color: #1D2026;" class="font17">用户协议</span>
+						<img style="width: 8px;height: 14px;float: right;margin-top: 3px;" src="../images/user/rightthree.png" />
+					</a>
+				</li>
+				<li class="mui-table-view-cell" onclick='clicked("../login/secret.html")'>
+					<a class="">
+						<span style="font-size: 17px;color: #1D2026;" class="font17">隐私政策</span>
+						<img style="width: 8px;height: 14px;float: right;margin-top: 3px;" src="../images/user/rightthree.png" />
+					</a>
+				</li>
+
+			</ul>
+
+<!-- 			<ul class="mui-table-view mt10">
+				<li class="mui-table-view-cell" onclick="clicked('../cusService/join.html')">
+					<a class="">
+						<span style="font-size: 17px;color: #1D2026;" class="font17">商务合作</span>
+						<img style="width: 8px;height: 14px;float: right;margin-top: 3px;" src="../images/user/rightthree.png" />
+					</a>
+				</li>				
+
+
+				<li class="mui-table-view-cell" onclick="clicked('../cusService/personservice.html')">
+					<a class="">
+						<span style="font-size: 17px;color: #1D2026;" class="font17">客服中心</span>
+						<img style="width: 8px;height: 14px;float: right;margin-top: 3px;" src="../images/user/rightthree.png" />
+					</a>
+				</li>
+			</ul> -->			
+
+			<ul class="mui-table-view mt10">
+				<li class="mui-table-view-cell" onclick="clicked('aboutUS.html')">
+					<a class="">
+						<span style="font-size: 17px;color: #1D2026;" class="font17">关于我们</span>
+						<img style="width: 8px;height: 14px;float: right;margin-top: 3px;" src="../images/user/rightthree.png" />
+					</a>
+				</li>
+			</ul>
+			
+			<ul class="mui-table-view mt10">
+				<li class="mui-table-view-cell" onclick='clicked("../setting/set_password.html")'>
+					<a class="">
+						<span style="font-size: 17px;color: #1D2026;" class="font17">密码设置</span>
+						<img style="width: 8px;height: 14px;float: right;margin-top: 3px;" src="../images/user/rightthree.png" />
+					</a>
+				</li>
+			</ul>		
+
+
+			<div type="button" id="exit" class="mui-text-center mt10 font18" style="font-weight: bold;color: #1D2026;">退出</div>
+		</div>
+
+		<div id="modal" class="mui-modal" style="background-color: #f4f5f7;">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-icon mui-icon-close mui-pull-right" href="#modal" style="color:#333;padding-top:16px;"></a>
+				<h1 class="mui-title" style="color:#333;">切换身份</h1>
+			</header>
+			<div class="mui-content" style="height: 100%;width:100%;">
+				<div class="login_content mui_active" style="" data="1">
+					<div class="login_content_one" style="">
+						<img src="../images/login/select1.png">
+						<div class="login_content_one_icon" style=""></div>
+					</div>
+					<div class="login_content_two" style="">
+						<div class="login_content_two1" style="">个人用户</div>
+						<div class="login_content_two2" style="">我的线路、车辆管理、订单处理</div>
+						<div class="login_content_two3" style="">角色权限、账号管理、承运商管理、城配订单处理</div>
+					</div>
+					<div class="login_content_three">
+						<img src="../images/login/n1.png">
+					</div>
+				</div>						
+				<div class="login_content" style="" data="2">
+					<div class="login_content_one" style="">
+						<img src="../images/login/select1.png">
+					</div>
+					<div class="login_content_two" style="">
+						<div class="login_content_two1" style="">企业用户</div>
+						<div class="login_content_two2" style="">我的线路、车辆管理、订单处理</div>
+						<div class="login_content_two3" style="color:#0088f4;">角色权限、账号管理、承运商管理、城配订单处理</div>
+					</div>
+					<div class="login_content_three">
+						<img src="../images/login/n2.png">
+					</div>
+				</div>	
+
+				<button type="button" class="mui-btn mui-btn-primary mui-btn-block confirm_change_role" style="width:94%;margin-left:3%;margin-top:30px;">确定切换</button>			
+			</div>
+		</div>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<!-- mui 框架 -->
+				 <script src="../js/common/fliter.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-2.4.1.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 通用js -->
+		<script src="../js/common/common.js" type="text/javascript" charset="utf-8"></script>
+
+		<script type="text/javascript">
+			//新效果
+			mui.plusReady(function(){
+				document.getElementById("exit").addEventListener("tap",function(){
+					mui.confirm('确定退出登录？','提示',['确定','取消'],function(e){
+						if(e.index==0){
+							localStorage.clear();
+							plus.runtime.restart();
+						}
+					},'div')
+					// user.out(function(){
+					// 	// plus.webview.getWebviewById('../tabbar3/index-menu.html').evalJS('refreshData()');
+					// 	// plusCommon.popToTarget('person/index-menu.html',true);
+					// 	mui.back();
+					// 	plus.webview.getWebviewById('driver/car/car_list_index.html').evalJS('refreshData_out()');
+					// 	// plusCommon.popToTarget('fullTruck/car.html', true);
+					// 	// var list = plus.webview.currentWebview().opener();
+					// 	// console.log(JSON.stringify(list));
+					// 	// mui.fire(list,"refresh");
+						
+					// })
+				},false);
+				
+			});
+
+			$(document).on('tap','.confirm_change_role',function(){
+				var val = $('.mui_active').attr('data');
+				if (!val) {
+					mui.toast('请选择角色！');
+					return false;
+				}
+				localStorage.setItem('app_role',val);
+				if (val == 1) {
+					var role_name = '个人';
+				} else if (val == 2) {
+					var role_name = '企业';
+				}
+				vue_obj.role_name = role_name;
+				$('#modal').removeClass('mui-active');
+				mui.toast('成功，当前角色：'+role_name);
+				parent.window.refreshData();
+			});
+
+			$(document).on('click','.login_content',function(){
+				var data = $(this).attr('data');
+				$('.login_content').removeClass('mui_active');
+				$(this).addClass('mui_active');
+				$('.login_content_one img').attr('src','../images/login/select1.png');
+				$(this).find('.login_content_one img').attr('src','../images/login/select2.png');
+			});
+
+			var vue_obj = new Vue({
+				el:"#content",
+				data:{
+					role_name:''
+				},
+				mounted:function(){
+					var app_role = localStorage.getItem('app_role');
+					$('.login_content_one img').attr('src','../images/login/select1.png');
+					if (app_role == 1) {
+						this.role_name = '个人';
+					} else if (app_role == 2) {
+						this.role_name = '企业';
+					}
+					$('.login_content[data="'+app_role+'"]').find('.login_content_one img').attr('src','../images/login/select2.png');
+				}
+			});
+
+			setAutoHeight(function(h){
+
+			},1)
+
+		</script>
+	</body>
+</html>
