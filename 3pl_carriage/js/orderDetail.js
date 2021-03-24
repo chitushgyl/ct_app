@@ -87,6 +87,7 @@ var vm = new Vue({
 		tel:'',
 		order_status:'',
 		img:[],
+		imgLen:[],
 		good_List:[],
 	},
 	mounted: function(){
@@ -119,7 +120,8 @@ var vm = new Vue({
 				var data = res.data.info;
 				self.detData_o=data;
 				self.order_status=data.order_status;
-				self.img = data.receipt;
+				self.img = data.receipt[0];
+				self.imgLen = data.receipt;
 				self.good_List=data.good_info;
 				console.log(self.order_status)
 				// self.clod = "";

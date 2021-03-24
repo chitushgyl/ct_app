@@ -73,6 +73,7 @@ var vm = new Vue({
 		type_from:'',
 		list:[],
 		img:[],
+		vehicleList:[],
 		lineList:[],
 	},
 	mounted: function(){
@@ -111,7 +112,7 @@ var vm = new Vue({
 				self.detailData = data;
 				self.lineList=data.tms_order_dispatch;
 				if (self.detailData.order_type == 'vehicle') {
-					self.addressList = data.info;
+					self.vehicleList = data.info;
 				}
 				if(self.detailData.order_type == 'line'){
 					self.addressList = data;

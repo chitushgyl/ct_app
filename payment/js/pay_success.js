@@ -80,6 +80,8 @@ var vm = new Vue({
 		        options:{}
 		      }
 		  });
+		  plus.webview.getWebviewById('3pl_user/form.html').evalJS('refreshData()');
+		  plus.webview.getWebviewById('user_line/line_details.html').evalJS('refreshData()');
 		  
 // clicked("../payment/pay_success.html",{data:datt});
       },
@@ -96,6 +98,8 @@ var vm = new Vue({
 		   plus.webview.show(index);//打开初始窗口
 		   // plusCommon.popToTarget('user_line/line.html',true);
 		   index.evalJS("changSub(0)"); //改变选项卡点击位置
+		   plus.webview.getWebviewById('3pl_user/form.html').evalJS('refreshData()');
+
 		   // var index=plus.webview.getLaunchWebview();//获得初始窗口
 		   // plus.webview.show(index);//打开初始窗口
 		   // plusCommon.popToTarget('user_line/line.html',true);
@@ -112,6 +116,7 @@ var vm = new Vue({
 		    plus.webview.show(index);//打开初始窗口
 			// plusCommon.popToTarget('user_line/line.html',true);
 			index.evalJS("changSub(1)"); //改变选项卡点击位置
+			plus.webview.getWebviewById('user_line/line_details.html').evalJS('refreshData()');
 			break;
 		   case 'owm': // 信用额度支付
 		   console.log(3);

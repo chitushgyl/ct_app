@@ -618,7 +618,7 @@ var indexData = new Vue({
 			
 			self.anticipatedfreight.weight=self.anticipatedfreight.temp_weight.reduce((n,m) => n + m);
 			self.anticipatedfreight.volume=self.anticipatedfreight.temp_volume.reduce((n,m) => n + m);
-			self.anticipatedfreight.weight=self.anticipatedfreight.weight*1000;
+			
 			
 			let temp_data=JSON.parse(JSON.stringify(self.anticipatedfreight));
 			temp_data.gather_address=JSON.stringify(temp_data.gather_address);
@@ -631,9 +631,12 @@ var indexData = new Vue({
 			var self = this;
 			var data=temp_data;
 			var list = self.address_list;
-			console.log("temp_data"+JSON.stringify(temp_data));
 
-			request.PostInfo_new(request.linePrice,data,function(res){
+			
+			var datr=JSON.parse(JSON.stringify(data));
+			datr.weight=datr.weight*1000;
+			// console.log("datr"+JSON.stringify(datr));
+			request.PostInfo_new(request.linePrice,datr,function(res){
 				console.log('费用是：'+JSON.stringify(res));
 				self.line_send_price=res.price_info.send_price;
 				self.line_pick_price=res.price_info.pick_price;
@@ -646,7 +649,8 @@ var indexData = new Vue({
 				var btnArray = ['确认','取消'];
 				mui.confirm('请确认当前运费？',messagess, btnArray, function(e) {
 					if(e.index == 0) {					
-						var data = {};						
+						var data = {};	
+				        var data2={}
 						data.gather_time=self.gather_time;
 						data.pick_flag=self.pick_flag;	
 						data.send_flag=self.send_flag;
@@ -657,7 +661,18 @@ var indexData = new Vue({
 						data.order_type ='line';
 						data.total_money=res.data;
 						data.forms='2';
-						data.dispatcher=list;
+						// data.dispatcher=list;
+						
+						let temp_dispatcher=JSON.parse(JSON.stringify(list));
+						 temp_dispatcher.forEach((item)=>{
+							item.good_weight=item.good_weight*1000;
+						 })
+						 data.dispatcher=temp_dispatcher;
+						// data.dispatcher.forEach((item)=>{
+						// 	item.good_weight=item.good_weight*1000;
+						// })
+						
+						
 						data.remark=self.remark;
 
 						//装货
@@ -680,16 +695,14 @@ var indexData = new Vue({
 			// 				data=list[0];
 							data.good_name=list[0].good_name;
 							data.good_number=list[0].good_number;
-							data.good_weight=list[0].good_weight;
+							data.good_weight=list[0].good_weight*1000;
 							data.good_volume=list[0].good_volume;
 							data.clod=list[0].clod;
 							data.send_flag='N';
 							data.pick_flag='N';
 						}
 						
-						data.dispatcher.forEach((item)=>{
-							item.good_weight=item.good_weight*1000;
-						})
+
 						
 						// console.log("data："+JSON.stringify(data));return;			
 						clicked("../payment/payment.html",{data:data}); 

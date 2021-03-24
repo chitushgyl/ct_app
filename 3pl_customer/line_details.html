@@ -707,6 +707,16 @@
 									</div>									
 								</div>
 							</li>
+							
+							<li class="mui-table-view-cell">
+								<div class="mui-input-row">
+									<label class="carInfotitle" style="padding-left:0;width:40%">备注</label>
+									<!-- <span style="text-align: right;width:20px;height:40px;line-height:40px;color:#FC5854;position:absolute;right:140px;top:0;">￥</span> -->
+									<input type="text" class="good_input" style="width:60%;text-align:right;padding-right:0px !important;" placeholder="请输入备注信息"  v-model="item.remark"   maxLength=10  οnkeyup="checkLength2(index);">
+									<!-- @tap="set_line_price()" -->
+								</div>
+							</li>
+							
 					 </div>
 					 </div>
 					 
@@ -767,6 +777,9 @@
 				// $('.left-action .left-btn').css({"padding-top":(10)+"px"});
 			},2)
 			
+			function refreshData() {
+				location.reload();
+			}
 			
 			$(document).on('click','.control_div button',function(e){
 				$(this).addClass("active_clod").siblings().removeClass("active_clod");

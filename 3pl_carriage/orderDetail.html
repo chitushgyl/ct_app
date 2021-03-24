@@ -18,6 +18,7 @@
 		<link rel="stylesheet" type="text/css" href="../oldcommon/orderDetail.css" />
 		<link rel="stylesheet" type="text/css" href="css/order.css"/>
 		<link href="../css/mui-imageviewer.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/imageview.css"/>
 		<style type="text/css">
 			p {
 				margin-top: 4px !important;
@@ -81,8 +82,10 @@
 				/* text-align: right; */
 			}
 			.title_value{
-				height:40px;
-				line-height: 40px;
+				margin: 10px 0 0 0;
+			}
+			.title_value_p{
+				padding-top: 10px;
 			}
 			.mui-bar {
 			    z-index: 100;
@@ -108,9 +111,9 @@
 				<div style="background-color:#fff;border-radius:5px;width:94%;margin-left:3%;padding:0 10px;height:100%;margin-top:10px;padding-bottom:10px;">
 					<div style="height:40px;line-height: 40px;width:100%;color:#333;font-size:13px;">
 						<span style="padding:5px 15px;background-color: #0088f4;color:#fff;border-radius:5px;">{{detData_o.order_type_show}}</span>
-						<span class="" style="color: #FF7A1A;font-size: 16px;font-weight: bold; float: right;" v-if="detailData.total_money">￥{{detData_o.on_line_money}}</span>  
+						<span class="" style="color: #FF7A1A;font-size: 16px;font-weight: bold; float: right;" v-if="detData_o.total_money">￥{{detData_o.total_money}}</span>  
 					</div>
-					<div v-cloak v-for="(item,index) in addressList">
+					<div v-cloak v-for="(item,index) in addressList"  v-if="detailData.order_type=='vehicle'">
 						<div class="mui-row" style="display:flex;justify-context:centet;align-items:center;padding-top: 10px;">
 							<img src="../images/f.png" style="width: 20px;" >
 						<!-- <div class="mui-col-sm-4 mui-col-xs-4"style="width: 20px;height: 20px; border-radius: 50%;background-color: #FC5854;text-align: center;color: floralwhite;">发</div> -->
@@ -133,7 +136,7 @@
 							<span style="font-size:12px;padding-left: 30px;">联系人:</span>
 							<span style="font-size:12px;">{{item.gather_info_tel}}</span>
 						</div>
-						<div style="height:60px;line-height: 40px;width:100%;color:#333;font-size:13px;" class="mui-col-sm-4 mui-col-xs-4 title_">
+						<div style="width:100%;color:#333;font-size:12px;display: flex;flex-wrap: wrap;" class="mui-col-sm-4 mui-col-xs-4 title_">
 							<!-- <span style="padding:4px 4px;background-color: #E4F3FF;color:#0088f4;border-radius:5px;margin: 3px;">{{item.good_number}}件</span> -->
 							<span style="padding:4px 4px;background-color: #E4F3FF;color:#0088f4;border-radius:5px;margin: 3px;">{{item.good_weight}}kg/{{item.good_volume}}立方</span>
 							<span style="padding:4px 4px;background-color: #E4F3FF;color:#0088f4;border-radius:5px;margin: 3px;">{{item.clod_name}}</span>
@@ -162,7 +165,7 @@
 							<span style="font-size:12px;padding-left: 30px;">联系人:</span>
 							<span style="font-size:12px;" v-cloak>{{item.line_gather_name}}&nbsp;{{item.line_gather_tel}}</span>
 						</div>
-						<div style="height:40px;line-height: 40px;width:100%;color:#333;font-size:13px;" class="mui-col-sm-4 mui-col-xs-4 title_" v-for="(gItem,index) in good_List">
+						<div style="width:100%;color:#333;font-size:12px;display: flex;flex-wrap: wrap;" class="mui-col-sm-4 mui-col-xs-4 title_" v-for="(gItem,index) in good_List">
 							<span style="padding:4px 4px;background-color: #E4F3FF;color:#0088f4;border-radius:5px;margin: 3px;">{{gItem.good_weight}}kg/{{gItem.good_volume}}立方</span>
 							<span style="padding:4px 4px;background-color: #E4F3FF;color:#0088f4;border-radius:5px;margin: 3px;">{{gItem.clod}}</span>
 							<span style="padding:4px 4px;background-color: #E4F3FF;color:#0088f4;border-radius:5px;margin: 3px;">{{gItem.good_name}}</span>
@@ -173,7 +176,7 @@
 					
 					</div>
 				<div style="width:94%;margin-left:3%;margin-top:10px;border-radius: 5px;padding:0 10px;background-color: #fff;">
-					<div class="mui-row title_value" v-cloak v-if="detailData.send_time">
+					<div class="mui-row title_value title_value_p" v-cloak v-if="detailData.send_time">
 						<div class="mui-col-sm-4 mui-col-xs-4 title_">装货时间</div>
 						<div class="mui-col-sm-8 mui-col-xs-8 value_" v-cloak>
 							{{detailData.send_time}}
@@ -204,28 +207,29 @@
 							<span v-else>不需配送</span>
 						</div>
 					</div>
-					<div class="mui-row title_value">
+					<div class="mui-row title_value" style="padding: 0 0 10px 0;">
 						<div class="mui-col-sm-4 mui-col-xs-4 title_">订单备注</div>
-						<div class="mui-col-sm-8 mui-col-xs-8 value_" >
+						<div class="mui-col-sm-8 mui-col-xs-8 value_"  style="display:inline-block;text-align:right;">
 							<span v-if="!detData_o.remark">无特殊要求</span>
 							<span v-else>{{detData_o.remark}}</span>
 						</div>
 					</div>
 				</div>
-				<div style="width:94%;margin-left:3%;margin-top:10px;border-radius: 5px;background-color:#fff;padding:0 10px;">
-					<div class="mui-row title_value" v-cloak v-for="(item,index) in detData_o.car_info">
+				<div class="" style="width:94%;margin-left:3%;margin-top:10px;border-radius: 5px;background-color:#fff;padding:0 10px;">
+					<div class="mui-row title_value title_value_p" v-cloak v-for="(item,index) in detData_o.car_info" style="padding: 10px 0 10px 0;">
 						<div class="mui-col-sm-4 mui-col-xs-4 title_" v-if="index==0">运输信息</div>
 							<div class="mui-col-sm-8 mui-col-xs-8 value_" v-cloak style="float: right;">
 								{{item.car_number}}&nbsp;&nbsp;{{item.contacts}}&nbsp;&nbsp;{{item.tel}}
 							</div>
 					</div>
-					<div style="" v-for="(item,index) in img" >
-						<div class="mui-col-sm-4 mui-col-xs-4 title_" v-if="item.url">回单信息</div>
-						<div class="mui-row" v-cloak style="display: flex;flex-direction: row-reverse;flex-wrap:wrap">
-							<img :src="item.url" style="width: 150px;height: 100px;">
+					<div style="" v-if="imgLen.length!=0" class=" title_value_p">
+						<div class=" mui-col-sm-12 title_ " v-if="imgLen.length!=0">回单信息</div>
+						<div style="display: flex;flex: 1;padding: 5px 5px 10px 5px;flex-direction: row-reverse;flex-wrap: wrap;">
+							<div class="mui-row mui-col-sm-4"  v-for="(item,index) in img" style="margin-top: 10px;" >
+								<img :src="item.url" style="width: 100px;height: 100px; border-radius: 5px;float: right;" data-preview-src="" data-preview-group="4">
+							</div>
 						</div>
-						</div>
-					
+					</div>
 				</div>
 				
 			<div style="background-color: #FFFFFF;position:fixed;bottom:10px;width: 100%;box-shadow:0px 0px 16px #ECE9E9;" v-if="order_status==1">
@@ -262,8 +266,9 @@
 		<!-- <script src="../oldcommon/oldCommon.js" type="text/javascript" charset="utf-8"></script> -->
 		<script src="../js/config/request.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/orderDetail.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../js/mui.zoom.js"></script>
-		<script src="../js/mui.previewimage.js"></script>
+		<script type="text/javascript" src="..js/mui.imageViewer.js" ></script>
+		<script src="../js/mui.previewimage.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.zoom.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			mui.previewImage();
 			mui('body').on('tap','.customer_tel',function(e){

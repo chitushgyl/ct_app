@@ -423,14 +423,17 @@
 				text-decoration: none !important;
 			}
 			/*日期选择*/
+			[v-cloak] {
+				display: none !important;
+			}
 		</style>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<!-- <a class="mui-action-back mui-icon mui-icon-arrowleft font21 mui-pull-left" style="color: #000000;"></a> -->
-			<a class="mui-action-back mui-pull-left">
+<!-- 			<a class="mui-action-back mui-pull-left">
 				<img src="../images/user/topbackarr.png" style="width: 20px;">
-			</a>
+			</a> -->
 			<h1 class="mui-title">线路列表</h1>
 		</header>
 		<div class="mui-content" id="set_content" style="padding-top:0;">
@@ -679,63 +682,23 @@
 				<div>
 					<ul class="mui-table-view" id="dataList" style="margin-top:40px;">						
 
-<!-- 						<li class="mui-table-view-cell set_li mui-row" v-for="(item,index) in lineList" @tap="toBulkOrderDetail(index)">
-
-							<div class="mui-col-xs-3 set_content set_start">
-								<div class="set_city">{{item.send_sheng_name}}</div>
-								<div class="set_area">
-									<div>{{item.send_qu_name}}</div>
-								</div>
-							</div>
-							<div class="mui-col-xs-3 set_content set_center" >
-								<div class="set_center_day">{{item.trunking}}天</div>
-								<img src="../images/driver/line_line.png" class="set_center_img">
-								<div class="set_center_tem">{{item.control}}</div>
-							</div>
-							<div class="mui-col-xs-3 set_content set_end" style="position:relative;">
-								<div class="set_city">{{item.gather_sheng_name}}</div>
-								<div class="set_area">
-									<div>{{item.gather_qu_name}}</div>
-								</div>
-								
-							</div>
-							<div class="mui-col-xs-3 set_content set_price" style="padding-top:20px;">
-								<div style="text-align: right;;width:100%;">
-									<span class="set_price_p set_price_family">{{item.price}}</span><small style="color:#999;font-size:10px;font-weight:unset;">&nbsp;&nbsp;&nbsp;&nbsp;</small>
-								</div>
-								<div style="line-height:20px;text-align: right;;width:100%;">
-									<span class="set_price_c">元/公斤</span><small style="color:#999;font-size:10px;font-weight:unset;">起</small>
-								</div>
-							</div>
-							
-							<div class="mui-col-xs-12 set_content">
-								<div class="" style="float:left;width:50%;display:inline-block;">
-									<span>发车时间 {{item.start_time}}</span> 
-									<span style="color:#333;"></span>
-								</div>
-								<div class="" style="display:inline-block;float:right;width:50%;text-align:right;">干线最低收费 <strong  style="color:#FF4940;">{{item.min_money}}</strong>元</div>
-							</div>
-							
-						</li> -->
-
-
 						<li class="mui-table-view-cell set_li mui-row" v-for="(item,index) in lineList" @tap="toBulkOrderDetail(index,lineList)">
 								<div class="mui-col-xs-10">
 									<div class="mui-col-xs-4 set_content set_start">
-										<div class="set_city">{{item.send_sheng_name}}</div>
-										<div class="set_area">
-											<div>{{item.send_qu_name}}</div>
+										<div class="set_city" v-cloak>{{item.send_sheng_name}}</div>
+										<div class="set_area" v-cloak>
+											<div v-cloak>{{item.send_qu_name}}</div>
 										</div>
 									</div>
 									<div class="mui-col-xs-4 set_content set_center" >
-										<div class="set_center_day">{{item.trunking}}天</div>
+										<div class="set_center_day" v-cloak>{{item.trunking}}天</div>
 										<img src="../images/driver/line_line.png" class="set_center_img">
-										<div class="set_center_tem">{{item.control}}</div>
+										<div class="set_center_tem" v-cloak>{{item.control}}</div>
 									</div>
 									<div class="mui-col-xs-4 set_content set_end" style="position:relative;">
-										<div class="set_city">{{item.gather_sheng_name}}</div>
+										<div class="set_city" v-cloak>{{item.gather_sheng_name}}</div>
 										<div class="set_area">
-											<div>{{item.gather_qu_name}}</div>
+											<div v-cloak>{{item.gather_qu_name}}</div>
 										</div>
 										
 									</div>
@@ -744,12 +707,12 @@
 											<span>发车时间 05-01 15:00</span> 
 											<span style="color:#333;"></span>
 										</div>
-										<div class="" style="display:inline-block;float:right;width:50%;text-align:right;">干线最低收费 <strong  style="color:#FF4940;">999</strong>元</div>
+										<div class="" style="display:inline-block;float:right;width:50%;text-align:right;">干线最低收费 <strong  style="color:#FF4940;" v-cloak>{{item.min_money}}</strong>元</div>
 									</div>
 								</div>	
 								<div class="mui-col-xs-2 set_content set_price" style="padding-top:20px;">
 									<div style="text-align: right;;width:100%;">
-										<span class="set_price_p set_price_family">{{item.price}}</span><small style="color:#999;font-size:10px;font-weight:unset;">&nbsp;&nbsp;&nbsp;&nbsp;</small>
+										<span class="set_price_p set_price_family" v-cloak>{{item.price}}</span><small style="color:#999;font-size:10px;font-weight:unset;">&nbsp;&nbsp;&nbsp;&nbsp;</small>
 									</div>
 									<div style="line-height:20px;text-align: right;;width:100%;">
 										<span class="set_price_c">元/公斤</span><small style="color:#999;font-size:10px;font-weight:unset;">起</small>

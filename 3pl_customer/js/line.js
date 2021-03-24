@@ -102,7 +102,7 @@ var vm = new Vue({
 		var self = this;
 		//获取起终点城市id
 		mui.plusReady(function(){
-			var page = plus.webview.currentWebview();
+			var page = plus.webview.currentWebview();		
 			self.start_id = page.startcity_id;
 			self.end_id = page.endcity_id;
 			self.start_name = page.startcity_name;
@@ -193,7 +193,7 @@ var vm = new Vue({
 			}
 			console.log(JSON.stringify(data));
 			request.PostInfo_new(request.lineList,data,function(response){
-				// console.log("response"+JSON.stringify(response));
+				console.log("response"+JSON.stringify(response));
 				var code = parseInt(response.code);
 				var data = response.data.info;
 				if(data){    // 如果有数据，就要隐藏为空下的提示
@@ -222,9 +222,10 @@ var vm = new Vue({
 				openLogin();
 				return false;
 			}
+			
 			mui.openWindow({
 			    url:"line_details.html",
-			    id:"user_line/line_details.html",
+			    id:"3pl_customer/line_details.html",
 			    extras:{
 					self_id:lineList[index].self_id,
 			  //     	slid: self.lineList[index].slid,
@@ -248,6 +249,8 @@ var vm = new Vue({
 			      	title:'正在加载...',//等待对话框上显示的提示内容
 			    }
 			})
+			plus.webview.getWebviewById('3pl_customer/line_details.html').evalJS('refreshData()');
+			
 		},
 		
 		// toVehicleOrderDetail: function(index){    //前往整车线路详情页面

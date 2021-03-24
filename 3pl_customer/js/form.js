@@ -474,9 +474,9 @@ var indexData = new Vue({
 			var self = this;
 			var list = self.address_list;
 			
-			list.forEach((item)=>{
-				item.good_weight=item.good_weight*1000;
-			})
+			// list.forEach((item)=>{
+			// 	item.good_weight=item.good_weight*1000;
+			// })
 			
 			self.address_list.forEach((item,index)=>{
 				 if(item.send_address_id && item.gather_address_id && item.good_name!=''){
@@ -551,7 +551,15 @@ var indexData = new Vue({
 			  data.car_type= self.carId;
 			  data.order_type ='vehicle';
 			  data.total_money=self.line_price;
-			  data.dispatcher=list;
+			  
+			  
+			  let temp_dispatcher=JSON.parse(JSON.stringify(list));
+			   temp_dispatcher.forEach((item)=>{
+			  	item.good_weight=item.good_weight*1000;
+			   })
+			   data.dispatcher=temp_dispatcher;
+			  
+			  // data.dispatcher=list;
 			  // data.dispatcher=JSON.stringify(list);
 			  data.send_time=self.start_time;
 			  data.gather_time=self.end_time;

@@ -38,7 +38,8 @@ var indexData = new Vue({
 			good_volume:1,
 			control_type:[],//温度信息
 			clod:"freeze",
-			clod_name:'冷冻'
+			clod_name:'冷冻',
+			remark:''
 		}],//下单地址和货物信息
 		
 		temp_control_type:[
@@ -140,7 +141,22 @@ var indexData = new Vue({
 		});
 	},
 	methods:{
-		
+		//备注字数限制
+		checkLength2:function(index){
+			var self=this;
+		    var l = 0;
+		    for(var i=0; i<self.address_list[index].remark.length; i++) {
+		        if (/[\u4e00-\u9fa5]/.test(self.address_list[index].remark[i])) {
+		            l+=2;
+		        } else {
+		            l++;
+		        }
+		        if (l > 10) {
+		            self.address_list[index].remark = self.address_list[index].remark.substr(0,i);
+		            break;
+		        }
+		    }
+		},
 		//获取页面基本信息
 		getCreateOrde:function(){
 			var data={
@@ -588,7 +604,7 @@ var indexData = new Vue({
 			
 			self.anticipatedfreight.weight=self.anticipatedfreight.temp_weight.reduce((n,m) => n + m);
 			self.anticipatedfreight.volume=self.anticipatedfreight.temp_volume.reduce((n,m) => n + m);
-			self.anticipatedfreight.weight=self.anticipatedfreight.weight*1000;
+			// self.anticipatedfreight.weight=self.anticipatedfreight.weight*1000;
 			let temp_data=JSON.parse(JSON.stringify(self.anticipatedfreight));
 			temp_data.gather_address=JSON.stringify(temp_data.gather_address);
 			temp_data.send_address=JSON.stringify(temp_data.send_address);
@@ -599,11 +615,13 @@ var indexData = new Vue({
 		count_price:function(temp_data){
 			var self = this;
 			var data=temp_data;
-
+			var list = self.address_list;
+			var datr=JSON.parse(JSON.stringify(data));
+			datr.weight=datr.weight*1000;
 			console.log('data的值是：'+JSON.stringify(data));
 			// return;
 			let datt={};
-			request.PostInfo_new(request.linePrice,data,function(res){
+			request.PostInfo_new(request.linePrice,datr,function(res){
 				console.log('/api/line/count_price的返回值是：'+JSON.stringify(res))
 				let messagess= '￥'+JSON.stringify(res.data) +'元';
 				var btnArray = ['确认','取消'];
@@ -618,22 +636,26 @@ var indexData = new Vue({
 							upData.send_time     =self.send_time;//发货时间
 							upData.gather_time   =self.gather_time;//收货时间
 							upData.pay_type      ='online';
-							upData.dispatcher    =self.address_list;
+							// upData.dispatcher    =self.address_list;
 							upData.pick_money    =self.pick_price
 							upData.price         =res.data;
 							upData.send_money    =self.send_price
 							upData.total_money   =self.min_money
 
-							
-							upData.dispatcher.forEach((item)=>{
+							let temp_dispatcher=JSON.parse(JSON.stringify(list));
+							 temp_dispatcher.forEach((item)=>{
 								item.good_weight=item.good_weight*1000;
-							})
+							 })
+							 upData.dispatcher=temp_dispatcher;
+							// upData.dispatcher.forEach((item)=>{
+							// 	item.good_weight=item.good_weight*1000;
+							// })
 							
 							
 							if(upData.pick_flag =='N' && upData.send_flag=='N'){
 								upData.good_name=self.address_list[0].good_name;
 								upData.good_number=self.address_list[0].good_number;
-								upData.good_weight=self.address_list[0].good_weight;
+								upData.good_weight=self.address_list[0].good_weight*1000;
 								upData.good_volume=self.address_list[0].good_volume;
 								upData.clod=self.address_list[0].clod;
 							}else{
@@ -653,7 +675,6 @@ var indexData = new Vue({
 									plus.webview.show(index);//打开初始窗口
 									// plusCommon.popToTarget('user_line/line.html',true);
 									index.evalJS("changSub(1)"); //改变选项卡点击位置
-									
 									// plusCommon.popToTarget('line/line.html',true);
 								}
 								// setTimeout(()=>{

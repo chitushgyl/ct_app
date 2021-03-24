@@ -74,6 +74,7 @@ var vm = new Vue({
 		type_from:'',
 		list:[],
 		img:[],
+		imgLen:[],
 	},
 	mounted: function(){
 		var self = this;
@@ -106,7 +107,8 @@ var vm = new Vue({
 				// console.log(JSON.stringify(res.data.info));
 				var data = res.data.info;
 				// self.clod = "";
-				self.img=data.receipt;
+				self.img = data.receipt[0];
+				self.imgLen = data.receipt;
 				self.detData_o=data;
 					for (var i = 0; i < data.arr.length; i++) {
 						self.addressList = data.arr[i].info;

@@ -668,7 +668,14 @@ var indexData = new Vue({
 			  data.order_type ='vehicle';
 			  // data.total_money=self.total_money;
 			  data.total_money=self.line_price+self.send_price+self.pick_price;
-			  data.dispatcher=list;
+			  
+			  let temp_dispatcher=JSON.parse(JSON.stringify(list));
+			   temp_dispatcher.forEach((item)=>{
+			  	item.good_weight=item.good_weight*1000;
+			   })
+			   data.dispatcher=temp_dispatcher;
+			  
+			  // data.dispatcher=list;
 			  // data.dispatcher=JSON.stringify(list);
 			  data.send_time=self.start_time;
 			  data.gather_time=self.end_time;
@@ -705,9 +712,9 @@ var indexData = new Vue({
 			  data.company_id = self.customer_id;
 			  data.remark=self.remark;
 			  // console.log("data:"+JSON.stringify(data));return;
-				data.dispatcher.forEach((item,index)=>{
-					item.good_weight=item.good_weight*1000;
-				})
+				// data.dispatcher.forEach((item,index)=>{
+				// 	item.good_weight=item.good_weight*1000;
+				// })
 			  
 			  request.PostInfo_new(request.tms_order_addOrder,data,function(res){
 				// console.log('接口返回值是：'+JSON.stringify(res));

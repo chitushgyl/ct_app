@@ -472,6 +472,24 @@ var vm = new Vue({
 					}
 				},"div");
 			}
+			if(id == 144){
+				
+				mui.confirm('确认该订单已经完成吗？', '订单完成', btnArray, function(e) {
+					if (e.index == 1) {
+						// console.log("成功");
+					} else {
+						var data = {
+							self_id: uoid,                       //订单id
+						}
+						console.log(JSON.stringify(data));
+						request.PostInfo_new(request.tms_order_orderDone,data,function(res){
+							mui.toast(res.msg);
+							vm.mescroll.resetUpScroll();
+							
+						},function(res){});
+					}
+				},"div");
+			}
 		},
 		toDis: function(index){
 			var self = this;

@@ -601,13 +601,21 @@ var indexData = new Vue({
 			  
 			var data = {};
 			  let temp_list=JSON.parse(JSON.stringify(list));
-			  temp_list.forEach((item)=>{
-				  item.good_weight=item.good_weight*1000;
-			  })
+			  // temp_list.forEach((item)=>{
+				 //  item.good_weight=item.good_weight*1000;
+			  // })
 			  data.order_type ='vehicle';
 			  data.total_money=self.line_price;
 			  data.line_price=self.line_price;
-			  data.dispatcher=temp_list;
+			  
+			  let temp_dispatcher=JSON.parse(JSON.stringify(temp_list));
+			   temp_dispatcher.forEach((item)=>{
+			  	item.good_weight=item.good_weight*1000;
+			   })
+			   data.dispatcher=temp_dispatcher;
+			  
+			  
+			  // data.dispatcher=temp_list;
 			  data.send_time=self.start_time;
 			  data.gather_time=self.end_time;
 			  

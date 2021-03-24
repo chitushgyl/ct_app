@@ -114,6 +114,7 @@ var vm = new Vue({
 		
 		to_car:function(index){
 			var self = this;
+			console.log(index)
 			self.getC_id=self.list[index].self_id;
 			self.car_number=self.list[index].car_number;
 			self.contacts=self.list[index].contacts;
@@ -124,6 +125,11 @@ var vm = new Vue({
 		},
 		to_car_c:function(index){
 			var self = this;
+			self.getC_id=self.list[index].self_id;
+			self.car_number=self.list[index].car_number;
+			self.contacts=self.list[index].contacts;
+			self.tel=self.list[index].tel;
+			self.type=self.list[index].car_possess;
 			self.checkedIndex_c=index;
 		},
 

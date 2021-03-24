@@ -185,9 +185,9 @@
 						<span v-else>不需配送</span>
 					</div>
 				</div>	
-				<div class="mui-row title_value">
+				<div class="mui-row">
 					<div class="mui-col-sm-4 mui-col-xs-4 title_">订单备注</div>
-					<div class="mui-col-sm-8 mui-col-xs-8 value_" >
+					<div class="mui-col-sm-8 mui-col-xs-8 value_"  style="display:inline-block;text-align:right;">
 						<span v-if="!detailData.remark">无特殊要求</span>
 						<span v-else>{{detailData.remark}}</span>
 					</div>
@@ -202,8 +202,8 @@
 					</div>
 					<div style="padding-top: 10px;"  v-if="imgLen.length!=0">
 						<div class=" mui-col-sm-12 title_" v-if="imgLen.length!=0">回单信息</div>
-						<div style="display: flex;flex: 1;padding: 5px 5px 15px 5px;flex-direction: row-reverse;">
-							<div class="mui-row mui-col-sm-4"  v-for="(item,index) in img" style="" >
+						<div style="display: flex;flex: 1;padding: 5px 5px 15px 5px;flex-direction: row-reverse;flex-wrap: wrap;">
+							<div class="mui-row mui-col-sm-4"  v-for="(item,index) in img" style="margin-top: 10px;" >
 								<img :src="item.url" style="width: 100px;height: 100px; border-radius: 5px;float: right;" data-preview-src="" data-preview-group="4">
 							</div>
 						</div>

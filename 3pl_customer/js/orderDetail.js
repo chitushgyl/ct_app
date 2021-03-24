@@ -74,6 +74,7 @@ var vm = new Vue({
 		type_from:'',
 		list:[],
 		img:[],
+		imgLen:[],
 	},
 	mounted: function(){
 		var self = this;
@@ -109,7 +110,8 @@ var vm = new Vue({
 				// console.log(JSON.stringify(self.list))
 				console.log(JSON.stringify(data))
 				self.detailData = data;
-				self.img = data.receipt;
+				self.img = data.receipt[0];
+				self.imgLen = data.receipt;
 				if (self.detailData.order_type == 'vehicle') {
 				             self.addressList = data.info;
 				  }else{

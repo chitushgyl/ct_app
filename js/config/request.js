@@ -208,7 +208,7 @@
 					},
 					success:function(response){
 						// console.log(response);、
-						console.log("response:"+JSON.stringify(response));
+						// console.log("response:"+JSON.stringify(response));
 						var res_json = JSON.parse(response);
 						var code = res_json.code;
 						var msg = res_json.msg;

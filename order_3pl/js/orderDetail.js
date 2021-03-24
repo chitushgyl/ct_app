@@ -75,6 +75,8 @@ var vm = new Vue({
 		list:[],
 		lineList_goods:[],
 		lineList:[],
+		img:[],
+		imgLen:[],
 	},
 	mounted: function(){
 		var self = this;
@@ -110,6 +112,8 @@ var vm = new Vue({
 				// console.log(JSON.stringify(self.list))
 				console.log(JSON.stringify(data))
 				self.detailData = data;
+				self.img = data.receipt[0];
+				self.imgLen = data.receipt;
 				self.lineList=data.tms_order_dispatch;
 				for(var i=0;i<data.tms_order_dispatch.length;i++){
 					self.lineList_goods=data.tms_order_dispatch[i].good_info;

@@ -101,6 +101,10 @@
 			    width:28%;
 			    text-align:right;
 			}
+			[v-cloak]{
+			    display: none
+			}
+			
 		</style>
 	</head>
 
@@ -112,7 +116,7 @@
 			<h1 class="mui-title" id="manual">订单列表</h1>
 		</header>
 		<!-- 主体 -->
-		<div id="carOrderList" class="mui-content">
+		<div id="carOrderList" class="mui-content" v-cloak>
 
 			<div class="nav" style="height: 44px;">
 				
@@ -141,7 +145,7 @@
 								<div class="order_number mui-float-left copy_div" >
 									<!-- <button type="button" class="mui-btn mui-btn-primary" style="margin-top: 9px; width:35px; height: 20px;font-size: 12px;position: relative;"> -->
 									<span style="padding: 2px 4px; height: 24px;line-height: 20px;background-color:#0088F4;color: #FFFFFF;margin-left: -10px;border-radius: 4px;font-size: 12px;">订单编号</span>
-									<span>{{item.self_id}}</span>
+									<span>{{item.self_id_show}}</span>
 								</div>
 								<div>
 									<img src="../images/driver/line_right.png" class="line_right_order_top mui-float-right" style="">
