@@ -71,6 +71,88 @@ var vm = new Vue({
 		
 		mui.plusReady(function() {		
 			var ws = plus.webview.currentWebview();
+			
+			/****城市联动开始*****/ 
+			let temp_cityArr;
+			request.PostInfo_new(request.get_city,{},function(res){
+							// console.log(111111111111111111);
+							temp_cityArr = res.data.info;
+							// console.log("temp_cityArr:"+self.temp_cityArr);
+							// console.log("self.temp_cityArr:"+JSON.stringify(self.temp_cityArr));return;
+							let temp_sheng=temp_cityArr.filter(item=>{
+									return 	item.level == 1;		
+							})
+							let temp_city=temp_cityArr.filter(item=>{
+									return 	item.level == 2;		
+							})
+							let temp_qug=temp_cityArr.filter(item=>{
+									return 	item.level == 3;		
+							})
+							
+						// console.log("temp_sheng:"+JSON.stringify(temp_sheng));
+						// console.log("temp_city:"+JSON.stringify(temp_city));
+						// console.log("temp_qug:"+JSON.stringify(temp_qug));
+							
+							
+							//制作二级和三级的联动
+							temp_city.forEach((item,index)=>{
+								item.children=[];
+								temp_qug.forEach((items)=>{
+									if(item.id == items.parent_id){
+										let json={};
+										json.value=items.id;
+										json.text=items.name;
+										item.children.push(json);
+									}
+								})
+							})
+							
+							//制作一级和二级的联动
+										
+							temp_sheng.forEach((item,index)=>{
+								
+								item.children=[];
+								temp_city.forEach((items)=>{
+									if(item.id == items.parent_id){
+										let json={};
+										json.value=items.id;
+										json.text=items.name;
+										json.children=items.children;
+										item.children.push(json);
+									}
+								})
+							})
+							
+							
+							
+							self.cityData3=temp_sheng.map(item=>{
+								return {
+									value:item.id,
+									text:item.name,
+									children:item.children
+								}
+							})
+							
+							console.log("self.cityData3:"+JSON.stringify(self.cityData3));
+							
+							// 初始化选择器
+							self.cityPicker = new mui.PopPicker({
+								layer: 3,
+							});
+							self.cityPicker.setData(self.cityData3);
+						},function(res){
+						
+						});
+						console.log(temp_cityArr);
+						// console.log("self.temp_cityArr:"+JSON.stringify(self.temp_cityArr));return;
+						// console.log("temp_sheng:"+JSON.stringify(temp_sheng));
+						// console.log("temp_city:"+JSON.stringify(temp_city));
+						// console.log("temp_qug:"+JSON.stringify(temp_qug));
+			
+						 console.log("cityData3:"+JSON.stringify(self.cityData3));
+						/****城市联动结束*****/ 
+			
+						// console.log(ws);
 			console.log(ws);
 		  	self.type = ws.type ? ws.type : 1;
 			//从城配编辑、修改页面进入将传值并初始化地址选择器		  	
@@ -191,7 +273,7 @@ var vm = new Vue({
 				
 				
 				var submitData = {
-					token : user.getState('token'),
+					token : localStorage.token,
 					self_id : self.address_id,
 					pro : self.sheng_name,
 					city : self.shi_name,
