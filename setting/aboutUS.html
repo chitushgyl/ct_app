@@ -8,8 +8,7 @@
 		<!-- fonticon -->
 		<link rel="stylesheet" type="text/css" href="../fonts/iconfont.css"/>
 		<!-- 通用样式 -->
-		<link rel="stylesheet" type="text/css" href="../person/css/common.css"/>
-						<link rel="stylesheet" type="text/css" href="../user/css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../user/css/common.css"/>
 		<!--页面样式-->
 		<link rel="stylesheet"  type="text/css" href="css/aboutus.css">
 		<title>关于我们</title>
@@ -65,9 +64,9 @@
 		<script src="../js/common/common.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			mui.plusReady(function(){
-				var checkUrl = request.ServerUrl+"/app/personal/get_pt"; // 检测更新
-				var downloadWgtUrl = request.ServerUrl+"/public/update/driver.wgt"; // 升级包目录
-				var downloadApkUrl = request.ServerUrl+"/public/update/driver.apk"; // 升级包目录
+				var checkUrl = request.ServerUrl_new+"/user/get_version"; // 检测更新
+				var downloadWgtUrl = request.ServerUrl_new+"/public/update/driver.wgt"; // 升级包目录
+				var downloadApkUrl = request.ServerUrl_new+"/update/driver.apk"; // 升级包目录
 				var iosURL = "https://itunes.apple.com/cn/app/%E8%B5%A4%E9%80%94%E6%89%BF%E8%BF%90%E7%AB%AF/id1249214373?mt=8"; // 苹果地址
 				var ios_state = null; // ios升级状态 1 需要升级从appstore中下载 2 差量升级 3 不升级
 			    var android_state = null; // android是否需要升级 1 需要升级从服务器下载新的apk 2 差量升级 3 不升级
@@ -76,51 +75,85 @@
 				var android_version = null; // 服务器上安卓的版本号
 			    // 检测更新
 				function checkUpdate(){
-				    var xhr = new XMLHttpRequest();
-				    xhr.onreadystatechange=function(){
-				        switch(xhr.readyState){
-				            case 4:
-					            if(xhr.status==200){
-					                var res = JSON.parse(BASE64.decode(xhr.responseText));
-					                res = res.data;
-							        ios_version = res.ios_version; // 苹果版本号
-							        android_version = res.android_version; // 安卓版本号
-							        ios_state = res.ios; // 苹果升级状态 1 整包升级 2 差量升级 3 不升级
-							        android_state = res.android; // 安卓需要升级状态 1 整包升级 2 差量升级 3不升级
-					                checkOs();
-					            }else{
-					                console.log("检测更新失败！");
-					            }
-				            	break;
-				            default:
-				            	break;
-				        }
-				    }
-				    xhr.open('GET',checkUrl);
-				    xhr.send();
+				    // var xhr = new XMLHttpRequest();
+				    // xhr.onreadystatechange=function(){
+				    //     switch(xhr.readyState){
+				    //         case 4:
+					   //          if(xhr.status==200){
+								// 	console.log(JSON.stringify(xhr.responseText));
+					   //              var res = JSON.parse(BASE64.decode(xhr.responseText));
+					   //              res = res.data;
+							 //        ios_version = res.ios_version; // 苹果版本号
+							 //        android_version = res.android_version; // 安卓版本号
+							 //        ios_state = res.ios; // 苹果升级状态 1 整包升级 2 差量升级 3 不升级
+							 //        android_state = res.android; // 安卓需要升级状态 1 整包升级 2 差量升级 3不升级
+					   //              checkOs();
+					   //          }else{
+					   //              console.log("检测更新失败！");
+					   //          }
+				    //         	break;
+				    //         default:
+				    //         	break;
+				    //     }
+				    // }
+				    // xhr.open('GET',checkUrl);
+				    // xhr.send();
+					request.PostInfo_new(request.get_version,{},function(res){
+						console.log("res是："+JSON.stringify(res));	 
+						 
+						  if(res.code==200){
+							  // var res = JSON.parse(BASE64.decode(xhr.responseText));
+							 res = res.data.info;  
+							for(var i in res) {
+								if(i.os=='ios'){
+									//苹果
+									// console.log("苹果");
+									ios_version = i.app_version; // 苹果版本号	 
+									ios_state = i.version_state; // 苹果升级状态 1 整包升级 2 差量升级 3 不升级
+								}else{
+									//安卓
+									// console.log("安卓");
+									android_version = i.app_version; // 安卓版本号							 
+									android_state = i.version_state; // 安卓需要升级状态 1 整包升级 2 差量升级 3不升级									
+								}
+							}
+							  
+							  checkOs();
+						  }else{
+							  console.log("检测更新失败！");
+						  }
+						 
+
+					},function(){});
+					
+					
 				}
 				/**
 				 * 判断手机系统检测升级
 				 */
 				function checkOs(){ 
-					
+					console.log("升级");
 			        if(plus.os.name == 'Android'){	// 	Android 用户
 			        	// 判断版本号
+						// console.log("是安卓机");
 			        	var isupdate = compareVersion(app_version,android_version); // 是否需要升级
 			        	// 
+						
 			        	if(!isupdate) {
 			        		mui.toast('已经是最新版本了');
 			        		return false;
 			        	}
 			        	//
+						// console.log("安卓状态："+android_state);
 			        	switch (android_state){
 			        		case '1':
+							
 			        			plus.nativeUI.alert( "温馨提示:请升级、新版本APP为您带来更好的服务体验！", function(){
 									createDownload();
 								}, "请升级", "确定" );
 			        			break;
 			        		case '2':
-			        			downWgt();
+			        			// downWgt();
 			        			break;
 			        		case '3':
 			        			break;
@@ -129,6 +162,7 @@
 			        	}
 					}else{ // 苹果用户
 						// 判断版本号
+						console.log("是苹果机");
 			        	var isupdate = compareVersion(app_version,ios_version); // 是否需要升级
 			        	// 
 			        	if(!isupdate) {
@@ -143,7 +177,7 @@
 								}, "请升级", "确定" );
 			        			break;
 			        		case '2':
-			        			downWgt();
+			        			// downWgt();
 			        			break;
 			        		case '3':
 			        			break;

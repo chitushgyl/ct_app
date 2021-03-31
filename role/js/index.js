@@ -133,7 +133,43 @@ var vm = new Vue({
 				}
 			},"div");
 		},
-
+		del_role:function(index){
+			var self = this;
+			var data = {
+				self_id: self.list[index].self_id
+			};
+			console.log(data);
+			var btnArray = ['确认', '取消'];
+			mui.confirm('删除角色', '确认删除角色？', btnArray, function(e) {
+				console.log('index:'+e.index);
+				if (e.index == 1) {
+					// console.log("成功");
+				} else {
+					request.PostInfo_new(request.user_delete,data,function(res){
+						var msg = res.msg;
+						mui.toast(msg);
+			// 			localStorage.dtoken = res.user_token;
+			// 			localStorage.project_type = self.list[index].type;
+			// 			if (self.list[index].system_admin) {
+			// 				localStorage.group_code = self.list[index].system_admin.group_code
+			
+			// 			}
+						// console.log(plus.runtime.appid);
+						// localStorage.change_role_flag = 1;
+						
+						mui.plusReady(function() {
+							plus.webview.getWebviewById(plus.runtime.appid).evalJS('refreshData()');//底部菜单刷新
+							console.log(plus.webview.getWebviewById('user/user.html'));
+							plus.webview.getWebviewById('user/user.html').evalJS('refreshData_index_menu()');//个人中心菜单刷新
+							//console.log("666666");
+							mui.back();
+							// plusCommon.popToTarget('../user/user.html',true);
+						})
+						
+					},function(res){});
+				}
+			},"div");
+		},
 		to_auth: function(index) {
 			var self  = this;
 			var conid = self.list[index].role_id;

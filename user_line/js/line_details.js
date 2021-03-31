@@ -22,6 +22,11 @@ var indexData = new Vue({
 		line_pick_price:null,
 		choosePickType:'oneself',//默认选中的提货方式
 		chooseSendType:'oneself',//默认选中的送货方式
+		pick_price:null,
+		send_price:null,
+		pick_price_show:0,
+		send_price_show:0,
+		more_Price:null,
 		send_arr:[{
 				send_info:'添加发车地址',
 				send_info_tel:'装车联系人'
@@ -75,6 +80,7 @@ var indexData = new Vue({
 		isShow:false,//是否显示下单地址的添加按钮
 		start_time:null,
 		end_time:null,
+		send_time:null,
 		remark:'',
 	},
 	mounted: function(){
@@ -104,10 +110,15 @@ var indexData = new Vue({
 				self.anticipatedfreight.send_address[0].city=self.lineList.send_shi_name;
 				self.anticipatedfreight.send_address[0].area=self.lineList.send_qu_name;
 				self.anticipatedfreight.send_address[0].info=self.lineList.send_address;
-				
 					
+				var currDate = new Date();
+				var d = new Date();
+				self.send_time=d.getFullYear() + "-" +(d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes();
+				// self.start_time=self.lineList.start_time;
 				
-				self.start_time=self.lineList.start_time;
+				
+				
+				
 				self.end_time=self.lineList.end_time;
 				self.line_id=self.lineList.self_id;
 				self.gather_time=self.lineList.depart_time;
@@ -218,12 +229,14 @@ var indexData = new Vue({
 					 item.send_info=self.lineList.send_sheng_name+self.lineList.send_shi_name+self.lineList.send_qu_name+self.lineList.send_address;
 					 item.send_info_tel='';
 				})
+				self.pick_price_show="0";
 			}else{
 				self.anticipatedfreight.pick_type='Y'
 				self.address_list.forEach((item,index)=>{
 					 item.send_info='添加装车地址';
 					 item.send_info_tel='装车地址联系人';
 				})
+				self.pick_price_show=self.pick_price;
 				
 			}
 			self.changeIsShow(self.chooseSendType,self.choosePickType);
@@ -240,12 +253,14 @@ var indexData = new Vue({
 					 item.gather_info=self.lineList.gather_sheng_name+self.lineList.gather_shi_name+self.lineList.gather_qu_name+self.lineList.gather_address;
 					 item.gather_info_tel='';
 				})
+				self.send_price_show="0";
 			}else{
 				self.anticipatedfreight.send_type='Y'
 				self.address_list.forEach((item,index)=>{
 					 item.gather_info='添加目的地址';
 					 item.gather_info_tel='目的地址联系人';
 				})
+				self.send_price_show=self.send_price;
 			}
 			self.changeIsShow(self.chooseSendType,self.choosePickType);
 		},
@@ -257,6 +272,7 @@ var indexData = new Vue({
 				self.isShow=false;
 				// alert(123);
 				//这里将情况用户自己选择的地址（如果真的有的话）[重新初始化address_list]
+
 				 self.address_list=[{
 					send_info:self.lineList.send_sheng_name+self.lineList.send_shi_name+self.lineList.send_qu_name+self.lineList.send_address,
 					send_info_tel:self.lineList.send_tel,
@@ -325,8 +341,27 @@ var indexData = new Vue({
 						item.send_qu_name=self.lineList.send_qu_name;
 						item.send_address=self.lineList.send_address;
 					})
+				}else{
+					self.anticipatedfreight.send_address.forEach((item,index)=>{
+						item.pro=null;
+						item.city=null;
+						item.area=null;
+						item.info=null;
+					})
+					
+					self.address_list.forEach((item,index)=>{
+						item.send_name=null;
+						item.send_tel=null;
+						item.send_qu=null;
+						item.send_sheng_name=null;
+						item.send_shi_name=null;
+						item.send_qu_name=null;
+						item.send_address=null;
+						item.send_address_id=null;
+					})					
 				}
 				
+
 				if(send =='oneself'){ //送货方式
 					self.anticipatedfreight.gather_address.forEach((item,index)=>{
 						item.pro=self.lineList.gather_sheng_name;
@@ -344,6 +379,24 @@ var indexData = new Vue({
 						item.gather_qu_name=self.lineList.gather_qu_name;
 						item.gather_address=self.lineList.gather_address;
 					})
+				}else{
+					self.anticipatedfreight.gather_address.forEach((item,index)=>{
+						item.pro=null;
+						item.city=null;
+						item.area=null;
+						item.info=null;
+					})
+
+					self.address_list.forEach((item,index)=>{
+						item.gather_name=null;
+						item.gather_tel=null;
+						item.gather_qu=null;
+						item.gather_sheng_name=null;
+						item.gather_shi_name=null;
+						item.gather_qu_name=null;
+						item.gather_address=null;
+						item.gather_address_id=null;
+					})					
 				}
 				
 			}
@@ -400,6 +453,24 @@ var indexData = new Vue({
 			console.log('index：'+index);
 			// 判断点击的时候点击的是发货还是收货
 			if (self.tapCityType == 1) { // 发货地址
+				
+				
+				var c_ss=self.lineList.send_sheng_name+self.lineList.send_shi_name;
+				var xz_ss=shiqu.sheng_name+shiqu.shi_name;
+				
+				
+				if(xz_ss==c_ss){
+					console.log("地址在可选范围内")
+				}else{
+					mui.toast('第'+(index+1)+"个装车地址必须在"+self.lineList.send_sheng_name+self.lineList.send_shi_name+"范围内");
+					return false;					
+				}
+								
+				// if(shiqu.sheng_name!=self.lineList.send_sheng_name && shiqu.shi_name!=self.lineList.send_shi_name){
+				// 	mui.toast('第'+(index+1)+"个装车地址必须在"+self.lineList.send_sheng_name+self.lineList.send_shi_name+"范围内");
+				// 	return false;
+				// }			
+
 				self.address_list[index].send_info = shiqu.sheng_name+shiqu.shi_name+shiqu.qu_name+shiqu.address; // 详细地址
 				self.address_list[index].send_info_tel = shiqu.contacts+shiqu.tel; // 详细地址
 				self.address_list[index].send_address_id=shiqu.self_id;
@@ -421,6 +492,37 @@ var indexData = new Vue({
 					self.anticipatedfreight.sendCanUse=true;
 				})
 			} else {		
+				
+				console.log(JSON.stringify(shiqu));
+				
+				var c_ss=self.lineList.gather_sheng_name+self.lineList.gather_shi_name;
+				var xz_ss=shiqu.sheng_name+shiqu.shi_name;
+
+				if(xz_ss==c_ss){
+					console.log("地址在可选范围内")
+				}else{
+					mui.toast('第'+(index+1)+"个收货地址必须在"+self.lineList.gather_sheng_name+self.lineList.gather_shi_name+"范围内");
+					return false;					
+				}
+				
+				// if(shiqu.sheng_name!=self.lineList.gather_sheng_name && shiqu.shi_name!=self.lineList.gather_shi_name ){
+				// 	mui.toast('第'+(index+1)+"个收货地址必须在"+self.lineList.gather_sheng_name+self.lineList.gather_shi_name+"范围内");
+				// 	return false;
+				// }
+				
+				
+				var c_address=self.lineList.gather_sheng_name+self.lineList.gather_shi_name+self.lineList.gather_qu_name+self.lineList.gather_address;
+				var xz_address=shiqu.sheng_name+shiqu.shi_name+shiqu.qu_name+shiqu.address;
+				
+				// console.log("c_address:"+JSON.stringify(c_address));
+				// console.log("xz_address:"+JSON.stringify(xz_address));
+				if(c_address==xz_address){
+					mui.toast("配送地址不能和仓库地址一样");
+					return false;
+				}
+
+
+				
 				self.address_list[index].gather_info = shiqu.sheng_name+shiqu.shi_name+shiqu.qu_name+shiqu.address; // 详细地址
 				self.address_list[index].gather_info_tel = shiqu.contacts+shiqu.tel; // 详细地址
 				self.address_list[index].gather_address_id=shiqu.self_id;
@@ -566,10 +668,51 @@ var indexData = new Vue({
 			this.anticipatedfreight.temp_volume.splice(index,1);
 			this.address_list = list;
 		},
-		
+		// 时间选择，选择装货时间
+		timeSelt: function() { 
+			var self = this;
+			var year = new Date().getFullYear();
+			var month = new Date().getMonth();
+			var day = new Date().getDate();
+			var hour = new Date().getHours();
+			var end = day + 3;
+			var minute = new Date().getMinutes();
+			var start = new Date(year, month, day, hour, minute, 0).getTime(); // 当前时间的节点
+			var starttime = start + 4 * 60 * 60 * 1000; // 只能选择4小时以后的时间
+			var endtime = new Date(year, month, end, 23, 59, 0).getTime(); // 结束时间。3天后
+			var dtpicker = new mui.DtPicker({
+				type: "datetime",
+				customData: {
+					i: [ //时间/日期别名
+						{
+							value: '00',
+							text: '00分'
+						},
+						{
+							value: '15',
+							text: '15分'
+						},
+						{
+							value: '30',
+							text: '30分'
+						},
+						{
+							value: '45',
+							text: '45分'
+						}
+					],
+				}
+			});
+			dtpicker.show(function(selectItems) {
+				var d = new Date(selectItems.y.value, selectItems.m.value - 1, selectItems.d.value, selectItems.h.value,
+				selectItems.i.value);
+				var time = selectItems.y.value + '-' + selectItems.m.value + '-' + selectItems.d.value + ' ' +  selectItems.h.value + ':'+selectItems.i.value;
+				self.send_time = time;
+			});
+		},	
 		//点击下单
 		orderUse(){
-			
+			var self = this;
 			var flag = false;
 			if (localStorage.ftoken == null) {
 				mui.toast('请先登录');
@@ -580,50 +723,74 @@ var indexData = new Vue({
 				return false;
 			}
 			
+			// var list = self.address_list;
 			
+		    self.address_list.forEach((item,index)=>{
+		    	 if(item.send_address_id && item.gather_address_id && item.good_name!=''){
+		    		cando=true;
+		    	 }else{
+		    		cando=false;
+		    	 }
+		    })
 			
-			let self=this;
-			var list = self.address_list;
-			
-			for (var i in list) {
-			
-				if (!list[i].good_name) {
-					mui.toast('请输入货物名称！');
-					return false;
-				} 
-				       
-						
-				if (!list[i].good_number) {
-				    flag = true;
-				    mui.toast('请输入货物件数！');
-				    return false;
-				}         
-						
-				 if (!list[i].good_volume) {
-				    mui.toast('请输入货物总体积！');
-				    return false;
-				}          
-						
-				if (!list[i].good_weight) {
-				    mui.toast('请输入货物总重量！');
-				    return false;
-				}
-				if (!list[i].clod) {
-				    mui.toast('请选择温度！');
-				    return false;
-				}
-				
-						  
+			if(cando){
+				self.anticipatedfreight.weight=self.anticipatedfreight.temp_weight.reduce((n,m) => n + m);
+				self.anticipatedfreight.volume=self.anticipatedfreight.temp_volume.reduce((n,m) => n + m);
+				let temp_data=JSON.parse(JSON.stringify(self.anticipatedfreight));
+				temp_data.gather_address=JSON.stringify(temp_data.gather_address);
+				temp_data.send_address=JSON.stringify(temp_data.send_address);
+				self.count_price(temp_data);
+			}else{
+				mui.toast('请完整填写信息！');
 			}
 			
-			self.anticipatedfreight.weight=self.anticipatedfreight.temp_weight.reduce((n,m) => n + m);
-			self.anticipatedfreight.volume=self.anticipatedfreight.temp_volume.reduce((n,m) => n + m);
+			
+			// let self=this;
 			
 			
-			let temp_data=JSON.parse(JSON.stringify(self.anticipatedfreight));
-			temp_data.gather_address=JSON.stringify(temp_data.gather_address);
-			temp_data.send_address=JSON.stringify(temp_data.send_address);
-			self.count_price(temp_data);
+			// for (var i in list) {
+			    
+			// 	if (!list[i].send_address_id) {
+			// 	    mui.toast('请选择装车地址！');
+			// 	    return false;
+			// 	}
+						
+			// 	if (!list[i].gather_address_id) {
+			// 	    mui.toast('请选择目的地址！');
+			// 	    return false;
+			// 	}
+
+				
+			// 	if (!list[i].good_name) {
+			// 		mui.toast('请输入货物名称！');
+			// 		return false;
+			// 	} 
+				       
+						
+			// 	if (!list[i].good_number) {
+			// 	    flag = true;
+			// 	    mui.toast('请输入货物件数！');
+			// 	    return false;
+			// 	}         
+						
+			// 	 if (!list[i].good_volume) {
+			// 	    mui.toast('请输入货物总体积！');
+			// 	    return false;
+			// 	}          
+						
+			// 	if (!list[i].good_weight) {
+			// 	    mui.toast('请输入货物总重量！');
+			// 	    return false;
+			// 	}
+			// 	if (!list[i].clod) {
+			// 	    mui.toast('请选择温度！');
+			// 	    return false;
+			// 	}
+				
+						  
+			// }
+			
+
 		},
 		
 		//调用接口计算预估运费
@@ -634,13 +801,15 @@ var indexData = new Vue({
 
 			
 			var datr=JSON.parse(JSON.stringify(data));
-			datr.weight=datr.weight*1000;
+			// datr.weight=datr.weight*1000;
+			datr.weight=datr.weight;
 			// console.log("datr"+JSON.stringify(datr));
 			request.PostInfo_new(request.linePrice,datr,function(res){
 				console.log('费用是：'+JSON.stringify(res));
 				self.line_send_price=res.price_info.send_price;
 				self.line_pick_price=res.price_info.pick_price;
 				self.line_price=res.price_info.line_price;
+				self.more_price=res.price_info.more_price;
 				let messagess= '￥'+JSON.stringify(res.data) +'元';
 				// console.log('title是：'+messagess);
 				let datt={
@@ -657,6 +826,7 @@ var indexData = new Vue({
 						data.send_price=self.line_send_price,
 						data.pick_price=self.line_pick_price,
 						data.line_price=self.line_price,
+						data.more_price=self.more_price,
 						data.line_id=self.line_id;
 						data.order_type ='line';
 						data.total_money=res.data;
@@ -665,7 +835,8 @@ var indexData = new Vue({
 						
 						let temp_dispatcher=JSON.parse(JSON.stringify(list));
 						 temp_dispatcher.forEach((item)=>{
-							item.good_weight=item.good_weight*1000;
+							// item.good_weight=item.good_weight*1000;
+							item.good_weight=item.good_weight;
 						 })
 						 data.dispatcher=temp_dispatcher;
 						// data.dispatcher.forEach((item)=>{
@@ -674,7 +845,7 @@ var indexData = new Vue({
 						
 						
 						data.remark=self.remark;
-
+						data.send_time=self.send_time;
 						//装货
 						// console.log(JSON.stringify(list));return;
 						
@@ -695,7 +866,8 @@ var indexData = new Vue({
 			// 				data=list[0];
 							data.good_name=list[0].good_name;
 							data.good_number=list[0].good_number;
-							data.good_weight=list[0].good_weight*1000;
+							data.good_weight=list[0].good_weight;
+							// data.good_weight=list[0].good_weight*1000;
 							data.good_volume=list[0].good_volume;
 							data.clod=list[0].clod;
 							data.send_flag='N';

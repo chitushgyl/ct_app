@@ -368,7 +368,7 @@ var vm = new Vue({
 				} else {
 					console.log("确定取消订单");
 					var data = {
-						token: user.getState('token'),  // 令牌
+						token:localStorage.token,  // 令牌
 						id: uoid,                       //订单id
 					}
 					request.PostInfo_new(request.app_driver_cancel_vehical,data,function(res){
@@ -397,7 +397,7 @@ var vm = new Vue({
 							}
 							var data = {
 								id:uoid,
-								token:user.getState('token'),
+								token:localStorage.token,
 								line_price:e.value
 							};
 							mui.openWindow({
@@ -448,7 +448,7 @@ var vm = new Vue({
 					// console.log("成功");
 				} else {
 					var data = {
-						token: user.getState('token'),  // 令牌
+						token:localStorage.token,  // 令牌
 						id: uoid,                       //订单id
 					}
 					request.PostInfo_new(request.app_driver_unline,data,function(res){
@@ -468,7 +468,7 @@ var vm = new Vue({
 					// console.log("成功");
 				} else {
 					var data = {
-						token: user.getState('token'),  // 令牌
+						token:localStorage.token,  // 令牌
 						id: uoid,                       //订单id
 					}
 					request.PostInfo_new(request.app_driver_cancel_dispatch,data,function(res){
@@ -490,7 +490,7 @@ var vm = new Vue({
 					// console.log("成功");
 				} else {
 					var data = {
-						token: user.getState('token'),  // 令牌
+						token:localStorage.token,  // 令牌
 						id: uoid,                       //订单id
 					}
 					request.PostInfo_new(request.app_driver_done_vehical,data,function(res){
@@ -512,7 +512,7 @@ var vm = new Vue({
 						// console.log("成功");
 					} else {
 						var data = {
-							token: user.getState('token'),  // 令牌
+							token:localStorage.token,  // 令牌
 							order_id: uoid,                       //订单id
 						}
 						request.PostInfo_new(request.api_driver_orderDone,data,function(res){

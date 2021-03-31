@@ -225,13 +225,12 @@ var vm = new Vue({
 			var data = {
 				page: pageNum,
 				group_code: localStorage.group_code,
-				
 			}
 
 			data.status = status;
 			console.log(JSON.stringify(data))
 			request.PostInfo_new(request.api_take_orderPage,data,function(res){
-				// console.log(JSON.stringify(res))
+				console.log(JSON.stringify(res))
 				var data = res.data.info;
 				//更新列表数据
 				self.list = self.list.concat(data);
@@ -276,8 +275,8 @@ var vm = new Vue({
 			//调度
 			if(id == 121){
 					mui.openWindow({
-						url:'dispatch.html',
-						id:'dispatch.html',
+						url:'../order_user/dispatch.html',
+						id:'../order_user/dispatch.html',
 						createNew:true,
 						extras:{
 							self_id: uoid,

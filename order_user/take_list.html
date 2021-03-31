@@ -99,9 +99,10 @@
 								<!-- </div> -->
 								<div class="order_number mui-float-left copy_div" >
 										<span style="padding: 2px 4px; height: 24px;line-height: 20px;background-color:#0088F4;color: #FFFFFF;margin-left: -10px;border-radius: 4px;font-size: 12px;">{{item.order_type_show}}</span>
-										<button class="btn" style="border:0;padding:0;height:100%;margin:0;background-color: #fff;display:inline;font-size:12px;height:36px;">
+										<span>订单编号{{item.self_id_show}}</span>
+										<!-- <button class="btn" style="border:0;padding:0;height:100%;margin:0;background-color: #fff;display:inline;font-size:12px;height:36px;">
 											{{item.create_time}}
-										</button> 
+										</button> -->
 									
 								</div>
 								<div class="mui-float-right order_status" :data="item.self_id">
@@ -124,9 +125,9 @@
 							<div style="" class="order_style_center">
 								<div class="mui-float-left start_order_center">
 									<div class="start_order_center_area" v-if="item.send_qu_name">{{item.send_qu_name}}</div>
-									<div class="start_order_center_city">
+<!-- 									<div class="start_order_center_city">
 										<span v-if="item.send_sheng_name || item.send_shi_name">{{item.send_sheng_name}}&nbsp;{{item.send_shi_name}}</span>
-									</div>
+									</div> -->
 								</div>
 								<div class="mui-float-left line_order_center">
 									<img src="../images/driver/line_line.png" class="line_line">
@@ -134,14 +135,14 @@
 								<div class="mui-float-left end_order_center">
 									<div class="start_order_center_area" v-if="item.gather_qu_name">{{item.gather_qu_name}}</div>
 									
-									<div class="start_order_center_city"> 
+<!-- 									<div class="start_order_center_city"> 
 										<span v-if="item.gather_sheng_name || item.gather_shi_name">{{item.gather_sheng_name}}&nbsp;{{item.gather_shi_name}}</span>
-									</div>
+									</div> -->
 								</div>
 								<div class="clear"></div>
 							</div>
-							<div style="" class="order_style_bottom" >
-								<div style="height:22px;line-height: 22px;">
+<!-- 							<div style="" class="order_style_bottom" >
+								<div style="height:22px;line-height: 22px;" v-if="item.order_type=='line'">
 									<div class="mui-float-left" style="width:50%;overflow: hidden;height:22px;"><span class="order_time_txt">货物</span>&nbsp;
 									<span class="order_time_val">{{item.good_number}}件{{item.good_weight}}kg{{item.good_volume}}方</span></div>
 									<div class="mui-float-right" style="width:50%;overflow: hidden;height:22px;text-align: right;">
@@ -151,7 +152,12 @@
 									<div class="clear"></div>
 								</div>
 								<div style="height:22px;line-height: 22px;">
-									<!-- <div class="mui-float-left" style="" v-if="item.order_type != 'vehicle'"><span class="order_time_txt"></span>&nbsp;<span class="order_time_val"></span></div> -->
+									<div class="mui-float-left" style="width: 100%;"v-if="item.send_time" ><span class="order_time_txt">发车时间</span>&nbsp;
+									<span class="order_time_val">{{item.send_time}}</span></div>
+									<div class="clear"></div>
+								</div>
+								<div style="height:22px;line-height: 22px;">
+									
 									<div class="clear"></div>
 								</div>
 								<div class="set_null_div">	</div>
@@ -162,7 +168,41 @@
 									</span>
 	
 								</div>
+							</div> -->
+							
+							<div  class="order_style_bottom" style="display:block;width:100%;height:25px;">
+							
+								<div class="mui-float-left" style="height:22px;line-height: 22px;width:50%;overflow: hidden;">
+										<span class="order_time_txt">发车时间</span>&nbsp;<span class="order_time_val">
+										<span class="order_time_val">{{item.send_time}}</span>
+									<div class="clear"></div>
+								</div>								
+								
+								<div class="mui-float-right" style="width:50%;overflow: hidden;height:22px;text-align: right;">
+									<span class="order_time_txt">温度</span>&nbsp;
+									<span class="order_time_val">{{item.temperture[0]}}</span>
+									<div class="clear"></div>
+								</div>
 							</div>
+							
+							<div class="order_style_bottom" style="display:block;width:100%;height:25px;" >
+							
+								<div class="mui-float-left"   style="height:22px;line-height: 22px;width:50%;text-align:left;">
+									<div class="mui-float-left" style="" ><span class="order_time_txt">车型</span>&nbsp;
+									<span class="order_time_val">{{item.tms_car_type.parame_name}}</span></div>
+									<div class="clear"></div>
+								</div>
+								<div class="set_null_div">	</div>
+								<div class="order_price" v-cloak  style="width:50%;text-align:right;float:right;">
+									<span >
+										￥<span style="font-size:20px;" v-if="item.group_code != item.receiver_id">{{item.on_line_money}}</span>
+										<span style="font-size:20px;" v-else>{{item.on_line_money}}</span>
+									</span>
+									
+								</div>
+										
+							</div>
+							
 						</div>
 
 						<div class="order_style_bottom_btn">	

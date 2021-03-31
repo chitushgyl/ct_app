@@ -566,7 +566,7 @@
 				overflow:auto;
 				width: 100%;
 			}
-	
+			
 		</style>
 	</head>
 	<body>
@@ -582,7 +582,7 @@
 			<div class=" mui-scroll">
 				<div class="mui-col-xs-12 set_li mui-row">
 					<div class="mui-col-xs-4 set_content set_start">
-						<div class="set_city">{{lineList.send_sheng_name}}</div>
+						<div class="set_city">{{lineList.send_shi_name}}</div>
 						<div class="set_area">
 							<div>{{lineList.send_qu_name}}</div>
 						</div>
@@ -593,7 +593,7 @@
 						<div class="set_center_tem"></div>
 					</div>
 					<div class="mui-col-xs-4 set_content set_end" style="position:relative;">
-						<div class="set_city">{{lineList.gather_sheng_name}}</div>
+						<div class="set_city">{{lineList.gather_shi_name}}</div>
 						<div class="set_area">
 							<div>{{lineList.gather_qu_name}}</div>
 						</div>
@@ -628,20 +628,39 @@
 						<div style="flex:1;display: flex;justify-content: space-around;">
 							<button type="button" v-for="(item,index) in tms_send_type" :key="item.key" :class="item.key == chooseSendType ? 'mui-btn  mui-btn-primary' : 'mui-btn ' " @click="chooseSend(item)">{{item.name}}</button>
 						</div>
-					</div>
+					</div>											
+										
+					<li class="mui-table-view-cell">
+						<div class="mui-input-row">
+							<label class="carInfotitle" style="padding-left:0px;width:40%;    padding:5px 15px 5px 0 !important;">提配费用</label>
+							<span style="color:#FC5854;font-size:12px;text-align:right;height:24px;float:right;width:82px;text-align:left;" v-cloak>配：￥{{send_price_show}}</span>
+							<span style="color:#FC5854;font-size:12px;text-align:right;height:24px;float:right;width:82px;text-align:left;" v-cloak>提：￥{{pick_price_show}}</span>
+						</div>
+					</li>
+
 				</div>
 
 				<!-- 下单选择 -->
-				<div class="mui-content"   v-for="(item,index) in address_list"    style="background:#fff;margin:10px 2%;padding:10px 1.5%;border-radius:7px;">
+				
+				<div class="mui-row" style="background:#fff;width:95%';margin:10px 2.5%;border-radius:8px;padding:5px 0;border-radius:10px;" v-if="choosePickType != 'oneself'">
+					<li class="mui-table-view-cell" @tap="timeSelt()" style="padding:11px 10px 11px 10px;padding-right:0;">
+						<div class="mui-row mui-navigate-right">
+							<div class="mui-col-sm-3  mui-col-xs-3 carInfotitle" style="font-weight:bold;height:36px;line-height:36px;">提货时间</div>
+							<div class="mui-col-sm-9  mui-col-xs-9 textright" style="text-align:right;padding-right:18px;height:36px;line-height:36px;" v-cloak>{{send_time}}</div>
+						</div>
+					</li>															
+				</div>
+				
+				<div class="mui-content"   v-for="(item,index) in address_list"    style="background:#fff;margin:10px 2%;padding:0px 1.5% 10px;border-radius:7px;">
 					<div class="mui-row" style="background:#fff;">
 							<div  class="mui-col-sm-9 mui-col-xs-9">
 								<div class="addcom tadd" style="padding:5px 0;" v-if="choosePickType == 'pick'">
 									<div class="mui-row"  @tap="send_info(index)" >
-										<div class=" mui-ellipsis addline">
+										<div class=" mui-ellipsis addline" style="display:flex;flex:1;">
 											<img  class="addImg" src="../images/f.png">
 											<div class="mui-badge mui-badge-inverted "  v-cloak style="margin-left: 10px;">
-												<p class="text_overflow"  style="font-size:16px;color:#444;font-weight:600;margin:0;height:20px;line-height:20px;">{{item.send_info_tel}}</p>
-												<p class="text_overflow"  style="font-size:13px;color:#999;margin:0;height:20px;line-height:20px;">{{item.send_info}}</p>
+												<p class="text_overflow"  style="font-size:16px;color:#444;font-weight:600;margin:0;height:20px;line-height:20px;width:100%;">{{item.send_info_tel}}</p>
+												<p class="text_overflow"  style="font-size:13px;color:#999;margin:0;height:20px;line-height:20px;width:100%;">{{item.send_info}}</p>
 											</div>
 										</div>
 									</div>
@@ -656,14 +675,12 @@
 								<!-- 到货地址 start -->
 								<div class="addcom padd"  style="padding:5px 0;" v-if="chooseSendType == 'send'">
 									<div class="mui-row"  @tap="gather_info(index)">
-										<div class=" mui-ellipsis addline" >
+										<div class=" mui-ellipsis addline" style="display:flex;flex:1;">
 											<img  class="addImg" src="../images/s.png">
-											<span class="mui-badge mui-badge-inverted" style="" v-cloak>
 												<div class="mui-badge mui-badge-inverted "  v-cloak  style="margin-left: 10px;">
-													<p  class="text_overflow" style="font-size:16px;color:#444;font-weight:600;margin:0;height:20px;line-height:20px;">{{item.gather_info_tel}}</p>
-													<p  class="text_overflow" style="font-size:13px;color:#999;margin:0;height:20px;line-height:20px;">{{item.gather_info}}</p>
+													<p  class="text_overflow" style="font-size:16px;color:#444;font-weight:600;margin:0;height:20px;line-height:20px;width:100%;">{{item.gather_info_tel}}</p>
+													<p  class="text_overflow" style="font-size:13px;color:#999;margin:0;height:20px;line-height:20px;width:100%;">{{item.gather_info}}</p>
 												</div>
-											</span>
 										</div>
 									</div>
 								</div>
@@ -681,10 +698,10 @@
 							</div>						 
 				
 					 </div>
-					 
-				
+
+					
 					 <div class="mui-table-view-cell mui-collapse"  :class="index == 0?'mui-active' : '' "  style="width:100%;min-height:30px;">
-						<a class="mui-navigate-right" href="#" style="padding-left:10px;height:30px;line-height:30px;margin: 0px -15px;color:#333;font-size:16px;font-weight: 600;" v-cloak>货物信息 <span class="goods_info">{{item.clod_name}} {{item.good_number}} 件 {{item.good_weight}} 吨 {{item.good_volume}} 方  {{item.good_name}}</span></a>
+						<a class="mui-navigate-right" href="#" style="padding-left:10px;height:30px;line-height:30px;margin: 0px -15px;color:#333;font-size:16px;font-weight: 600;" v-cloak>货物信息 <span class="goods_info">{{item.clod_name}} {{item.good_number}} 件 {{item.good_weight}} 公斤 {{item.good_volume}} 方  {{item.good_name}}</span></a>
 						 <div class="mui-collapse-content" style="padding:0;font-size:13px;">
 							 <!-- <ul class="mui-table-view"> -->
 							 
@@ -706,7 +723,7 @@
 										<div class="mui-input-row" style="display:flex;flex: 1;">
 											<label  class="carInfotitle" style="padding-left:0;">总重量</label>
 											<input class="mui-numbox-input mui-col-sm-2  mui-col-xs-2 good_input" v-model="item.good_weight"  type="number" @tap="set_good_weight(index)" readonly="readonly"/>
-											<span class="mui-col-sm-7  mui-col-xs-7"  style="text-align:right;width:30px;height:40px;line-height:40px;float:right;">吨</span>											
+											<span class="mui-col-sm-7  mui-col-xs-7"  style="text-align:right;width:30px;height:40px;line-height:40px;float:right;">公斤</span>											
 										</div>
 								</li>
 

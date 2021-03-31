@@ -114,7 +114,7 @@ var indexData = new Vue({
 			}
 			
 
-			if (project_type == 'user') {
+			if (project_type == 'user'|| project_type=='carriage') {
 				//用户
 
 					// let old_back = mui.back;
@@ -135,10 +135,31 @@ var indexData = new Vue({
 				
 				// console.log(JSON.stringify(plus.webview.getWebviewById(plus.runtime.appid)));
 							// plusCommon.popToTarget(plus.webview.getWebviewById(plus.runtime.appid).id,true);
-		   var index=plus.webview.getLaunchWebview();//获得初始窗口
-		   plus.webview.show(index);//打开初始窗口
-			// plusCommon.popToTarget('user_line/line.html',true);
-			index.evalJS("changSub(2)"); //改变选项卡点击位置
+					 //   var index=plus.webview.getLaunchWebview();//获得初始窗口
+					 //   plus.webview.show(index);//打开初始窗口
+						// index.evalJS("changSub(2)"); //改变选项卡点击位置
+						// plus.webview.getWebviewById('user_line/on_line.html').evalJS('refresh_show()');
+						// mui.back();
+						// plus.webview.currentWebview().opener().evalJS("refresh_show()");
+						// mui.back();
+						
+						switch (project_type){
+							case 'user':
+								// var index=plus.webview.getLaunchWebview();//获得初始窗口
+								// plus.webview.show(index);//打开初始窗口
+								// // plusCommon.popToTarget('user_line/line.html',true);
+								// index.evalJS("changSub(0)"); //改变选项卡点击位置
+								break;
+								
+							case 'carriage':
+								var index=plus.webview.getLaunchWebview();//获得初始窗口
+								plus.webview.show(index);//打开初始窗口
+								// plusCommon.popToTarget('user_line/line.html',true);
+								index.evalJS("changSub(0)"); //改变选项卡点击位置
+								break;
+						}
+						
+						
 						},function(res){
 
 						});
@@ -155,7 +176,12 @@ var indexData = new Vue({
 						request.PostInfo_new(request.online_addOrder,datelist,function(res){
 
 								mui.toast(res.msg);
-								mui.back();
+								var index=plus.webview.getLaunchWebview();//获得初始窗口
+								plus.webview.show(index);//打开初始窗口
+								// plusCommon.popToTarget('user_line/line.html',true);
+								index.evalJS("changSub(0)"); //改变选项卡点击位置
+								// plus.webview.currentWebview().opener().evalJS("refresh_show()");
+								// mui.back();
 								// plusCommon.popToTarget('../userline/on_line.html',true);
 								// plus.webview.currentWebview().opener().evalJS("refresh_show()");
 								// plus.webview.getWebviewById('../user_line/on_line.html').reload();
@@ -168,7 +194,7 @@ var indexData = new Vue({
 								 //触发父页面的自定义事件(refresh),从而进行刷新
 								  // mui.fire(list, 'refresh');
 								  //返回true,继续页面关闭逻辑
-								return true;
+								// return true;
 						},function(res){
 				
 						});

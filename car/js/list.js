@@ -42,7 +42,7 @@ var vmHeader = new Vue({
 			// var type = user.getState('type');
 			var self = this;
 			var project_type = localStorage.project_type;
-			if(project_type=='user'){
+			if(project_type=='user' || project_type=='carriage'){
 				mui.openWindow({
 				    url:"car_add.html",
 				    id:"car_add",
@@ -59,8 +59,7 @@ var vmHeader = new Vue({
 				    },
 				// var len = vm.$data.carList.length; 
 				});
-			}
-			else{
+			}else{
 				mui.openWindow({
 				    url:"car_add3pl.html",
 				    id:"car_add3pl",
@@ -163,7 +162,7 @@ var vm = new Vue({
 				};
 				console.log(JSON.stringify(data));
 				var project_type = localStorage.project_type;
-				if(project_type=='user'){
+				if(project_type=='user' || project_type=='carriage'){
 					request.PostInfo_new(request.api_car_carPage,data,function(res){
 						console.log(JSON.stringify(res.data.info));
 						var data = res.data.info;
@@ -182,8 +181,7 @@ var vm = new Vue({
 							self.mescroll.endSuccess(data.length);
 						},500);
 					},function(res){});
-				}
-				else{
+				}else{
 					request.PostInfo_new(request.tms_car_carPage,data,function(res){
 						console.log(JSON.stringify(res.data.items));
 						if (res.data.items.length == 0) {
@@ -210,7 +208,7 @@ var vm = new Vue({
 			};
 			var project_type = localStorage.project_type;
 			console.log(self.carList[index].self_id);
-			if(project_type=='user'){
+			if(project_type=='user'|| project_type=='carriage'){
 			mui.confirm('车辆删除后将无法恢复', '确认删除?', ['确认','取消'], function(e) {
 				console.log(JSON.stringify(e));
 				if (e.index == 0) {
@@ -260,7 +258,7 @@ var vm = new Vue({
 			var weight = self.carList[index].weight;
 			var project_type = localStorage.project_type;
 			// console.log(board_time);
-			if(project_type == 'user'){
+			if(project_type == 'user'|| project_type=='carriage'){
 				mui.openWindow({
 				    url:"car_add.html",
 				    id:"car/car_add.html",

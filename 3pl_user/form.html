@@ -392,7 +392,7 @@
 			  padding-bottom: constant(safe-area-inset-bottom);  
 			  padding-bottom: env(safe-area-inset-bottom); */
 			  .mui-navigate-right:after, .mui-push-right:after {
-			      right:0px;
+			      right:10px;
 			      content: '\e583';
 			  }
 		</style>
@@ -472,7 +472,7 @@
 									<li class="mui-table-view-cell">
 										<div class="mui-input-row">
 											<label class="carInfotitle" style="padding-left:0;">货物名称</label>
-											<input type="text" class="" style="text-align: right;padding-right:0px;"  v-model="item.good_name" placeholder="请输入"  οnkeyup="checkLength2(index);" maxLength=10 v-cloak>
+											<input type="text" class="mui-input-clear" style="text-align: right;padding-right:0px;"  v-model="item.good_name" placeholder="请输入"  οnkeyup="checkLength2(index);" maxLength=10 v-cloak>
 										</div>
 									</li>
 									
@@ -551,7 +551,13 @@
 				</div>
 
 				<ul class="mui-table-view" style="background:#fff;margin:10px 2%;padding:10px 1.5%;border-radius:7px;">
-
+					<li class="mui-table-view-cell" @tap="get_car()"style="padding:11px 10px 11px 10px;padding-right:0;">
+						<div class="mui-row mui-navigate-right">
+							<div class="mui-col-sm-3  mui-col-xs-3 carInfotitle">车辆类型</div>
+							<!-- <label class="carInfotitle" style="padding-left:0px;width:40%">车辆类型</label> -->
+							<div class="mui-col-sm-9  mui-col-xs-9 textright"  style="padding-right:16px;"  v-cloak>{{carName}}</div>
+						</div>
+					</li>
 					<li class="mui-table-view-cell" @tap="timeSelt()" style="padding:11px 10px 11px 10px;padding-right:0;">
 						<div class="mui-row mui-navigate-right">
 							<div class="mui-col-sm-3  mui-col-xs-3 carInfotitle">装车时间</div>
@@ -574,21 +580,27 @@
 					</li>
 
 
-					<li class="mui-table-view-cell"style="padding:11px 10px 11px 10px;padding-right:0;">
+					<li class="mui-table-view-cell"style="padding:11px 10px 11px 10px;padding-right:0;" >
 						<span  class="carInfotitle">是否卸货</span>
 						<div class="mui-switch mui-switch-blue sendtype" id="sendtype">
 							<div class="mui-switch-handle"></div>
 						</div>
-					</li>
-					
-					<li class="mui-table-view-cell" @tap="get_car()"style="padding:11px 10px 11px 10px;padding-right:0;">
-						<div class="mui-row mui-navigate-right">
-							<div class="mui-col-sm-3  mui-col-xs-3 carInfotitle">车辆类型</div>
-							<!-- <label class="carInfotitle" style="padding-left:0px;width:40%">车辆类型</label> -->
-							<div class="mui-col-sm-9  mui-col-xs-9 textright"  style="padding-right:16px;"  v-cloak>{{carName}}</div>
+					</li>					
+
+					<li class="mui-table-view-cell" v-if="send_price>0">
+						<div class="mui-input-row">
+							<label class="carInfotitle" style="padding-left:0px;width:40%">卸货费(元)</label>
+							<input type="text" class="" style="width:140px;color:#FC5854;font-size:19px;text-align:right;padding-right:10px;" readonly="readonly"   v-model="send_price" v-cloak>
 						</div>
 					</li>
 					
+					<li class="mui-table-view-cell"  v-if="pick_price>0">
+						<div class="mui-input-row">
+							<label class="carInfotitle" style="padding-left:0px;width:40%">装货费(元)</label>
+							<input type="text" class="" style="width:140px;color:#FC5854;font-size:19px;text-align:right;padding-right:10px;" readonly="readonly"   v-model="pick_price" v-cloak>
+						</div>
+					</li>
+										
 					<li class="mui-table-view-cell" >
 						<div class="mui-input-row">
 							<label class="carInfotitle" style="padding-left:0px;width:40%">预估运费(元)</label>
@@ -605,6 +617,7 @@
 							<!-- @tap="set_line_price()" -->
 						</div>
 					</li>	
+					
 					<li class="mui-table-view-cell">
 						<div class="mui-input-row">
 							<label class="carInfotitle" style="padding-left:0;width:40%">备注</label>
@@ -613,11 +626,12 @@
 							<!-- @tap="set_line_price()" -->
 						</div>
 					</li>
+				
 				</ul>
 
 			</div>
-				<div class="inbutton" style="position:fixed;bottom:10px;padding:0;margin:0;z-index: 9999;">
-					<button style="background: #0088f4;color: #FFFFFF;border-radius:22px;width:92%;margin-left:4%;" type="button" class="mui-btn mui-btn-block btnorder1" @tap="orderUse()">确定</button>
+				<div class="inbutton" style="position:fixed;bottom:0px;padding:0;margin:0;z-index: 9999;">
+					<button style="background: #0088f4;color: #FFFFFF;border-radius:22px;width:92%;margin-left:4%;margin-bottom:5px;" type="button" class="mui-btn mui-btn-block btnorder1" @tap="orderUse()">确定</button>
 				</div>
 		</div>
 		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
@@ -658,26 +672,26 @@
 			
 
 			
-		$(document).on('click','.control_div button',function(e){
-			var c = $(this).hasClass('active_clod');
-			if (c) {
-				$(this).removeClass('active_clod');
-			} else {
-				$(this).addClass('active_clod');
-			}
-			e.stopPropagation();
-		});	
-			
-			
-		$(document).on('click','.set_checkbox button',function(e){
-			var c = $(this).hasClass('set_check_active');
-			if (c) {
-				$(this).removeClass('set_check_active');
-			} else {
-				$(this).addClass('set_check_active');
-			}
-			e.stopPropagation();
-		});
+			$(document).on('click','.control_div button',function(e){
+				var c = $(this).hasClass('active_clod');
+				if (c) {
+					$(this).removeClass('active_clod');
+				} else {
+					$(this).addClass('active_clod');
+				}
+				e.stopPropagation();
+			});	
+				
+				
+			$(document).on('click','.set_checkbox button',function(e){
+				var c = $(this).hasClass('set_check_active');
+				if (c) {
+					$(this).removeClass('set_check_active');
+				} else {
+					$(this).addClass('set_check_active');
+				}
+				e.stopPropagation();
+			});
 	
 			function refreshData() {
 				location.reload();

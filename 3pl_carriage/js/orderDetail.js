@@ -91,14 +91,12 @@ var vm = new Vue({
 		good_List:[],
 	},
 	mounted: function(){
-		var self = this;
-		mui.init({
-			beforeback: function() {　　　
+		// var self = this;
+		// mui.init({
+		// 	beforeback: function() {　　　
 
-            }
-		});
-	},
-	created:function(){
+  //           }
+		// });
 		var self = this;
 		mui.init();
 		// mui.previewImage();
@@ -108,6 +106,9 @@ var vm = new Vue({
 			self.self_id = ws.self_id
 			console.log(self.self_id);
 		})
+	},
+	created:function(){
+
 	},
 	methods: {
 		getDetail: function(){
@@ -135,11 +136,6 @@ var vm = new Vue({
 				};
 				for (var i = 0; i < data.tms_carriage_dispatch.length; i++) {
 						self.lineList = data.tms_carriage_dispatch[i].tms_order_dispatch;
-						// self.detailData = data.arr[i];
-						// self.order_status=self.detailData.order_status;
-						// self.clods = data[i].clod;
-						// self.clod += self.clods;
-				// console.log(JSON.stringify(self.order_status))
 				};
 				self.list = self.list.concat(data);
 				
@@ -195,9 +191,11 @@ var vm = new Vue({
 				};	
 			console.log(JSON.stringify(data))
 			request.PostInfo_new(request.api_carriage_carriageTake,data,function(res){
-				console.log(res);
-				mui.toast(res.msg);
+				mui.toast(res.msg);	
+				plus.webview.getWebviewById('3pl_carriage/orderDetail.html').evalJS('refreshData()');			
 				plus.webview.currentWebview().opener().evalJS("refresh_show()");
+				
+				// plusCommon.popToTarget('3pl_carriage/order_list.html',true);
 				// mui.back();
 		  	},function(res){
 		

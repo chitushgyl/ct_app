@@ -467,6 +467,9 @@ Vue.filter('dateToStro',function(value){
 	}
 });
 
+
+
+
 /**
  * @description：自定义指令，可以用全局方法 Vue.filter() 注册一个自定义过滤器;
  * 返回价格/100
@@ -510,6 +513,38 @@ Vue.filter('phone', function (value) {
   str = str.toString().replace(/^(\d{3})(\d{4})(\d{4})/g , '$1****$3')
   return str;
 })
+
+//千分位转数字
+Vue.filter('NumFormat', function(value) {
+
+  if(!value) return '0.00';
+  /*原来用的是Number(value).toFixed(0)，这样取整时有问题，例如0.51取整之后为1，感谢Nils指正*/
+  var intPart =  Number(value)|0; //获取整数部分
+  var intPartFormat = intPart.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,'); //将整数部分逢三一断
+  var floatPart = ".00"; //预定义小数部分
+  // console.log(888,value)
+  // console.log(888,typeof(value))
+  var value2Array = value.toString().split(".");
+  var isNegtiveNo = ''
+  if(intPartFormat == 0){
+    if(value.toString().indexOf('-') != 1) isNegtiveNo = '-' //修复小于0负数丢失的问题
+  }
+
+  //=2表示数据有小数位
+
+  if(value2Array.length == 2) {
+    floatPart = value2Array[1].toString(); //拿到小数部分
+    if(floatPart.length == 1) { //补0,实际上用不着
+      return isNegtiveNo + intPartFormat + "." + floatPart + '0';
+    } else {
+      return isNegtiveNo + intPartFormat + "." + floatPart;
+    }
+  } else {
+    return isNegtiveNo + intPartFormat + floatPart;
+  }
+})
+
+
 
 
 /*

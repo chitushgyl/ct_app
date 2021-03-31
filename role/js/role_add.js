@@ -69,18 +69,53 @@ var vm = new Vue({
 			// self.type_role = addType
 			console.log(addType);
 			self.type_role = addType;
-			mui.openWindow({
-				url:"bind.html",
-				id:"role/bind.html",
-				extras:{
-					type: addType,
-				},
-				waiting:{
-				  autoShow:true,//自动显示等待框，默认为true
-				  title:'正在加载...',//等待对话框上显示的提示内容
-				  options:{}
-				},
-			});
+			if(self.type_role=='carriage'){
+				var btnArray = ['确认', '取消'];
+				mui.confirm('确认绑定司机吗？', '绑定司机', btnArray, function(e) {
+					if (e.index == 1) {
+						// console.log("成功");
+					} else {
+						var data = {// 令牌
+							company_name: self.company_name,
+							driver_name: self.driver_name,
+							driver_tel: self.driver_tel,
+							group_name: self.group_name,
+							login: self.name,
+							pwd: self.password,
+							type: self.type_role
+						}
+						request.PostInfo_new(request.user_add_binding,data,function(res){
+							console.log(JSON.stringify(res));
+							if(res.code==200){
+								mui.toast('绑定成功！');
+							}
+							// mui.openWindow({
+							// 	url:"index.html",
+							// 	id:"role/index.html",
+							// });
+							plusCommon.popToTarget('../role/index.html',true);
+							// mui.back();
+						},function(res){
+						
+						});		
+					}
+				},"div");
+			}
+			else{
+				mui.openWindow({
+					url:"bind.html",
+					id:"role/bind.html",
+					extras:{
+						type: addType,
+					},
+					waiting:{
+					  autoShow:true,//自动显示等待框，默认为true
+					  title:'正在加载...',//等待对话框上显示的提示内容
+					  options:{}
+					},
+				});
+			}
+			
 		},
 		//绑定
 		addRoleType: function(){

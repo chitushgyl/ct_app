@@ -163,10 +163,15 @@
 								<div class="clear"></div>
 							</div>
 							<div style="" class="order_style_center">
-								<div class="mui-float-left start_order_center_s" v-if="status == 1">
+								<div class="mui-float-left start_order_center_s" v-if="status == 1" >
 									<div class="start_order_center_area" v-if="item.send_shi_name">{{item.send_shi_name}}</div>
 									<div class="start_order_center_city">
 										<span v-if="item.send_qu_name">{{item.send_qu_name}}</span>
+									</div>
+									<div class="start_order_center_city" style="height:22px;margin-top:10px;">
+										<span class="order_time_txt">温度</span>&nbsp;
+										<span class="order_time_val">{{item.clod}}</span>
+										<div class="clear"></div>
 									</div>
 								</div>
 								<div class="mui-float-left start_order_center" v-if="status==2||status==3">
@@ -174,20 +179,37 @@
 									<div class="start_order_center_city">
 										<span v-if="item.send_qu_name">{{item.send_qu_name}}</span>
 									</div>
+									<div class="start_order_center_city" style="height:22px;margin-top:10px;">
+										<span class="order_time_txt">温度</span>&nbsp;
+										<span class="order_time_val">{{item.clod}}</span>
+										<div class="clear"></div>
+									</div>
 								</div>
 								<div class="mui-float-left line_order_center">
 									<img src="../images/driver/line_line.png" class="line_line">
 								</div>
-								<div class="mui-float-left end_order_center_s" v-if="status == 1">
+								<div class="mui-float-left end_order_center_s" v-if="status == 1" >
 									<div class="start_order_center_area" v-if="item.gather_shi_name">{{item.gather_shi_name}}</div>
 									<div class="start_order_center_city"> 
 										<span v-if="item.gather_qu_name">{{item.gather_qu_name}}</span>
+									</div>
+									<div class="start_order_center_city" v-cloak  style="text-align:right;height:22px;margin-top:10px;color:#FC5854;">
+										<span >
+											￥<span style="font-size:20px;font-weight:bolder;" v-if="item.group_code != item.receiver_id">{{item.on_line_money}}</span>
+											<span style="font-size:20px;font-weight:bolder;" v-else>{{item.total_money}}</span>
+										</span>										
 									</div>
 								</div>
 								<div class="mui-float-left end_order_center" v-if="status==2||status==3">
 									<div class="start_order_center_area" v-if="item.gather_shi_name">{{item.gather_shi_name}}</div>
 									<div class="start_order_center_city"> 
 										<span v-if="item.gather_qu_name">{{item.gather_qu_name}}</span>
+									</div>
+									<div class="start_order_center_city" v-cloak  style="text-align:right;height:22px;margin-top:10px;color:#FC5854;">
+										<span >
+											￥<span style="font-size:20px;font-weight:bolder;" v-if="item.group_code != item.receiver_id">{{item.on_line_money}}</span>
+											<span style="font-size:20px;font-weight:bolder;" v-else>{{item.total_money}}</span>
+										</span>										
 									</div>
 								</div>
 								<div class="mui-row" style="display:flex;justify-context:centet;align-items:center;padding-left: 20px;" v-if="status==1">
@@ -196,7 +218,7 @@
 								</div>
 								<div class="clear"></div>
 							</div>
-							<div style="" class="order_style_bottom" >
+<!-- 							<div style="" class="order_style_bottom" >
 								<div style="height:22px;line-height: 22px;">
 									<div class="clear"></div>
 								</div>
@@ -213,8 +235,88 @@
 										<span style="font-size:20px;" v-else>{{item.total_money}}</span>
 									</span>
 								</div>
-							</div>
-							
+							</div> -->
+
+<!-- 								<div  class="order_style_bottom" style="display:block;width:100%;height:25px;">
+								
+									<div class="mui-float-left" style="height:22px;line-height: 22px;width:50%;overflow: hidden;" v-if="item.order_type=='vehicle'">
+											<span class="order_time_txt">发车时间</span>&nbsp;<span class="order_time_val">
+											<span class="order_time_val">{{item.send_time}}</span>
+										<div class="clear"></div>
+									</div>
+									
+									<div class="mui-float-left" style="width:50%;overflow: hidden;height:22px;width:50%;" v-if="item.order_type=='line'">
+										<span class="order_time_txt">货物</span>&nbsp;<span class="order_time_val">{{item.good_number}}件{{item.good_weight}}kg{{item.good_volume}}方</span>
+									</div>
+									
+									<div class="mui-float-right" style="width:50%;overflow: hidden;height:22px;text-align: right;">
+										<span class="order_time_txt">温度</span>&nbsp;
+										<span class="order_time_val">{{item.clod}}</span>
+										<div class="clear"></div>
+									</div>
+								</div>
+								
+								<div class="order_style_bottom" style="display:block;width:100%;height:25px;" >
+								
+									<div class="mui-float-left"   style="height:22px;line-height: 22px;width:50%;text-align:left;" v-if="item.order_type=='vehicle'">
+										<div class="mui-float-left" style="" ><span class="order_time_txt">车型</span>&nbsp;
+										<span class="order_time_val">{{item.car_type_show}}</span></div>
+										<div class="clear"></div>
+									</div>
+									<div class="set_null_div">	</div>
+									<div class="order_price" v-cloak  style="width:50%;text-align:right;float:right;">
+										<span >
+											￥<span style="font-size:20px;" v-if="item.group_code != item.receiver_id">{{item.on_line_money}}</span>
+											<span style="font-size:20px;" v-else>{{item.total_money}}</span>
+										</span>
+										
+									</div>
+											
+								</div> -->
+
+									<div  class="order_style_bottom" style="display:block;width:100%;height:25px;">
+									
+										<!-- <div class="mui-float-left" style="height:22px;line-height: 22px;width:50%;overflow: hidden;"> -->
+<!-- 												<span class="order_time_txt">发车时间</span>&nbsp;<span class="order_time_val">
+												<span class="order_time_val">{{item.send_time}}</span> -->
+											<!-- <div class="clear"></div> -->
+										<!-- </div> -->
+									
+										
+<!-- 										<div class="mui-float-right" style="width:50%;overflow: hidden;height:22px;text-align: right;">
+											<span class="order_time_txt">温度</span>&nbsp;
+											<span class="order_time_val">{{item.clod}}</span>
+											<div class="clear"></div>
+										</div> -->
+									<!-- </div> -->
+									
+									<!-- <div class="order_style_bottom" style="display:block;width:100%;height:25px;margin-top:10px;" > -->
+									
+										<!-- <div class="mui-float-left"   style="height:22px;line-height: 22px;width:50%;text-align:left;" > -->
+<!-- 											<div class="mui-float-left" style="" ><span class="order_time_txt">车型</span>&nbsp;
+											<span class="order_time_val">{{item.car_type_show}}</span></div>
+											<div class="clear"></div> -->
+										<!-- </div> -->
+<!-- 										
+										<div class="mui-float-left" style="width:50%;overflow: hidden;height:22px;width:50%;" v-if="item.order_type=='line'">
+											<span class="order_time_txt">货物</span>&nbsp;<span class="order_time_val">{{item.good_number}}件{{item.good_weight}}kg{{item.good_volume}}方</span>
+										</div> -->
+<!-- 										<div class="mui-float-left" style="width:50%;overflow: hidden;height:22px;text-align:left;">
+											<span class="order_time_txt">温度</span>&nbsp;
+											<span class="order_time_val">{{item.clod}}</span>
+											<div class="clear"></div>
+										</div>
+<!-- 										<div class="set_null_div">	</div>
+									
+										<div class="order_price" v-cloak  style="width:50%;text-align:right;float:right;">
+											<span >
+												￥<span style="font-size:20px;" v-if="item.group_code != item.receiver_id">{{item.on_line_money}}</span>
+												<span style="font-size:20px;" v-else>{{item.total_money}}</span>
+											</span>
+											
+										</div> -->
+												
+									</div>				
 						</div>
 			
 						<div class="order_style_bottom_btn">	
@@ -252,6 +354,11 @@
 				$('.nav').css({"margin-top":(h-40)+'px'});
 				$('#mescroll').css({"margin-top":(h)+'px'});
 			},2)
+			
+			function refresh_show(){
+				location.reload();
+			}
+			
 		</script>
 	</body>
 </html>

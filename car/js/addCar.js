@@ -24,7 +24,7 @@ var indexData = new Vue({
 		tms_control_type_show : null,
 		control : "",
 		tel : null,
-		board_time : null,
+		board_time : "",
 		car_brand : null,
 		license : [],
 		medallion : [],
@@ -74,7 +74,7 @@ var indexData = new Vue({
 				// 	self.carList = [];
 				// }
 				var project_type = localStorage.project_type;
-				if(project_type == 'user'){
+				if(project_type == 'user'|| project_type=='carriage'){
 					request.PostInfo_new(request.api_car_creatCar,data,function(res){
 						console.log(JSON.stringify(res));
 						// self.showlist = res.data.info;
@@ -155,7 +155,7 @@ var indexData = new Vue({
 		selectCarType: function(){ 
 		var self = this;
 		    var data = {
-		    	token:user.getState('token'),
+		    	token: localStorage.token,
 		    	// self_id:self.car_id
 		    };
 		    request.PostInfo_new(request.api_car_getType,data,function(res){
@@ -185,7 +185,7 @@ var indexData = new Vue({
 			var self = this;
 			// self.visibilityPicker();
 			var data = {
-				token:user.getState('token'),
+				token: localStorage.token,
 				self_id:self.car_id
 			};
 			request.PostInfo_new(request.api_car_creatCar,data,function(res){
@@ -230,7 +230,7 @@ var indexData = new Vue({
 			var self = this;
 			// self.visibilityPicker();
 			var data = {
-				token:user.getState('token'),
+				token: localStorage.token,
 				self_id:self.car_id
 			};
 			request.PostInfo_new(request.api_car_creatCar,data,function(res){
@@ -276,40 +276,47 @@ var indexData = new Vue({
 			
 			
 			if(type == 1){ // 执行添加动作
-			if(project_type=='user'){
+			if(project_type=='user'|| project_type=='carriage'){
+				
+				if(!self.car_number){
+					mui.toast('请输入车牌号！');
+					return false;
+				}
+				if(!self.car_type_id){
+					mui.toast('请选择车辆类型！');
+					return false;
+				}
+				if(!self.control){
+					mui.toast('请选择温控类型！');
+					return false;
+				}
+				if(!self.car_possess){
+					mui.toast('请选择车辆属性！');
+					return false;
+				}
+	
+				if(!self.board_time){
+					mui.toast('请选择车辆注册信息！');
+					return false;
+				}
+	
 				if(self.license.length<1 || self.medallion<1){
 					mui.toast('图片不能为空！');
 					return false;
 				}
 				
-				if(!self.car_number){
-					mui.toast('车牌号必填！');
-					return false;
-				}
-				if(!self.car_type_id){
-					mui.toast('车辆类型必填！');
-					return false;
-				}
-				if(!self.control){
-					mui.toast('温控类型必填！');
-					return false;
-				}
-				if(!self.car_possess){
-					mui.toast('车辆属性必填！');
-					return false;
-				}
-				
 				if(!self.contacts){
-					mui.toast('联系人必填！');
+					mui.toast('请输入联系人！');
 					return false;
 				}
 				
 				if(!self.tel){
-					mui.toast('联系人电话必填！');
+					mui.toast('请输入联系电话！');
 					return false;
 				}
+
 				var submitData = {
-					token : user.getState('token'),
+					token : localStorage.token,
 					self_id : self.car_id,
 					control : self.control,
 					board_time : self.board_time,
@@ -330,33 +337,37 @@ var indexData = new Vue({
 			else{
 				
 				if(!self.car_number){
-					mui.toast('车牌号必填！');
+					mui.toast('请输入车牌号！');
 					return false;
 				}
 				if(!self.car_type_id){
-					mui.toast('车辆类型必填！');
+					mui.toast('请选择车辆类型！');
 					return false;
 				}
 				if(!self.control){
-					mui.toast('温控类型必填！');
+					mui.toast('请选择温控类型！');
 					return false;
 				}
 				if(!self.car_possess){
-					mui.toast('车辆属性必填！');
+					mui.toast('请选择车辆属性！');
 					return false;
 				}
 				
 				if(!self.contacts){
-					mui.toast('联系人必填！');
+					mui.toast('请输入联系人！');
 					return false;
 				}
 				
 				if(!self.tel){
-					mui.toast('联系人电话必填！');
+					mui.toast('请输入联系电话！');
+					return false;
+				}
+				if(!self.board_time){
+					mui.toast('请选择车辆注册信息！');
 					return false;
 				}
 				var submitData = {
-					token : user.getState('token'),
+					token :  localStorage.token,
 					self_id : self.car_id,
 					control : self.control,
 					board_time : self.board_time,
@@ -414,12 +425,12 @@ function picker(data,col,ele){
  * */
 function actionSheet(self,up_type){
 	plus.nativeUI.actionSheet({cancel:"取消",buttons:[  
-        {title:"拍照"},  
+        // {title:"拍照"},  
         {title:"从相册中选择"}  
     ]}, function(e){//1 是拍照  2 从相册中选择  
         switch(e.index){  
-            case 1:getImage(self);break;  
-            case 2:getGalleryImage(self,up_type);break;  
+            // case 1:getImage(self);break;  
+            case 1:getGalleryImage(self,up_type);break;  
         }  
     });  
 }
@@ -428,40 +439,40 @@ function actionSheet(self,up_type){
  * @description: 拍照
  * @parms self 点击的图片
  * */
-function getImage(self){
-	// 获取照相机对象
-	var cmr = plus.camera.getCamera();
-	// 图片的分辨率 320*240
-    var res = cmr.supportedImageResolutions[0];
-	// 图片的格式jpg
-    var fmt = cmr.supportedImageFormats[0];
-	// 进行拍照操作
-    cmr.captureImage(function(path) {  
-        // 读取文件
-        plus.io.resolveLocalFileSystemURL(path, function(entry) {  
-        	// 转化路径
-            var localUrl = entry.toLocalURL();
-			console.log(JSON.stringify(entry));
-            // 压缩上传
-            plus.zip.compressImage({  
-                src: localUrl,  
-                dst: "_doc/chat/camera/" + localUrl,  
-                quality: 20,  
-                overwrite: true  
-            }, function(e) {  
-            	console.log("压缩成功" + e.target);
-            	// 显示图片
-            	self.setAttribute('src',e.target);
-            }, function(err) {  
-                console.log("压缩失败：  " + err.message);  
-            });  
-        });  
-    }, function(err) {  
-        console.error("拍照失败：" + err.message);  
-    }, {  
-        index: 1  
-    });  
-}
+// function getImage(self){
+// 	// 获取照相机对象
+// 	var cmr = plus.camera.getCamera();
+// 	// 图片的分辨率 320*240
+//     var res = cmr.supportedImageResolutions[0];
+// 	// 图片的格式jpg
+//     var fmt = cmr.supportedImageFormats[0];
+// 	// 进行拍照操作
+//     cmr.captureImage(function(path) {  
+//         // 读取文件
+//         plus.io.resolveLocalFileSystemURL(path, function(entry) {  
+//         	// 转化路径
+//             var localUrl = entry.toLocalURL();
+// 			console.log(JSON.stringify(entry));
+//             // 压缩上传
+//             plus.zip.compressImage({  
+//                 src: localUrl,  
+//                 dst: "_doc/chat/camera/" + localUrl,  
+//                 quality: 20,  
+//                 overwrite: true  
+//             }, function(e) {  
+//             	console.log("压缩成功" + e.target);
+//             	// 显示图片
+//             	self.setAttribute('src',e.target);
+//             }, function(err) {  
+//                 console.log("压缩失败：  " + err.message);  
+//             });  
+//         });  
+//     }, function(err) {  
+//         console.error("拍照失败：" + err.message);  
+//     }, {  
+//         index: 1  
+//     });  
+// }
 
 /*
  * @description: 从相册中选择文件

@@ -204,9 +204,10 @@ var vm = new Vue({
 			var self = this;
 			var conid = self.list[index].self_id;
 			console.log(conid)
+			// plus.webview.getWebviewById('3pl_carriage/orderDetail.html').evalJS('refreshData()');
 			mui.openWindow({
 			    url:"orderDetail.html",
-			    id:"order_3pl/orderDetail.html",
+			    id:"3pl_carriage/orderDetail.html",
 			    extras:{
 			      	self_id: conid,
 			      	type:1
@@ -231,7 +232,7 @@ var vm = new Vue({
 			data.status = status;
 			// console.log(data.status)
 			request.PostInfo_new(request.api_carriage_OrderPage,data,function(res){
-				console.log(JSON.stringify(res.data))
+				// console.log(JSON.stringify(res.data))
 				var data = res.data.items;
 			// 	self.clod = "";
 			// 	for (var i = 0; i < data.length; i++) {

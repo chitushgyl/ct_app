@@ -77,7 +77,9 @@ var indexData=new Vue({
 		//全部提现
 		setAll(){
 			let self=this;
-			self.bankInfo.money=self.user_money;
+			var quxian_money=self.user_money;
+			quxian_money=parseFloat(quxian_money.replace(/[^\d\.-]/g, ""))
+			self.bankInfo.money=quxian_money;			
 		},
 		
 		//确认提现
@@ -90,7 +92,7 @@ var indexData=new Vue({
 			}
 			console.log(self.user_money);
 			console.log(self.bankInfo.money);
-			if(self.user_money<self.bankInfo.money){
+			if(	parseFloat( self.user_money.replace(/[^\d\.-]/g, ""))<self.bankInfo.money){
 				mui.toast('余额不足！');
 				return false;
 			}

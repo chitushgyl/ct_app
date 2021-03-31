@@ -76,6 +76,7 @@ var vm = new Vue({
 		list:[],
 		img:[],
 		imgLen:[],
+		lineList:[],
 	},
 	mounted: function(){
 		var self = this;
@@ -111,7 +112,7 @@ var vm = new Vue({
 			};
 			console.log(JSON.stringify(data))		
 			request.PostInfo_new(request.api_order_details,data,function(res){
-				// console.log(JSON.stringify(res.data.info));
+				// console.log("data："+JSON.stringify(res));
 				var data = res.data.info;
 				self.list = self.list.concat(data);
 				// console.log(JSON.stringify(self.list))
@@ -119,7 +120,17 @@ var vm = new Vue({
 				self.detailData = data;
 				self.img = data.receipt[0];
 				self.imgLen = data.receipt;
-				self.addressList = data.info;
+				self.addressList = res.data.info.info;
+				self.lineList = data.tms_order_dispatch;
+				
+				
+				// var hash = {};
+				// self.lineList = self.lineList.reduce(function(item, next) {
+				//     hash[next.name] ? '' : hash[next.name] = true && item.push(next);
+				//     return item
+				// }, [])
+				
+				
 				if (self.receipt) {
 					self.receipt_len = self.receipt.length;
 					if (self.receipt_len > 0) {

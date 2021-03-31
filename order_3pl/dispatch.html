@@ -141,7 +141,7 @@
 				<div class="mui-row" style="height: 45px !important;display: flex;">
 					<div class="mui-col-xs-4" style="padding-top: 11px;padding-left: 8px;">应付金额：<span style="color: red;">￥</span></div>
 					<div class="mui-col-xs-8">
-						<input id="" type="text" placeholder="请输入" style="color: red;float: left;border:0px;" v-model="total_price"/>
+						<input id="" type="number" placeholder="请输入" style="color: red;float: left;border:0px;" v-model="total_price"/>
 					</div>
 				</div>
 				<div class="mui-row" style="height: 45px !important;" v-if="status==1">
@@ -153,7 +153,7 @@
 				<div class="mui-row" style="height: 45px !important;"v-if="status==1">
 					<div class="mui-col-xs-4" style="padding-top: 11px;padding-left: 8px;">联系电话：</div>
 					<div class="mui-col-xs-8">
-						<input id="" type="text" placeholder="请输入" style="color: #1D2026;float: left; border: 0px;font-size: 14px;" v-model="tel"/>
+						<input id="" type="text" placeholder="电话" style="color: #1D2026;float: left; border: 0px;font-size: 14px;" v-model="tel"/>
 					</div>
 				</div>
 				<button style="width:92%;margin-left:4%;" type="button" class="mui-btn mui-btn-block create_order set_bottom_btn" >确认调度</button>

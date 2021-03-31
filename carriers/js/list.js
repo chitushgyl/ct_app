@@ -128,7 +128,7 @@ var vm = new Vue({
 			// 本页面
 			var wp = plus.webview.currentWebview().opener();
 			// 如果是从个人中心跳转则不返回
-			if(wp.id == "person/index-menu.html") return false;
+			if(wp.id == "user/user.html") return false;
 			var get_data = JSON.stringify({id:self.list[index].id,name:self.list[index].all_name});
 			wp.evalJS('listenBack_customer('+get_data+')');
 			mui.back();

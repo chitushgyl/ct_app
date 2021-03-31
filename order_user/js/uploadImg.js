@@ -3,15 +3,13 @@
 // 接口：个人中心-车型列表
 // var carModelURl = request.ServerUrl+request.carModelURl;
 
-function pub() {
-        lis = document.getElementById('father').getElementsByTagName('li').length;
-        var final = document.getElementById("final");
-        if (lis == 4) {
-            final.style.display = "none";
-        } else {
-            final.style.display = "inline"
-        }
-    }
+function refresh(){
+	vm.$data.mescroll.resetUpScroll();
+}
+function refresh_show(){
+	location.reload();
+}
+
 // 用户令牌
 var token = null;
 // 车型数据
@@ -33,54 +31,56 @@ var vm = new Vue({
 			// console.log(self.car_id)
 			});
 	},
-//车型列表
 	methods:{
-				submitFun: function(){
+			submitFun: function(){
 					var self = this;
 					var type = self.type;
+					if(self.medallion.length===0){
+						mui.toast('图片不能为空！');
+						return false;
+					}
 					console.log(self.car_id)
 						var submitData = {
 							order_id : self.car_id,
-							// receipt: self.license,
 							receipt: self.medallion,
 						};
+						console.log(JSON.stringify(submitData));
 						request.PostInfo_new(request.api_take_upload,submitData,function(res){
-							plus.webview.currentWebview().opener().evalJS("refreshData()");
-							mui.back();
+							mui.toast(res.msg);
+							console.log(JSON.stringify(res))
+							// plus.webview.getWebviewById('../car/list.html').reload();
+							plus.webview.currentWebview().opener().evalJS("refresh_show()");
+							// mui.back();
 						},function(res){
-						
+							
 						});
 				
 			},
-			//删除上传的图片
-					deleteImg(type){
-						let self=this;
-						self.license=[];
-						self.$refs.upImg.setAttribute('src','../images/photo.png');
-					},
+			// deleteImg(){
+			// 	var self=this;
+			// 		self.medallion=[];
+			// 		self.$refs.rep.setAttribute('src','../images/photo.png');
+			// },
+
 		},
 })
+var uuid=null;
 /*
  * @description: 选择
  * @parms self 点击的图片
  * */
 function actionSheet(self,up_type){
 	plus.nativeUI.actionSheet({cancel:"取消",buttons:[  
-        {title:"拍照"},  
+        // {title:"拍照"},  
         {title:"从相册中选择"}  
     ]}, function(e){//1 是拍照  2 从相册中选择  
         switch(e.index){  
-            case 1:getImage(self);break;  
-            case 2:getGalleryImage(self,up_type);break;  
+            // case 1:getImage(self);break;  
+            case 1:getGalleryImage(self,up_type);break;  
         }  
     });  
 }
-
-/*
- * @description: 拍照
- * @parms self 点击的图片
- * */
-function getImage(self){
+ function getImage(self){
 	// 获取照相机对象
 	var cmr = plus.camera.getCamera();
 	// 图片的分辨率 320*240
@@ -93,6 +93,7 @@ function getImage(self){
         plus.io.resolveLocalFileSystemURL(path, function(entry) {  
         	// 转化路径
             var localUrl = entry.toLocalURL();
+			 setHtml(localUrl);
             // 压缩上传
             plus.zip.compressImage({  
                 src: localUrl,  
@@ -103,14 +104,13 @@ function getImage(self){
             	console.log("压缩成功" + e.target);
             	// 显示图片
             	self.setAttribute('src',e.target);
-				set_del(self);
             }, function(err) {  
                 console.log("压缩失败：  " + err.message);  
             });  
         });  
     }, function(err) {  
         console.error("拍照失败：" + err.message);  
-    }, {  
+    },{  
         index: 1  
     });  
 }
@@ -119,35 +119,77 @@ function getImage(self){
  * @description: 从相册中选择文件
  * @parms self 点击的图片
  * */
- //单张上传
-function getGalleryImage(self,up_type) { 
-	// 从系统相册选择文件
-    plus.gallery.pick(function(path) {
-    	// 压缩文件
-        plus.zip.compressImage({  
-            src: path,  
-            dst: "_doc/chat/gallery/" + path,  
-            quality: 20,  
-            overwrite: true  
+function getGalleryImage(self,up_type) {
+		// 从相册中选择图片 
+		
+		let fileSrc=[]; //定义一个空的图片地址数组
+		let zipActions=[]; //定义一个空的方法数组
+		plus.gallery.pick(function(e) {
+			for (var i in e.files) {
+				var fs=e.files[i];
+				setHtml(fs);
+				var zipAction=()=>{ //将每一次循环方法定义成一个方法变量
+					return new Promise(resolve=>{
+						//每一个方法返回一个 promise对象，第一个参数是resolve方法
+						((index)=>{
+							plus.zip.compressImage({
+							    src: e.files[index],  
+							    dst: "_doc/chat/gallery/" + e.files[index],  
+							    quality: 20,  
+							    overwrite: true  ,
+							}, function(e) {  
+								console.log(JSON.stringify(e))
+								console.log("压缩成功" + e.target);
+								// fileSrc.push(e.target);
+								fileSrc.push(e.target);
+								resolve();
+								// 显示图片
+								// self.setAttribute('src',e.target);
+							}, function(err) {  
+							    console.error("压缩失败：" + err.message);  
+							}); 
+							 
+						})(i)
+					})
+				}
+				zipActions.push(zipAction());//将每次循环调用的方法添加到方法数组中去
+			}	
+			Promise.all(zipActions).then((e)=>{
+				//调用Promise.all方法，传入方法数组,异步的图片压缩全部成功执行后，开始图片上传
+				console.log('Promise.all的值是：'+JSON.stringify(e))
+				toOss(fileSrc,up_type);
+			}).catch((e)=>{
+				console.log('catch的值是：'+JSON.stringify(e))
+			});
 			
-        }, function(e) {  
-			console.log(JSON.stringify(e))
-        	console.log("压缩成功" + e.target);
-        	// 显示图片
-        	self.setAttribute('src',e.target);
-			set_del(self);
-			toOss(e.target,up_type);
-        }, function(err) {  
-            console.error("压缩失败：" + err.message);  
-        });  
-    }, function(err) {});  
-};
-
-
+		}, function(e) {
+			console.log("取消选择图片");
+		}, {
+			filter: "image",
+			multiple: true,
+			maximum:1,
+			system: false,
+			onmaxed: function() {
+				// plus.nativeUI.alert('最好不要一次上传太多张');
+			}
+		});
+	}
  
+  function setHtml(path) {
+ 	 var str = '';
+ 	 str = '<li class="img-box" style="padding-left: 10px;padding-top:5px" onclick="delImg(this)">'+
+ 	 '<img id="travelimg" class="uploadImg" src="'+path+'" ref="rep" style="width: 110px; height: 80px;" data-preview-src="" data-preview-group="4">'+
+	 '<div style="margin-top:-90px;position:absolute;margin-left:104px"  >'+
+	 '<div class="deleteImg" style="padding-left:2px;width:12px;height:12px;line-height: 12px;border-radius:50%;background-color:red;color:#FFF;font-size:14px;">'+'x'+'</div>'+
+ 	 '</div>'+'</li>';
+ 	 jQuery(".set_images").append(str);
+ 	 }
+
+
 //上传图片到oss服务器
-function toOss(src,up_type){
-	
+function toOss(fileSrc,up_type){
+	// var files=vm.medallion;
+	plus.nativeUI.showWaiting( "上传中..." );
 	var o_url = request.ServerUrl_new+request.upload_img;
 	/**
 	 * 这里不懂的可以去hbuild官网查看
@@ -157,33 +199,53 @@ function toOss(src,up_type){
 	blocksize:204800,  
 	timeout: 10  
 	},function(data, status){
+		console.log(JSON.stringify(data))
 		if(status == 200){
 			var temp_urlInfo=JSON.parse(data.responseText);
-			console.log(temp_urlInfo);
-			console.log(JSON.stringify(temp_urlInfo.data));
+			console.log(JSON.stringify(temp_urlInfo));
 			if(temp_urlInfo.code == 200){
+				plus.nativeUI.closeWaiting();//关闭旋转菊花
 				// mui.toast('图片上传成功！');
-				if(up_type == 'car'){
-					vm.license=[];
-					vm.license.push(temp_urlInfo.data);
-				}else{
-					vm.medallion=[];
+					// vm.medallion=[];
 					vm.medallion.push(temp_urlInfo.data);
-				}
-			}
-
-			
+					console.log(JSON.stringify(vm.medallion))
+			}	
 		}else{
 			mui.toast('图片上传失败！');
 		}
 	});
-	task.addFile(src, {key: 'inputfile'}); 
+	console.log(fileSrc.length);
+	for (var i = 0; i < fileSrc.length; i++) {
+	                    var f = fileSrc[i];
+	                    task.addFile(f, {
+	                        key: 'inputfile'                      //相同的key在后端只能拿到一张，所以要设置不同的key
+	                    });
+	                };
+	// task.addFile(src, {key: 'inputfile'}); 
 	task.addData('type', 'uploadImg'); 
 	task.start();
-	
-	
-	
 };
+
+function delImg(obj)  
+     {  
+		 // alert(obj)
+        var list =document.getElementsByTagName('li');  
+        for(var i=0;i<list.length;i++){  
+            list[i].index=i;  
+			console.log( list[i].index)
+        }  
+		console.log(obj.index)
+        var idx=obj.index-1;  
+        var ul=obj.parentNode;  
+		console.log(idx)
+        var btnArray=['是','否'];  
+        plus.nativeUI.confirm("确定要删除此图?",function(e){  
+            if(e.index==0){  
+                ul.removeChild(obj);  
+                vm.medallion.splice(idx,1); 
+            }   
+        },{"buttons":btnArray})  
+		} 
  /*
  * @description: 上传图片
  * @parms token 接口令牌
@@ -211,6 +273,7 @@ function uploadImg(){
         } 
     }
 	};
+	
 /*
  * @description: 点击图片选择选择图片的方式
  * @parms 
@@ -219,8 +282,8 @@ mui('body').on('tap','.uploadImg',function(){
 	var self = this;
 	var leng = $('.uploadImg').length;
 	var up_type=self.getAttribute("data-type");
-	if (leng >8) {
-		alert('照片不能超过8张！');
+	if (leng >5) {
+		alert('照片不能超过5张！');
 		return false;
 	}
 	if(window.plus){
@@ -230,89 +293,4 @@ mui('body').on('tap','.uploadImg',function(){
 			actionSheet(self,up_type);
 		},false);
 	}
-}); 
-	// 删除图片之后
-			function delete_after() {
-				var len = $('.uploadImg').length;
-				if ($('.uploadImg').eq(len-1).attr('src') != '../images/photo.png') {
-					var node = '';
-					node += '	<img id="travelimg" class="uploadImg" src="../images/photo.png" style="width: 110px; height: 80px;"/>'
-					$('.set_images').append(node);
-				}
-			}
-// 删除图片
-			function del_img(that) {
-				var src = $(that).parent().find('.uploadImg').attr('src');
-				// var img_src = $(that).parent().find('.uploadImg').attr('data_src');
-				// if (img_src) {
-					$(that).parent().remove();
-					delete_after();
-				// }	
-			}
-			$(document).on('click','.upload_del',function(){
-				del_img($(this));
-			});
-		
-// 上传图片后
-			function set_del(self) {
-				var data = $(self).attr('data');
-				$(self).parent().find('.upload_del').remove();
-				var node_del = '<img src="../images/driver/out.png" style="position:absolute;top:-2px;left:23%;background-color:#fff;width:13px;border-radius:15px;" class="upload_del">';
-				$(self).parent().append(node_del);
-				if (data == 1) {
-
-				} else {
-					// 第一次添加
-					$(self).attr('data',1);
-					if ($('.uploadImg').length < 8) {
-						var node = '';
-						node += '	<img id="travelimg" class="uploadImg" src="../images/photo.png" style="width: 110px; height: 80px;"/>'
-						$('.set_images').append(node);
-					} 
-				}
-				// alert(data);
-			}
-			
-// //服务端接口路径
-//             var server = request.api_take_upload;
-//             //获取图片元素
-//             var files = document.getElementById('headimg');
-//  function upload(){
-//                 var wt=plus.nativeUI.showWaiting();
-//                 var task=plus.uploader.createUpload(server,
-//                     {method:"POST"},
-//                     function(t,status){ //上传完成
-//                         if(status==200){
-//                             alert("上传成功："+t.responseText);
-//                             wt.close(); //关闭等待提示按钮
-//                         }else{
-//                             alert("上传失败："+status);
-//                             wt.close();//关闭等待提示按钮
-//                         }
-//                     }
-//                 );
-// 				 //添加其他参数
-// 				task.addData("name","test");
-// 				task.addFile(files.src,{key:"dddd"});
-// 				task.start();
-// 				}
- /*
- * @description: 上传图片
- * @parms 
- * */
-// mui('body').on('tap','#submit',function(){
-// 	// console.log(file)
-// 	var c_out = click_one();
-//     if (!c_out) {
-//         console.log('time_in');
-//         return false;
-//     }
-// 	var carid = document.getElementById('travelimg').getAttribute('data-value');
-// 	// var carnumber = document.getElementById('carNum').innerText;
-//     var flag = request.to_login();
-//     if (!flag) {
-//         return false;
-//     };
-// 	// 上传
-// 	return uploadImg();
-// }); 
+});

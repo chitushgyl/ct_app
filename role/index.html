@@ -219,10 +219,9 @@
 				<ul id="dataList" class="mui-table-view data-list" style="margin-top:10px;background-color: #F3F4F6;margin-bottom:35px;">
 					<div id="historylist" style="display: block;">
 						<li class="mui-table-view-cell  set_tool_" v-for="(item,index) in list"  :style="{background:item.color?item.color:'#0088F4  !important',padding:'5px 0',height:'auto'}">
-
 							
-							<div class="mui-slider-right mui-disabled " >
-								<a class="mui-btn mui-btn-red" >删除</a>
+							<div class="mui-slider-right mui-disabled" v-if="item.type!='user' && item.type!='carriage' ">
+								<a class="mui-btn mui-btn-red" @click="del_role(index)">删除</a>
 							</div>
 							
 							<div class="mui-slider-handle"   :style="{background:item.color ? item.color : '#0088F4',padding:0,margin:0 }">
@@ -238,7 +237,7 @@
 												<div class="role_name_t">
 													<span v-if="item.admin_login">{{item.admin_login}}{{item.company_type}}</span>
 													<span v-else-if="item.company_name">{{item.company_type}} {{item.company_name}}</span>
-													<span v-else>用户</span>
+													<span v-else>{{item.company_type}}</span>
 												</div>
 												<div class="role_name_b">
 													<span v-if="item.group_name">所属公司：{{item.group_name}}</span>
@@ -260,48 +259,6 @@
 
 							
 		                </li>
-						
-<!-- 						<li class="mui-table-view-cell  set_tool_"  style="background:#0088F4;">
-						
-							
-							<div class="mui-slider-right mui-disabled " >
-								<a class="mui-btn mui-btn-red" >删除</a>
-							</div>
-							
-							<div class="mui-slider-handle" >
-									<div class="role_one">
-										<div class="role_top mui-row" style="display:flex;flex:1;">
-											<div class="role_top_left" style="" >
-												<div class="img_left" >
-													<img src="../images/bulk/cheapgot.png" class="van_img">
-												</div>
-											</div>
-									
-											<div class="mui-col-xs-6 role_name" style="flex:1;" >
-												<div class="role_name_t">
-													<span style="color: #000000;">shuchanlaknffa@adad.com</span>
-												</div>
-												<div class="role_name_b">
-													<span style="color: #000000;">所属公司：caasdeas</span>
-												</div>
-											</div>
-											
-											<div class="role_top_right" style="background: #0088F4;">
-												<div style="" class="icon_img" style="color: #000000;"  >
-													<img src="../images/role.png" class="icon_img_src">
-												</div>
-											</div>
-											
-
-										</div>
-						
-									
-									</div>			
-							</div>
-						
-							
-						</li> -->
-						
 
 					</div>
 				</ul>

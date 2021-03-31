@@ -164,6 +164,32 @@ var vm = new Vue({
 			var self = this;
 			var type = self.type;
 			if(type == 1){ // 执行添加动作
+			
+			// var str = self.address;
+			// var ze = /.+?(省|市|自治区|自治州|县|区)/g; // 省市区的正则
+			// var str_ze = str.match(ze);
+			// console.log(str_ze);
+			// var arr = []
+			// for (let i in str_ze) {
+			//     let o = {};
+			//     o["name"] = str_ze[i]; //即添加了key值也赋了value值 o[i] 相当于o.name 此时i为变量
+			//     arr.push(o)
+			// }
+			// // console.log(JSON.stringify(arr));
+			// if(arr[0].name!==self.sheng_name){
+			// 	mui.toast("详细地址和所选省份或直辖市不匹配");
+			// 	// self.address=" ";
+			// 	return false;
+			// }
+			
+			// if(arr[1].name!==self.shi_name){
+			// 	mui.toast("详细地址和所选城市不匹配");
+			// 	// self.address=" ";
+			// 	return false;
+			// }	
+				
+				
+				
 				var submitData = {
 					token : user.getState('token'),
 					self_id : self.address_id,
@@ -201,6 +227,32 @@ var vm = new Vue({
 				
 
 			}else{ // 执行编辑动作
+			
+			
+			// var str = self.address;
+			// var ze = /.+?(省|市|北京市|天津市|上海市|重庆市|自治区|自治州|县|区)/g; // 省市区的正则
+			// var str_ze = str.match(ze);
+			// console.log(str_ze);
+			// var arr = []
+			// for (let i in str_ze) {
+			//     let o = {};
+			//     o["name"] = str_ze[i]; //即添加了key值也赋了value值 o[i] 相当于o.name 此时i为变量
+			//     arr.push(o)
+			// }
+			// console.log(JSON.stringify(arr));
+			// console.log(arr[0].name);
+			// console.log(self.sheng_name);
+			// if(arr[0].name!==self.sheng_name){
+			// 	mui.toast("详细地址和所选省份或直辖市不匹配");
+			// 	// self.address=" ";
+			// 	return false;
+			// }
+			
+			// if(arr[1].name!==self.shi_name){
+			// 	mui.toast("详细地址和所选城市不匹配");
+			// 	// self.address=" ";
+			// 	return false;
+			// }			
 				var submitData = {
 					self_id : self.address_id,
 					qu: self.qu,
@@ -217,7 +269,7 @@ var vm = new Vue({
 				console.log('qu:'+self.qu);
 				console.log('add:'+self.address);
 				if(!self.sheng_name || !self.shi_name || !self.qu_name || !self.address){
-					mui.toast("请将地址信息填写完整！！123");
+					mui.toast("请将地址信息填写完整！");
 					return false;
 				}				
 				if (project_type == 'TMS3PL') {

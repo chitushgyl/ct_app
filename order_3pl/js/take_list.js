@@ -230,7 +230,7 @@ var vm = new Vue({
 			data.status = status;
 			console.log(JSON.stringify(data))
 			request.PostInfo_new(request.tms_dispatch_createDispatch,data,function(res){
-				console.log(JSON.stringify(data))
+				// console.log("res:"+JSON.stringify(data))
 				var data = res.data.info;
 				self.clod = "";
 					for (var i = 0; i < data.length; i++) {

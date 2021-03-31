@@ -86,6 +86,9 @@ var vm = new Vue({
             }
 		});
 	},
+	// computed:{
+		
+	// },
 	created:function(){
 		var self = this;
 		mui.init();
@@ -118,44 +121,44 @@ var vm = new Vue({
 				for(var i=0;i<data.tms_order_dispatch.length;i++){
 					self.lineList_goods=data.tms_order_dispatch[i].good_info;
 				}
-				if (self.detailData.order_type == 'vehicle') {
+				// if (self.detailData.order_type == 'vehicle') {
 				             self.addressList = data.info;
-				  }else{
-					  self.addressList = [{
-					  gather_address: self.detailData.line_gather_address,
-					  gather_address_id: self.detailData.line_gather_address_id,
-					  gather_address_latitude: self.detailData.line_gather_address_latitude,
-					  gather_address_longitude: self.detailData.line_gather_address_longitude,
-					  gather_contacts_id: self.detailData.line_gather_contacts_id,
-					  gather_name: self.detailData.line_gather_name,
-					  gather_qu: self.detailData.line_gather_qu,
-					  gather_qu_name: self.detailData.line_gather_qu_name,
-					  gather_sheng: self.detailData.line_gather_sheng,
-					  gather_sheng_name: self.detailData.line_gather_sheng_name,
-					  gather_shi: self.detailData.line_gather_shi,
-					  gather_shi_name: self.detailData.line_gather_shi_name,
-					  gather_tel: self.detailData.line_gather_tel,
-					  send_address: self.detailData.line_send_address,
-					  send_address_id: self.detailData.line_send_address_id,
-					  send_address_latitude: self.detailData.line_send_address_latitude,
-					  send_address_longitude: self.detailData.line_send_address_longitude,
-					  send_contacts_id: self.detailData.line_send_contacts_id,
-					  send_name: self.detailData.line_send_name,
-					  send_qu: self.detailData.line_send_qu,
-					  send_qu_name: self.detailData.line_send_qu_name,
-					  send_sheng: self.detailData.line_send_sheng,
-					  send_sheng_name: self.detailData.line_send_sheng_name,
-					  send_shi: self.detailData.line_send_shi,
-					  send_shi_name: self.detailData.line_send_shi_name,
-					  send_tel: self.detailData.line_send_tel,
-					  clod: "",
-					  clod_name: self.detailData.temperture,
-					  good_name: self.detailData.good_info[0].good_name,
-					  good_number: self.detailData.good_number,
-					  good_volume: self.detailData.good_volume,
-					  good_weight: self.detailData.good_weight,
-					  }]
-			}
+			// 	  }else{
+			// 		  self.addressList = [{
+			// 		  gather_address: self.detailData.line_gather_address,
+			// 		  gather_address_id: self.detailData.line_gather_address_id,
+			// 		  gather_address_latitude: self.detailData.line_gather_address_latitude,
+			// 		  gather_address_longitude: self.detailData.line_gather_address_longitude,
+			// 		  gather_contacts_id: self.detailData.line_gather_contacts_id,
+			// 		  gather_name: self.detailData.line_gather_name,
+			// 		  gather_qu: self.detailData.line_gather_qu,
+			// 		  gather_qu_name: self.detailData.line_gather_qu_name,
+			// 		  gather_sheng: self.detailData.line_gather_sheng,
+			// 		  gather_sheng_name: self.detailData.line_gather_sheng_name,
+			// 		  gather_shi: self.detailData.line_gather_shi,
+			// 		  gather_shi_name: self.detailData.line_gather_shi_name,
+			// 		  gather_tel: self.detailData.line_gather_tel,
+			// 		  send_address: self.detailData.line_send_address,
+			// 		  send_address_id: self.detailData.line_send_address_id,
+			// 		  send_address_latitude: self.detailData.line_send_address_latitude,
+			// 		  send_address_longitude: self.detailData.line_send_address_longitude,
+			// 		  send_contacts_id: self.detailData.line_send_contacts_id,
+			// 		  send_name: self.detailData.line_send_name,
+			// 		  send_qu: self.detailData.line_send_qu,
+			// 		  send_qu_name: self.detailData.line_send_qu_name,
+			// 		  send_sheng: self.detailData.line_send_sheng,
+			// 		  send_sheng_name: self.detailData.line_send_sheng_name,
+			// 		  send_shi: self.detailData.line_send_shi,
+			// 		  send_shi_name: self.detailData.line_send_shi_name,
+			// 		  send_tel: self.detailData.line_send_tel,
+			// 		  clod: "",
+			// 		  clod_name: self.detailData.temperture,
+			// 		  good_name: self.detailData.good_info[0].good_name,
+			// 		  good_number: self.detailData.good_number,
+			// 		  good_volume: self.detailData.good_volume,
+			// 		  good_weight: self.detailData.good_weight,
+			// 		  }]
+			// }
 				if (self.receipt) {
 					self.receipt_len = self.receipt.length;
 					if (self.receipt_len > 0) {

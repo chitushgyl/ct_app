@@ -11,7 +11,7 @@
 		<!-- 字体 -->
 		<link rel="stylesheet" type="text/css" href="../fonts/iconfont.css" />
 		<!-- 通用样式 -->
-		<link rel="stylesheet" type="text/css" href="../person/css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../user/css/common.css" />
 		<link rel="stylesheet" type="text/css" href="../css/common.css" />
 		<!-- 支付 -->
 		<link rel="stylesheet" type="text/css" href="../css/paymentVehical.css" />
@@ -229,7 +229,7 @@
 		</style>
 	</head>
 	<body>
-		<header class="mui-bar mui-bar-nav">
+		<header id="header_id"  class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-pull-left">
 				<img src="../images/user/topbackarr.png" style="width: 20px;">
 			</a>
@@ -283,7 +283,16 @@
 				<li class="mui-table-view-cell mui-collapse" style="min-height:48px;">
 					<a class="mui-navigate-right" href="#" style="background:#fff;height:48px;line-height:48px;margin-left:0;">费用明细</a>
 					<div class="mui-collapse-content" style="font-size:14px;">
-						<div class="mui-row pay_info" >
+
+<!-- 						<div class="mui-row pay_info" v-if="order_type=='vehicle'">
+							<div class="pay_info_l">
+								<span>里程</span> 
+							</div>
+							<div class="pay_info_r">
+								<span>{{kilometre}} km</span> 
+							</div>
+						</div>	 -->				
+						<div class="mui-row pay_info" v-if="order_type=='vehicle'">
 							<div class="pay_info_l">
 								<span>里程运费</span> 
 							</div>
@@ -293,7 +302,7 @@
 						</div>
 						<div class="mui-row pay_info" v-if="order_type=='vehicle'">
 							<div class="pay_info_l">
-								<span>多点提配</span> 
+								<span>多点装卸</span> 
 							</div>
 							<div class="pay_info_r">
 								<span>￥{{multistorePrice}}</span> 
@@ -315,12 +324,30 @@
 								<span>￥{{send_price}}</span> 
 							</div>
 						</div>
+						
+						<div class="mui-row pay_info" v-if="order_type=='line'">
+							<div class="pay_info_l">
+								<span>干线费</span> 
+							</div>
+							<div class="pay_info_r">
+								<span>￥{{line_price}}</span> 
+							</div>
+						</div>
+						
 						<div class="mui-row pay_info" v-if="order_type=='line'">
 							<div class="pay_info_l">
 								<span>提货费</span> 
 							</div>
 							<div class="pay_info_r">
 								<span>￥{{pick_price}}</span> 
+							</div>
+						</div>
+						<div class="mui-row pay_info" v-if="order_type=='line'">
+							<div class="pay_info_l">
+								<span>多点提配</span> 
+							</div>
+							<div class="pay_info_r">
+								<span>￥{{more_price}}</span> 
 							</div>
 						</div>
 						<div class="mui-row pay_info" v-if="order_type=='line'">
@@ -337,7 +364,7 @@
 								<span>下单立减</span> 
 							</div>
 							<div class="pay_info_r">
-								<span style="color:#FF4940;"> -￥ {{del_money}} 元</span> 
+								<span style="color:#FF4940;"> -￥ {{del_money}}</span> 
 							</div>
 						</div>
 <!-- 						<div class="mui-row pay_info" >

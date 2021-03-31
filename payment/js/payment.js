@@ -34,10 +34,11 @@ var vm = new Vue({
 		psPrice:'',//总装卸费
 		pick_price:'',//装货费
 		send_price:'',//卸货费
-		multistorePrice:'',//多点提配费
-		licheng_Price:'',
-		line_send_price:'',
-		line_pick_price:'',
+		multistorePrice:0,//多点提配费
+		more_price:0,
+		licheng_Price:0,
+		line_send_price:0,
+		line_pick_price:0,
 		dispatcher:[],
 		car_type:null,
 	},
@@ -60,7 +61,7 @@ var vm = new Vue({
 			self.freight=page.data.freight;//里程运费	
 			self.psPrice=page.data.psPrice;//总装卸费
 			self.multistorePrice=page.data.multistorePrice;
-			
+			self.more_price=page.data.more_price?page.data.more_price:0;
 			self.line_send_price=page.data.line_send_price;
 			self.line_pick_price=page.data.line_pick_price;
 			// console.log("page:"+JSON.stringify(page));
@@ -189,7 +190,7 @@ var vm = new Vue({
 		 }else if(self.pay_type == 3){
 
 					request.PostInfo_new(request.api_order_addOrder,self.data,function(res){
-									 
+									 console.log("res:"+JSON.stringify(res));
 									 if(res.code==200){
 										 var datt={
 											 forms:self.forms,

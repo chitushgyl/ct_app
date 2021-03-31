@@ -176,14 +176,21 @@
 		appAlipay:'/alipay/appAlipay',//支付宝支付
 		
 		//上传图片接口
-		  upload_img:'/up/upload_img',
+		upload_img:'/up/upload_img',
 		
+		//删除角色
 		
 		ftoken:localStorage.ftoken,
 		dtoken:localStorage.dtoken,
 		project_type:localStorage.project_type ? localStorage.project_type : 'user',
 		// project_type:'',
-
+        
+		
+		//检查更新App
+		
+		get_version:"/user/get_version",
+		
+		
 		//新app请求接口
 		PostInfo_new : function(url, data, successcallback,failcallback) {
 			var URL = this.ServerUrl_new+url;

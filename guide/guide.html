@@ -133,7 +133,7 @@
 				var openPage = plus.webview.currentWebview().opener();
 				// console.log(JSON.stringify(openPage));
 				
-				var token = user.getState('token');
+				var token = localStorage.token;
 				if(token){
 					// console.log("token 存在是登录状态");
 					mui.fire(openPage,'PageEvent');

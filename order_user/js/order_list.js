@@ -231,7 +231,7 @@ var vm = new Vue({
 			data.status = status;
 			console.log(JSON.stringify(data))
 			request.PostInfo_new(request.api_order_orderPage,data,function(res){
-				console.log(res.data)
+				console.log("res.data:"+JSON.stringify(res.data))
 				var data = res.data.info;
 				//更新列表数据
 				self.list = self.list.concat(data);

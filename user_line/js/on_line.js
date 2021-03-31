@@ -1,4 +1,6 @@
-
+function refresh_show(){
+ location.reload();
+}
 function objSort(prop){  // 排序函数
 	return function(obj1,obj2){
 		var val1 = obj1[prop];
@@ -106,6 +108,7 @@ var vm = new Vue({
 		mui.plusReady(function(){
 			var page = plus.webview.currentWebview();
 			self.start_id = page.startcity_id;
+			// console.log("线上订单id："+page.id);
 			self.end_id = page.endcity_id;
 			self.start_name = page.startcity_name;
 			self.end_name = page.endcity_name;

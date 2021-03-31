@@ -38,17 +38,30 @@
 		#set_footer{
 			height:50px !important;
 		}
-
-		@supports(bottom:constant(safe-area-inset-bottom))or(bottom:env(safe-area-inset-bottom)){
-			 #footer,#indexfoot{ 
+		
+		#set_footer{
+		  /* top: constant(safe-area-inset-top); */
+		  /* bottom: calc(50px + constant(safe-area-inset-bottom)); */
+		  /* bottom: calc(50px + env(safe-area-inset-bottom)); */
+		  /* padding-bottom: constant(safe-area-inset-bottom); */
+		  /* padding-bottom: env(safe-area-inset-bottom); */
+		/*  height:50px !important; */
+		  padding-bottom: 0;  
+		  padding-bottom: constant(safe-area-inset-bottom);  
+		  padding-bottom: env(safe-area-inset-bottom); 
+		} 	
+		
+		
+		/* @supports(bottom:constant(safe-area-inset-bottom))or(bottom:env(safe-area-inset-bottom)){ */
+			 /* #footer,#indexfoot{ */
                /* top: constant(safe-area-inset-top); */
 			   /* bottom: calc(50px + constant(safe-area-inset-bottom)); */
 			   /* bottom: calc(50px + env(safe-area-inset-bottom)); */
 			   /* padding-bottom: constant(safe-area-inset-bottom); */
 			   /* padding-bottom: env(safe-area-inset-bottom); */
-			   height:50px !important;
+/* 			   height:50px !important;
 			 } 		
-		}
+		} */
 
     /*兼容ihponeX样式 end*/
 		
@@ -79,7 +92,7 @@
 	<script src="js/common/common.js" type="text/javascript"></script>
 	<!-- 检查升级 -->
 	<!-- <script type="text/javascript" src="js/config/update.js"></script> -->
-<script type="text/javascript">
+	<script type="text/javascript">
 	
 	var d_index = new Vue({
 				el:'#set_footer',
@@ -133,6 +146,7 @@
 						//当点击的是个人中心时，调用 菜单接口
 						// if(subpages_length==index){
 							plus.webview.getWebviewById('user/user.html').evalJS('refreshData_index_menu()');
+							plus.webview.getWebviewById('user_line/on_line.html').evalJS('refresh_show()');
 						// }
 					},
 

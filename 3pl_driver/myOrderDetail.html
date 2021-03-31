@@ -104,7 +104,8 @@
 			<div style="background-color:#fff;border-radius:5px;width:94%;margin-left:3%;padding:0 10px;height:100%;margin-top:10px;padding-bottom:10px;">
 				<div style="height:40px;line-height: 40px;width:100%;color:#333;font-size:13px;">
 					<span style="padding:5px 15px;background-color: #0088f4;color:#fff;border-radius:5px;">{{detData_o.order_type_show}}</span>
-					<span class="" style="color: #FF7A1A;font-size: 16px;font-weight: bold; float: right;" v-if="detData_o.price">￥{{detData_o.price}}</span>  
+					<span>订单编号{{detData_o.self_id_show}}</span>
+					<!-- <span class="" style="color: #FF7A1A;font-size: 16px;font-weight: bold; float: right;" v-if="detData_o.price">￥{{detData_o.price}}</span>  -->
 				</div>
 				<div style="height:0;width:94%;margin-left:3%;border-bottom:1px solid #e8e9ea;margin-bottom:10px;"></div>
 					<div class="mui-row" v-cloak v-for="(item,index) in addressList" v-if="detailData.order_type=='vehicle'" :class="[index < addressList.length-1 ? 'div_border' :'']">
@@ -166,6 +167,16 @@
 			</div>
 
 			<div style="width:94%;margin-left:3%;margin-top:10px;border-radius: 5px;padding:0 10px;background-color: #fff;">
+				
+				
+				<!-- <span class="" style="color: #FF7A1A;font-size: 16px;font-weight: bold; float: right;" v-if="detData_o.price">￥{{detData_o.price}}</span> -->
+				<div class="mui-row title_value" v-cloak v-if="detData_o.price"  style="padding-top: 10px;">
+					<div class="mui-col-sm-4 mui-col-xs-4 title_">订单金额</div>
+					<div class="mui-col-sm-8 mui-col-xs-8 value_" v-cloak>
+						{{detData_o.price}}
+					</div>
+				</div>		
+				
 				<div class="mui-row title_value" v-cloak v-if="detailData.send_time"  style="padding-top: 10px;">
 					<div class="mui-col-sm-4 mui-col-xs-4 title_">装货时间</div>
 					<div class="mui-col-sm-8 mui-col-xs-8 value_" v-cloak>
@@ -178,7 +189,7 @@
 						{{detailData.gather_time}}
 					</div>
 				</div>
-				<div class="mui-row title_value" v-if="detailData.order_type=='vehicle'" :class="[!detailData.send_time || !detailData.gather_time  ? 'send_g' : '']" v-cloak>
+				<div class="mui-row title_value" v-if="detailData.order_type=='vehicle'">
 					<div class="mui-col-sm-4 mui-col-xs-4 title_">是否装卸</div>
 					<div class="mui-col-sm-8 mui-col-xs-8 value_" >
 						<span v-if="detailData.pick_flag == 'Y'">需要装货</span>
@@ -188,7 +199,7 @@
 						<!-- {{detailData.picktype|ispick}} {{detailData.sendtype|issend}} -->
 					</div>
 				</div>
-				<div class="mui-row title_value" v-if="detailData.order_type=='line'" :class="[!detailData.send_time || !detailData.gather_time  ? 'send_g' : '']" v-cloak>
+				<div class="mui-row title_value" v-if="detailData.order_type=='line'">
 					<div class="mui-col-sm-4 mui-col-xs-4 title_">是否提配</div>
 					<div class="mui-col-sm-8 mui-col-xs-8 value_" >
 						<span v-if="detailData.pick_flag == 'Y'">需要提货</span>

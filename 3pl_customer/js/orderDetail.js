@@ -75,6 +75,7 @@ var vm = new Vue({
 		list:[],
 		img:[],
 		imgLen:[],
+		lineList:[],
 	},
 	mounted: function(){
 		var self = this;
@@ -110,46 +111,47 @@ var vm = new Vue({
 				// console.log(JSON.stringify(self.list))
 				console.log(JSON.stringify(data))
 				self.detailData = data;
+				self.lineList=data.tms_order_dispatch;
 				self.img = data.receipt[0];
 				self.imgLen = data.receipt;
-				if (self.detailData.order_type == 'vehicle') {
+				// if (self.detailData.order_type == 'vehicle') {
 				             self.addressList = data.info;
-				  }else{
-					  self.addressList = [{
-					  gather_address: self.detailData.line_gather_address,
-					  gather_address_id: self.detailData.line_gather_address_id,
-					  gather_address_latitude: self.detailData.line_gather_address_latitude,
-					  gather_address_longitude: self.detailData.line_gather_address_longitude,
-					  gather_contacts_id: self.detailData.line_gather_contacts_id,
-					  gather_name: self.detailData.line_gather_name,
-					  gather_qu: self.detailData.line_gather_qu,
-					  gather_qu_name: self.detailData.line_gather_qu_name,
-					  gather_sheng: self.detailData.line_gather_sheng,
-					  gather_sheng_name: self.detailData.line_gather_sheng_name,
-					  gather_shi: self.detailData.line_gather_shi,
-					  gather_shi_name: self.detailData.line_gather_shi_name,
-					  gather_tel: self.detailData.line_gather_tel,
-					  send_address: self.detailData.line_send_address,
-					  send_address_id: self.detailData.line_send_address_id,
-					  send_address_latitude: self.detailData.line_send_address_latitude,
-					  send_address_longitude: self.detailData.line_send_address_longitude,
-					  send_contacts_id: self.detailData.line_send_contacts_id,
-					  send_name: self.detailData.line_send_name,
-					  send_qu: self.detailData.line_send_qu,
-					  send_qu_name: self.detailData.line_send_qu_name,
-					  send_sheng: self.detailData.line_send_sheng,
-					  send_sheng_name: self.detailData.line_send_sheng_name,
-					  send_shi: self.detailData.line_send_shi,
-					  send_shi_name: self.detailData.line_send_shi_name,
-					  send_tel: self.detailData.line_send_tel,
-					  clod: "",
-					  clod_name: self.detailData.temperture,
-					  good_name: self.detailData.good_info[0].good_name,
-					  good_number: self.detailData.good_number,
-					  good_volume: self.detailData.good_volume,
-					  good_weight: self.detailData.good_weight,
-					  }]
-			}
+			// 	  }else{
+			// 		  self.addressList = [{
+			// 		  gather_address: self.detailData.line_gather_address,
+			// 		  gather_address_id: self.detailData.line_gather_address_id,
+			// 		  gather_address_latitude: self.detailData.line_gather_address_latitude,
+			// 		  gather_address_longitude: self.detailData.line_gather_address_longitude,
+			// 		  gather_contacts_id: self.detailData.line_gather_contacts_id,
+			// 		  gather_name: self.detailData.line_gather_name,
+			// 		  gather_qu: self.detailData.line_gather_qu,
+			// 		  gather_qu_name: self.detailData.line_gather_qu_name,
+			// 		  gather_sheng: self.detailData.line_gather_sheng,
+			// 		  gather_sheng_name: self.detailData.line_gather_sheng_name,
+			// 		  gather_shi: self.detailData.line_gather_shi,
+			// 		  gather_shi_name: self.detailData.line_gather_shi_name,
+			// 		  gather_tel: self.detailData.line_gather_tel,
+			// 		  send_address: self.detailData.line_send_address,
+			// 		  send_address_id: self.detailData.line_send_address_id,
+			// 		  send_address_latitude: self.detailData.line_send_address_latitude,
+			// 		  send_address_longitude: self.detailData.line_send_address_longitude,
+			// 		  send_contacts_id: self.detailData.line_send_contacts_id,
+			// 		  send_name: self.detailData.line_send_name,
+			// 		  send_qu: self.detailData.line_send_qu,
+			// 		  send_qu_name: self.detailData.line_send_qu_name,
+			// 		  send_sheng: self.detailData.line_send_sheng,
+			// 		  send_sheng_name: self.detailData.line_send_sheng_name,
+			// 		  send_shi: self.detailData.line_send_shi,
+			// 		  send_shi_name: self.detailData.line_send_shi_name,
+			// 		  send_tel: self.detailData.line_send_tel,
+			// 		  clod: "",
+			// 		  clod_name: self.detailData.temperture,
+			// 		  good_name: self.detailData.good_info[0].good_name,
+			// 		  good_number: self.detailData.good_number,
+			// 		  good_volume: self.detailData.good_volume,
+			// 		  good_weight: self.detailData.good_weight,
+			// 		  }]
+			// }
 				// self.addressList = data.info;
 				// console.log(JSON.stringify(self.addressList))
 				

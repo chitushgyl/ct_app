@@ -54,6 +54,11 @@ var indexData = new Vue({
 	  end_time:'',
 	  remark:'',
 	  line_price:'',
+	  kilometre:'',//公里数
+	  freight:'',//里程运费	
+	  psPrice:'',//总装卸费
+	  pick_price:'',//装货费
+	  send_price:'',//卸货费	
 	  carData:[],
 	  fristcontent: '', // 滚动条1
 	  twocontent: '', // 滚动条2
@@ -115,32 +120,47 @@ var indexData = new Vue({
 
 		//获取车辆信息
 		get_car:function(){
-			var data={};
-			var self = this;
-			request.PostInfo_new(request.getType,data,function(res){
-				var list = res.data.info;
-				var newList=list.map((item,index,arr)=>{
-					let json={};
-					json.value=item.self_id;
-					json.text=item.parame_name;
-					return json;
-				});
-				var getCar = new mui.PopPicker();
-				 getCar.setData(newList);
-				 getCar.show(function(selectItems){
-					 self.carId=selectItems[0].value;
-					 self.carName=selectItems[0].text;
-					 self.anticipatedfreight.car_type=self.carId;
-					 if(self.anticipatedfreight.sendCanUse && self.anticipatedfreight.gatherCanUse){
-						 self.count_price();
-					 }else{
-						 console.log('还没有选择地址');
-					 }
-				 })
-				
-			},function(res){
 			
-			});	
+			let cando=false;
+			this.address_list.forEach((item,index)=>{
+				if(item.send_address_id && item.gather_address_id && item.good_name!=''){
+					cando=true;
+				}else{
+					cando=false;
+				}
+			})
+			if(cando){
+				var data={};
+				var self = this;
+				request.PostInfo_new(request.getType,data,function(res){
+					var list = res.data.info;
+					var newList=list.map((item,index,arr)=>{
+						let json={};
+						json.value=item.self_id;
+						json.text=item.parame_name;
+						return json;
+					});
+					var getCar = new mui.PopPicker();
+					 getCar.setData(newList);
+					 getCar.show(function(selectItems){
+						 self.carId=selectItems[0].value;
+						 self.carName=selectItems[0].text;
+						 self.anticipatedfreight.car_type=self.carId;
+						 if(self.anticipatedfreight.sendCanUse && self.anticipatedfreight.gatherCanUse){
+							 self.count_price();
+						 }else{
+							 console.log('还没有选择地址');
+						 }
+					 })
+					
+				},function(res){
+				
+				});	
+			
+			}else{
+				console.log('没有新增，因为上一个还没填完！')
+				mui.toast('请先填写地址信息和货物信息再选择车辆！');
+			}
 		},
 		
 	
@@ -323,17 +343,28 @@ var indexData = new Vue({
 		//调用接口计算预估运费
 		count_price:function(){
 			var self = this;
-			var data=self.anticipatedfreight;
-			console.log('data的值是：'+JSON.stringify(data))
-			if(self.anticipatedfreight.car_type){
-				request.PostInfo_new(request.count_price,data,function(res){
-					self.yugu=res.info.singleprice+'~'+res.info.maxprice;
-					console.log(JSON.stringify(self.yugu));
-				},function(res){
-					console.log('332的是：'+JSON.stringify(res));
-				})
-			}
-			
+			if(self.anticipatedfreight.car_type){	
+				
+				var data=self.anticipatedfreight;
+				console.log('data的值是：'+JSON.stringify(data))
+				if(self.anticipatedfreight.car_type){
+					request.PostInfo_new(request.count_price,data,function(res){
+						self.yugu=res.info.singleprice+'~'+res.info.maxprice;
+						console.log(JSON.stringify(self.yugu));
+						self.kilometre=res.info.kilometre;//公里数
+						self.freight=res.info.freight;//里程运费	
+						self.psPrice=res.info.psPrice;	//总装卸费
+						self.multistorePrice=res.info.multistorePrice;//多点提配费
+						
+						self.pick_price=res.info.pickprice;
+						self.send_price=res.info.sendprice;	
+						self.line_price=0;
+					},function(res){
+						console.log('332的是：'+JSON.stringify(res));
+					})
+				}
+				
+			}	
 		},
 		
 		
@@ -423,7 +454,25 @@ var indexData = new Vue({
 				    self.end_time = time;
 			});
 		},
-
+		
+		//货物名称字数限制
+		checkLength2:function(index){
+			var self=this;
+		    var l = 0;
+		    for(var i=0; i<self.address_list[index].good_name.length; i++) {
+		        if (/[\u4e00-\u9fa5]/.test(self.address_list[index].good_name[i])) {
+		            l+=2;
+		        } else {
+		            l++;
+		        }
+		        if (l > 10) {
+		            self.address_list[index].good_name = self.address_list[index].good_name.substr(0,i);
+		            break;
+		        }
+		    }
+		},
+		
+		
 		//输入数量
 		set_good_number:function(index){
 			var self=this;
@@ -439,6 +488,9 @@ var indexData = new Vue({
 			document.activeElement.blur();
 			keyBoard.openKeyBoard('请输入重量:(吨)', self.address_list[index].good_weight, keyBoard.keyModels.PLUS, function(number){
 			    self.address_list[index].good_weight = number;
+				self.anticipatedfreight.temp_weight=self.address_list.map((item)=>{
+						return item.good_weight;
+				})
 			});
 		},	
 		
@@ -448,6 +500,9 @@ var indexData = new Vue({
 			document.activeElement.blur();
 			keyBoard.openKeyBoard('请输入体积:(立方)', self.address_list[index].good_volume, keyBoard.keyModels.PLUS, function(number){
 			    self.address_list[index].good_volume = number;
+				self.anticipatedfreight.temp_volume=self.address_list.map((item)=>{
+						return item.good_volume;
+				})
 			});
 		},	
 
@@ -582,7 +637,7 @@ var indexData = new Vue({
 				mui.toast(res.msg);
 				setTimeout(()=>{
 					location.reload()
-				},1500)
+				},500)
 			},function(res){
 				mui.toast(res.msg);
 			});
@@ -616,7 +671,7 @@ var indexData = new Vue({
 			if (gotlenth == 0) {
 				// console.log("jifei");
 				// self.evaluation();
-			} else {
+			}else {
 				mui.toast("收货城市不可和发货城市相同");
 				self.eskilo = '';
 				self.esprice = '';
@@ -626,8 +681,7 @@ var indexData = new Vue({
 		// 控制页面上移到可视区域,避免软键盘遮挡
 		pagescroll:function(){    
 			// console.log("页面上移函数");
-			mui(".mui-content").scroll().scrollTo(0,-220);
-			
+			mui(".mui-content").scroll().scrollTo(0,-220);			
 		},
 		
 		set_price_json:function(){

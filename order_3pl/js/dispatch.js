@@ -193,33 +193,11 @@ var vm = new Vue({
 		submitFun: function(){ // 提交
 			var self = this;
 			// var token = user.getState('token');
-			// var group_id = user.getState('group_id');
+			// var getC_id = user.getState('group_id');
+			var getC_id=self.getC_id;
 			// var name = request.clear_str_null($('#name').val());
 			// var contact_name = request.clear_str_null($('#contact_name').val());
 			// var contact_tel = request.clear_str_null($('#contact_tel').val());
-			// if (!self.group_id) {
-			// 	mui.toast('请选择公司!');
-			// 	return false;
-			// }			
-		
-			// if (!name) {
-			// 	mui.toast('客户名称不能为空!');
-			// 	return false;
-			// }
-		
-			// if (!self.paystate_id) {
-			// 	mui.toast('请选择结算方式!');
-			// 	return false;
-			// }
-			// if (!contact_name) {
-			// 	mui.toast('联系人不能为空!');
-			// 	return false;
-			// }
-			// var c_m = request.checkMobile(contact_tel);
-			// if (c_m) {
-			// 	mui.toast('联系电话(手机号)格式错误！');
-			// 	return false;
-			// }
 			self.car_info = [{
 				car_id: self.getC_id,
 				car_number:self.car_number,
@@ -230,6 +208,23 @@ var vm = new Vue({
 			}]
 			console.log(JSON.stringify(self.car_info))
 			if(self.status == 1){
+				if (!self.getC_id) {
+					mui.toast('请选择司机!');
+					return false;
+				}
+				if (!self.total_price) {
+					mui.toast('请输入应付金额!');
+					return false;
+				}
+				if (!self.contacts) {
+					mui.toast('请输入联系人!');
+					return false;
+				}
+				if (!self.tel) {
+					mui.toast('请输入联系电话!');
+					return false;
+				}
+						
 				var data = {
 					car_info:self.car_info,
 					carriage_flag: "driver",
@@ -239,6 +234,14 @@ var vm = new Vue({
 				};
 			}
 			else{
+				if (!self.getC_id) {
+					mui.toast('请选择承运商!');
+					return false;
+				}
+				if (!self.total_price) {
+					mui.toast('请输入应付金额!');
+					return false;
+				}
 				var data = {
 					company_id:self.getC_id,
 					carriage_flag: "carriers",

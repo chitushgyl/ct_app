@@ -102,11 +102,13 @@
 			<div style="background-color:#fff;border-radius:5px;width:94%;margin-left:3%;padding:0 10px;height:100%;margin-top:10px;padding-bottom:10px;">
 				<div style="height:40px;line-height: 40px;width:100%;color:#333;font-size:13px;">
 					<span style="padding:5px 15px;background-color: #0088f4;color:#fff;border-radius:5px;">{{detailData.order_type_show}}</span>
+					<!-- <span>订单编号</span>
+					<span>{{detailData.self_id_show}}</span> -->
 					<!-- <span class="" style="color: #FF7A1A;font-size: 16px;font-weight: bold; float: right;" v-if="detailData.total_money">￥{{detailData.total_money}}</span>  -->
 					<!-- <span v-if="" style="padding:5px 15px;background-color: #00BEFF;color:#fff;border-radius:5px;">同城</span>
 					<span v-if="" style="padding:5px 15px;background-color: #0088f4;color:#fff;border-radius:5px;">车源</span> -->
 					<!-- <span v-if="" style="padding:5px 15px;background-color: #0062FF;color:#fff;border-radius:5px;">整车</span> -->
-					<!-- <span style="margin-left:10px;"> 订单编号 {{detailData.self_id}}</span> -->
+					<span style=""> 订单编号 {{detailData.self_id_show}}</span>
 					 
 				</div>
 				<div style="height:0;width:94%;margin-left:3%;border-bottom:1px solid #e8e9ea;margin-bottom:10px;"></div>
@@ -183,7 +185,7 @@
 				</div>
 				
 				<div class="mui-row title_value" v-cloak v-if="detailData.send_time">
-					<div class="mui-col-sm-4 mui-col-xs-4 title_">装车时间</div>
+					<div class="mui-col-sm-4 mui-col-xs-4 title_">装货时间</div>
 					<div v-cloak class="mui-col-sm-8 mui-col-xs-8 value_">
 						{{detailData.send_time}}
 					</div>

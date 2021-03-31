@@ -15,6 +15,11 @@ var indexData = new Vue({
 		],//送货按钮数组
 		choosePickType:'oneself',//默认选中的提货方式
 		chooseSendType:'oneself',//默认选中的送货方式
+		pick_price:null,
+		send_price:null,
+		pick_price_show:0,
+		send_price_show:0,
+		more_Price:null,
 		send_arr:[{
 				send_info:'添加发车地址',
 				send_info_tel:'装车联系人'
@@ -70,8 +75,9 @@ var indexData = new Vue({
 		min_money:'',
 		pick_price:'',
 		send_price:'',
-		start_time:'',
-		end_time:'',
+		start_time:null,
+		end_time:null,
+		send_time:null,
 		remark:'',
 	},
 	mounted: function(){
@@ -108,6 +114,8 @@ var indexData = new Vue({
 				
 				self.send_time=self.lineList.start_time;//发货时间
 				self.gather_time=self.lineList.end_time;//收货时间
+				self.pick_price=self.lineList.pick_price;
+				self.send_price=self.lineList.send_price;
 				
 				//初始化address_list数据
 				self.address_list[0].gather_info=self.lineList.gather_sheng_name+self.lineList.gather_shi_name+self.lineList.gather_qu_name+self.lineList.gather_address;
@@ -196,13 +204,14 @@ var indexData = new Vue({
 					 item.send_info=self.lineList.send_sheng_name+self.lineList.send_shi_name+self.lineList.send_qu_name+self.lineList.send_address;
 					 item.send_info_tel='';
 				})
+				self.pick_price_show="0";
 			}else{
 				self.anticipatedfreight.pick_type='Y'
 				self.address_list.forEach((item,index)=>{
 					 item.send_info='添加装车地址';
 					 item.send_info_tel='装车地址联系人';
 				})
-				
+				self.pick_price_show=self.pick_price;
 			}
 			self.changeIsShow(self.chooseSendType,self.choosePickType);
 		},
@@ -218,12 +227,14 @@ var indexData = new Vue({
 					 item.gather_info=self.lineList.gather_sheng_name+self.lineList.gather_shi_name+self.lineList.gather_qu_name+self.lineList.gather_address;
 					 item.gather_info_tel='';
 				})
+				self.send_price_show="0";
 			}else{
 				self.anticipatedfreight.send_type='Y'
 				self.address_list.forEach((item,index)=>{
 					 item.gather_info='添加目的地址';
 					 item.gather_info_tel='目的地址联系人';
 				})
+				self.send_price_show=self.send_price;
 			}
 			self.changeIsShow(self.chooseSendType,self.choosePickType);
 		},
@@ -324,7 +335,28 @@ var indexData = new Vue({
 						item.area=self.lineList.send_qu_name;
 						item.info=self.lineList.send_address;
 					})
+				}else{
+					self.anticipatedfreight.send_address.forEach((item,index)=>{
+						item.pro=null;
+						item.city=null;
+						item.area=null;
+						item.info=null;
+					})
+					
+					self.address_list.forEach((item,index)=>{
+						item.send_name=null;
+						item.send_tel=null;
+						item.send_qu=null;
+						item.send_sheng_name=null;
+						item.send_shi_name=null;
+						item.send_qu_name=null;
+						item.send_address=null;
+						item.send_address_id=null;
+					})					
 				}
+				
+				
+				
 				if(send =='oneself'){
 					
 					self.address_list.forEach((item,index)=>{
@@ -343,6 +375,24 @@ var indexData = new Vue({
 						item.area=self.lineList.gather_qu_name;
 						item.info=self.lineList.gather_address;
 					})
+				}else{
+					self.anticipatedfreight.gather_address.forEach((item,index)=>{
+						item.pro=null;
+						item.city=null;
+						item.area=null;
+						item.info=null;
+					})
+
+					self.address_list.forEach((item,index)=>{
+						item.gather_name=null;
+						item.gather_tel=null;
+						item.gather_qu=null;
+						item.gather_sheng_name=null;
+						item.gather_shi_name=null;
+						item.gather_qu_name=null;
+						item.gather_address=null;
+						item.gather_address_id=null;
+					})					
 				}
 			}
 		},
@@ -398,6 +448,19 @@ var indexData = new Vue({
 			console.log('index：'+index);
 			// 判断点击的时候点击的是发货还是收货
 			if (self.tapCityType == 1) { // 发货地址
+			
+				var c_ss=self.lineList.send_sheng_name+self.lineList.send_shi_name;
+				var xz_ss=shiqu.sheng_name+shiqu.shi_name;
+				
+				
+				if(xz_ss==c_ss){
+					console.log("地址在可选范围内")
+				}else{
+					mui.toast('第'+(index+1)+"个装车地址必须在"+self.lineList.send_sheng_name+self.lineList.send_shi_name+"范围内");
+					return false;					
+				}
+			
+			
 				self.address_list[index].send_info = shiqu.sheng_name+shiqu.shi_name+shiqu.qu_name+shiqu.address; // 详细地址
 				self.address_list[index].send_info_tel = shiqu.contacts+shiqu.tel; // 详细地址
 				self.address_list[index].send_address_id=shiqu.self_id;
@@ -421,6 +484,31 @@ var indexData = new Vue({
 					self.anticipatedfreight.sendCanUse=true;
 				})
 			} else {
+				var c_ss=self.lineList.gather_sheng_name+self.lineList.gather_shi_name;
+				var xz_ss=shiqu.sheng_name+shiqu.shi_name;
+
+				if(xz_ss==c_ss){
+					console.log("地址在可选范围内")
+				}else{
+					mui.toast('第'+(index+1)+"个收货地址必须在"+self.lineList.gather_sheng_name+self.lineList.gather_shi_name+"范围内");
+					return false;					
+				}
+				
+				// if(shiqu.sheng_name!=self.lineList.gather_sheng_name && shiqu.shi_name!=self.lineList.gather_shi_name ){
+				// 	mui.toast('第'+(index+1)+"个收货地址必须在"+self.lineList.gather_sheng_name+self.lineList.gather_shi_name+"范围内");
+				// 	return false;
+				// }
+				
+				
+				var c_address=self.lineList.gather_sheng_name+self.lineList.gather_shi_name+self.lineList.gather_qu_name+self.lineList.gather_address;
+				var xz_address=shiqu.sheng_name+shiqu.shi_name+shiqu.qu_name+shiqu.address;
+				
+				// console.log("c_address:"+JSON.stringify(c_address));
+				// console.log("xz_address:"+JSON.stringify(xz_address));
+				if(c_address==xz_address){
+					mui.toast("配送地址不能和仓库地址一样");
+					return false;
+				}
 		
 				self.address_list[index].gather_info = shiqu.sheng_name+shiqu.shi_name+shiqu.qu_name+shiqu.address; // 详细地址
 				self.address_list[index].gather_info_tel = shiqu.contacts+shiqu.tel; // 详细地址
@@ -462,7 +550,8 @@ var indexData = new Vue({
 		          good_volume:1,
 				  control_type:self.temp_control_type,
 		          clod:self.temp_control_type[0].key,
-		          clod_name:self.temp_control_type[0].name		
+		          clod_name:self.temp_control_type[0].name,
+				  remark:'',
 		        });
 				
 				self.anticipatedfreight.temp_weight.push(1);
@@ -617,7 +706,7 @@ var indexData = new Vue({
 			var data=temp_data;
 			var list = self.address_list;
 			var datr=JSON.parse(JSON.stringify(data));
-			datr.weight=datr.weight*1000;
+			// datr.weight=datr.weight*1000;
 			console.log('data的值是：'+JSON.stringify(data));
 			// return;
 			let datt={};
@@ -643,9 +732,9 @@ var indexData = new Vue({
 							upData.total_money   =self.min_money
 
 							let temp_dispatcher=JSON.parse(JSON.stringify(list));
-							 temp_dispatcher.forEach((item)=>{
-								item.good_weight=item.good_weight*1000;
-							 })
+							 // temp_dispatcher.forEach((item)=>{
+								// item.good_weight=item.good_weight*1000;
+							 // })
 							 upData.dispatcher=temp_dispatcher;
 							// upData.dispatcher.forEach((item)=>{
 							// 	item.good_weight=item.good_weight*1000;
@@ -655,7 +744,8 @@ var indexData = new Vue({
 							if(upData.pick_flag =='N' && upData.send_flag=='N'){
 								upData.good_name=self.address_list[0].good_name;
 								upData.good_number=self.address_list[0].good_number;
-								upData.good_weight=self.address_list[0].good_weight*1000;
+								// upData.good_weight=self.address_list[0].good_weight*1000;
+								upData.good_weight=self.address_list[0].good_weight;
 								upData.good_volume=self.address_list[0].good_volume;
 								upData.clod=self.address_list[0].clod;
 							}else{

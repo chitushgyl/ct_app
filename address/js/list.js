@@ -209,7 +209,7 @@ var vm = new Vue({
 			var wp = plus.webview.currentWebview().opener();
 			// console.log(wp.id);
 			// 如果是从个人中心跳转则不返回
-			if(wp.id=="../user/user.html") return false;
+			if(wp.id == "user/user.html") return false;
 			var getaddress = JSON.stringify(self.showlist[index].pro_name+self.showlist[index].city_name+self.showlist[index].area_name+self.showlist[index].address);
 			var address = JSON.stringify(self.showlist[index]);
 			// 显示信息

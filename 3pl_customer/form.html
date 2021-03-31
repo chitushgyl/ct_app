@@ -463,7 +463,7 @@
 							<li class="mui-table-view-cell">
 								<div class="mui-input-row">
 									<label class="carInfotitle" style="padding-left:0;">货物名称</label>
-									<input type="text" class="" style="text-align: right;padding-right:0px;"  v-model="item.good_name" placeholder="请输入"  v-cloak>
+									<input type="text" class="" style="text-align: right;padding-right:0px;"  v-model="item.good_name" placeholder="请输入"  v-cloak  οnkeyup="checkLength2(index);">
 								</div>
 							</li>
 
@@ -544,6 +544,14 @@
 
 				<ul class="mui-table-view" style="background:#fff;margin:10px 2%;padding:10px 1.5%;border-radius:7px;">
 
+					<li class="mui-table-view-cell" @tap="get_car()"  style="padding:11px 10px 11px 10px;padding-right:0;">
+						<div class="mui-row">
+							<div class="mui-col-sm-3  mui-col-xs-3 carInfotitle">车辆类型</div>
+							<div class="mui-col-sm-9  mui-col-xs-9 textright" v-cloak>{{carName}}</div>
+						</div>
+					</li>
+
+
 					<li class="mui-table-view-cell" @tap="timeSelt()" style="padding:11px 10px 11px 10px;padding-right:0;">
 						<div class="mui-row">
 							<div class="mui-col-sm-3  mui-col-xs-3 carInfotitle">装车时间</div>
@@ -573,10 +581,17 @@
 						</div>
 					</li>
 					
-					<li class="mui-table-view-cell" @tap="get_car()"  style="padding:11px 10px 11px 10px;padding-right:0;">
-						<div class="mui-row">
-							<div class="mui-col-sm-3  mui-col-xs-3 carInfotitle">车辆类型</div>
-							<div class="mui-col-sm-9  mui-col-xs-9 textright" v-cloak>{{carName}}</div>
+					<li class="mui-table-view-cell" v-if="send_price>0">
+						<div class="mui-input-row">
+							<label class="carInfotitle" style="padding-left:0px;width:40%">卸货费(元)</label>
+							<input type="text" class="" style="width:140px;color:#FC5854;font-size:19px;text-align:right;padding-right:10px;" readonly="readonly"   v-model="pick_price" v-cloak>
+						</div>
+					</li>
+					
+					<li class="mui-table-view-cell"  v-if="pick_price>0">
+						<div class="mui-input-row">
+							<label class="carInfotitle" style="padding-left:0px;width:40%">装货费(元)</label>
+							<input type="text" class="" style="width:140px;color:#FC5854;font-size:19px;text-align:right;padding-right:10px;" readonly="readonly"   v-model="send_price" v-cloak>
 						</div>
 					</li>
 					
